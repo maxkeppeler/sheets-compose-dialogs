@@ -82,7 +82,7 @@ internal fun CalendarTopComponent(
             ) {
                 Text(
                     modifier = selectableItemModifier,
-                    text = cameraDate.format(DateTimeFormatter.ofPattern("MMMM")),
+                    text = cameraDate.format(DateTimeFormatter.ofPattern("MMM")),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )

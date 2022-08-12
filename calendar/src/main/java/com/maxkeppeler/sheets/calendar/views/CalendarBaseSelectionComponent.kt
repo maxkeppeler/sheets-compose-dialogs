@@ -77,7 +77,6 @@ internal fun CalendarBaseSelectionComponent(
         thresholds = { _, _ -> FractionalThreshold(0.5f) },
         orientation = Orientation.Horizontal
     )
-    val monthModifier = baseModifier
     val yearModifier = baseModifier
         .graphicsLayer { alpha = 0.99F }
         .drawWithContent {
@@ -106,7 +105,7 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.YEAR -> {
             Column(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier.padding(vertical = 24.dp),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -124,11 +123,21 @@ internal fun CalendarBaseSelectionComponent(
             }
         }
         CalendarDisplayMode.MONTH -> {
-            LazyVerticalGrid(
-                columns = GridCells.Fixed(cells),
-                modifier = monthModifier,
+            Column(
+                modifier = Modifier.padding(vertical = 24.dp),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                onMonthView()
+                Text(
+                    text = "Select month",
+                    style = MaterialTheme.typography.titleMedium,
+                )
+                LazyVerticalGrid(
+                    modifier = baseModifier,
+                    columns = GridCells.Fixed(cells),
+                ) {
+                    onMonthView()
+                }
             }
         }
     }

@@ -3,16 +3,15 @@
 package com.maxkeppeler.sheets.calendar.models
 
 import android.util.Range
+import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import java.time.LocalDate
 
 /**
  * Available selection modes and selection-based configurations.
  */
 sealed class CalendarSelection(
-    open val withButtonView: Boolean = true,
-    open val negativeButtonText: String? = null,
-    open val positiveButtonText: String? = null,
-) {
+    val text: Boolean = true,
+) : BaseSelection() {
 
     /**
      * Select a date.
@@ -23,11 +22,7 @@ sealed class CalendarSelection(
         override val positiveButtonText: String? = null,
         val selectedDate: LocalDate? = null,
         val onSelectDate: (date: LocalDate) -> Unit
-    ) : CalendarSelection(
-        withButtonView = withButtonView,
-        negativeButtonText = negativeButtonText,
-        positiveButtonText = positiveButtonText,
-    )
+    ) : CalendarSelection()
 
     /**
      * Select multiple dates.
@@ -37,10 +32,7 @@ sealed class CalendarSelection(
         override val positiveButtonText: String? = null,
         val selectedDates: List<LocalDate>? = null,
         val onSelectDate: (dates: List<LocalDate>) -> Unit
-    ) : CalendarSelection(
-        negativeButtonText = negativeButtonText,
-        positiveButtonText = positiveButtonText
-    )
+    ) : CalendarSelection()
 
     /**
      * Select a range (start and end date).
@@ -51,5 +43,5 @@ sealed class CalendarSelection(
         override val positiveButtonText: String? = null,
         val selectedRange: Range<LocalDate>? = null,
         val onSelectRange: (startDate: LocalDate, endDate: LocalDate) -> Unit
-    ) : CalendarSelection(withButtonView)
+    ) : CalendarSelection()
 }

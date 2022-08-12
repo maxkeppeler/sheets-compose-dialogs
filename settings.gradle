@@ -16,3 +16,4 @@ rootProject.name = "sheets-compose"
 include ':app'
 include ':core'
 include ':calendar'
+include ':color'

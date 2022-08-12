@@ -16,6 +16,9 @@ import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.Header
+import com.maxkeppeker.sheets.core.views.ButtonComponent
+import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
 import com.maxkeppeler.sheets.calendar.views.*
@@ -31,6 +34,7 @@ import java.time.LocalDate
 fun CalendarView(
     selection: CalendarSelection,
     config: CalendarConfig = CalendarConfig(),
+    header: Header? = null,
     onCancel: () -> Unit = {},
 ) {
     val dateSaver = Saver<MutableState<LocalDate?>, LocalDate>(
@@ -167,85 +171,96 @@ fun CalendarView(
         }
     }
 
-    Column(modifier = Modifier.padding(16.dp)) {
+    Column(modifier = Modifier.wrapContentHeight()) {
 
-        CalendarTopComponent(
-            config = config,
-            mode = mode,
-            navigationDisabled = monthRange == null || mode != CalendarDisplayMode.CALENDAR,
-            prevDisabled = prevDisabled,
-            nextDisabled = nextDisabled,
-            cameraDate = cameraDate,
-            onPrev = onPrev,
-            onNext = onNext,
-            onMonthClick = {
-                mode = when (mode) {
-                    CalendarDisplayMode.MONTH -> CalendarDisplayMode.CALENDAR
-                    CalendarDisplayMode.YEAR -> CalendarDisplayMode.MONTH
-                    else -> CalendarDisplayMode.MONTH
-                }
-            },
-            onYearClick = {
-                mode = when (mode) {
-                    CalendarDisplayMode.YEAR -> CalendarDisplayMode.CALENDAR
-                    CalendarDisplayMode.MONTH -> CalendarDisplayMode.YEAR
-                    else -> CalendarDisplayMode.YEAR
-                }
-            },
-        )
+        HeaderComponent(header)
 
-        val selectionModifier = when (mode) {
-            CalendarDisplayMode.CALENDAR -> Modifier.wrapContentHeight()
-            else -> Modifier.weight(1f, false)
+        Column(
+            modifier = Modifier
+                .wrapContentHeight()
+                .padding(horizontal = 16.dp)
+                .padding(top = 16.dp)
+        ) {
+
+            CalendarTopComponent(
+                config = config,
+                mode = mode,
+                navigationDisabled = monthRange == null || mode != CalendarDisplayMode.CALENDAR,
+                prevDisabled = prevDisabled,
+                nextDisabled = nextDisabled,
+                cameraDate = cameraDate,
+                onPrev = onPrev,
+                onNext = onNext,
+                onMonthClick = {
+                    mode = when (mode) {
+                        CalendarDisplayMode.MONTH -> CalendarDisplayMode.CALENDAR
+                        CalendarDisplayMode.YEAR -> CalendarDisplayMode.MONTH
+                        else -> CalendarDisplayMode.MONTH
+                    }
+                },
+                onYearClick = {
+                    mode = when (mode) {
+                        CalendarDisplayMode.YEAR -> CalendarDisplayMode.CALENDAR
+                        CalendarDisplayMode.MONTH -> CalendarDisplayMode.YEAR
+                        else -> CalendarDisplayMode.YEAR
+                    }
+                },
+            )
+//
+//            val selectionModifier = when (mode) {
+//                CalendarDisplayMode.CALENDAR -> Modifier.wrapContentHeight()
+//                else -> Modifier.weight(1f, false)
+//            }
+
+            CalendarBaseSelectionComponent(
+                modifier = Modifier.wrapContentHeight(),
+                calendarGridState = calendarGridState,
+                yearListState = yearListState,
+                mode = mode,
+                cells = cells,
+                nextDisabled = nextDisabled,
+                prevDisabled = prevDisabled,
+                onNext = onNext,
+                onPrev = onPrev,
+                onCalendarView = {
+                    setupCalendarSelectionView(
+                        config = config,
+                        cells = cells,
+                        data = calendarData,
+                        today = today,
+                        selection = selection,
+                        onSelect = onDateClickHandler,
+                        selectedDate = date.value,
+                        selectedDates = dates,
+                        selectedRange = Pair(range.startValue, range.endValue),
+                    )
+                },
+                onMonthView = {
+                    setupMonthSelectionView(
+                        monthRange = monthRange!!,
+                        selectedMonth = cameraDate.month,
+                        onMonthClick = {
+                            cameraDate = cameraDate.withMonth(it.value).beginOfWeek
+                            mode = CalendarDisplayMode.CALENDAR
+                        }
+                    )
+                },
+                onYearView = {
+                    setupYearSelectionView(
+                        yearsRange = yearsRange,
+                        selectedYear = cameraDate.year,
+                        onYearClick = {
+                            cameraDate = cameraDate.withYear(it).beginOfWeek
+                            mode = CalendarDisplayMode.CALENDAR
+                        })
+                }
+            )
         }
 
-        CalendarBaseSelectionComponent(
-            modifier = selectionModifier,
-            calendarGridState = calendarGridState,
-            yearListState = yearListState,
-            mode = mode,
-            cells = cells,
-            nextDisabled = nextDisabled,
-            prevDisabled = prevDisabled,
-            onNext = onNext,
-            onPrev = onPrev,
-            onCalendarView = {
-                setupCalendarSelectionView(
-                    config = config,
-                    cells = cells,
-                    data = calendarData,
-                    today = today,
-                    selection = selection,
-                    onSelect = onDateClickHandler,
-                    selectedDate = date.value,
-                    selectedDates = dates,
-                    selectedRange = Pair(range.startValue, range.endValue),
-                )
-            },
-            onMonthView = {
-                setupMonthSelectionView(
-                    monthRange = monthRange!!,
-                    selectedMonth = cameraDate.month,
-                    onMonthClick = {
-                        cameraDate = cameraDate.withMonth(it.value).beginOfWeek
-                        mode = CalendarDisplayMode.CALENDAR
-                    }
-                )
-            },
-            onYearView = {
-                setupYearSelectionView(
-                    yearsRange = yearsRange,
-                    selectedYear = cameraDate.year,
-                    onYearClick = {
-                        cameraDate = cameraDate.withYear(it).beginOfWeek
-                        mode = CalendarDisplayMode.CALENDAR
-                    })
-            }
-        )
-
         if (selection.withButtonView && mode == CalendarDisplayMode.CALENDAR) {
-            CalendarButtonComponent(
-                selection = selection,
+            ButtonComponent(
+                negativeButtonText = selection.negativeButtonText,
+                positiveButtonText = selection.positiveButtonText,
                 onPositiveValid = isValid,
                 onNegative = onCancel,
                 onPositive = { onInvokeListener(); onCancel() }

@@ -1,4 +1,4 @@
-package com.maxkeppeler.sheets.calendar.views
+package com.maxkeppeker.sheets.core.views
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -10,21 +10,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.core.R as RC
 
 @ExperimentalMaterial3Api
 @Composable
-internal fun CalendarButtonComponent(
-    selection: CalendarSelection,
+fun ButtonComponent(
+    negativeButtonText: String? = null,
+    positiveButtonText: String? = null,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
     onPositiveValid: () -> Boolean
 ) {
 
-    Spacer(modifier = Modifier.height(8.dp))
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .padding(horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
     ) {
@@ -36,7 +38,7 @@ internal fun CalendarButtonComponent(
             onClick = onNegative
         ) {
             Text(
-                text = selection.negativeButtonText ?: stringResource(id = RC.string.cancel),
+                text = negativeButtonText ?: stringResource(id = RC.string.cancel),
             )
         }
 
@@ -46,7 +48,7 @@ internal fun CalendarButtonComponent(
             onClick = onPositive,
             enabled = valid
         ) {
-            Text(text = selection.positiveButtonText ?: stringResource(id = RC.string.ok))
+            Text(text = positiveButtonText ?: stringResource(id = RC.string.ok))
         }
     }
 }

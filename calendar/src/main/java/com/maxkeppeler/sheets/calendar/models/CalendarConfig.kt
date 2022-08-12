@@ -1,12 +1,13 @@
 package com.maxkeppeler.sheets.calendar.models
 
+import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
 
 /**
  * Available calendar configurations.
  */
-data class CalendarConfig(
+class CalendarConfig(
 
     /**
      * Style of calendar.
@@ -42,4 +43,5 @@ data class CalendarConfig(
      * Disable a timeline.
      */
     val disabledTimeline: CalendarTimeline? = null
-)
+
+) : BaseConfigs()
