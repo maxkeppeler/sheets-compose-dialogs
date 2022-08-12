@@ -19,6 +19,7 @@ sealed class CalendarSelection(
     class Date(
         override val withButtonView: Boolean = false,
         override val negativeButtonText: String? = null,
+        override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButtonText: String? = null,
         val selectedDate: LocalDate? = null,
         val onSelectDate: (date: LocalDate) -> Unit
@@ -29,6 +30,7 @@ sealed class CalendarSelection(
      */
     class Dates(
         override val negativeButtonText: String? = null,
+        override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButtonText: String? = null,
         val selectedDates: List<LocalDate>? = null,
         val onSelectDate: (dates: List<LocalDate>) -> Unit
@@ -40,6 +42,7 @@ sealed class CalendarSelection(
     class Period(
         override val withButtonView: Boolean = false,
         override val negativeButtonText: String? = null,
+        override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButtonText: String? = null,
         val selectedRange: Range<LocalDate>? = null,
         val onSelectRange: (startDate: LocalDate, endDate: LocalDate) -> Unit

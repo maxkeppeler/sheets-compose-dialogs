@@ -28,7 +28,7 @@ private fun CustomHeaderComponent(header: Header.Default) {
     Column {
         Text(
             text = header.titleText,
-            style = MaterialTheme.typography.titleMedium,
+            style = MaterialTheme.typography.headlineSmall,
             modifier = Modifier
                 .padding(horizontal = dimensionResource(id = RC.dimen.normal_150))
                 .padding(top = dimensionResource(id = RC.dimen.normal_150)),
@@ -36,7 +36,7 @@ private fun CustomHeaderComponent(header: Header.Default) {
         if (header.subtitleText != null)
             Text(
                 text = header.subtitleText,
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.titleSmall,
                 modifier = Modifier
                     .padding(horizontal = dimensionResource(id = RC.dimen.normal_150))
                     .padding(top = dimensionResource(id = RC.dimen.small_50)),

@@ -93,7 +93,10 @@ fun ColorView(
             negativeButtonText = selection.negativeButtonText,
             positiveButtonText = selection.positiveButtonText,
             onPositiveValid = isValid,
-            onNegative = onCancel,
+            onNegative = {
+                selection.onNegativeClick?.invoke()
+                onCancel()
+            },
             onPositive = { onInvokeListener(); onCancel() }
         )
     }

@@ -1,17 +1,15 @@
 @file:Suppress("MemberVisibilityCanBePrivate", "CanBeParameter")
 
-package com.maxkeppeler.sheets.color.models
+package com.maxkeppeler.sheets.info.models
 
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 
 /**
  * Selection and selection-based configurations.
  */
-class ColorSelection(
-    val selectedColor: SelectedColor? = null,
+class InfoSelection(
     override val negativeButtonText: String? = null,
     override val onNegativeClick: (() -> Unit)? = null,
     override val positiveButtonText: String? = null,
-    val onSelectNone: (() -> Unit)? = null,
-    val onSelectColor: (color: Int) -> Unit,
+    val onPositiveClick: () -> Unit,
 ) : BaseSelection()

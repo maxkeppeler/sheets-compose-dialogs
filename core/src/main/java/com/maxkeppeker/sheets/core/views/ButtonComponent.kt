@@ -19,7 +19,7 @@ fun ButtonComponent(
     positiveButtonText: String? = null,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
-    onPositiveValid: () -> Boolean
+    onPositiveValid: () -> Boolean = { true }
 ) {
 
     Row(

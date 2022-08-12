@@ -4,7 +4,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -22,6 +21,9 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
+import com.maxkeppeler.sheets.info.InfoDialog
+import com.maxkeppeler.sheets.info.models.Body
+import com.maxkeppeler.sheets.info.models.InfoSelection
 import com.mk.sheets.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import kotlin.random.Random
@@ -44,6 +46,8 @@ class MainActivity : ComponentActivity() {
                     val colorDialogVisible = remember { mutableStateOf(false) }
                     val color = remember { mutableStateOf(Color.White.toArgb()) }
 
+                    val infoDialogVisible = remember { mutableStateOf(true) }
+
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
                             Text(text = "Calendar Dialog")
@@ -60,11 +64,32 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Color Dialog")
                         }
 
-
                         Spacer(modifier = Modifier.height(16.dp))
+
+
+                        TextButton(onClick = { infoDialogVisible.value = true }) {
+                            Text(text = "Info Dialog")
+                        }
+
                     }
 
 
+                    InfoDialog(
+                        show = infoDialogVisible,
+                        header = Header.Default(
+                            titleText = "Do you want to work?",
+                            subtitleText = "It's essential"
+                        ),
+                        body = Body.Default(
+                            bodyText = "this is a very long text bla bla",
+                            postBody = {
+                                TextButton(onClick = { /*TODO*/ }) {
+                                    Text(text = "Test")
+                                }
+                            }
+                        ),
+                        selection = InfoSelection(onPositiveClick = {}, onNegativeClick = {})
+                    )
 
 
                     val disabledDates = listOf(
