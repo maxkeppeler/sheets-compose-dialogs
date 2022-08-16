@@ -2,7 +2,7 @@ package com.maxkeppeker.sheets.core.models.base
 
 abstract class BaseSelection {
     open val withButtonView: Boolean = true
-    abstract val negativeButtonText: String?
-    abstract val positiveButtonText: String?
-    abstract val onNegativeClick: (() -> Unit)?
+    open val negativeButtonText: String? = null
+    open val positiveButtonText: String? = null
+    open val onNegativeClick: (() -> Unit)? = null
 }

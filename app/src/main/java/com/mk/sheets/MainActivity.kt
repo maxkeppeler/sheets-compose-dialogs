@@ -24,6 +24,8 @@ import com.maxkeppeler.sheets.color.models.*
 import com.maxkeppeler.sheets.info.InfoDialog
 import com.maxkeppeler.sheets.info.models.Body
 import com.maxkeppeler.sheets.info.models.InfoSelection
+import com.maxkeppeler.sheets.state.StateDialog
+import com.maxkeppeler.sheets.state.models.*
 import com.mk.sheets.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import kotlin.random.Random
@@ -46,7 +48,8 @@ class MainActivity : ComponentActivity() {
                     val colorDialogVisible = remember { mutableStateOf(false) }
                     val color = remember { mutableStateOf(Color.White.toArgb()) }
 
-                    val infoDialogVisible = remember { mutableStateOf(true) }
+                    val infoDialogVisible = remember { mutableStateOf(false) }
+                    val stateDialogVisible = remember { mutableStateOf(false) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -71,8 +74,36 @@ class MainActivity : ComponentActivity() {
                             Text(text = "Info Dialog")
                         }
 
+                        Spacer(modifier = Modifier.height(16.dp))
+
+
+                        TextButton(onClick = { stateDialogVisible.value = true }) {
+                            Text(text = "State Dialog")
+                        }
                     }
 
+//                    StateDialog(
+//                        show = stateDialogVisible,
+//                        selection = StateSelection { },
+//                        config = StateConfig(
+//                            state = State.Loading("Wait a moment", ProgressIndicator.Linear(0.5f)),
+//                        )
+//                    )
+
+
+                    StateDialog(
+                        show = stateDialogVisible,
+                        selection = StateSelection { },
+                        config = StateConfig(
+//                            state = State.Loading("Wait a moment", ProgressIndicator.Linear())
+//                            state = State.Failure(
+//                                labelText = "An unknown error has occurred"
+//                            )
+                            state = State.Success(
+                                labelText = "Upload finished, amazing!"
+                            )
+                        )
+                    )
 
                     InfoDialog(
                         show = infoDialogVisible,

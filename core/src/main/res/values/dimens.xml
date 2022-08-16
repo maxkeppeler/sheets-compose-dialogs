@@ -39,6 +39,8 @@
     <dimen name="size_250">40dp</dimen>
     <dimen name="size_275">44dp</dimen>
     <dimen name="size_300">48dp</dimen>
+    <dimen name="size_325">52dp</dimen>
+    <dimen name="size_350">56dp</dimen>
 
     <!-- One time dimens -->
 
