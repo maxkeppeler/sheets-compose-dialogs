@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.mk.sheets">
+    package="com.mk.sheets.compose">
 
     <application
         android:allowBackup="true"
@@ -14,7 +14,7 @@
         android:theme="@style/Theme.SheetsCompose"
         tools:targetApi="31">
         <activity
-            android:name=".MainActivity"
+            android:name="com.mk.sheets.compose.MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.SheetsCompose">

@@ -1,4 +1,4 @@
-package com.mk.compose.ui.theme
+package com.mk.sheets.compose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

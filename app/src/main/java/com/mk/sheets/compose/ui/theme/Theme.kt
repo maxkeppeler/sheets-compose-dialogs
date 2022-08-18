@@ -1,4 +1,4 @@
-package com.mk.compose.ui.theme
+package com.mk.sheets.compose.ui.theme
 
 import android.app.Activity
 import android.os.Build
