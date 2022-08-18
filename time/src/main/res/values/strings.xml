@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="sheets_at_least_placeholder" translatable="true">Minimum</string>
+    <string name="sheets_at_most_placeholder" translatable="true">Maximum</string>
+
+    <string name="sheets_hour_code" translatable="true">h</string>
+    <string name="sheets_minute_code" translatable="true">m</string>
+    <string name="sheets_second_code" translatable="true">s</string>
+    <string name="sheets_day_code" translatable="true">D</string>
+
+</resources>

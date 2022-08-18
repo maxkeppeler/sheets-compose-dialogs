@@ -1,4 +1,4 @@
-package com.mk.sheets
+package com.mk.sheets.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -26,7 +26,11 @@ import com.maxkeppeler.sheets.info.models.Body
 import com.maxkeppeler.sheets.info.models.InfoSelection
 import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.*
-import com.mk.sheets.ui.theme.SheetsComposeTheme
+import com.maxkeppeler.sheets.time.TimeDialog
+import com.maxkeppeler.sheets.time.models.TimeConfig
+import com.maxkeppeler.sheets.time.models.TimeFormat
+import com.maxkeppeler.sheets.time.models.TimeSelection
+import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import kotlin.random.Random
 
@@ -50,6 +54,7 @@ class MainActivity : ComponentActivity() {
 
                     val infoDialogVisible = remember { mutableStateOf(false) }
                     val stateDialogVisible = remember { mutableStateOf(false) }
+                    val timeDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -80,7 +85,26 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { stateDialogVisible.value = true }) {
                             Text(text = "State Dialog")
                         }
+
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+
+                        TextButton(onClick = { timeDialogVisible.value = true }) {
+                            Text(text = "Time Dialog")
+                        }
                     }
+
+                    TimeDialog(
+                        show = timeDialogVisible,
+                        selection = TimeSelection {},
+                        config = TimeConfig(
+                            timeFormat = TimeFormat.HH_MM_SS,
+                            currentTime = 45,
+                            minTime = 48,
+                            maxTime = 180
+                        )
+                    )
 
 //                    StateDialog(
 //                        show = stateDialogVisible,
