@@ -1,6 +1,7 @@
 package com.mk.sheets.compose
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
@@ -19,6 +20,9 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.clock_time.ClockTimeDialog
+import com.maxkeppeler.sheets.clock_time.models.ClockTimeConfig
+import com.maxkeppeler.sheets.clock_time.models.ClockTimeSelection
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
 import com.maxkeppeler.sheets.info.InfoDialog
@@ -32,6 +36,7 @@ import com.maxkeppeler.sheets.time.models.TimeFormat
 import com.maxkeppeler.sheets.time.models.TimeSelection
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
+import java.time.LocalTime
 import kotlin.random.Random
 
 @ExperimentalMaterial3Api
@@ -54,7 +59,8 @@ class MainActivity : ComponentActivity() {
 
                     val infoDialogVisible = remember { mutableStateOf(false) }
                     val stateDialogVisible = remember { mutableStateOf(false) }
-                    val timeDialogVisible = remember { mutableStateOf(true) }
+                    val timeDialogVisible = remember { mutableStateOf(false) }
+                    val clockTimeDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -93,7 +99,25 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { timeDialogVisible.value = true }) {
                             Text(text = "Time Dialog")
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+
+                        TextButton(onClick = { clockTimeDialogVisible.value = true }) {
+                            Text(text = "Clock Dialog")
+                        }
                     }
+
+                    ClockTimeDialog(
+                        show = clockTimeDialogVisible,
+                        selection = ClockTimeSelection.HoursMinutes { hour, minute ->
+                            Log.d("ClockTime", "hour:$hour,minute:$minute")
+                        },
+                        config = ClockTimeConfig(
+                            currentTime = LocalTime.of(23, 20, 0),
+                            is24HourFormat = true
+                        ),
+                    )
 
                     TimeDialog(
                         show = timeDialogVisible,
