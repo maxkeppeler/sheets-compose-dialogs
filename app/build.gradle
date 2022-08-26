@@ -55,6 +55,7 @@ dependencies {
     api project(':info')
     api project(':state')
     api project(':time')
+    api project(':option')
     api project(':clock_time')
 
     implementation 'androidx.core:core-ktx:1.8.0'

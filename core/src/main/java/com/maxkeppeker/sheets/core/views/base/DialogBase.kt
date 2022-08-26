@@ -19,6 +19,7 @@ import androidx.compose.ui.window.DialogProperties
 fun DialogBase(
     show: MutableState<Boolean>,
     properties: DialogProperties = DialogProperties(),
+    onDialogClick: (() -> Unit)? = null,
     content: @Composable () -> Unit
 ) {
     if (!show.value) return
@@ -49,6 +50,7 @@ fun DialogBase(
                         indication = null,
                         interactionSource = remember { MutableInteractionSource() }
                     ) {
+                        onDialogClick?.invoke()
                     },
                 shape = MaterialTheme.shapes.large,
                 color = MaterialTheme.colorScheme.surface

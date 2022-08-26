@@ -6,6 +6,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Add
+import androidx.compose.material.icons.rounded.Create
+import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -16,6 +20,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.Header
+import com.maxkeppeker.sheets.core.models.ImageSource
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -28,8 +33,12 @@ import com.maxkeppeler.sheets.color.models.*
 import com.maxkeppeler.sheets.info.InfoDialog
 import com.maxkeppeler.sheets.info.models.Body
 import com.maxkeppeler.sheets.info.models.InfoSelection
+import com.maxkeppeler.sheets.option.OptionDialog
+import com.maxkeppeler.sheets.option.models.*
 import com.maxkeppeler.sheets.state.StateDialog
-import com.maxkeppeler.sheets.state.models.*
+import com.maxkeppeler.sheets.state.models.State
+import com.maxkeppeler.sheets.state.models.StateConfig
+import com.maxkeppeler.sheets.state.models.StateSelection
 import com.maxkeppeler.sheets.time.TimeDialog
 import com.maxkeppeler.sheets.time.models.TimeConfig
 import com.maxkeppeler.sheets.time.models.TimeFormat
@@ -60,7 +69,8 @@ class MainActivity : ComponentActivity() {
                     val infoDialogVisible = remember { mutableStateOf(false) }
                     val stateDialogVisible = remember { mutableStateOf(false) }
                     val timeDialogVisible = remember { mutableStateOf(false) }
-                    val clockTimeDialogVisible = remember { mutableStateOf(true) }
+                    val clockTimeDialogVisible = remember { mutableStateOf(false) }
+                    val optionDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -102,11 +112,34 @@ class MainActivity : ComponentActivity() {
 
                         Spacer(modifier = Modifier.height(16.dp))
 
-
                         TextButton(onClick = { clockTimeDialogVisible.value = true }) {
                             Text(text = "Clock Dialog")
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = { optionDialogVisible.value = true }) {
+                            Text(text = "Option Dialog")
+                        }
                     }
+
+                    val options = listOf(
+                        Option(ImageSource(Icons.Rounded.Create), titleText = "Apple"),
+                        Option(ImageSource(Icons.Rounded.Notifications), titleText = "Banana", disabled = true),
+                        Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_1", selected = true),
+                        Option(ImageSource(Icons.Rounded.Add), titleText = "Strawberry_2"),
+                        Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_3"),
+                        Option(ImageSource(Icons.Rounded.Create), titleText = "Pineapple", details = OptionDetails("A rare fruit", "This is a long beautiful description of a pineapple.")),
+                    )
+                    OptionDialog(
+                        show = optionDialogVisible,
+                        selection = OptionSelection.Single(options) { index, option ->
+                            Log.d("OptionDialog", "index:$index, options:$option")
+                        },
+                        config = OptionConfig(style = DisplayMode.GRID_VERTICAL),
+//                        selection = OptionSelection.Multiple(options, minChoices = 2, maxChoices = 4, maxChoicesStrict = true) { indicies, options ->
+//                            Log.d("OptionDialog", "indicies:$indicies, options:$options")
+//                        }
+                    )
 
                     ClockTimeDialog(
                         show = clockTimeDialogVisible,
