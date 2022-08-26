@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalSnapperApi::class)
-
 package com.maxkeppeler.sheets.calendar
 
 import androidx.compose.foundation.layout.Column
@@ -22,7 +20,6 @@ import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
 import com.maxkeppeler.sheets.calendar.views.*
-import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.time.DayOfWeek

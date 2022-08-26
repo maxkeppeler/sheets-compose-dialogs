@@ -1,5 +1,4 @@
-@file:OptIn(
-    ExperimentalSnapperApi::class, ExperimentalMaterial3Api::class,
+@file:OptIn(ExperimentalMaterial3Api::class,
     ExperimentalMaterialApi::class
 )
 
@@ -29,7 +28,6 @@ import com.maxkeppeler.sheets.color.models.ColorSelectionMode
 import com.maxkeppeler.sheets.color.views.ColorCustomComponent
 import com.maxkeppeler.sheets.color.views.ColorSelectionModeComponent
 import com.maxkeppeler.sheets.color.views.ColorTemplateComponent
-import dev.chrisbanes.snapper.ExperimentalSnapperApi
 
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
