@@ -23,24 +23,24 @@ class LibraryModulePlugin : Plugin<Project> {
 
         dependencies.apply {
 
-            implementation(Dependency.KOTLIN_STD)
-            implementation(Dependency.AndroidX.CORE_KTX)
+            implementation(Dependencies.KOTLIN_STD)
+            implementation(Dependencies.AndroidX.CORE_KTX)
 
             // Compose libs
-            implementation(Dependency.Compose.UI)
-            implementation(Dependency.Compose.UI_TOOLING)
-            implementation(Dependency.Compose.ANIMATION)
-            implementation(Dependency.Compose.RUNTIME)
-            implementation(Dependency.Compose.MATERIAL)
-            implementation(Dependency.Compose.MATERIAL_3)
-            implementation(Dependency.Compose.ICONS_EXTENDED)
+            implementation(Dependencies.Compose.UI)
+            implementation(Dependencies.Compose.UI_TOOLING)
+            implementation(Dependencies.Compose.ANIMATION)
+            implementation(Dependencies.Compose.RUNTIME)
+            implementation(Dependencies.Compose.MATERIAL)
+            implementation(Dependencies.Compose.MATERIAL_3)
+            implementation(Dependencies.Compose.ICONS_EXTENDED)
 
             // Test libs
-            testImplementation(Dependency.Test.JUNIT)
-            androidTestImplementation(Dependency.AndroidX.Test.JUNIT)
-            androidTestImplementation(Dependency.AndroidX.Test.ESPRESSO_CORE)
-            androidTestImplementation(Dependency.Compose.Test.JUNIT)
-            debugImplementation(Dependency.Compose.Test.MANIFEST)
+            testImplementation(Dependencies.Test.JUNIT)
+            androidTestImplementation(Dependencies.AndroidX.Test.JUNIT)
+            androidTestImplementation(Dependencies.AndroidX.Test.ESPRESSO_CORE)
+            androidTestImplementation(Dependencies.Compose.Test.JUNIT)
+            debugImplementation(Dependencies.Compose.Test.MANIFEST)
        }
     }
 

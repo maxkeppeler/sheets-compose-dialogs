@@ -6,13 +6,13 @@ plugins {
 
 android {
     defaultConfig {
-        applicationId = AppConfig.id
-        compileSdk = AppConfig.compileSdk
-        minSdk = AppConfig.minSdk
-        targetSdk = AppConfig.targetSdk
-        versionCode = AppConfig.versionCode
-        versionName = AppConfig.versionName
-        testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        applicationId = App.ID
+        compileSdk = App.COMPILE_SDK
+        minSdk = App.MIN_SDK
+        targetSdk = App.TARGET_SDK
+        versionCode = App.VERSION_CODE
+        versionName = App.VERSION_NAME
+        testInstrumentationRunner = App.TEST_INSTRUMENTATION_RUNNER
     }
 
     buildTypes {
@@ -36,7 +36,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
     }
     packagingOptions {
         resources {
@@ -47,29 +47,29 @@ android {
 
 dependencies {
 
-    Module.values().forEach { module ->
+    Modules.values().forEach { module ->
         api(project(module.path))
     }
 
-    implementation(Dependency.KOTLIN_STD)
-    implementation(Dependency.AndroidX.CORE_KTX)
-    implementation(Dependency.AndroidX.LIFECYCLE_KTX)
-    implementation(Dependency.AndroidX.ACTIVITY_COMPOSE)
+    implementation(Dependencies.KOTLIN_STD)
+    implementation(Dependencies.AndroidX.CORE_KTX)
+    implementation(Dependencies.AndroidX.LIFECYCLE_KTX)
+    implementation(Dependencies.AndroidX.ACTIVITY_COMPOSE)
 
     // Compose libs
-    implementation(Dependency.Compose.UI)
-    implementation(Dependency.Compose.UI_TOOLING)
-    implementation(Dependency.Compose.ANIMATION)
-    implementation(Dependency.Compose.RUNTIME)
-    implementation(Dependency.Compose.MATERIAL)
-    implementation(Dependency.Compose.MATERIAL_3)
-    implementation(Dependency.Compose.ICONS_EXTENDED)
+    implementation(Dependencies.Compose.UI)
+    implementation(Dependencies.Compose.UI_TOOLING)
+    implementation(Dependencies.Compose.ANIMATION)
+    implementation(Dependencies.Compose.RUNTIME)
+    implementation(Dependencies.Compose.MATERIAL)
+    implementation(Dependencies.Compose.MATERIAL_3)
+    implementation(Dependencies.Compose.ICONS_EXTENDED)
 
     // Test libs
-    testImplementation(Dependency.Test.JUNIT)
-    androidTestImplementation(Dependency.AndroidX.Test.JUNIT)
-    androidTestImplementation(Dependency.AndroidX.Test.ESPRESSO_CORE)
-    androidTestImplementation(Dependency.Compose.Test.JUNIT)
-    debugImplementation(Dependency.Compose.Test.TOOLING)
-    debugImplementation(Dependency.Compose.Test.MANIFEST)
+    testImplementation(Dependencies.Test.JUNIT)
+    androidTestImplementation(Dependencies.AndroidX.Test.JUNIT)
+    androidTestImplementation(Dependencies.AndroidX.Test.ESPRESSO_CORE)
+    androidTestImplementation(Dependencies.Compose.Test.JUNIT)
+    debugImplementation(Dependencies.Compose.Test.TOOLING)
+    debugImplementation(Dependencies.Compose.Test.MANIFEST)
 }

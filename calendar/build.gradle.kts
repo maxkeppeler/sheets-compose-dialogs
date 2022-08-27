@@ -4,10 +4,10 @@ plugins {
 
 android {
     defaultConfig {
-        compileSdk = AppConfig.compileSdk
-        minSdk = AppConfig.minSdk
-        targetSdk = AppConfig.targetSdk
-        testInstrumentationRunner = AppConfig.androidTestInstrumentation
+        compileSdk = App.COMPILE_SDK
+        minSdk = App.MIN_SDK
+        targetSdk = App.TARGET_SDK
+        testInstrumentationRunner = App.TEST_INSTRUMENTATION_RUNNER
     }
 
     compileOptions {
@@ -23,7 +23,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.compose
+        kotlinCompilerExtensionVersion = Versions.COMPOSE
     }
     packagingOptions {
         resources {
@@ -33,7 +33,7 @@ android {
 }
 
 dependencies {
-    api(project(Module.CORE.path))
-    implementation(Dependency.SNAPPER)
-    coreLibraryDesugaring(Dependency.DESUGAR)
+    api(project(Modules.CORE.path))
+    implementation(Dependencies.SNAPPER)
+    coreLibraryDesugaring(Dependencies.DESUGAR)
 }

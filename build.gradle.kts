@@ -1,5 +1,3 @@
-import org.gradle.api.internal.initialization.ClassLoaderIds.buildScript
-
 plugins {
     id("com.android.application") version ("7.2.2") apply false
     id("com.android.library") version ("7.2.2") apply false
@@ -8,10 +6,8 @@ plugins {
 
 allprojects {
     repositories {
-        jcenter()
         google()
         mavenCentral()
-        maven("https://plugins.gradle.org/m2/")
     }
 }
 
