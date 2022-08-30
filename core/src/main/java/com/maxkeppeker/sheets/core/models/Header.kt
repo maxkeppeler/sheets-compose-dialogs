@@ -9,7 +9,8 @@ abstract class Header {
 
     data class Default(
         val titleText: String,
-        val subtitleText: String? = null
+        val subtitleText: String? = null,
+        val icon: ImageSource? = null
     ) : Header()
 
     data class Custom(

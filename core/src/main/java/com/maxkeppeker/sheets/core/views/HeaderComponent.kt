@@ -1,7 +1,9 @@
 package com.maxkeppeker.sheets.core.views
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -25,21 +27,29 @@ fun HeaderComponent(
 
 @Composable
 private fun CustomHeaderComponent(header: Header.Default) {
-    Column {
-        Text(
-            text = header.titleText,
-            style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier
-                .padding(horizontal = dimensionResource(id = RC.dimen.normal_150))
-                .padding(top = dimensionResource(id = RC.dimen.normal_150)),
-        )
-        if (header.subtitleText != null)
+    Row {
+        header.icon?.let {
+            IconComponent(
+                modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                imageSource = it,
+            )
+        }
+        Column {
             Text(
-                text = header.subtitleText,
-                style = MaterialTheme.typography.titleSmall,
+                text = header.titleText,
+                style = MaterialTheme.typography.headlineSmall,
                 modifier = Modifier
                     .padding(horizontal = dimensionResource(id = RC.dimen.normal_150))
-                    .padding(top = dimensionResource(id = RC.dimen.small_50)),
+                    .padding(top = dimensionResource(id = RC.dimen.normal_150)),
             )
+            if (header.subtitleText != null)
+                Text(
+                    text = header.subtitleText,
+                    style = MaterialTheme.typography.titleSmall,
+                    modifier = Modifier
+                        .padding(horizontal = dimensionResource(id = RC.dimen.normal_150))
+                        .padding(top = dimensionResource(id = RC.dimen.small_50)),
+                )
+        }
     }
 }
