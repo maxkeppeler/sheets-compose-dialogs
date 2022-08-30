@@ -8,7 +8,6 @@ pluginManagement {
 rootProject.name = "sheets-compose"
 include(
     ":app",
-
     // Include all modules
     ":core",
     ":info",
@@ -18,5 +17,6 @@ include(
     ":color",
     ":option",
     ":state",
-    ":emoji"
+    ":emoji",
+    ":list",
 )

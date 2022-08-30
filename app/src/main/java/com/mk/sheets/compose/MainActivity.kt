@@ -38,6 +38,9 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 import com.maxkeppeler.sheets.info.InfoDialog
 import com.maxkeppeler.sheets.info.models.Body
 import com.maxkeppeler.sheets.info.models.InfoSelection
+import com.maxkeppeler.sheets.list.ListDialog
+import com.maxkeppeler.sheets.list.models.ListOption
+import com.maxkeppeler.sheets.list.models.ListSelection
 import com.maxkeppeler.sheets.option.OptionDialog
 import com.maxkeppeler.sheets.option.models.*
 import com.maxkeppeler.sheets.state.StateDialog
@@ -76,8 +79,9 @@ class MainActivity : ComponentActivity() {
                     val timeDialogVisible = remember { mutableStateOf(false) }
                     val clockTimeDialogVisible = remember { mutableStateOf(false) }
                     val optionDialogVisible = remember { mutableStateOf(false) }
-                    val emojiDialogVisible = remember { mutableStateOf(true) }
+                    val emojiDialogVisible = remember { mutableStateOf(false) }
                     val emojiDialogText = remember { mutableStateOf("") }
+                    val listDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -132,7 +136,34 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { emojiDialogVisible.value = true }) {
                             Text(text = "Emoji Dialog" + emojiDialogText.value)
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = { listDialogVisible.value = true }) {
+                            Text(text = "List Dialog")
+                        }
                     }
+
+                    ListDialog(
+                        show = listDialogVisible,
+                        selection = ListSelection.Multiple(
+                            showCheckBoxes = true,
+                            minChoices = 2,
+                            maxChoices = 3,
+                            options = listOf(
+                                ListOption(
+//                                    ImageSource(Icons.Rounded.Notifications),
+                                    titleText = "Banana",
+                                ),
+                                ListOption(
+//                                    ImageSource(Icons.Rounded.Notifications),
+                                    titleText = "Bananaaa",
+                                ),
+                                ListOption(titleText = "Great")
+                            )
+                        ) { selectedIndices, selectedOptions ->
+                            Log.d("ListDialog", "selectedIndices:$selectedIndices, selectedOptions:$selectedOptions")
+                        },
+                    )
 
                     val options = listOf(
                         Option(ImageSource(Icons.Rounded.Create), titleText = "Apple"),
@@ -146,25 +177,25 @@ class MainActivity : ComponentActivity() {
                             titleText = "Strawberry_1",
                             selected = true
                         ),
-                        Option(ImageSource(Icons.Rounded.Add), titleText = "Strawberry_2"),
-                        Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_3"),
-                        Option(
-                            ImageSource(Icons.Rounded.Create),
-                            titleText = "Pineapple",
-                            details = OptionDetails(
-                                "A rare fruit",
-                                "This is a long beautiful description of a pineapple."
-                            )
-                        ),
+//                        Option(ImageSource(Icons.Rounded.Add), titleText = "Strawberry_2"),
+//                        Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_3"),
+//                        Option(
+//                            ImageSource(Icons.Rounded.Create),
+//                            titleText = "Pineapple",
+//                            details = OptionDetails(
+//                                "A rare fruit",
+//                                "This is a long beautiful description of a pineapple."
+//                            )
+//                        ),
                     )
                     OptionDialog(
                         show = optionDialogVisible,
                         selection = OptionSelection.Single(options) { index, option ->
                             Log.d("OptionDialog", "index:$index, options:$option")
                         },
-                        config = OptionConfig(style = DisplayMode.GRID_VERTICAL),
+                        config = OptionConfig(style = DisplayMode.LIST),
 //                        selection = OptionSelection.Multiple(options, minChoices = 2, maxChoices = 4, maxChoicesStrict = true) { indicies, options ->
-//                            Log.d("OptionDialog", "indicies:$indicies, options:$options")
+//                            Log.d("OptionDialog", "indicies:indicies, options:$options")
 //                        }
                     )
 
