@@ -19,8 +19,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.CoreDialog
 import com.maxkeppeker.sheets.core.models.Header
 import com.maxkeppeker.sheets.core.models.ImageSource
+import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -81,7 +83,8 @@ class MainActivity : ComponentActivity() {
                     val optionDialogVisible = remember { mutableStateOf(false) }
                     val emojiDialogVisible = remember { mutableStateOf(false) }
                     val emojiDialogText = remember { mutableStateOf("") }
-                    val listDialogVisible = remember { mutableStateOf(true) }
+                    val listDialogVisible = remember { mutableStateOf(false) }
+                    val coreDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -141,7 +144,27 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { listDialogVisible.value = true }) {
                             Text(text = "List Dialog")
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = { coreDialogVisible.value = true }) {
+                            Text(text = "Core Dialog")
+                        }
                     }
+
+                    CoreDialog(show = coreDialogVisible,
+                        selection = object : BaseSelection() {
+                            override val withButtonView = true
+                            override val positiveButtonText = "hahah"
+                        },
+                        header = Header.Default(
+                            titleText = "Custom Dialog"
+                        ),
+                        onPositiveValid = { false },
+                        body = {
+                            Text(text = "Test")
+                        }
+                    )
+
 
                     ListDialog(
                         show = listDialogVisible,
@@ -161,7 +184,10 @@ class MainActivity : ComponentActivity() {
                                 ListOption(titleText = "Great")
                             )
                         ) { selectedIndices, selectedOptions ->
-                            Log.d("ListDialog", "selectedIndices:$selectedIndices, selectedOptions:$selectedOptions")
+                            Log.d(
+                                "ListDialog",
+                                "selectedIndices:$selectedIndices, selectedOptions:$selectedOptions"
+                            )
                         },
                     )
 
