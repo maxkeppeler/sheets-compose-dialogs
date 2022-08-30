@@ -6,5 +6,7 @@ enum class Modules(val path: String) {
     TIME(":time"),
     COLOR(":color"),
     STATE(":state"),
-    OPTION(":option")
+    OPTION(":option"),
+    EMOJI(":emoji"),
+    LIST(":list"),
 }

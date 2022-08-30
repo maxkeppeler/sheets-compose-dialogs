@@ -21,7 +21,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.Header
 import com.maxkeppeker.sheets.core.models.ImageSource
-import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -31,6 +30,11 @@ import com.maxkeppeler.sheets.clock_time.models.ClockTimeConfig
 import com.maxkeppeler.sheets.clock_time.models.ClockTimeSelection
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
+import com.maxkeppeler.sheets.emoji.EmojiDialog
+import com.maxkeppeler.sheets.emoji.models.EmojiCategoryStyle
+import com.maxkeppeler.sheets.emoji.models.EmojiConfig
+import com.maxkeppeler.sheets.emoji.models.EmojiProvider
+import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 import com.maxkeppeler.sheets.info.InfoDialog
 import com.maxkeppeler.sheets.info.models.Body
 import com.maxkeppeler.sheets.info.models.InfoSelection
@@ -71,7 +75,9 @@ class MainActivity : ComponentActivity() {
                     val stateDialogVisible = remember { mutableStateOf(false) }
                     val timeDialogVisible = remember { mutableStateOf(false) }
                     val clockTimeDialogVisible = remember { mutableStateOf(false) }
-                    val optionDialogVisible = remember { mutableStateOf(true) }
+                    val optionDialogVisible = remember { mutableStateOf(false) }
+                    val emojiDialogVisible = remember { mutableStateOf(true) }
+                    val emojiDialogText = remember { mutableStateOf("") }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -121,15 +127,35 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { optionDialogVisible.value = true }) {
                             Text(text = "Option Dialog")
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = { emojiDialogVisible.value = true }) {
+                            Text(text = "Emoji Dialog" + emojiDialogText.value)
+                        }
                     }
 
                     val options = listOf(
                         Option(ImageSource(Icons.Rounded.Create), titleText = "Apple"),
-                        Option(ImageSource(Icons.Rounded.Notifications), titleText = "Banana", disabled = true),
-                        Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_1", selected = true),
+                        Option(
+                            ImageSource(Icons.Rounded.Notifications),
+                            titleText = "Banana",
+                            disabled = true
+                        ),
+                        Option(
+                            ImageSource(Icons.Rounded.Create),
+                            titleText = "Strawberry_1",
+                            selected = true
+                        ),
                         Option(ImageSource(Icons.Rounded.Add), titleText = "Strawberry_2"),
                         Option(ImageSource(Icons.Rounded.Create), titleText = "Strawberry_3"),
-                        Option(ImageSource(Icons.Rounded.Create), titleText = "Pineapple", details = OptionDetails("A rare fruit", "This is a long beautiful description of a pineapple.")),
+                        Option(
+                            ImageSource(Icons.Rounded.Create),
+                            titleText = "Pineapple",
+                            details = OptionDetails(
+                                "A rare fruit",
+                                "This is a long beautiful description of a pineapple."
+                            )
+                        ),
                     )
                     OptionDialog(
                         show = optionDialogVisible,
@@ -202,6 +228,20 @@ class MainActivity : ComponentActivity() {
                             }
                         ),
                         selection = InfoSelection(onPositiveClick = {}, onNegativeClick = {})
+                    )
+
+
+                    EmojiDialog(
+                        show = emojiDialogVisible,
+                        selection = EmojiSelection.Unicode(
+                            withButtonView = false,
+                            onPositiveClick = {
+                                emojiDialogText.value = it
+                            }
+                        ),
+                        config = EmojiConfig(
+                            emojiProvider = EmojiProvider.IOS
+                        )
                     )
 
 

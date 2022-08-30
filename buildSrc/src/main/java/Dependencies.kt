@@ -33,6 +33,14 @@ object Dependencies {
         }
     }
 
+    object Vanniktech {
+
+        const val EMOJI_GOOGLE = "com.vanniktech:emoji-google:0.15.0"
+        const val EMOJI_IOS = "com.vanniktech:emoji-ios:0.15.0"
+        const val EMOJI_FACEBOOK = "com.vanniktech:emoji-facebook:0.15.0"
+        const val EMOJI_TWITTER = "com.vanniktech:emoji-twitter:0.15.0"
+    }
+
     object Test {
 
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
