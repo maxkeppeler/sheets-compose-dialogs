@@ -13,7 +13,7 @@ object Dependencies {
     }
 
     const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
-    const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.2.2"
+    const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.3.0"
     const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
 
     object Compose {
