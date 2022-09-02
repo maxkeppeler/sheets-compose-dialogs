@@ -14,6 +14,7 @@ include(
     ":calendar",
     ":time",
     ":clock_time",
+    ":date_text",
     ":color",
     ":option",
     ":state",

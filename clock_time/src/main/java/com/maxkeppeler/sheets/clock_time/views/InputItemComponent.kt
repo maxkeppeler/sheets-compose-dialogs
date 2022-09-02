@@ -39,7 +39,6 @@ internal fun InputItemComponent(
     onEnterValue: (Int) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
-
     var cornerRadius by remember { mutableStateOf(Constants.DEFAULT_CORNER_RADIUS) }
     val animatedCornerRadius = animateIntAsState(cornerRadius, tween(durationMillis = 300))
     val interactionSource = remember { MutableInteractionSource() }

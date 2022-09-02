@@ -17,11 +17,12 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 fun HeaderComponent(
     header: Header?,
+    noHeaderView: @Composable () -> Unit = {}
 ) {
     when (header) {
         is Header.Custom -> header.header.invoke()
         is Header.Default -> CustomHeaderComponent(header)
-        null -> Unit
+        null -> noHeaderView.invoke()
     }
 }
 

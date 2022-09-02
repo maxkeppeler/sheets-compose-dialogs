@@ -7,7 +7,6 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.*
@@ -32,8 +31,9 @@ import com.maxkeppeler.sheets.clock_time.models.ClockTimeConfig
 import com.maxkeppeler.sheets.clock_time.models.ClockTimeSelection
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
+import com.maxkeppeler.sheets.date_text.DateTextDialog
+import com.maxkeppeler.sheets.date_text.models.DateTextSelection
 import com.maxkeppeler.sheets.emoji.EmojiDialog
-import com.maxkeppeler.sheets.emoji.models.EmojiCategoryStyle
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiProvider
 import com.maxkeppeler.sheets.emoji.models.EmojiSelection
@@ -44,7 +44,10 @@ import com.maxkeppeler.sheets.list.ListDialog
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
 import com.maxkeppeler.sheets.option.OptionDialog
-import com.maxkeppeler.sheets.option.models.*
+import com.maxkeppeler.sheets.option.models.DisplayMode
+import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.option.models.OptionConfig
+import com.maxkeppeler.sheets.option.models.OptionSelection
 import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.State
 import com.maxkeppeler.sheets.state.models.StateConfig
@@ -56,6 +59,8 @@ import com.maxkeppeler.sheets.time.models.TimeSelection
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import java.time.LocalTime
+import java.time.format.FormatStyle
+import java.util.*
 import kotlin.random.Random
 
 @ExperimentalMaterial3Api
@@ -84,7 +89,8 @@ class MainActivity : ComponentActivity() {
                     val emojiDialogVisible = remember { mutableStateOf(false) }
                     val emojiDialogText = remember { mutableStateOf("") }
                     val listDialogVisible = remember { mutableStateOf(false) }
-                    val coreDialogVisible = remember { mutableStateOf(true) }
+                    val coreDialogVisible = remember { mutableStateOf(false) }
+                    val dateTextDialogVisible = remember { mutableStateOf(true) }
 
                     Column(Modifier.padding(24.dp)) {
                         TextButton(onClick = { calendarDialogVisible.value = true }) {
@@ -149,7 +155,22 @@ class MainActivity : ComponentActivity() {
                         TextButton(onClick = { coreDialogVisible.value = true }) {
                             Text(text = "Core Dialog")
                         }
+                        Spacer(modifier = Modifier.height(16.dp))
+                        TextButton(onClick = { dateTextDialogVisible.value = true }) {
+                            Text(text = "Date Text Dialog")
+                        }
                     }
+
+                    DateTextDialog(
+                        show = dateTextDialogVisible,
+                        selection = DateTextSelection.DateTime(
+                            withButtonView = false,
+                            locale = Locale.US,
+//                            startWithTime = true,
+                        ) {
+                            Log.d("DateTextDialog", "time/date - $it")
+                        }
+                    )
 
                     CoreDialog(show = coreDialogVisible,
                         selection = object : BaseSelection() {
