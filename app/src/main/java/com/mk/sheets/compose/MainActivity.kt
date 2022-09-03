@@ -26,13 +26,13 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.clock_time.ClockTimeDialog
-import com.maxkeppeler.sheets.clock_time.models.ClockTimeConfig
-import com.maxkeppeler.sheets.clock_time.models.ClockTimeSelection
+import com.maxkeppeler.sheets.clock.ClockDialog
+import com.maxkeppeler.sheets.clock.models.ClockTimeConfig
+import com.maxkeppeler.sheets.clock.models.ClockTimeSelection
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
-import com.maxkeppeler.sheets.date_text.DateTextDialog
-import com.maxkeppeler.sheets.date_text.models.DateTextSelection
+import com.maxkeppeler.sheets.date_time.DateTextDialog
+import com.maxkeppeler.sheets.date_time.models.DateTextSelection
 import com.maxkeppeler.sheets.emoji.EmojiDialog
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiProvider
@@ -52,14 +52,13 @@ import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.State
 import com.maxkeppeler.sheets.state.models.StateConfig
 import com.maxkeppeler.sheets.state.models.StateSelection
-import com.maxkeppeler.sheets.time.TimeDialog
-import com.maxkeppeler.sheets.time.models.TimeConfig
-import com.maxkeppeler.sheets.time.models.TimeFormat
-import com.maxkeppeler.sheets.time.models.TimeSelection
+import com.maxkeppeler.sheets.duration.DurationDialog
+import com.maxkeppeler.sheets.duration.models.TimeConfig
+import com.maxkeppeler.sheets.duration.models.TimeFormat
+import com.maxkeppeler.sheets.duration.models.TimeSelection
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.format.FormatStyle
 import java.util.*
 import kotlin.random.Random
 
@@ -127,7 +126,7 @@ class MainActivity : ComponentActivity() {
 
 
                         TextButton(onClick = { timeDialogVisible.value = true }) {
-                            Text(text = "Time Dialog")
+                            Text(text = "Duration Dialog")
                         }
 
                         Spacer(modifier = Modifier.height(16.dp))
@@ -246,7 +245,7 @@ class MainActivity : ComponentActivity() {
 //                        }
                     )
 
-                    ClockTimeDialog(
+                    ClockDialog(
                         show = clockTimeDialogVisible,
                         selection = ClockTimeSelection.HoursMinutes { hour, minute ->
                             Log.d("ClockTime", "hour:$hour,minute:$minute")
@@ -257,7 +256,7 @@ class MainActivity : ComponentActivity() {
                         ),
                     )
 
-                    TimeDialog(
+                    DurationDialog(
                         show = timeDialogVisible,
                         selection = TimeSelection {},
                         config = TimeConfig(
