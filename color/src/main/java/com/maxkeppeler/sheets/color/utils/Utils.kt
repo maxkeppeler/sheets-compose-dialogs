@@ -4,7 +4,6 @@ import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
-import android.widget.Toast
 import androidx.annotation.RestrictTo
 import com.maxkeppeler.sheets.color.R
 
@@ -32,11 +31,11 @@ internal fun pasteColorFromClipboard(
             onPastedColor(Color.parseColor(it))
         }.getOrElse {
             // Clipboard information can not be parsed to color
-            onPastedColorFailure(ctx.getString(R.string.sheets_clipboard_paste_invalid_color_code))
+            onPastedColorFailure(ctx.getString(R.string.scd_color_dialog_clipboard_paste_invalid_color_code))
         }
     } ?: run {
         // Clipboard was empty
-        onPastedColorFailure(ctx.getString(R.string.sheets_clipboard_paste_invalid_empty))
+        onPastedColorFailure(ctx.getString(R.string.scd_color_dialog_clipboard_paste_invalid_empty))
     }
 }
 

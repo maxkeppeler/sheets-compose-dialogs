@@ -25,12 +25,30 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
+import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarSwipeAction
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The main component for the selection of the use-case as well as the selection of month and year within the dialog.
+ * @param modifier The modifier that is applied to this component.
+ * @param yearListState The state of the year list selection view.
+ * @param calendarGridState The state of the calendar grid view.
+ * @param cells The amount of cells / columns that are used for the calendar grid view.
+ * @param mode The display mode of the dialog.
+ * @param nextDisabled Whenever the navigation to the next period is disabled.
+ * @param prevDisabled Whenever the navigation to the previous period is disabled.
+ * @param onPrev The listener that is invoked when the navigation to the previous period is invoked.
+ * @param onNext The listener that is invoked when the navigation to the next period is invoked.
+ * @param onCalendarView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.CALENDAR].
+ * @param onMonthView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.MONTH].
+ * @param onYearView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.YEAR].
+ */
 @Composable
 internal fun CalendarBaseSelectionComponent(
     modifier: Modifier,
@@ -72,7 +90,7 @@ internal fun CalendarBaseSelectionComponent(
 
     val baseModifier = modifier
         .fillMaxWidth()
-        .padding(top = 16.dp)
+        .padding(top = dimensionResource(RC.dimen.scd_normal_100))
 
     val dateModifier = baseModifier.swipeable(
         state = swipeableState,
@@ -108,12 +126,12 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.YEAR -> {
             Column(
-                modifier = Modifier.padding(vertical = 24.dp),
+                modifier = Modifier.padding(vertical = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Select year",
+                    text = stringResource(R.string.scd_calendar_dialog_select_year),
                     style = MaterialTheme.typography.titleMedium,
                 )
                 LazyRow(
@@ -127,12 +145,12 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.MONTH -> {
             Column(
-                modifier = Modifier.padding(vertical = 24.dp),
+                modifier = Modifier.padding(vertical = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Select month",
+                    text = stringResource(R.string.scd_calendar_dialog_select_month),
                     style = MaterialTheme.typography.titleMedium,
                 )
                 LazyVerticalGrid(

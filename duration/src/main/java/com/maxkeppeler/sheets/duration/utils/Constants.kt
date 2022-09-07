@@ -8,6 +8,13 @@ internal object Constants {
     const val ACTION_BACKSPACE = "action_backspace"
     const val ACTION_CLEAR = "action_clear"
 
-    const val DEFAULT_CORNER_RADIUS = 50
-    const val PRESSED_CORNER_RADIUS = 20
+    // Keyboard constants
+
+    const val KEYBOARD_COLUMNS = 3
+
+    const val KEYBOARD_ANIM_CORNER_RADIUS = 300
+    const val KEYBOARD_ITEM_CORNER_RADIUS_DEFAULT = 50
+    const val KEYBOARD_ITEM_CORNER_RADIUS_PRESSED = 20
+
+    const val KEYBOARD_ACTION_BACKGROUND_SURFACE_ALPHA = 0.3f
 }

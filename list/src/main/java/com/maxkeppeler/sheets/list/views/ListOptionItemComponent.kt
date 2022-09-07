@@ -13,13 +13,17 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.views.IconComponent
-import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
+import com.maxkeppeler.sheets.core.R as RC
 
-
+/**
+ * The item component for an option.
+ * @param selection The selection configuration.
+ * @param option The option that will be displayed.
+ * @param onClick Listener that is invoked when the option is clicked.
+ */
 @Composable
 internal fun ListOptionItemComponent(
     selection: ListSelection,
@@ -42,7 +46,7 @@ internal fun ListOptionItemComponent(
     else MaterialTheme.colorScheme.onSurface
 
     val containerModifier = Modifier
-        .padding(bottom = 4.dp)
+        .padding(bottom = dimensionResource(id = RC.dimen.scd_small_50))
         .fillMaxWidth()
         .clip(MaterialTheme.shapes.medium)
         .clickable { onClick(option) }
@@ -70,17 +74,17 @@ internal fun ListOptionItemComponent(
         option.icon?.let {
             IconComponent(
                 modifier = Modifier
-                    .padding(start = 16.dp)
-                    .size(dimensionResource(R.dimen.size_150)),
-                imageSource = it,
+                    .padding(start = dimensionResource(RC.dimen.scd_normal_100))
+                    .size(dimensionResource(RC.dimen.scd_size_150)),
+                iconSource = it,
                 tint = iconColor
             )
         }
 
         Column(
             modifier = Modifier
-                .padding(vertical = 12.dp)
-                .padding(start = 16.dp)
+                .padding(vertical = dimensionResource(RC.dimen.scd_small_150))
+                .padding(start = dimensionResource(RC.dimen.scd_normal_100))
                 .fillMaxWidth()
                 .wrapContentHeight(),
         ) {

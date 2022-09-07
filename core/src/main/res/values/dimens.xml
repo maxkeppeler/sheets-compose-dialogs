@@ -4,45 +4,47 @@
          Scalable and reusable dimens system for paddings and margins.
     -->
 
-    <dimen name="small_25">2dp</dimen>
-    <dimen name="small_50">4dp</dimen>
-    <dimen name="small_75">6dp</dimen>
-    <dimen name="small_100">8dp</dimen>
-    <dimen name="small_125">10dp</dimen>
-    <dimen name="small_150">12dp</dimen>
+    <dimen name="scd_small_25">2dp</dimen>
+    <dimen name="scd_small_50">4dp</dimen>
+    <dimen name="scd_small_75">6dp</dimen>
+    <dimen name="scd_small_100">8dp</dimen>
+    <dimen name="scd_small_125">10dp</dimen>
+    <dimen name="scd_small_150">12dp</dimen>
 
-    <dimen name="normal_100">16dp</dimen>
-    <dimen name="normal_125">20dp</dimen>
-    <dimen name="normal_150">24dp</dimen>
-    <dimen name="normal_175">28dp</dimen>
+    <dimen name="scd_normal_100">16dp</dimen>
+    <dimen name="scd_normal_125">20dp</dimen>
+    <dimen name="scd_normal_150">24dp</dimen>
+    <dimen name="scd_normal_175">28dp</dimen>
 
-    <dimen name="large_100">32dp</dimen>
-    <dimen name="large_125">40dp</dimen>
-    <dimen name="large_150">48dp</dimen>
-    <dimen name="large_175">56dp</dimen>
-    <dimen name="large_200">64dp</dimen>
-    <dimen name="large_225">72dp</dimen>
-    <dimen name="large_250">80dp</dimen>
-    <dimen name="large_400">128dp</dimen>
+    <dimen name="scd_large_100">32dp</dimen>
+    <dimen name="scd_large_125">40dp</dimen>
+    <dimen name="scd_large_150">48dp</dimen>
+    <dimen name="scd_large_175">56dp</dimen>
+    <dimen name="scd_large_200">64dp</dimen>
+    <dimen name="scd_large_225">72dp</dimen>
+    <dimen name="scd_large_250">80dp</dimen>
+    <dimen name="scd_large_400">128dp</dimen>
 
     <!--
-        Scalable and reusable dimens system for sizes (width & height, 1:1 ratio) of view.
+        Scalable and reusable dimens system for sizes of views.
     -->
 
-    <dimen name="size_50">8dp</dimen>
-    <dimen name="size_100">16dp</dimen>
-    <dimen name="size_125">20dp</dimen>
-    <dimen name="size_150">24dp</dimen>
-    <dimen name="size_175">28dp</dimen>
-    <dimen name="size_200">32dp</dimen>
-    <dimen name="size_225">36dp</dimen>
-    <dimen name="size_250">40dp</dimen>
-    <dimen name="size_275">44dp</dimen>
-    <dimen name="size_300">48dp</dimen>
-    <dimen name="size_325">52dp</dimen>
-    <dimen name="size_350">56dp</dimen>
+    <dimen name="scd_size_50">8dp</dimen>
+    <dimen name="scd_size_100">16dp</dimen>
+    <dimen name="scd_size_125">20dp</dimen>
+    <dimen name="scd_size_150">24dp</dimen>
+    <dimen name="scd_size_175">28dp</dimen>
+    <dimen name="scd_size_200">32dp</dimen>
+    <dimen name="scd_size_225">36dp</dimen>
+    <dimen name="scd_size_250">40dp</dimen>
+    <dimen name="scd_size_275">44dp</dimen>
+    <dimen name="scd_size_300">48dp</dimen>
+    <dimen name="scd_size_325">52dp</dimen>
+    <dimen name="scd_size_350">56dp</dimen>
 
     <!-- One time dimens -->
+
+    <dimen name="scd_dynamic_content_max_height">350dp</dimen>
 
 
 </resources>

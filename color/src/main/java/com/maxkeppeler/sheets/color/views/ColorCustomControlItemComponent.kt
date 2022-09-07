@@ -11,12 +11,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The control item component to build up a value of a custom color.
+ * @param label The label text of the color value.
+ * @param value The value of the color value.
+ * @param onValueChange The listener that returns the new value of the color value.
+ * @param colorItemLabelWidth The width of the label.
+ * @param colorValueLabelWidth The width of the value.
+ */
 @Composable
 internal fun ColorCustomControlItemComponent(
-    name: String,
+    label: String,
     value: Int,
     onValueChange: (Int) -> Unit,
     colorItemLabelWidth: MutableState<Int?>,
@@ -31,8 +40,9 @@ internal fun ColorCustomControlItemComponent(
                     stateWidth.value = coordinates.size.width
                 }
             }
-        stateWidth.value?.let { Modifier.width(LocalDensity.current.run { it.toDp() }) }
-            ?: defaultModifier
+        stateWidth.value?.let {
+            Modifier.width(LocalDensity.current.run { it.toDp() })
+        } ?: defaultModifier
     }
 
     Row(
@@ -41,14 +51,14 @@ internal fun ColorCustomControlItemComponent(
     ) {
         Text(
             modifier = wrapOrFixedModifier(colorItemLabelWidth),
-            text = name,
+            text = label,
             style = MaterialTheme.typography.labelMedium,
         )
 
         Slider(
             modifier = Modifier
                 .weight(1f)
-                .padding(horizontal = 16.dp),
+                .padding(horizontal = dimensionResource(RC.dimen.scd_normal_100)),
             valueRange = 0f..255f,
             value = value.toFloat(),
             onValueChange = { onValueChange(it.toInt()) },

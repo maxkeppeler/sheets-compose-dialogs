@@ -1,27 +1,17 @@
-<!--
-  ~  Copyright (C) 2020. Maximilian Keppeler (https://www.maxkeppeler.com)
-  ~
-  ~  Licensed under the Apache License, Version 2.0 (the "License");
-  ~  you may not use this file except in compliance with the License.
-  ~  You may obtain a copy of the License at
-  ~
-  ~      http://www.apache.org/licenses/LICENSE-2.0
-  ~
-  ~  Unless required by applicable law or agreed to in writing, software
-  ~  distributed under the License is distributed on an "AS IS" BASIS,
-  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  ~  See the License for the specific language governing permissions and
-  ~  limitations under the License.
-  -->
-
 <resources>
 
-    <string name="sheets_color_picker_alpha" translatable="true">Alpha</string>
-    <string name="sheets_color_picker_red" translatable="true">Red</string>
-    <string name="sheets_color_picker_green" translatable="true">Green</string>
-    <string name="sheets_color_picker_blue" translatable="true">Blue</string>
-    <string name="sheets_argb" translatable="true">ARGB</string>
-    <string name="sheets_clipboard_paste_invalid_color_code" translatable="true">Paste valid aRGB-Code.</string>
-    <string name="sheets_clipboard_paste_invalid_empty" translatable="true">Nothing to paste</string>
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Red</string>
+    <string name="scd_color_dialog_green" translatable="true">Green</string>
+    <string name="scd_color_dialog_blue" translatable="true">Blue</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Color</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Template colors</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Custom color</string>
+    <string name="scd_color_dialog_no_color" translatable="true">No color</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Copy color</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Paste color</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Paste valid aRGB-Code.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Nothing to paste</string>
 
 </resources>

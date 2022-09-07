@@ -7,6 +7,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import java.time.LocalDate
 
+/**
+ * The view that displays all relevant year information.
+ * @param yearsRange The range of years
+ * @param selectedYear The year that is currently selected.
+ * @param onYearClick The listener that is invoked when a year is selected.
+ */
 internal fun LazyListScope.setupYearSelectionView(
     yearsRange: IntRange,
     selectedYear: Int,
@@ -17,7 +23,7 @@ internal fun LazyListScope.setupYearSelectionView(
         val year = yearsRange.first + it
         val selected = selectedYear == year
         val thisYear = year == LocalDate.now().year
-        CalendarViewMainYearComponent(
+        YearItemComponent(
             year = year,
             thisYear = thisYear,
             selected = selected,

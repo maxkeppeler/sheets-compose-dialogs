@@ -1,8 +1,8 @@
 package com.maxkeppeler.sheets.duration.utils
 
 import androidx.annotation.RestrictTo
-import com.maxkeppeler.sheets.duration.models.TimeConfig
-import com.maxkeppeler.sheets.duration.models.TimeFormat
+import com.maxkeppeler.sheets.duration.models.DurationConfig
+import com.maxkeppeler.sheets.duration.models.DurationFormat
 import java.util.concurrent.TimeUnit
 
 
@@ -36,7 +36,7 @@ data class TimeInfo(
     }
 }
 
-internal fun parseCurrentTime(format: TimeFormat, currentTime: Long? = null): StringBuilder {
+internal fun parseCurrentTime(format: DurationFormat, currentTime: Long? = null): StringBuilder {
 
     val time = StringBuffer("")
     val (days, hours, minutes, seconds) = splitTime(currentTime ?: 0)
@@ -44,30 +44,30 @@ internal fun parseCurrentTime(format: TimeFormat, currentTime: Long? = null): St
     // No support for days yet
     val filledTimeString = StringBuilder().apply {
         when (format) {
-            TimeFormat.HH_MM_SS -> {
+            DurationFormat.HH_MM_SS -> {
                 append(hours.toString().padStart(2, '0'))
                 append(minutes.toString().padStart(2, '0'))
                 append(seconds.toString().padStart(2, '0'))
             }
-            TimeFormat.HH_MM -> {
+            DurationFormat.HH_MM -> {
                 append(hours.toString().padStart(2, '0'))
                 append(minutes.toString().padStart(2, '0'))
             }
-            TimeFormat.MM_SS -> {
+            DurationFormat.MM_SS -> {
                 append(minutes.toString().padStart(2, '0'))
                 append(seconds.toString().padStart(2, '0'))
             }
-            TimeFormat.M_SS -> {
+            DurationFormat.M_SS -> {
                 append(minutes.toString().substring(0, minutes.toString().length.coerceAtMost(1)))
                 append(seconds.toString().padStart(2, '0'))
             }
-            TimeFormat.HH -> {
+            DurationFormat.HH -> {
                 append(hours.toString().padStart(2, '0'))
             }
-            TimeFormat.MM -> {
+            DurationFormat.MM -> {
                 append(minutes.toString().padStart(2, '0'))
             }
-            TimeFormat.SS -> {
+            DurationFormat.SS -> {
                 append(seconds.toString().padStart(2, '0'))
             }
         }
@@ -81,7 +81,7 @@ internal fun parseCurrentTime(format: TimeFormat, currentTime: Long? = null): St
 
 internal fun getValuePairs(
     time: StringBuilder,
-    timeConfig: TimeConfig
+    timeConfig: DurationConfig
 ): List<Pair<String, String>> {
 
     val valuePairs = mutableListOf<Pair<String, String>>()
@@ -107,7 +107,7 @@ internal fun getValuePairs(
 }
 
 /** Calculates the current time in seconds based on the input. */
-internal fun parseToSeconds(time: StringBuilder, format: TimeFormat): Long {
+internal fun parseToSeconds(time: StringBuilder, format: DurationFormat): Long {
 
     var timeInSeconds = 0L
     val reversedTime = time.reversed()
@@ -137,7 +137,7 @@ internal fun parseToSeconds(time: StringBuilder, format: TimeFormat): Long {
     return timeInSeconds
 }
 
-internal fun getInputOptions(config: TimeConfig): List<String> {
+internal fun getInputOptions(config: DurationConfig): List<String> {
     return mutableListOf(
         *(1..9).toList().map { it.toString() }.toTypedArray(),
         if (config.displayClearButton) Constants.ACTION_CLEAR else "00",

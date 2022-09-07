@@ -5,51 +5,23 @@ package com.maxkeppeler.sheets.clock.views
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.clock.R
-
-@Composable
-internal fun TimeTypeItemComponent(
-    modifier: Modifier,
-    selected: Boolean,
-    text: String,
-    onClick: () -> Unit
-) {
-
-    val backgroundColor = if (selected) MaterialTheme.colorScheme.secondaryContainer
-    else Color.Transparent
-
-    val textStyle =
-        if (selected) MaterialTheme.typography.labelSmall
-            .copy(color = MaterialTheme.colorScheme.onSecondaryContainer)
-        else MaterialTheme.typography.labelMedium
-            .copy(color = MaterialTheme.colorScheme.onSurface)
-
-    Row(
-        modifier = modifier
-            .clip(MaterialTheme.shapes.medium)
-            .background(backgroundColor)
-            .clickable { onClick.invoke() }
-            .padding(8.dp)
-    ) {
-        Text(
-            text = text,
-            style = textStyle
-        )
-    }
-}
+import com.maxkeppeler.sheets.core.R as RC
 
 @Composable
 internal fun TimeValueComponent(
@@ -85,7 +57,7 @@ internal fun TimeValueComponent(
                         .clip(MaterialTheme.shapes.medium)
                         .background(if (currentGroupIndex == groupIndex) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
                         .clickable { onGroupClick.invoke(currentGroupIndex) }
-                        .padding(horizontal = 6.dp),
+                        .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
                     text = buildAnnotatedString {
                         val values = value.toString().toCharArray()
                         val selectedStyle = SpanStyle(
@@ -105,7 +77,7 @@ internal fun TimeValueComponent(
                     Text(
                         modifier = Modifier
                             .wrapContentSize()
-                            .padding(horizontal = 4.dp),
+                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_50)),
                         text = ":",
                         style = textStyle
                     )
@@ -113,25 +85,24 @@ internal fun TimeValueComponent(
             }
 
         }
-
         if (!is24hourFormat) {
             Column(
                 Modifier
                     .align(Alignment.TopEnd)
-                    .padding(end = 16.dp),
+                    .padding(end = dimensionResource(RC.dimen.scd_normal_100)),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 TimeTypeItemComponent(
                     modifier = Modifier,
                     selected = isAm,
                     onClick = { onAm.invoke(true) },
-                    text = stringResource(id = R.string.sheets_am),
+                    text = stringResource(id = R.string.scd_clock_dialog_am),
                 )
                 TimeTypeItemComponent(
                     modifier = Modifier,
                     selected = !isAm,
                     onClick = { onAm.invoke(false) },
-                    text = stringResource(id = R.string.sheets_pm),
+                    text = stringResource(id = R.string.scd_clock_dialog_pm),
                 )
             }
         }

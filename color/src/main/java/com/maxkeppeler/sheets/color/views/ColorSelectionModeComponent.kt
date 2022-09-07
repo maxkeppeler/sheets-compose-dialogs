@@ -17,12 +17,21 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
 import com.maxkeppeler.sheets.color.models.ColorSelectionMode
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The color selection mode component that allows the user to switch between template colors, custom color and no color.
+ * @param selection The selection configuration for the dialog.
+ * @param config The general configuration for the dialog.
+ * @param mode The current color selection mode.
+ * @param onModeChange The listener that returns the new color selection mode.
+ * @param onNoColorClick The listener that is invoked when no color is selected.
+ */
 @Composable
 internal fun ColorSelectionModeComponent(
     selection: ColorSelection,
@@ -31,7 +40,7 @@ internal fun ColorSelectionModeComponent(
     onModeChange: (ColorSelectionMode) -> Unit,
     onNoColorClick: () -> Unit
 ) {
-    Row(modifier = Modifier.padding(bottom = 8.dp)) {
+    Row(modifier = Modifier.padding(bottom = dimensionResource(RC.dimen.scd_small_100))) {
         if (config.displayMode == null) {
 
             TextButton(
@@ -43,23 +52,26 @@ internal fun ColorSelectionModeComponent(
                 },
                 modifier = Modifier,
                 contentPadding = PaddingValues(
-                    vertical = dimensionResource(id = RC.dimen.small_100),
-                    horizontal = dimensionResource(id = RC.dimen.small_100)
+                    vertical = dimensionResource(id = RC.dimen.scd_small_100),
+                    horizontal = dimensionResource(id = RC.dimen.scd_small_100)
                 ),
                 shape = RoundedCornerShape(50)
             ) {
+                val text = stringResource(
+                    when (mode) {
+                        ColorSelectionMode.CUSTOM -> R.string.scd_color_dialog_template_colors
+                        ColorSelectionMode.TEMPLATE -> R.string.scd_color_dialog_custom_color
+                    }
+                )
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                     imageVector = if (mode != ColorSelectionMode.TEMPLATE) Icons.Rounded.Apps else Icons.Rounded.Tune,
-                    contentDescription = "Select month",
+                    contentDescription = text,
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
-                    text = when (mode) {
-                        ColorSelectionMode.CUSTOM -> "Template colors"
-                        ColorSelectionMode.TEMPLATE -> "Custom color"
-                    },
+                    modifier = Modifier.padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+                    text = text,
                 )
             }
         }
@@ -69,20 +81,20 @@ internal fun ColorSelectionModeComponent(
                 onClick = onNoColorClick,
                 modifier = Modifier,
                 contentPadding = PaddingValues(
-                    vertical = dimensionResource(id = RC.dimen.small_100),
-                    horizontal = dimensionResource(id = RC.dimen.small_100)
+                    vertical = dimensionResource(id = RC.dimen.scd_small_100),
+                    horizontal = dimensionResource(id = RC.dimen.scd_small_100)
                 ),
                 shape = RoundedCornerShape(50)
             ) {
                 Icon(
-                    modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                     imageVector = Icons.Rounded.NotInterested,
-                    contentDescription = "No color",
+                    contentDescription = stringResource(R.string.scd_color_dialog_no_color),
                     tint = MaterialTheme.colorScheme.primary
                 )
                 Text(
-                    modifier = Modifier.padding(horizontal = 8.dp),
-                    text = "No color",
+                    modifier = Modifier.padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
+                    text = stringResource(R.string.scd_color_dialog_no_color),
                 )
             }
         }

@@ -22,6 +22,13 @@ import androidx.core.graphics.alpha
 import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The template item component that represents one color.
+ * @param modifier The modifier that is applied to this component.
+ * @param color The color that this item represents.
+ * @param selected If the color was selected.
+ * @param onColorClick The listener that returns the selected color.
+ */
 @Composable
 internal fun ColorTemplateItemComponent(
     modifier: Modifier = Modifier,
@@ -42,7 +49,7 @@ internal fun ColorTemplateItemComponent(
             Box(modifier = Modifier.fillMaxSize()) {
                 Image(
                     modifier = Modifier.fillMaxSize(),
-                    painter = painterResource(id = R.drawable.transparent_pattern),
+                    painter = painterResource(id = R.drawable.scd_color_dialog_transparent_pattern),
                     contentDescription = null,
                 )
                 Row(
@@ -58,12 +65,12 @@ internal fun ColorTemplateItemComponent(
                 colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.background),
                 modifier = Modifier
                     .align(Alignment.Center)
-                    .size(dimensionResource(RC.dimen.size_150)),
+                    .size(dimensionResource(RC.dimen.scd_size_150)),
                 onClick = {}
             ) {
                 Icon(
                     modifier = Modifier
-                        .size(dimensionResource(RC.dimen.size_100)),
+                        .size(dimensionResource(RC.dimen.scd_size_100)),
                     imageVector = Icons.Rounded.Check,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
@@ -74,7 +81,7 @@ internal fun ColorTemplateItemComponent(
                 modifier = Modifier
                     .clip(RoundedCornerShape(50))
                     .background(MaterialTheme.colorScheme.background)
-                    .padding(dimensionResource(id = RC.dimen.small_25)),
+                    .padding(dimensionResource(id = RC.dimen.scd_small_25)),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = MaterialTheme.typography.labelSmall,

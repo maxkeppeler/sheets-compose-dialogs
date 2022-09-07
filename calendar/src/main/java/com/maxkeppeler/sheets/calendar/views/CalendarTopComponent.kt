@@ -1,26 +1,43 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.animation.*
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import androidx.compose.material.icons.rounded.ChevronLeft
+import androidx.compose.material.icons.rounded.ChevronRight
+import androidx.compose.material.icons.rounded.ExpandLess
+import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * Top header component of the calendar dialog.
+ * @param config The general configuration for the dialog.
+ * @param mode The display mode of the dialog.
+ * @param navigationDisabled Whenever the navigation of the navigation is disabled.
+ * @param prevDisabled Whenever the navigation to the previous period is disabled.
+ * @param nextDisabled Whenever the navigation to the next period is disabled.
+ * @param cameraDate The current camera-date of the month view.
+ * @param onPrev The listener that is invoked when the navigation to the previous period is invoked.
+ * @param onNext The listener that is invoked when the navigation to the next period is invoked.
+ * @param onMonthClick The listener that is invoked when the month selection was clicked.
+ * @param onYearClick The listener that is invoked when the year selection was clicked.
+ */
 @ExperimentalMaterial3Api
 @Composable
 internal fun CalendarTopComponent(
@@ -41,9 +58,9 @@ internal fun CalendarTopComponent(
 
     val selectableContainerModifier = Modifier.clip(MaterialTheme.shapes.extraSmall)
     val selectableItemModifier = Modifier
-        .padding(start = 8.dp)
-        .padding(vertical = 4.dp)
-        .padding(end = 4.dp)
+        .padding(start = dimensionResource(RC.dimen.scd_small_100))
+        .padding(vertical = dimensionResource(RC.dimen.scd_small_50))
+        .padding(end = dimensionResource(RC.dimen.scd_small_50))
 
     Box(modifier = Modifier.fillMaxWidth()) {
         AnimatedVisibility(
@@ -56,13 +73,18 @@ internal fun CalendarTopComponent(
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier
-                        .size(dimensionResource(RC.dimen.size_200)),
+                        .size(dimensionResource(RC.dimen.scd_size_200)),
                     onClick = onPrev
                 ) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         imageVector = Icons.Rounded.ChevronLeft,
-                        contentDescription = "Last month"
+                        contentDescription = stringResource(
+                            when (config.style) {
+                                CalendarStyle.MONTH -> R.string.scd_calendar_dialog_prev_month
+                                CalendarStyle.WEEK -> R.string.scd_calendar_dialog_prev_week
+                            }
+                        )
                     )
                 }
 
@@ -88,9 +110,9 @@ internal fun CalendarTopComponent(
                 )
                 if (config.monthSelection) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         imageVector = if (mode == CalendarDisplayMode.MONTH) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
-                        contentDescription = "Select month",
+                        contentDescription = stringResource(R.string.scd_calendar_dialog_select_month),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -109,9 +131,9 @@ internal fun CalendarTopComponent(
                 )
                 if (config.yearSelection) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         imageVector = if (mode == CalendarDisplayMode.MONTH) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
-                        contentDescription = "Select year",
+                        contentDescription = stringResource(id = R.string.scd_calendar_dialog_select_year),
                         tint = MaterialTheme.colorScheme.primary
                     )
                 }
@@ -127,13 +149,18 @@ internal fun CalendarTopComponent(
             Column(Modifier.align(Alignment.CenterEnd)) {
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-                    modifier = Modifier.size(dimensionResource(RC.dimen.size_200)),
+                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_200)),
                     onClick = onNext
                 ) {
                     Icon(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
+                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         imageVector = Icons.Rounded.ChevronRight,
-                        contentDescription = "Next month"
+                        contentDescription = stringResource(
+                            when (config.style) {
+                                CalendarStyle.MONTH -> R.string.scd_calendar_dialog_next_month
+                                CalendarStyle.WEEK -> R.string.scd_calendar_dialog_next_week
+                            }
+                        )
                     )
                 }
             }

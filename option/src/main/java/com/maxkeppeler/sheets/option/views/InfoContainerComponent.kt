@@ -14,8 +14,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.option.models.OptionDetails
+import com.maxkeppeler.sheets.core.R as RC
 
 @Composable
 internal fun InfoContainerComponent(
@@ -32,13 +32,13 @@ internal fun InfoContainerComponent(
             colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.background),
             modifier = Modifier
                 .shadow(1.dp, RoundedCornerShape(50))
-                .size(dimensionResource(R.dimen.size_150)),
+                .size(dimensionResource(RC.dimen.scd_size_150)),
             onClick = { onClick() }
         ) {
 
             Icon(
                 modifier = Modifier
-                    .size(dimensionResource(R.dimen.size_100)),
+                    .size(dimensionResource(RC.dimen.scd_size_100)),
                 imageVector = Icons.Rounded.Info,
                 contentDescription = null,
             )

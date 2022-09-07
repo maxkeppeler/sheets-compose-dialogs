@@ -15,8 +15,17 @@ import androidx.compose.ui.graphics.BlendMode
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.color.utils.Constants
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The template mode that displays a list of colors to choose from.
+ * @param colors A list of colors that are displayed.
+ * @param selectedColor The color that is currently selected.
+ * @param onColorClick The listener that returns the selected color.
+ */
 @Composable
 internal fun ColorTemplateComponent(
     colors: List<Int>,
@@ -24,7 +33,7 @@ internal fun ColorTemplateComponent(
     onColorClick: (Int) -> Unit
 ) {
     LazyVerticalGrid(
-        columns = GridCells.Adaptive(48.dp),
+        columns = GridCells.Adaptive(Constants.COLOR_TEMPLATE_ITEM_SIZE),
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
             .height(300.dp)
@@ -47,7 +56,7 @@ internal fun ColorTemplateComponent(
         items(colors) { color ->
             val selected = color == selectedColor
             ColorTemplateItemComponent(
-                modifier = Modifier.padding(4.dp),
+                modifier = Modifier.padding(dimensionResource(RC.dimen.scd_small_50)),
                 color = color,
                 selected = selected,
                 onColorClick = onColorClick

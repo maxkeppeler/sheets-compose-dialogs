@@ -6,29 +6,40 @@ import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.calendar.models.*
-import com.maxkeppeler.sheets.calendar.models.CalendarData
-import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.utils.calcCalendarDateData
 import java.time.DayOfWeek
 import java.time.LocalDate
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The view that displays all relevant calendar information.
+ * @param cells The amount of cells / columns that are used for the calendar grid view.
+ * @param config The general configuration for the dialog view.
+ * @param selection The selection configuration for the dialog.
+ * @param data The calculated data of the current calendar view.
+ * @param today The date of today.
+ * @param onSelect The listener that is invoked when a date is selected.
+ * @param selectedDate The date that is currently selected.
+ * @param selectedDates The dates that are currently selected.
+ * @param selectedRange The range that is currently selected.
+ */
 internal fun LazyGridScope.setupCalendarSelectionView(
     cells: Int,
     config: CalendarConfig,
+    selection: CalendarSelection,
     data: CalendarData,
     today: LocalDate,
-    selection: CalendarSelection,
     onSelect: (LocalDate) -> Unit,
     selectedDate: LocalDate?,
     selectedDates: List<LocalDate>?,
     selectedRange: Pair<LocalDate?, LocalDate?>
 ) {
-    items(DayOfWeek.values()) { DayHeaderComponent(data.cameraDate.with(it)) }
-    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(4.dp)) }
+    items(DayOfWeek.values()) { CalendarHeaderItemComponent(data.cameraDate.with(it)) }
+    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
     items(data.offsetStart) {
-        CalendarViewMainValueComponent(
+        CalendarDateItemComponent(
             selection = selection,
             data = CalendarDateData(otherMonth = true)
         )
@@ -51,7 +62,7 @@ internal fun LazyGridScope.setupCalendarSelectionView(
             selectedRange = selectedRange
         ) ?: return@items
 
-        CalendarViewMainValueComponent(
+        CalendarDateItemComponent(
             data = dateData,
             selection = selection,
             onDateClick = onSelect

@@ -1,5 +1,6 @@
 package com.maxkeppeler.sheets.calendar.utils
 
+import androidx.annotation.RestrictTo
 import com.maxkeppeler.sheets.calendar.models.*
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -11,12 +12,14 @@ import java.util.*
  * Get week in year.
  */
 internal val LocalDate.weekOfWeekBasedYear: Int
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear())
 
 /**
  * Get first day of this week.
  */
 internal val LocalDate.beginOfWeek: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         var dateNew = this
         while (dateNew.dayOfWeek != DayOfWeek.MONDAY) {
@@ -29,6 +32,7 @@ internal val LocalDate.beginOfWeek: LocalDate
  * Get first day of previous week.
  */
 internal val LocalDate.previousWeek: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val dateNew = when {
             dayOfMonth == Constants.FIRST_DAY_IN_MONTH && dayOfWeek != DayOfWeek.MONDAY -> {
@@ -52,6 +56,7 @@ internal val LocalDate.previousWeek: LocalDate
  * Get first day of next week.
  */
 internal val LocalDate.nextWeek: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val daysInMonth = lengthOfMonth()
         val daysInMonthLeft = daysInMonth - dayOfMonth
@@ -77,6 +82,7 @@ internal val LocalDate.nextWeek: LocalDate
  * Get initial camera date of the selection.
  */
 internal val CalendarSelection.initialCameraDate: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val cameraDateBasedOnMode = when (this) {
             is CalendarSelection.Date -> selectedDate
@@ -90,12 +96,14 @@ internal val CalendarSelection.initialCameraDate: LocalDate
  * Get selection value of date.
  */
 internal val CalendarSelection.dateValue: LocalDate?
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = if (this is CalendarSelection.Date) selectedDate else null
 
 /**
  * Get selection value of dates.
  */
 internal val CalendarSelection.datesValue: Array<LocalDate>
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val value = if (this is CalendarSelection.Dates) selectedDates?.toMutableList()
             ?: mutableListOf() else mutableListOf()
@@ -106,6 +114,7 @@ internal val CalendarSelection.datesValue: Array<LocalDate>
  * Get selection value of range.
  */
 internal val CalendarSelection.rangeValue: Array<LocalDate?>
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
         val value = if (this is CalendarSelection.Period) selectedRange else null
         return mutableListOf(value?.lower, value?.upper).toTypedArray()
@@ -115,17 +124,20 @@ internal val CalendarSelection.rangeValue: Array<LocalDate?>
  * Get range start value.
  */
 internal val List<LocalDate?>.startValue: LocalDate?
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = this.getOrNull(Constants.RANGE_START)
 
 /**
  * Get range end value.
  */
 internal val List<LocalDate?>.endValue: LocalDate?
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = this.getOrNull(Constants.RANGE_END)
 
 /**
  * Calculate the month data based on the camera date and the restrictions.
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcMonthData(
     config: CalendarConfig,
     cameraDate: LocalDate,
@@ -161,6 +173,7 @@ internal fun calcMonthData(
 /**
  * Calculate the calendar data based on the camera-date.
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): CalendarData {
     var weekCameraDate = cameraDate
     val offsetStart = when (config.style) {
@@ -195,6 +208,7 @@ internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): Ca
 /**
  * Calculate the calendar date-data based on the date.
  */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcCalendarDateData(
     date: LocalDate,
     calendarViewData: CalendarData,

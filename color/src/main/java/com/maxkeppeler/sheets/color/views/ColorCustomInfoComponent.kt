@@ -19,12 +19,18 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.color.R
+import com.maxkeppeler.sheets.color.utils.Constants
 import com.maxkeppeler.sheets.color.utils.copyColorIntoClipboard
 import com.maxkeppeler.sheets.color.utils.getFormattedColor
 import com.maxkeppeler.sheets.color.utils.pasteColorFromClipboard
 import kotlinx.coroutines.delay
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * A information view for the custom color picker.
+ * @param color The color that is currently selected.
+ * @param onColorChange The listener that returns a selected color.
+ */
 @Composable
 internal fun ColorCustomInfoComponent(
     color: Int,
@@ -35,7 +41,7 @@ internal fun ColorCustomInfoComponent(
     val onCopyCustomColor = {
         copyColorIntoClipboard(
             ctx = context,
-            label = "Color",
+            label = context.getString(R.string.scd_color_dialog_color),
             value = getFormattedColor(color)
         )
     }
@@ -57,7 +63,7 @@ internal fun ColorCustomInfoComponent(
     ) {
 
         ColorTemplateItemComponent(
-            modifier = Modifier.size(56.dp),
+            modifier = Modifier.size(Constants.COLOR_CUSTOM_ITEM_SIZE),
             color = color,
             selected = false,
             onColorClick = onColorChange
@@ -67,14 +73,14 @@ internal fun ColorCustomInfoComponent(
             modifier = Modifier
                 .height(64.dp)
                 .fillMaxWidth()
-                .padding(start = 16.dp)
+                .padding(start = dimensionResource(RC.dimen.scd_normal_100))
         ) {
 
             Row(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(start = 16.dp)
-                    .padding(end = 8.dp),
+                    .padding(start = dimensionResource(RC.dimen.scd_normal_100))
+                    .padding(end = dimensionResource(RC.dimen.scd_small_100)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Column(modifier = Modifier.padding(start = 0.dp)) {
@@ -86,19 +92,19 @@ internal fun ColorCustomInfoComponent(
                         )
                     } else {
                         Text(
-                            text = stringResource(id = R.string.sheets_argb),
+                            text = stringResource(R.string.scd_color_dialog_argb),
                             style = MaterialTheme.typography.titleMedium,
                             maxLines = 1
                         )
                         Text(
-                            modifier = Modifier.padding(top = dimensionResource(id = RC.dimen.small_25)),
+                            modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_25)),
                             text = getFormattedColor(color),
                             style = MaterialTheme.typography.labelSmall,
                             maxLines = 1
                         )
                     }
                 }
-                if (colorPasteError == null) {
+                if (colorPasteError.value == null) {
                     Spacer(modifier = Modifier.weight(1f))
                     FilledIconButton(
                         colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.background),
@@ -107,9 +113,9 @@ internal fun ColorCustomInfoComponent(
                     ) {
                         Icon(
                             modifier = Modifier
-                                .size(dimensionResource(RC.dimen.size_150)),
+                                .size(dimensionResource(RC.dimen.scd_size_150)),
                             imageVector = Icons.Rounded.ContentCopy,
-                            contentDescription = "Copy color",
+                            contentDescription = stringResource(R.string.scd_color_dialog_copy_color),
                         )
                     }
                     FilledIconButton(
@@ -119,9 +125,9 @@ internal fun ColorCustomInfoComponent(
                     ) {
                         Icon(
                             modifier = Modifier
-                                .size(dimensionResource(RC.dimen.size_150)),
+                                .size(dimensionResource(RC.dimen.scd_size_150)),
                             imageVector = Icons.Rounded.ContentPaste,
-                            contentDescription = "Paste color",
+                            contentDescription = stringResource(R.string.scd_color_dialog_paste_color),
                         )
                     }
                 }

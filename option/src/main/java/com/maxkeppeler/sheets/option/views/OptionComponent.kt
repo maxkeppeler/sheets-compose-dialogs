@@ -15,41 +15,55 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.option.models.DisplayMode
 import com.maxkeppeler.sheets.option.models.Option
 import com.maxkeppeler.sheets.option.models.OptionConfig
-import com.maxkeppeler.sheets.option.models.OptionSelection
-import com.maxkeppeler.sheets.option.utils.Constants
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The view for the selection of the options.
+ * @param modifier The modifier that is applied to this component.
+ * @param config The general configuration.
+ * @param options The list of options.
+ * @param onOptionChange Listener that is invoked when the state of an option changes.
+ */
 @Composable
 fun OptionComponent(
     modifier: Modifier,
-    selection: OptionSelection,
     config: OptionConfig,
     options: List<Option>,
-    onOptionChange: (Int, Option) -> Unit,
+    onOptionChange: (Option) -> Unit,
 ) {
 
     val lazyContainerModifier = modifier
         .fillMaxWidth()
-        .padding(horizontal = 16.dp, vertical = 16.dp)
+        .padding(
+            horizontal = dimensionResource(RC.dimen.scd_normal_100),
+            vertical = dimensionResource(RC.dimen.scd_normal_100)
+        )
 
-    val columnsLimits = config.gridColumns ?: Constants.GRID_COLUMNS_MAX_DEFAULT
+    val columnsLimits = config.gridColumns
     val columns = if (options.size < columnsLimits) options.size else columnsLimits
 
     val onClick: (Option) -> Unit = { option ->
-        val index = options.indexOf(option)
-        val newOption = option.copy(selected = !option.selected)
-        onOptionChange(index, newOption)
+        val newOption = option.copy(selected = !option.selected).apply {
+            position = option.position
+        }
+        onOptionChange(newOption)
     }
+
     val size = rememberSaveable { mutableStateOf<Size?>(null) }
 
-    when (config.style) {
+    when (config.mode) {
         DisplayMode.GRID_HORIZONTAL -> {
             LazyRow(
-                modifier = Modifier.padding(top = 16.dp),
-                contentPadding = PaddingValues(horizontal = 16.dp)
+                modifier = Modifier.padding(
+                    top = dimensionResource(RC.dimen.scd_normal_100)
+                ),
+                contentPadding = PaddingValues(
+                    horizontal = dimensionResource(RC.dimen.scd_normal_100)
+                )
             ) {
                 items(options) { option ->
                     OptionItemComponent(

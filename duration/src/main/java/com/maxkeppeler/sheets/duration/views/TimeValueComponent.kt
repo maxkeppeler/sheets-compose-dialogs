@@ -6,11 +6,18 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The value component that reflects one unit and its value.
+ * @param valuePairs The list of value pairs that will be displayed.
+ * @param indexOfFirstValue The index of the first valid value.
+ * @param hintView If the current component will be displays as a small hint or not.
+ */
 @Composable
 internal fun TimeValueComponent(
     valuePairs: List<Pair<String, String>>,
@@ -48,7 +55,7 @@ internal fun TimeValueComponent(
             Text(
                 modifier = Modifier
                     .wrapContentSize()
-                    .padding(horizontal = 6.dp),
+                    .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
                 text = buildAnnotatedString {
                     append(valuePair.first)
                     withStyle(spanStyle) {

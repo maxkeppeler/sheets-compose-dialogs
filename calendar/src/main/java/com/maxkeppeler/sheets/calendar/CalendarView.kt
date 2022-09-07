@@ -1,22 +1,19 @@
 package com.maxkeppeler.sheets.calendar
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
-import com.maxkeppeker.sheets.core.models.Header
-import com.maxkeppeker.sheets.core.views.ButtonComponent
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.utils.BaseConstants
+import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
+import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
 import com.maxkeppeler.sheets.calendar.views.*
@@ -25,7 +22,13 @@ import kotlinx.coroutines.launch
 import java.time.DayOfWeek
 import java.time.LocalDate
 
-@ExperimentalMaterialApi
+/**
+ * Calendar dialog for the use-case to select a date or period in a typical calendar-view.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ * @param header The header to be displayed at the top of the dialog view.
+ * @param onCancel Listener that is invoked when the use-case was canceled.
+ */
 @ExperimentalMaterial3Api
 @Composable
 fun CalendarView(
@@ -57,7 +60,7 @@ fun CalendarView(
     val onInvokeListener = {
         when (selection) {
             is CalendarSelection.Date -> selection.onSelectDate(date.value!!)
-            is CalendarSelection.Dates -> selection.onSelectDate(dates)
+            is CalendarSelection.Dates -> selection.onSelectDates(dates)
             is CalendarSelection.Period -> selection.onSelectRange(
                 range.startValue!!,
                 range.endValue!!
@@ -67,7 +70,7 @@ fun CalendarView(
 
     val onSelection: (() -> Unit) -> Unit = { selectionUnit ->
         coroutine.launch {
-            delay(Constants.SUCCESS_DISMISS_DELAY)
+            delay(BaseConstants.SUCCESS_DISMISS_DELAY)
             selectionUnit()
             onCancel()
         }
@@ -146,8 +149,8 @@ fun CalendarView(
 
     val cells = when (mode) {
         CalendarDisplayMode.CALENDAR -> DayOfWeek.values().size
-        CalendarDisplayMode.YEAR -> 1
-        CalendarDisplayMode.MONTH -> 4
+        CalendarDisplayMode.YEAR -> Constants.YEAR_GRID_COLUMNS
+        CalendarDisplayMode.MONTH -> Constants.MONTH_GRID_COLUMNS
     }
     val yearsRange by remember {
         val value = IntRange(config.minYear, config.maxYear.plus(1))
@@ -168,17 +171,9 @@ fun CalendarView(
         }
     }
 
-    Column(modifier = Modifier.wrapContentHeight()) {
-
-        HeaderComponent(header)
-
-        Column(
-            modifier = Modifier
-                .wrapContentHeight()
-                .padding(horizontal = 16.dp)
-                .padding(top = 16.dp)
-        ) {
-
+    FrameBase(
+        header = { HeaderComponent(header) },
+        content = {
             CalendarTopComponent(
                 config = config,
                 mode = mode,
@@ -203,11 +198,6 @@ fun CalendarView(
                     }
                 },
             )
-//
-//            val selectionModifier = when (mode) {
-//                CalendarDisplayMode.CALENDAR -> Modifier.wrapContentHeight()
-//                else -> Modifier.weight(1f, false)
-//            }
 
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),
@@ -252,12 +242,12 @@ fun CalendarView(
                         })
                 }
             )
-        }
-
-        if (selection.withButtonView && mode == CalendarDisplayMode.CALENDAR) {
-            ButtonComponent(
-                negativeButtonText = selection.negativeButtonText,
-                positiveButtonText = selection.positiveButtonText,
+        },
+        buttonsVisible = selection.withButtonView && mode == CalendarDisplayMode.CALENDAR,
+        buttons = {
+            ButtonsComponent(
+                negativeButton = selection.negativeButton,
+                positiveButton = selection.positiveButton,
                 onPositiveValid = isValid,
                 onNegative = {
                     selection.onNegativeClick?.invoke()
@@ -269,15 +259,5 @@ fun CalendarView(
                 }
             )
         }
-    }
-}
-
-@ExperimentalMaterialApi
-@ExperimentalMaterial3Api
-@Composable
-@Preview(showBackground = true)
-private fun CalendarViewPreview() {
-    CalendarView(
-        selection = CalendarSelection.Date { selectedDate -> }
     )
 }

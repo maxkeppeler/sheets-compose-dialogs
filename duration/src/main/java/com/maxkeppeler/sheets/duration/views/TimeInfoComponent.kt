@@ -10,21 +10,27 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
+import com.maxkeppeler.sheets.duration.R
 
+/**
+ * The info component that will show a hint if the selected time is out of the specified bounds.
+ * @param minTimeValue The minimum valid time.
+ * @param maxTimeValue The maximum valid time.
+ */
 @Composable
 internal fun TimeInfoComponent(
-    minValue: Long? = null,
-    maxValue: Long? = null,
+    minTimeValue: Long? = null,
+    maxTimeValue: Long? = null,
 ) {
 
-    if (minValue != null || maxValue != null) {
+    if (minTimeValue != null || maxTimeValue != null) {
 
         val labelRes =
-            if (minValue != null) com.maxkeppeler.sheets.duration.R.string.sheets_at_least_placeholder
-            else if (maxValue != null) com.maxkeppeler.sheets.duration.R.string.sheets_at_most_placeholder
+            if (minTimeValue != null) R.string.sheets_at_least_placeholder
+            else if (maxTimeValue != null) R.string.sheets_at_most_placeholder
             else null
 
-        val options = getFormattedHintTime(minValue ?: maxValue!!)
+        val options = getFormattedHintTime(minTimeValue ?: maxTimeValue!!)
         labelRes?.let {
             Row(
                 modifier = Modifier.fillMaxWidth(),

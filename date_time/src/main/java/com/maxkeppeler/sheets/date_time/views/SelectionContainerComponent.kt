@@ -26,12 +26,20 @@ import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.SnapOffsets
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 
-
+/**
+ * The container of a selection.
+ * @param unit The unit of the value.
+ * @param width The width of the component.
+ * @param height The height of the component.
+ * @param options The list of options that the unit allows.
+ * @param onValueChange The listener that returns the selected unit option item.
+ * @param heightOffsetTopPadding The height offset that is applied to the top of this component.
+ */
 @Composable
 internal fun SelectionContainerComponent(
-    height: MutableState<Int>,
-    width: MutableState<Int>,
     unit: UnitSelection,
+    width: MutableState<Int>,
+    height: MutableState<Int>,
     options: List<UnitOptionEntry>,
     onValueChange: (UnitOptionEntry) -> Unit,
     heightOffsetTopPadding: Dp

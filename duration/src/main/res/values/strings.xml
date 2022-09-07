@@ -10,4 +10,7 @@
     <string name="sheets_second_code" translatable="true">s</string>
     <string name="sheets_day_code" translatable="true">D</string>
 
+    <string name="scd_duration_dialog_delete_last_input">Delete last input</string>
+    <string name="scd_duration_dialog_clear_input">Clear input</string>
+
 </resources>

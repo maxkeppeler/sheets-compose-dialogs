@@ -6,11 +6,19 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeler.sheets.core.R as RC
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
 
 
+/**
+ * The container of a unit that was found in the localized pattern.
+ * It switches between the view and selection mode.
+ * @param unit The unit of the value.
+ * @param height The height of the component.
+ * @param onValueChange The listener that returns the selected unit option item.
+ */
 @Composable
 internal fun UnitContainerComponent(
     unit: UnitSelection,
@@ -24,7 +32,7 @@ internal fun UnitContainerComponent(
 
         if (expanded.value) {
             SelectionContainerComponent(
-                heightOffsetTopPadding = 24.dp,
+                heightOffsetTopPadding = dimensionResource(RC.dimen.scd_normal_150),
                 unit = unit,
                 height = height,
                 width = width,

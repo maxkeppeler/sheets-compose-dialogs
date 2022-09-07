@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Cabin
 import androidx.compose.material.icons.rounded.Create
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material3.*
@@ -19,20 +20,26 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.CoreDialog
-import com.maxkeppeker.sheets.core.models.Header
-import com.maxkeppeker.sheets.core.models.ImageSource
-import com.maxkeppeker.sheets.core.models.base.BaseSelection
+import com.maxkeppeker.sheets.core.models.CoreSelection
+import com.maxkeppeker.sheets.core.models.base.ButtonStyle
+import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.clock.ClockDialog
-import com.maxkeppeler.sheets.clock.models.ClockTimeConfig
-import com.maxkeppeler.sheets.clock.models.ClockTimeSelection
+import com.maxkeppeler.sheets.clock.models.ClockConfig
+import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.*
-import com.maxkeppeler.sheets.date_time.DateTextDialog
-import com.maxkeppeler.sheets.date_time.models.DateTextSelection
+import com.maxkeppeler.sheets.date_time.DateTimeDialog
+import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
+import com.maxkeppeler.sheets.duration.DurationDialog
+import com.maxkeppeler.sheets.duration.models.DurationConfig
+import com.maxkeppeler.sheets.duration.models.DurationFormat
+import com.maxkeppeler.sheets.duration.models.DurationSelection
 import com.maxkeppeler.sheets.emoji.EmojiDialog
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiProvider
@@ -52,10 +59,6 @@ import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.State
 import com.maxkeppeler.sheets.state.models.StateConfig
 import com.maxkeppeler.sheets.state.models.StateSelection
-import com.maxkeppeler.sheets.duration.DurationDialog
-import com.maxkeppeler.sheets.duration.models.TimeConfig
-import com.maxkeppeler.sheets.duration.models.TimeFormat
-import com.maxkeppeler.sheets.duration.models.TimeSelection
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 import java.time.LocalDate
 import java.time.LocalTime
@@ -160,9 +163,9 @@ class MainActivity : ComponentActivity() {
                         }
                     }
 
-                    DateTextDialog(
+                    DateTimeDialog(
                         show = dateTextDialogVisible,
-                        selection = DateTextSelection.DateTime(
+                        selection = DateTimeSelection.DateTime(
                             withButtonView = false,
                             locale = Locale.US,
 //                            startWithTime = true,
@@ -172,14 +175,15 @@ class MainActivity : ComponentActivity() {
                     )
 
                     CoreDialog(show = coreDialogVisible,
-                        selection = object : BaseSelection() {
-                            override val withButtonView = true
-                            override val positiveButtonText = "hahah"
-                        },
+                        selection = CoreSelection(
+                            withButtonView = true,
+                            negativeButton =  SelectionButton("nahhh", IconSource(Icons.Rounded.Notifications), ButtonStyle.FILLED),
+                            positiveButton = SelectionButton("yaah", IconSource(Icons.Rounded.Cabin), ButtonStyle.ELEVATED),
+                        ),
                         header = Header.Default(
                             titleText = "Custom Dialog"
                         ),
-                        onPositiveValid = { false },
+                        onPositiveValid = { true },
                         body = {
                             Text(text = "Test")
                         }
@@ -212,14 +216,14 @@ class MainActivity : ComponentActivity() {
                     )
 
                     val options = listOf(
-                        Option(ImageSource(Icons.Rounded.Create), titleText = "Apple"),
+                        Option(IconSource(Icons.Rounded.Create), titleText = "Apple"),
                         Option(
-                            ImageSource(Icons.Rounded.Notifications),
+                            IconSource(Icons.Rounded.Notifications),
                             titleText = "Banana",
                             disabled = true
                         ),
                         Option(
-                            ImageSource(Icons.Rounded.Create),
+                            IconSource(Icons.Rounded.Create),
                             titleText = "Strawberry_1",
                             selected = true
                         ),
@@ -239,7 +243,7 @@ class MainActivity : ComponentActivity() {
                         selection = OptionSelection.Single(options) { index, option ->
                             Log.d("OptionDialog", "index:$index, options:$option")
                         },
-                        config = OptionConfig(style = DisplayMode.LIST),
+                        config = OptionConfig(mode = DisplayMode.LIST),
 //                        selection = OptionSelection.Multiple(options, minChoices = 2, maxChoices = 4, maxChoicesStrict = true) { indicies, options ->
 //                            Log.d("OptionDialog", "indicies:indicies, options:$options")
 //                        }
@@ -247,20 +251,22 @@ class MainActivity : ComponentActivity() {
 
                     ClockDialog(
                         show = clockTimeDialogVisible,
-                        selection = ClockTimeSelection.HoursMinutes { hour, minute ->
+                        selection = ClockSelection.HoursMinutes { hour, minute ->
                             Log.d("ClockTime", "hour:$hour,minute:$minute")
                         },
-                        config = ClockTimeConfig(
-                            currentTime = LocalTime.of(23, 20, 0),
+                        config = ClockConfig(
+                            defaultTime = LocalTime.of(23, 20, 0),
                             is24HourFormat = true
                         ),
                     )
 
                     DurationDialog(
                         show = timeDialogVisible,
-                        selection = TimeSelection {},
-                        config = TimeConfig(
-                            timeFormat = TimeFormat.HH_MM_SS,
+                        selection = DurationSelection {
+                            Log.d("DurationDialog", "time (seconds):$it")
+                        },
+                        config = DurationConfig(
+                            timeFormat = DurationFormat.HH_MM_SS,
                             currentTime = 45,
                             minTime = 48,
                             maxTime = 180
@@ -335,12 +341,12 @@ class MainActivity : ComponentActivity() {
                     ColorDialog(
                         show = colorDialogVisible,
                         selection = ColorSelection(
-                            selectedColor = SelectedColor(color.value),
+                            selectedColor = SingleColor(color.value),
                             onSelectNone = { color.value = Color.White.toArgb() },
                             onSelectColor = { color.value = it },
                         ),
                         config = ColorConfig(
-                            templateColors = TemplateColors.ColorsInt(
+                            templateColors = MultipleColors.ColorsInt(
                                 Color.Red.copy(alpha = 0.1f).toArgb(),
                                 Color.Red.copy(alpha = 0.3f).toArgb(),
                                 Color.Red.copy(alpha = 0.5f).toArgb(),
@@ -416,8 +422,8 @@ class MainActivity : ComponentActivity() {
 //                            date.value = it
 //                        }
                         selection = CalendarSelection.Dates(
-                            positiveButtonText = "Yeahh",
-                            negativeButtonText = "Nahh"
+                            positiveButton = SelectionButton("Yeahh"),
+                            negativeButton = SelectionButton("Nahh")
                         ) {
                             date.value = it.lastOrNull()
                         }

@@ -5,30 +5,40 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.list.models.ListConfig
+import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The view for the selection of the options.
+ * @param modifier The modifier that is applied to this component.
+ * @param selection The selection configuration.
+ * @param options The list of options.
+ * @param onOptionChange Listener that is invoked when the state of an option changes.
+ */
 @Composable
 fun ListOptionComponent(
     modifier: Modifier,
     selection: ListSelection,
     options: List<ListOption>,
-    onOptionChange: (Int, ListOption) -> Unit,
+    onOptionChange: (ListOption) -> Unit,
 ) {
 
     val lazyContainerModifier = modifier
         .fillMaxWidth()
-        .padding(horizontal = 16.dp, vertical = 16.dp)
+        .padding(
+            horizontal = dimensionResource(id = RC.dimen.scd_normal_100),
+            vertical = dimensionResource(id = RC.dimen.scd_normal_100)
+        )
 
     val onClick: (ListOption) -> Unit = { option ->
-        val index = options.indexOf(option)
-        val newOption = option.copy(selected = !option.selected)
-        onOptionChange(index, newOption)
+        val newOption = option.copy(selected = !option.selected).apply {
+            position = option.position
+        }
+        onOptionChange(newOption)
     }
 
     LazyColumn(

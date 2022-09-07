@@ -18,6 +18,14 @@ import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.option.models.Option
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * Option dialog for the use-case to display a list or grid of options.
+ * @param show The state used to show and hide the dialog.
+ * @param option The option that will be displayed.
+ * @param backgroundColor The color that is used for the background of the option.
+ * @param iconColor The color that is used for the icon of the option.
+ * @param textColor The color that is used for the texts of the option.
+ */
 @Composable
 internal fun OptionDetailsDialog(
     show: MutableState<Boolean>,
@@ -32,8 +40,8 @@ internal fun OptionDetailsDialog(
         Column {
             Row(
                 modifier = Modifier
-                    .padding(top = 16.dp)
-                    .padding(horizontal = 16.dp)
+                    .padding(top = dimensionResource(RC.dimen.scd_normal_100))
+                    .padding(horizontal = dimensionResource(RC.dimen.scd_normal_100))
                     .fillMaxWidth()
                     .clip(MaterialTheme.shapes.medium)
                     .then(
@@ -41,13 +49,14 @@ internal fun OptionDetailsDialog(
                             backgroundColor
                         ) else Modifier
                     )
-                    .padding(16.dp), verticalAlignment = Alignment.CenterVertically
+                    .padding(dimensionResource(RC.dimen.scd_normal_100)),
+                verticalAlignment = Alignment.CenterVertically
             ) {
 
                 option.icon?.let {
                     IconComponent(
-                        modifier = Modifier.size(dimensionResource(RC.dimen.size_150)),
-                        imageSource = it,
+                        modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                        iconSource = it,
                         tint = iconColor
                     )
                 }
@@ -63,19 +72,20 @@ internal fun OptionDetailsDialog(
 
             Column(
                 modifier = Modifier
-                    .padding(horizontal = 24.dp)
-                    .padding(bottom = 24.dp)
+                    .padding(horizontal = dimensionResource(RC.dimen.scd_normal_150))
+                    .padding(bottom = dimensionResource(RC.dimen.scd_normal_150))
             ) {
                 Text(
-                    modifier = Modifier.padding(top = 16.dp),
+                    modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_100)),
                     text = option.details!!.title,
                     style = MaterialTheme.typography.titleMedium
                 )
                 Text(
-                    modifier = Modifier.padding(top = 8.dp),
+                    modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_100)),
                     text = option.details.body,
                     style = MaterialTheme.typography.bodyMedium
                 )
+                option.details.postView?.invoke(option.selected)
             }
         }
     }

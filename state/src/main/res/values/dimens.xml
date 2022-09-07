@@ -1,0 +1,5 @@
+<resources>
+
+    <dimen name="scd_state_dialog_indicator_width">64dp</dimen>
+
+</resources>

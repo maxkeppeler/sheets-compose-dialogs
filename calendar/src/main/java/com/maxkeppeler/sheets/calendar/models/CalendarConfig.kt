@@ -5,43 +5,21 @@ import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
 
 /**
- * Available calendar configurations.
+ * The general configuration for the calendar dialog.
+ * @param style The style of the calendar.
+ * @param monthSelection Allow the direct selection of a month.
+ * @param yearSelection Allow the direct selection of a year.
+ * @param minYear The minimum year that is selectable.
+ * @param maxYear The maximum year that is selectable.
+ * @param disabledDates A list of dates that will be marked as disabled and can not be selected.
+ * @param disabledTimeline The timeline you want to disable and which dates can not be selected.
  */
 class CalendarConfig(
-
-    /**
-     * Style of calendar.
-     */
     val style: CalendarStyle = CalendarStyle.MONTH,
-
-    /**
-     * Allow selection of month in additional helper-view.
-     */
     val monthSelection: Boolean = Constants.DEFAULT_MONTH_SELECTION,
-
-    /**
-     * Allow selection of year in additional helper-view.
-     */
     val yearSelection: Boolean = Constants.DEFAULT_YEAR_SELECTION,
-
-    /**
-     * Min-selectable year.
-     */
     val minYear: Int = Constants.DEFAULT_MIN_YEAR,
-
-    /**
-     * Max-selectable year.
-     */
     val maxYear: Int = Constants.DEFAULT_MAX_YEAR,
-
-    /**
-     * Define dates that are disabled.
-     */
     val disabledDates: List<LocalDate>? = null,
-
-    /**
-     * Disable a timeline.
-     */
     val disabledTimeline: CalendarTimeline? = null
-
 ) : BaseConfigs()

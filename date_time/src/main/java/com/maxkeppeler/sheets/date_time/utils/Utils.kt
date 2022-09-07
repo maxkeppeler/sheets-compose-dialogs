@@ -1,6 +1,6 @@
 package com.maxkeppeler.sheets.date_time.utils
 
-import com.maxkeppeler.sheets.date_time.models.DateTextConfig
+import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
 import java.time.LocalDate
@@ -12,9 +12,8 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.util.*
 
-
 internal fun detectUnit(
-    config: DateTextConfig,
+    config: DateTimeConfig,
     pattern: String,
     segment: String,
     sec: UnitOptionEntry?,
@@ -103,11 +102,10 @@ internal fun getLocalDateOf(
 internal fun getLocalizedPattern(
     isDate: Boolean,
     formatStyle: FormatStyle,
-    chronology: Chronology,
     locale: Locale
 ): String = DateTimeFormatterBuilder.getLocalizedDateTimePattern(
     if (isDate) formatStyle else null,
-    if (!isDate) formatStyle else null, chronology, locale
+    if (!isDate) formatStyle else null, Chronology.ofLocale(locale), locale
 ).toString()
 
 internal fun getLocalizedValues(pattern: String): Array<String> =
@@ -176,7 +174,7 @@ private fun getMonthOptions(pattern: String): List<UnitOptionEntry> {
     }
 }
 
-private fun getYearOptions(config: DateTextConfig): List<UnitOptionEntry> =
+private fun getYearOptions(config: DateTimeConfig): List<UnitOptionEntry> =
     IntRange(config.minYear, config.maxYear.plus(1)).map { value ->
         UnitOptionEntry(
             value = value,

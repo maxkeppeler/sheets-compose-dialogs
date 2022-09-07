@@ -2,23 +2,21 @@
 
 package com.maxkeppeler.sheets.option
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.maxkeppeker.sheets.core.models.Header
+import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import com.maxkeppeker.sheets.core.views.ButtonComponent
+import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
+import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
+import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.option.models.Option
 import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionSelection
@@ -27,25 +25,38 @@ import com.maxkeppeler.sheets.option.views.OptionComponent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * Option view for the use-case to display a list or grid of options.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ * @param header The header to be displayed at the top of the dialog view.
+ * @param onCancel Listener that is invoked when the use-case was canceled.
+ */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun OptionView(
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
-    onCancel: () -> Unit = {},
     header: Header? = null,
-    ) {
+    onCancel: () -> Unit = {},
+) {
 
     val coroutine = rememberCoroutineScope()
-    val options = remember { mutableStateListOf(*selection.options.toTypedArray()) }
+    val options = remember {
+        val sortedOptions =
+            selection.options.mapIndexed { i, option -> option.apply { position = i } }
+        val value = sortedOptions.toTypedArray()
+        mutableStateListOf(*value)
+    }
     val selectedOptions = remember(options.toList()) {
         val selectedOptions = options.toList().filter { it.selected }.toTypedArray()
         when (selection) {
             is OptionSelection.Multiple -> Unit
             is OptionSelection.Single -> {
-                if (selectedOptions.size > 1)
-                    throw IllegalStateException("OptionSelection type Single can not have multiple selected options.")
+                if (selectedOptions.size > 1) {
+                    throw IllegalStateException("$selection does not support multiple selected options.")
+                }
             }
         }
         mutableStateListOf(*selectedOptions)
@@ -54,13 +65,12 @@ fun OptionView(
     val onInvokeListener = {
         when (selection) {
             is OptionSelection.Multiple -> {
-                val indices = selectedOptions.toList().map { options.indexOf(it) }
+                val indices = selectedOptions.map { it.position }
                 selection.onSelectOptions(indices, selectedOptions.toList())
             }
             is OptionSelection.Single -> {
                 val option = selectedOptions.first()
-                val index = options.indexOf(option)
-                selection.onSelectOption(index, option)
+                selection.onSelectOption(option.position, option)
             }
         }
     }
@@ -73,46 +83,48 @@ fun OptionView(
         }
     }
 
-    val selectOption: (Int, Option) -> Unit = { index, option -> options[index] = option }
-    val processSelection: (Int, Option) -> Unit = { index, option ->
+    val selectOption: (Option) -> Unit = { option ->
+        options[option.position] = option
+    }
+
+    val processSelection: (Option) -> Unit = { option ->
         when (selection) {
             is OptionSelection.Multiple -> {
                 selection.maxChoices?.takeIf { selection.maxChoicesStrict }?.let { maxChoices ->
-                    if (selectedOptions.size <= maxChoices) selectOption(index, option)
-                } ?: selectOption(index, option)
+                    if (selectedOptions.size <= maxChoices) selectOption(option)
+                } ?: selectOption(option)
             }
             is OptionSelection.Single -> {
                 selectedOptions.forEach { selectedOption ->
-                    val selectedOptionIndex = options.indexOf(selectedOption)
-                    options[selectedOptionIndex] = selectedOption.copy(selected = false)
+                    val disabledOption = selectedOption.copy(selected = false)
+                        .apply { position = selectedOption.position }
+                    options[selectedOption.position] = disabledOption
                 }
-                selectOption(index, option)
+                selectOption(option)
             }
         }
         if (!selection.withButtonView) onSelection(onInvokeListener)
     }
 
-    Column(modifier = Modifier.wrapContentHeight()) {
+    FrameBase(
+        header = { HeaderComponent(header) },
+        contentPaddingValues = PaddingValues(0.dp),
+        content = {
+            OptionBoundsComponent(
+                selection = selection,
+                selectedOptions = selectedOptions
+            )
 
-        HeaderComponent(header)
-
-        OptionBoundsComponent(
-            selection = selection,
-            selectedOptions = selectedOptions
-        )
-
-        OptionComponent(
-            modifier = Modifier
-                .weight(1f, false)
-                .heightIn(max = 350.dp),
-            selection = selection,
-            config = config,
-            options = options,
-            onOptionChange = processSelection
-        )
-
-        if (selection.withButtonView) {
-            ButtonComponent(
+            OptionComponent(
+                modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
+                config = config,
+                options = options,
+                onOptionChange = processSelection
+            )
+        },
+        buttonsVisible = selection.withButtonView,
+        buttons = {
+            ButtonsComponent(
                 onPositiveValid = {
                     when (selection) {
                         is OptionSelection.Single -> selectedOptions.isNotEmpty()
@@ -125,8 +137,8 @@ fun OptionView(
                         }
                     }
                 },
-                negativeButtonText = selection.negativeButtonText,
-                positiveButtonText = selection.positiveButtonText,
+                negativeButton = selection.negativeButton,
+                positiveButton = selection.positiveButton,
                 onNegative = {
                     selection.onNegativeClick?.invoke()
                     onCancel()
@@ -137,7 +149,7 @@ fun OptionView(
                 }
             )
         }
-    }
+    )
 }
 
 

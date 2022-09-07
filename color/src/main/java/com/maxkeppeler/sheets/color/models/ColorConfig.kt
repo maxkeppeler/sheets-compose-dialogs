@@ -3,28 +3,15 @@ package com.maxkeppeler.sheets.color.models
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 
 /**
- * Available calendar configurations.
+ * The general configuration for the clock dialog.
+ * @param displayMode Available color selection modes. If null, both are used.
+ * @param defaultDisplayMode Default view when opening ColorDialog.
+ * @param templateColors Colors for the [ColorSelectionMode.TEMPLATE]-view.
+ * @param allowCustomColorAlphaValues Allow alpha values in the custom color picker.
  */
 data class ColorConfig(
-
-    /**
-     * Available color selection modes. If null, both are used.
-     */
     val displayMode: ColorSelectionMode? = null,
-
-    /**
-     * Default view when opening ColorDialog.
-     */
     val defaultDisplayMode: ColorSelectionMode? = null,
-
-    /**
-     * Colors for the [ColorSelectionMode.TEMPLATE]-view.
-     */
-    val templateColors: TemplateColors = TemplateColors.ColorsInt(),
-
-    /**
-     * Allow
-     */
+    val templateColors: MultipleColors = MultipleColors.ColorsInt(),
     val allowCustomColorAlphaValues: Boolean = true,
-
-    ) : BaseConfigs()
+) : BaseConfigs()

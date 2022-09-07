@@ -19,66 +19,35 @@
 package com.maxkeppeler.sheets.option.models
 
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.ImageSource
+import com.maxkeppeker.sheets.core.models.base.IconSource
 import java.io.Serializable
 import java.util.*
 
 /**
- * An option is represented with at least a text.
- * A drawable is optional but makes it easier to understand to the user.
+ * An option for the the option dialog.
+ * @param icon The icon displayed in the option.
+ * @param titleText The title displayed in the option.
+ * @param subtitleText The subtitle displayed in the option.
+ * @param selected The state if the option is selected by default.
+ * @param disabled The state if the option is disabled permanently.
+ * @param details Define further information with longer texts. The option will be marked with an Info-Icon and the user can open a dialog to the option where the longer texts are displayed.
+ * @param onLongClick The listener that is invoked when the option recognizes a long click.
+ * @param customView Replace the standard grid or list item view with a custom view.
+ * @param listTopView Add a content above the option list item.
+ * @param listBottomView Add a content below the option list item.
  */
 data class Option(
-
-    /**
-     * The icon displayed in the option.
-     */
-    val icon: ImageSource? = null,
-
-    /**
-     * The title displayed in the option.
-     */
+    val icon: IconSource? = null,
     val titleText: String,
-
-    /**
-     * The subtitle displayed in the option.
-     */
     val subtitleText: String? = null,
-
-    /**
-     * The state if the option is selected by default.
-     */
     val selected: Boolean = false,
-
-    /**
-     * The state if the option is disabled permanently.
-     */
     val disabled: Boolean = false,
-
-    /**
-     * Define further information with longer texts.
-     * The option will be marked with an Info-Icon and
-     * the user can open a dialog to the option where the longer texts are displayed.
-     */
     val details: OptionDetails? = null,
-
-    /**
-     * Add a long click listener to the option.
-     */
-    val longClickListener: (() -> Unit)? = null,
-
-    /**
-     * Replace the standard grid or list item view with a custom view.
-     */
+    val onLongClick: (() -> Unit)? = null,
     val customView: (@Composable (selected: Boolean) -> Unit)? = null,
-
-    val preView: (@Composable (selected: Boolean) -> Unit)? = null,
-
-    val postView: (@Composable (selected: Boolean) -> Unit)? = null,
-
-    /**
-     * The unique key for the option.
-     */
-    val key: String? = UUID.randomUUID().toString(),
-
-    ) : Serializable
+    val listTopView: (@Composable (selected: Boolean) -> Unit)? = null,
+    val listBottomView: (@Composable (selected: Boolean) -> Unit)? = null,
+) : Serializable {
+    internal var position: Int = 0
+}
 

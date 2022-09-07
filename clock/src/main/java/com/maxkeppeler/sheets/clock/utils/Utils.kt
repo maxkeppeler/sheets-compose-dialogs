@@ -1,13 +1,16 @@
 package com.maxkeppeler.sheets.clock.utils
 
+import androidx.annotation.RestrictTo
 import androidx.compose.runtime.MutableState
-import com.maxkeppeler.sheets.clock.models.ClockTimeConfig
+import com.maxkeppeler.sheets.clock.models.ClockConfig
 import java.time.LocalTime
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isAm(currentTime: LocalTime): Boolean {
     return currentTime.hour <= 12
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun convertTimeIntoTimeTextValues(
     is24hourFormat: Boolean,
     allowSeconds: Boolean,
@@ -34,6 +37,7 @@ internal fun convertTimeIntoTimeTextValues(
     return timeTextValues
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun convertTimeTextValuesIntoTime(
     is24HourFormat: Boolean,
     isAm: Boolean,
@@ -55,8 +59,8 @@ internal fun convertTimeTextValuesIntoTime(
     return LocalTime.of(actualHour, min, sec)
 }
 
-
-internal fun getInputKeys(config: ClockTimeConfig): List<String> {
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+internal fun getInputKeys(config: ClockConfig): List<String> {
     return mutableListOf(
         *(1..9).toList().map { it.toString() }.toTypedArray(),
         Constants.ACTION_PREV,
@@ -65,6 +69,7 @@ internal fun getInputKeys(config: ClockTimeConfig): List<String> {
     )
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun getDisabledInputKeys(
     timeValues: List<StringBuilder>,
     is24hourFormat: Boolean,
@@ -103,6 +108,7 @@ internal fun getDisabledInputKeys(
     }?.map { it.toString() } ?: listOf()
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun moveToPreviousIndex(
     valueIndex: MutableState<Int>,
     groupIndex: MutableState<Int>,
@@ -121,6 +127,7 @@ internal fun moveToPreviousIndex(
     }
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun moveToNextIndex(
     valueIndex: MutableState<Int>,
     groupIndex: MutableState<Int>,
@@ -139,6 +146,7 @@ internal fun moveToNextIndex(
     }
 }
 
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun inputValue(
     is24hourFormat: Boolean,
     timeValues: List<StringBuilder>,

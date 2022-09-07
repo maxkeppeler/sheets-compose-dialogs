@@ -3,38 +3,54 @@
 package com.maxkeppeler.sheets.option.models
 
 import androidx.annotation.IntRange
+import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 
 /**
- * Available selection modes and selection-based configurations.
+ * The selection configuration for the list dialog.
+ * @param options The options that will be displayed.
  */
 sealed class OptionSelection(
-    open val options: List<Option>
+    open val options: List<Option> = listOf()
 ) : BaseSelection() {
 
     /**
-     * Select a single option.
+     * Single-choice selection for the list dialog.
+     * @param options The options that will be displayed.
+     * @param withButtonView Show the dialog with the buttons view.
+     * @param negativeButton The button that will be used as a negative button.
+     * @param onNegativeClick The listener that is invoked when the negative button is clicked.
+     * @param positiveButton The button that will be used as a positive button.
+     * @param onSelectOption The listener that returns the selected index and the selected option when the positive button is clicked.
      */
     class Single(
         override val options: List<Option>,
         override val withButtonView: Boolean = true,
-        override val negativeButtonText: String? = null,
+        override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButtonText: String? = null,
+        override val positiveButton: SelectionButton? = null,
         val onSelectOption: (index: Int, option: Option) -> Unit
-    ) : OptionSelection(options = options)
+    ) : OptionSelection()
 
     /**
-     * Select multiple options.
+     * Multiple-choice selection for the list dialog.
+     * @param options The options that will be displayed.
+     * @param minChoices The minimum amount of choices that are allowed.
+     * @param maxChoices The maximum amount of choices that are allowed.
+     * @param maxChoicesStrict Allow the user to temporarily select more options than maximum choices.
+     * @param negativeButton The button that will be used as a negative button.
+     * @param onNegativeClick The listener that is invoked when the negative button is clicked.
+     * @param positiveButton The button that will be used as a positive button.
+     * @param onSelectOptions The listener that returns the selected indices and the selected options when the positive button is clicked.
      */
     class Multiple(
         override val options: List<Option>,
         @IntRange(from = 1L, to = 90L) val minChoices: Int? = null,
         @IntRange(from = 3L, to = 90L) val maxChoices: Int? = null,
         val maxChoicesStrict: Boolean = true,
-        override val negativeButtonText: String? = null,
+        override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButtonText: String? = null,
+        override val positiveButton: SelectionButton? = null,
         val onSelectOptions: (selectedIndices: List<Int>, selectedOptions: List<Option>) -> Unit
-    ) : OptionSelection(options = options)
+    ) : OptionSelection()
 }

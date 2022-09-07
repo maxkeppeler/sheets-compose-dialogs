@@ -9,12 +9,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.views.IconComponent
-import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.core.R as RC
 
 
+/**
+ * The list item component for an option.
+ * @param option The option that will be displayed.
+ * @param modifier The modifier that is applied to this component.
+ * @param iconColor The color of the icon.
+ * @param textColor The color of the text.
+ * @param onInfoClick The listener that is invoked when the info button is clicked.
+ */
 @Composable
 internal fun OptionListItemComponent(
     option: Option,
@@ -26,7 +33,7 @@ internal fun OptionListItemComponent(
 
     Box {
         Column(modifier = modifier) {
-            option.preView?.invoke(option.selected)
+            option.listTopView?.invoke(option.selected)
             option.customView?.invoke(option.selected) ?: run {
                 Row(
                     modifier = Modifier.fillMaxWidth(),
@@ -36,25 +43,27 @@ internal fun OptionListItemComponent(
                     option.icon?.let {
                         IconComponent(
                             modifier = Modifier
-                                .padding(start = 24.dp)
-                                .size(dimensionResource(R.dimen.size_150)),
-                            imageSource = it,
+                                .padding(start = dimensionResource(RC.dimen.scd_normal_150))
+                                .size(dimensionResource(RC.dimen.scd_size_150)),
+                            iconSource = it,
                             tint = iconColor
                         )
                     }
 
                     Column(
                         modifier = Modifier
-                            .padding(top = 16.dp)
-                            .padding(bottom = 16.dp)
-                            .padding(start = 16.dp)
+                            .padding(
+                                top = dimensionResource(RC.dimen.scd_normal_100),
+                                bottom = dimensionResource(RC.dimen.scd_normal_100),
+                                start = dimensionResource(RC.dimen.scd_normal_100)
+                            )
                             .fillMaxWidth()
                             .wrapContentHeight(),
                     ) {
 
                         Text(
                             maxLines = 1,
-                            text = option.titleText ?: "",
+                            text = option.titleText,
                             style = MaterialTheme.typography.labelLarge.copy(color = textColor)
                         )
                         option.subtitleText?.let { text ->
@@ -66,7 +75,7 @@ internal fun OptionListItemComponent(
                     }
                 }
             }
-            option.postView?.invoke(option.selected)
+            option.listBottomView?.invoke(option.selected)
         }
 
         InfoContainerComponent(

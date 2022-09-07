@@ -16,9 +16,18 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.maxkeppeker.sheets.core.views.IconComponent
-import com.maxkeppeler.sheets.core.R
+import com.maxkeppeler.sheets.core.R as RC
 import com.maxkeppeler.sheets.option.models.Option
 
+/**
+ * The grid item component for an option.
+ * @param option The option that will be displayed.
+ * @param modifier The modifier that is applied to this component.
+ * @param iconColor The color of the icon.
+ * @param textColor The color of the text.
+ * @param size The size that should be applied to the option component.
+ * @param onInfoClick The listener that is invoked when the info button is clicked.
+ */
 @Composable
 internal fun OptionGridItemComponent(
     option: Option,
@@ -58,22 +67,22 @@ internal fun OptionGridItemComponent(
             option.customView?.invoke(option.selected) ?: run {
                 Column(
                     modifier = Modifier
-                        .padding(top = 16.dp)
-                        .padding(bottom = 16.dp)
+                        .padding(top = dimensionResource(RC.dimen.scd_normal_100))
+                        .padding(bottom = dimensionResource(RC.dimen.scd_normal_100))
                         .fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     option.icon?.let {
                         IconComponent(
-                            modifier = Modifier.size(dimensionResource(R.dimen.size_150)),
-                            imageSource = it,
+                            modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                            iconSource = it,
                             tint = iconColor
                         )
                     }
                     Text(
                         maxLines = 1,
                         modifier = textModifier.padding(top = 8.dp),
-                        text = option.titleText ?: "",
+                        text = option.titleText,
                         style = MaterialTheme.typography.labelLarge.copy(color = textColor)
                     )
                     option.subtitleText?.let { text ->

@@ -1,22 +1,31 @@
 package com.maxkeppeler.sheets.color.views
 
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.*
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import com.maxkeppeler.sheets.color.R
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The control component to build up a custom color.
+ * @param color The color that is currently selected.
+ * @param onColorChange The listener that returns a selected color.
+ */
 @Composable
-internal fun ColorCustomControlComponent(color: Int, onColorChange: (Int) -> Unit) {
+internal fun ColorCustomControlComponent(
+    color: Int,
+    onColorChange: (Int) -> Unit
+) {
 
     val alphaValue = remember(color) { mutableStateOf(color.alpha) }
     val redValue = remember(color) { mutableStateOf(color.red) }
@@ -33,16 +42,16 @@ internal fun ColorCustomControlComponent(color: Int, onColorChange: (Int) -> Uni
     val colorValueLabelWidth = remember { mutableStateOf<Int?>(null) }
 
     val colorItems = mutableListOf(
-        stringResource(R.string.sheets_color_picker_alpha) to alphaValue,
-        stringResource(R.string.sheets_color_picker_red) to redValue,
-        stringResource(R.string.sheets_color_picker_green) to greenValue,
-        stringResource(R.string.sheets_color_picker_blue) to blueValue
+        stringResource(R.string.scd_color_dialog_alpha) to alphaValue,
+        stringResource(R.string.scd_color_dialog_red) to redValue,
+        stringResource(R.string.scd_color_dialog_green) to greenValue,
+        stringResource(R.string.scd_color_dialog_blue) to blueValue
     )
 
-    Column(modifier = Modifier.padding(top = 12.dp)) {
+    Column(modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_150))) {
         colorItems.forEach { entry ->
             ColorCustomControlItemComponent(
-                name = entry.first,
+                label = entry.first,
                 value = entry.second.value,
                 onValueChange = { entry.second.value = it },
                 colorItemLabelWidth = colorItemLabelWidth,

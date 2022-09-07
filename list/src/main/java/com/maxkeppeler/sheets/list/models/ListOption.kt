@@ -18,40 +18,23 @@
 
 package com.maxkeppeler.sheets.list.models
 
-import com.maxkeppeker.sheets.core.models.ImageSource
+import com.maxkeppeker.sheets.core.models.base.IconSource
 import java.io.Serializable
 import java.util.*
 
 /**
- * An option is represented with at least a text.
- * A drawable is optional but makes it easier to understand to the user.
+ * An option for the the list dialog.
+ * @param icon The icon displayed in the option.
+ * @param titleText The title displayed in the option.
+ * @param subtitleText The subtitle displayed in the option.
+ * @param selected The state if the option is selected by default.
  */
 data class ListOption(
-
-    /**
-     * The icon displayed in the option.
-     */
-    val icon: ImageSource? = null,
-
-    /**
-     * The title displayed in the option.
-     */
+    val icon: IconSource? = null,
     val titleText: String,
-
-    /**
-     * The subtitle displayed in the option.
-     */
     val subtitleText: String? = null,
-
-    /**
-     * The state if the option is selected by default.
-     */
     val selected: Boolean = false,
-
-    /**
-     * The unique key for the option.
-     */
-    val key: String? = UUID.randomUUID().toString(),
-
-    ) : Serializable
+) : Serializable {
+    internal var position: Int = 0
+}
 

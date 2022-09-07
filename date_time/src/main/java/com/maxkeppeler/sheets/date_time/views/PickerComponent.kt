@@ -8,23 +8,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
-import com.maxkeppeler.sheets.date_time.models.DateTextConfig
+import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
 import com.maxkeppeler.sheets.date_time.utils.*
 import java.time.LocalDate
 import java.time.LocalTime
-import java.time.chrono.Chronology
 import java.time.format.FormatStyle
 import java.util.*
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * A picker component that will build up a date or time selection.
+ * @param config The general configuration for the dialog.
+ * @param locale The locale that is used for the date and time format.
+ * @param formatStyle The style of the date or time format.
+ * @param onDateValueChange The listener that returns the selected date.
+ * @param onTimeValueChange The listener that returns the selected time.
+ */
 @Composable
 internal fun PickerComponent(
-    config: DateTextConfig,
+    config: DateTimeConfig,
     locale: Locale = Locale.getDefault(),
     formatStyle: FormatStyle,
-    chronology: Chronology = Chronology.ofLocale(locale),
     onDateValueChange: ((LocalDate?) -> Unit)? = null,
     onTimeValueChange: ((LocalTime?) -> Unit)? = null
 ) {
@@ -33,7 +41,7 @@ internal fun PickerComponent(
     val height = remember { mutableStateOf(0) }
 
     val pattern by remember {
-        val value = getLocalizedPattern(isDate, formatStyle, chronology, locale)
+        val value = getLocalizedPattern(isDate, formatStyle, locale)
         mutableStateOf(value)
     }
 
@@ -123,9 +131,8 @@ internal fun PickerComponent(
                                     Text(
                                         modifier = Modifier
                                             .clip(MaterialTheme.shapes.extraSmall)
-                                            .padding(start = 6.dp)
-                                            .padding(top = 24.dp)
-                                            .padding(end = 6.dp),
+                                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_75))
+                                            .padding(top = dimensionResource(RC.dimen.scd_normal_150)),
                                         text = ":"
                                     )
                                 }

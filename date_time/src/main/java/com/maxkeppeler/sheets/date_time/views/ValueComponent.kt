@@ -10,10 +10,17 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
+import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The value component that is displayed if a selection was made.
+ * @param unit The unit of the value.
+ * @param width The width of the component.
+ * @param onClick The listener that is invoked if this component was selected.
+ */
 @Composable
 internal fun ValueComponent(
     unit: UnitSelection,
@@ -33,8 +40,7 @@ internal fun ValueComponent(
                 else MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.3f)
             )
             .clickable { onClick() }
-            .padding(vertical = 16.dp)
-            .padding(horizontal = 16.dp),
+            .padding(dimensionResource(RC.dimen.scd_normal_100)),
         text = unit.value?.label
             ?: unit.value?.labelRes?.let { stringResource(id = it) }
             ?: unit.options.last().label?.map { "  " }?.joinToString(separator = "")

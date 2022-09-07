@@ -1,10 +1,9 @@
 @file:OptIn(ExperimentalMaterial3Api::class)
+@file:Suppress("UNUSED_PARAMETER")
 
 package com.maxkeppeler.sheets.list
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.heightIn
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
@@ -13,10 +12,13 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.maxkeppeker.sheets.core.models.Header
+import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.utils.BaseConstants
-import com.maxkeppeker.sheets.core.views.ButtonComponent
+import com.maxkeppeker.sheets.core.utils.BaseModifiers
+import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
+import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
+import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -25,24 +27,38 @@ import com.maxkeppeler.sheets.list.views.ListOptionComponent
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
+/**
+ * List view for the use-case to display a list of options.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ * @param header The header to be displayed at the top of the dialog view.
+ * @param onCancel Listener that is invoked when the use-case was canceled.
+ */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun InfoView(
     selection: ListSelection,
     config: ListConfig = ListConfig(),
-    onCancel: () -> Unit = {},
     header: Header? = null,
+    onCancel: () -> Unit = {},
 ) {
     val coroutine = rememberCoroutineScope()
-    val options = remember { mutableStateListOf(*selection.options.toTypedArray()) }
+    val options = remember {
+        val sortedOptions =
+            selection.options.mapIndexed { i, option -> option.apply { position = i } }
+        val value = sortedOptions.toTypedArray()
+        mutableStateListOf(*value)
+    }
+
     val selectedOptions = remember(options.toList()) {
         val selectedOptions = options.toList().filter { it.selected }.toTypedArray()
         when (selection) {
             is ListSelection.Multiple -> Unit
             is ListSelection.Single -> {
-                if (selectedOptions.size > 1)
-                    throw IllegalStateException("OptionSelection type Single can not have multiple selected options.")
+                if (selectedOptions.size > 1) {
+                    throw IllegalStateException("$selection does not support multiple selected options.")
+                }
             }
         }
         mutableStateListOf(*selectedOptions)
@@ -51,13 +67,12 @@ fun InfoView(
     val onInvokeListener = {
         when (selection) {
             is ListSelection.Multiple -> {
-                val indices = selectedOptions.toList().map { options.indexOf(it) }
+                val indices = selectedOptions.map { it.position }
                 selection.onSelectOptions(indices, selectedOptions.toList())
             }
             is ListSelection.Single -> {
                 val option = selectedOptions.first()
-                val index = options.indexOf(option)
-                selection.onSelectOption(index, option)
+                selection.onSelectOption(option.position, option)
             }
         }
     }
@@ -70,45 +85,47 @@ fun InfoView(
         }
     }
 
-    val selectOption: (Int, ListOption) -> Unit = { index, option -> options[index] = option }
-    val processSelection: (Int, ListOption) -> Unit = { index, option ->
+    val selectOption: (ListOption) -> Unit = { option ->
+        options[option.position] = option
+    }
+
+    val processSelection: (ListOption) -> Unit = { option ->
         when (selection) {
             is ListSelection.Multiple -> {
                 selection.maxChoices?.let { maxChoices ->
-                    if (selectedOptions.size <= maxChoices) selectOption(index, option)
-                } ?: selectOption(index, option)
+                    if (selectedOptions.size <= maxChoices) selectOption(option)
+                } ?: selectOption(option)
             }
             is ListSelection.Single -> {
                 selectedOptions.forEach { selectedOption ->
-                    val selectedOptionIndex = options.indexOf(selectedOption)
-                    options[selectedOptionIndex] = selectedOption.copy(selected = false)
+                    val disabledOption = selectedOption.copy(selected = false)
+                        .apply { position = selectedOption.position }
+                    options[selectedOption.position] = disabledOption
                 }
-                selectOption(index, option)
+                selectOption(option)
             }
         }
         if (!selection.withButtonView) onSelection(onInvokeListener)
     }
 
-    Column(modifier = Modifier.wrapContentHeight()) {
-
-        HeaderComponent(header)
-
-        ListOptionBoundsComponent(
-            selection = selection,
-            selectedOptions = selectedOptions
-        )
-
-        ListOptionComponent(
-            modifier = Modifier
-                .weight(1f, false)
-                .heightIn(max = 350.dp),
-            selection = selection,
-            options = options,
-            onOptionChange = processSelection
-        )
-
-        if (selection.withButtonView) {
-            ButtonComponent(
+    FrameBase(
+        header = { HeaderComponent(header) },
+        contentPaddingValues = PaddingValues(0.dp),
+        content = {
+            ListOptionBoundsComponent(
+                selection = selection,
+                selectedOptions = selectedOptions
+            )
+            ListOptionComponent(
+                modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
+                selection = selection,
+                options = options,
+                onOptionChange = processSelection
+            )
+        },
+        buttonsVisible = selection.withButtonView,
+        buttons = {
+            ButtonsComponent(
                 onPositiveValid = {
                     when (selection) {
                         is ListSelection.Single -> selectedOptions.isNotEmpty()
@@ -121,8 +138,8 @@ fun InfoView(
                         }
                     }
                 },
-                negativeButtonText = selection.negativeButtonText,
-                positiveButtonText = selection.positiveButtonText,
+                negativeButton = selection.negativeButton,
+                positiveButton = selection.positiveButton,
                 onNegative = {
                     selection.onNegativeClick?.invoke()
                     onCancel()
@@ -133,6 +150,6 @@ fun InfoView(
                 }
             )
         }
-    }
+    )
 }
 

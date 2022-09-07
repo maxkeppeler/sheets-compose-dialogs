@@ -4,6 +4,13 @@ package com.maxkeppeler.sheets.state.models
 
 import androidx.compose.runtime.Composable
 
+/**
+ * Defined implementations of a progress indicator.
+ * @param value The progress of the indicator.
+ * @param showProgressPercentage Show the progress as percentage.
+ * @param customProgressIndicator Custom view that replaces the default progress indicator view.
+ * @param customIndicator Custom view that replaces the default indicator view.
+ */
 sealed class ProgressIndicator(
     open var value: Float? = null,
     open val showProgressPercentage: Boolean = false,

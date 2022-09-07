@@ -2,18 +2,17 @@
 
 <resources>
 
-    <string name="sheets_at_least_placeholder" translatable="true">Minimum</string>
-    <string name="sheets_at_most_placeholder" translatable="true">Maximum</string>
+    <string name="scd_clock_dialog_at_least_placeholder" translatable="true">Minimum</string>
+    <string name="scd_clock_dialog_at_most_placeholder" translatable="true">Maximum</string>
 
-    <string name="sheets_hour_code" translatable="true">h</string>
-    <string name="sheets_minute_code" translatable="true">m</string>
-    <string name="sheets_second_code" translatable="true">s</string>
-    <string name="sheets_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
 
-
-    <string name="sheets_am" translatable="true">AM</string>
-    <string name="sheets_pm" translatable="true">PM</string>
-    <string name="sheets_next_value" translatable="true">Next value</string>
-    <string name="sheets_previous_value" translatable="true">Previous</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Next value</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Previous</string>
 
 </resources>
