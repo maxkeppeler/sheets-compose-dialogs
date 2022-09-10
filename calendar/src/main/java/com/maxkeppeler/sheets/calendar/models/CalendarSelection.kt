@@ -22,7 +22,7 @@ sealed class CalendarSelection : BaseSelection() {
      * @param onSelectDate The listener that returns the selected date.
      */
     class Date(
-        override val withButtonView: Boolean = false,
+        override val withButtonView: Boolean = true,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -56,7 +56,7 @@ sealed class CalendarSelection : BaseSelection() {
      * @param onSelectRange The listener that returns the selected range.
      */
     class Period(
-        override val withButtonView: Boolean = false,
+        override val withButtonView: Boolean = true,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
