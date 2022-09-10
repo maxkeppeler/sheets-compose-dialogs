@@ -76,6 +76,7 @@ fun ColorView(
                     )
                 ColorSelectionMode.CUSTOM ->
                     ColorCustomComponent(
+                        config = config,
                         color = color.value ?: Color.Gray.toArgb(),
                         onColorChange = onColorClickHandler,
                     )

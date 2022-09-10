@@ -17,26 +17,26 @@ import androidx.compose.ui.window.DialogProperties
 
 /**
  * Base component for a dialog.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param properties DialogProperties for further customization of this dialog's behavior.
  * @param onDialogClick Listener that is invoked when the dialog was clicked.
  * @param content The content to be displayed inside the dialog.
  */
 @Composable
 fun DialogBase(
-    show: MutableState<Boolean>,
+    show: Boolean,
     properties: DialogProperties = DialogProperties(),
     onDialogClick: (() -> Unit)? = null,
-    content: @Composable () -> Unit
+    onClose: () -> Unit,
+    content: @Composable () -> Unit,
 ) {
-    if (!show.value) return
+    if (!show) return
 
     val boxInteractionSource = remember { MutableInteractionSource() }
     val contentInteractionSource = remember { MutableInteractionSource() }
-    val dismissDialog = { show.value = false }
 
     Dialog(
-        onDismissRequest = dismissDialog,
+        onDismissRequest = onClose,
         properties = properties,
     ) {
 
@@ -50,7 +50,7 @@ fun DialogBase(
                 .clickable(
                     interactionSource = boxInteractionSource,
                     indication = null,
-                    onClick = dismissDialog
+                    onClick = onClose
                 )
         ) {
             Surface(

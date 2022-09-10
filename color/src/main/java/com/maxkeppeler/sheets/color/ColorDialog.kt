@@ -13,31 +13,34 @@ import com.maxkeppeler.sheets.color.models.ColorSelection
 
 /**
  * Color view for the use-case to to select a color.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
+ * @param onClose Listener that is invoked to indicate that the use-case is done and the view should be closed.
  * @param properties DialogProperties for further customization of this dialog's behavior.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun ColorDialog(
-    show: MutableState<Boolean>,
+    show: Boolean,
     selection: ColorSelection,
     config: ColorConfig = ColorConfig(),
     header: Header? = null,
+    onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {
 
     DialogBase(
         show = show,
+        onClose = onClose,
         properties = properties,
     ) {
         ColorView(
             config = config,
             selection = selection,
             header = header,
-            onCancel = { show.value = false }
+            onCancel = onClose
         )
     }
 }

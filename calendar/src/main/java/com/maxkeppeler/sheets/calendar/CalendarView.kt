@@ -1,6 +1,6 @@
 package com.maxkeppeler.sheets.calendar
 
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -8,7 +8,14 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshots.SnapshotStateList
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.layout.onSizeChanged
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.toSize
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -198,6 +205,8 @@ fun CalendarView(
                     }
                 },
             )
+
+            var baseSelectionSize by remember { mutableStateOf(Size.Zero) }
 
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),

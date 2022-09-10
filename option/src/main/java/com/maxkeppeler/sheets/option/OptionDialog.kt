@@ -17,7 +17,7 @@ import com.maxkeppeler.sheets.option.models.OptionSelection
 
 /**
  * Option dialog for the use-case to display a list or grid of options.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
@@ -26,22 +26,24 @@ import com.maxkeppeler.sheets.option.models.OptionSelection
 @ExperimentalMaterial3Api
 @Composable
 fun OptionDialog(
-    show: MutableState<Boolean>,
+    show: Boolean,
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
     header: Header? = null,
+    onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {
 
     DialogBase(
         show = show,
+        onClose = onClose,
         properties = properties,
     ) {
         OptionView(
             selection = selection,
             config = config,
             header = header,
-            onCancel = { show.value = false }
+            onCancel = onClose
         )
     }
 }

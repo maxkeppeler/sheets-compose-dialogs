@@ -17,7 +17,7 @@ import com.maxkeppeler.sheets.state.models.StateSelection
 
 /**
  * State dialog for the use-case to display various states.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
@@ -26,10 +26,11 @@ import com.maxkeppeler.sheets.state.models.StateSelection
 @ExperimentalMaterial3Api
 @Composable
 fun StateDialog(
-    show: MutableState<Boolean>,
-    selection: StateSelection,
+    show: Boolean,
+    selection: StateSelection? = null,
     config: StateConfig,
     header: Header? = null,
+    onClose: () -> Unit = {},
     properties: DialogProperties = DialogProperties(
         dismissOnBackPress = false,
         dismissOnClickOutside = false,
@@ -38,13 +39,14 @@ fun StateDialog(
 
     DialogBase(
         show = show,
+        onClose = onClose,
         properties = properties,
     ) {
         StateView(
             selection = selection,
             config = config,
             header = header,
-            onCancel = { show.value = false }
+            onCancel = onClose
         )
     }
 }

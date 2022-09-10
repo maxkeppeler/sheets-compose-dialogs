@@ -26,7 +26,7 @@ fun CoreView(
     selection: CoreSelection,
     header: Header? = null,
     body: @Composable () -> Unit,
-    onCancel: () -> Unit = {},
+    onCancel: () -> Unit,
     onPositiveValid: () -> Boolean = { true }
 ) {
 

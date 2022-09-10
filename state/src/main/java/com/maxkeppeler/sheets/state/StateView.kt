@@ -9,7 +9,6 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
@@ -29,7 +28,7 @@ import com.maxkeppeler.sheets.state.views.StateComponent
 @ExperimentalMaterial3Api
 @Composable
 fun StateView(
-    selection: StateSelection,
+    selection: StateSelection? = null,
     config: StateConfig,
     header: Header? = null,
     onCancel: () -> Unit = {},

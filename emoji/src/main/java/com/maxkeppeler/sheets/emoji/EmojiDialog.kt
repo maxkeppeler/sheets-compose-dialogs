@@ -13,31 +13,34 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 
 /**
  * Emoji dialog for the use-case to to select any emoji or a variant, if available.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
+ * @param onClose Listener that is invoked to indicate that the use-case is done and the view should be closed.
  * @param properties DialogProperties for further customization of this dialog's behavior.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun EmojiDialog(
-    show: MutableState<Boolean>,
+    show: Boolean,
     selection: EmojiSelection,
     config: EmojiConfig = EmojiConfig(),
     header: Header? = null,
+    onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {
 
     DialogBase(
         show = show,
+        onClose = onClose,
         properties = properties,
     ) {
         EmojiView(
             selection = selection,
             config = config,
             header = header,
-            onCancel = { show.value = false }
+            onCancel = onClose
         )
     }
 }

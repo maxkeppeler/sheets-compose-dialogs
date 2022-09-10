@@ -19,7 +19,7 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * A popup that shows the various variants of an emoji.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param size The size that is used as a constraint for the popup.
  * @param baseEmoji The base emoji that was clicked.
  * @param selectedEmoji The emoji that is currently selected.

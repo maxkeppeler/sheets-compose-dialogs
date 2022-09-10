@@ -17,31 +17,34 @@ import com.maxkeppeler.sheets.info.models.InfoSelection
 
 /**
  * Info dialog for the use-case to display simple information.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param selection The selection configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
  * @param body The body content to be displayed inside the dialog.
+ * @param onClose Listener that is invoked to indicate that the use-case is done and the view should be closed.
  * @param properties DialogProperties for further customization of this dialog's behavior.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun InfoDialog(
-    show: MutableState<Boolean>,
+    show: Boolean,
     selection: InfoSelection,
     header: Header? = null,
     body: Body,
+    onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {
 
     DialogBase(
         show = show,
+        onClose = onClose,
         properties = properties,
     ) {
         InfoView(
             selection = selection,
             header = header,
             body = body,
-            onCancel = { show.value = false }
+            onCancel = onClose
         )
     }
 }
