@@ -14,20 +14,26 @@ import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import com.maxkeppeler.sheets.color.R
+import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The control component to build up a custom color.
+ * @param config The general configuration for the dialog view.
  * @param color The color that is currently selected.
  * @param onColorChange The listener that returns a selected color.
  */
 @Composable
 internal fun ColorCustomControlComponent(
+    config: ColorConfig,
     color: Int,
     onColorChange: (Int) -> Unit
 ) {
 
-    val alphaValue = remember(color) { mutableStateOf(color.alpha) }
+    val alphaValue = remember(color) {
+        val value = if (config.allowCustomColorAlphaValues) color.alpha else 255
+        mutableStateOf(value)
+    }
     val redValue = remember(color) { mutableStateOf(color.red) }
     val greenValue = remember(color) { mutableStateOf(color.green) }
     val blueValue = remember(color) { mutableStateOf(color.blue) }
@@ -49,14 +55,18 @@ internal fun ColorCustomControlComponent(
     )
 
     Column(modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_150))) {
-        colorItems.forEach { entry ->
-            ColorCustomControlItemComponent(
-                label = entry.first,
-                value = entry.second.value,
-                onValueChange = { entry.second.value = it },
-                colorItemLabelWidth = colorItemLabelWidth,
-                colorValueLabelWidth = colorValueLabelWidth,
-            )
+        colorItems.forEachIndexed { index, entry ->
+            if (config.allowCustomColorAlphaValues && index == 0
+                || !config.allowCustomColorAlphaValues && index > 0
+            ) {
+                ColorCustomControlItemComponent(
+                    label = entry.first,
+                    value = entry.second.value,
+                    onValueChange = { entry.second.value = it },
+                    colorItemLabelWidth = colorItemLabelWidth,
+                    colorValueLabelWidth = colorValueLabelWidth,
+                )
+            }
         }
     }
 

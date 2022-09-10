@@ -120,6 +120,7 @@ internal fun CalendarBaseSelectionComponent(
                 state = calendarGridState,
                 columns = GridCells.Fixed(cells),
                 modifier = dateModifier,
+                userScrollEnabled = false,
             ) {
                 onCalendarView()
             }

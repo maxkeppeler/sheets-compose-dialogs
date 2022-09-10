@@ -20,7 +20,7 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Option dialog for the use-case to display a list or grid of options.
- * @param show The state used to show and hide the dialog.
+ * @param show If the dialog should be displayed or not.
  * @param option The option that will be displayed.
  * @param backgroundColor The color that is used for the background of the option.
  * @param iconColor The color that is used for the icon of the option.
@@ -35,7 +35,8 @@ internal fun OptionDetailsDialog(
     textColor: Color
 ) {
     DialogBase(
-        show = show,
+        show = show.value,
+        onClose = { show.value = false },
         onDialogClick = { show.value = !show.value }) {
         Column {
             Row(

@@ -23,7 +23,7 @@ sealed class ClockSelection : BaseSelection() {
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
-        val onPositiveClick: (hour: Int, minute: Int) -> Unit,
+        val onPositiveClick: (hours: Int, minutes: Int) -> Unit,
     ) : ClockSelection()
 
     /**
@@ -39,6 +39,6 @@ sealed class ClockSelection : BaseSelection() {
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
-        val onPositiveClick: (hour: Int, minute: Int, seconds: Int) -> Unit,
+        val onPositiveClick: (hours: Int, minutes: Int, seconds: Int) -> Unit,
     ) : ClockSelection()
 }

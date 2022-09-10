@@ -91,7 +91,7 @@ fun OptionView(
         when (selection) {
             is OptionSelection.Multiple -> {
                 selection.maxChoices?.takeIf { selection.maxChoicesStrict }?.let { maxChoices ->
-                    if (selectedOptions.size <= maxChoices) selectOption(option)
+                    if (!option.selected || selectedOptions.size < maxChoices) selectOption(option)
                 } ?: selectOption(option)
             }
             is OptionSelection.Single -> {

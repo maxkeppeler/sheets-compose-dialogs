@@ -37,7 +37,7 @@ import kotlinx.coroutines.launch
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
-fun InfoView(
+fun ListView(
     selection: ListSelection,
     config: ListConfig = ListConfig(),
     header: Header? = null,
@@ -93,7 +93,7 @@ fun InfoView(
         when (selection) {
             is ListSelection.Multiple -> {
                 selection.maxChoices?.let { maxChoices ->
-                    if (selectedOptions.size <= maxChoices) selectOption(option)
+                    if (!option.selected || selectedOptions.size < maxChoices) selectOption(option)
                 } ?: selectOption(option)
             }
             is ListSelection.Single -> {
