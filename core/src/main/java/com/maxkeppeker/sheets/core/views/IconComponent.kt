@@ -13,15 +13,17 @@ import com.maxkeppeker.sheets.core.models.base.IconSource
  * @param modifier The modifier that is applied to this icon.
  * @param iconSource The icon that is used.
  * @param tint The color that is used to tint the icon.
+ * @param defaultTint The default color that is used.
  */
 @Composable
 fun IconComponent(
     modifier: Modifier,
     iconSource: IconSource,
     tint: Color? = null,
+    defaultTint: Color? = null,
 ) {
 
-    val actualTint = tint ?: iconSource.tint ?: LocalContentColor.current
+    val actualTint = tint ?: iconSource.tint ?: defaultTint ?: LocalContentColor.current
 
     val resolvedPainterDrawableRes = iconSource.drawableRes?.let { painterResource(id = it) }
     (iconSource.painter ?: resolvedPainterDrawableRes)?.let {
