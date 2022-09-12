@@ -14,8 +14,9 @@ import com.maxkeppeker.sheets.core.models.base.BaseSelection
  * @param onSelectNone The listener that is invoked when no color is selected.
  * @param onSelectColor The listener that returns the selected color.
  */
-class ColorSelection(
+data class ColorSelection(
     val selectedColor: SingleColor? = null,
+    override val withButtonView: Boolean = true,
     override val negativeButton: SelectionButton? = null,
     override val onNegativeClick: (() -> Unit)? = null,
     override val positiveButton: SelectionButton? = null,

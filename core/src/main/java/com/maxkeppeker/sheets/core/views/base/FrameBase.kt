@@ -24,10 +24,11 @@ fun FrameBase(
     buttonsVisible: Boolean = true,
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
-    Column(modifier = Modifier.wrapContentHeight()) {
-
+    Column(
+        modifier = Modifier
+            .wrapContentHeight()
+    ) {
         header()
-
         Column(
             modifier = Modifier
                 .padding(contentPaddingValues)

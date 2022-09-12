@@ -10,9 +10,7 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.color.models.*
 import java.time.LocalDate
-import kotlin.random.Random
 
 @Composable
 internal fun CalendarSample1(closeSelection: () -> Unit) {

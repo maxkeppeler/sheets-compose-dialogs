@@ -10,6 +10,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
@@ -22,11 +23,13 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param option The option that will be displayed.
  * @param onClick The listener that is invoked when an option was clicked.
  * @param grid Display option as a grid item.
+ * @param inputDisabled If input is disabled.
  * @param size The size that should be applied to the option component.
  */
 @Composable
 internal fun OptionItemComponent(
     option: Option,
+    inputDisabled: Boolean,
     onClick: (Option) -> Unit,
     grid: Boolean = true,
     size: MutableState<Size?>? = null,
@@ -44,10 +47,10 @@ internal fun OptionItemComponent(
         .padding(dimensionResource(RC.dimen.scd_small_50))
         .wrapContentHeight()
         .clip(MaterialTheme.shapes.medium)
-        .clickable(!option.disabled) { onClick(option) }
+        .clickable(!inputDisabled && !option.disabled) { onClick(option) }
         .then(if (option.disabled || option.selected) Modifier.background(backgroundColor) else Modifier)
 
-    val showInfoDialog = remember { mutableStateOf(false) }
+    val showInfoDialog = rememberSaveable { mutableStateOf(false) }
     option.details?.let {
         OptionDetailsDialog(
             show = showInfoDialog,
@@ -58,7 +61,7 @@ internal fun OptionItemComponent(
         )
     }
 
-    val onInfoClick =  { showInfoDialog.value = !showInfoDialog.value }
+    val onInfoClick = { showInfoDialog.value = !showInfoDialog.value }
 
     if (grid) OptionGridItemComponent(
         option = option,

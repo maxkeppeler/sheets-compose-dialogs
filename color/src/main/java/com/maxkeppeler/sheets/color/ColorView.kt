@@ -1,20 +1,15 @@
-@file:OptIn(
-    ExperimentalMaterial3Api::class,
-    ExperimentalMaterialApi::class
-)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.maxkeppeler.sheets.color
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
+import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
@@ -42,17 +37,22 @@ fun ColorView(
     onCancel: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val color = rememberSaveable { mutableStateOf(selection.selectedColor?.colorInInt(context)) }
-    val colors = rememberSaveable { mutableStateOf(config.templateColors.getColorsAsInt(context)) }
-    var selectedDisplayMode by rememberSaveable {
-        val value = config.defaultDisplayMode.takeUnless {
-            config.displayMode != null && config.displayMode != config.defaultDisplayMode
-        } ?: config.displayMode ?: ColorSelectionMode.TEMPLATE
-        mutableStateOf(value)
+    val state = rememberSaveable(
+        saver = ColorState.Saver(context, selection, config),
+        init = { ColorState(context, selection, config) }
+    )
+
+    val coroutine = rememberCoroutineScope()
+    val onSelection: (Int) -> Unit = {
+        state.processSelection(it)
+        BaseBehaviors.autoFinish(
+            selection = selection,
+            coroutine = coroutine,
+            onSelection = state::onFinish,
+            onFinished = onCancel,
+            onDisableInput = state::disableInput
+        )
     }
-    val onInvokeListener = { selection.onSelectColor(color.value!!) }
-    val onColorClickHandler: (Int) -> Unit = { color.value = it }
-    val isValid: () -> Boolean = { color.value != null }
 
     FrameBase(
         header = { HeaderComponent(header) },
@@ -60,41 +60,39 @@ fun ColorView(
             ColorSelectionModeComponent(
                 config = config,
                 selection = selection,
-                mode = selectedDisplayMode,
-                onModeChange = { selectedDisplayMode = it },
+                mode = state.displayMode,
+                onModeChange = { state.displayMode = it },
                 onNoColorClick = {
                     selection.onSelectNone?.invoke()
                     onCancel()
                 }
             )
-            when (selectedDisplayMode) {
+            when (state.displayMode) {
                 ColorSelectionMode.TEMPLATE ->
                     ColorTemplateComponent(
-                        colors = colors.value,
-                        selectedColor = color.value,
-                        onColorClick = onColorClickHandler
+                        colors = state.colors,
+                        selectedColor = state.color,
+                        inputDisabled = state.inputDisabled,
+                        onColorClick = onSelection
                     )
                 ColorSelectionMode.CUSTOM ->
                     ColorCustomComponent(
                         config = config,
-                        color = color.value ?: Color.Gray.toArgb(),
-                        onColorChange = onColorClickHandler,
+                        color = state.color ?: Color.Gray.toArgb(),
+                        onColorChange = state::processSelection,
                     )
             }
         },
+        buttonsVisible = selection.withButtonView
+                || !selection.withButtonView
+                && config.displayMode != ColorSelectionMode.TEMPLATE,
         buttons = {
             ButtonsComponent(
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onPositiveValid = isValid,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    onInvokeListener()
-                    onCancel()
-                }
+                selection = selection,
+                onPositiveValid = state.valid,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = state::onFinish,
+                onCancel = onCancel
             )
         }
     )

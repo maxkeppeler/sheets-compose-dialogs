@@ -17,7 +17,7 @@ import com.maxkeppeker.sheets.core.views.base.FrameBase
  * @param header The header to be displayed at the top of the dialog view.
  * @param body The body content to be displayed inside the dialog view.
  * @param onCancel Listener that is invoked when the use-case was canceled.
- * @param onPositiveValid Listener that is invoked to check if the dialog view input is valid.
+ * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
@@ -27,7 +27,7 @@ fun CoreView(
     header: Header? = null,
     body: @Composable () -> Unit,
     onCancel: () -> Unit,
-    onPositiveValid: () -> Boolean = { true }
+    onPositiveValid: Boolean = true
 ) {
 
     FrameBase(
@@ -37,16 +37,10 @@ fun CoreView(
         buttons = {
             ButtonsComponent(
                 onPositiveValid = onPositiveValid,
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    selection.onPositiveClick?.invoke()
-                    onCancel()
-                }
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = { selection.onPositiveClick?.invoke() },
+                onCancel = onCancel
             )
         }
     )

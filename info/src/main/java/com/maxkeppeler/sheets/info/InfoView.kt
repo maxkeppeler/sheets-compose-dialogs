@@ -35,16 +35,10 @@ fun InfoView(
         buttonsVisible = selection.withButtonView,
         buttons = {
             ButtonsComponent(
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    selection.onPositiveClick()
-                    onCancel()
-                }
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = selection.onPositiveClick::invoke,
+                onCancel = onCancel
             )
         }
     )

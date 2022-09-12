@@ -21,7 +21,7 @@ import com.maxkeppeker.sheets.core.views.base.DialogBase
  * @param body The body content to be displayed inside the dialog.
  * @param onPositiveValid Listener that is invoked to check if the dialog input is valid.
  * @param onClose Listener that is invoked to indicate that the use-case is done and the view should be closed.
- * @param properties DialogProperties for further customization of this dialog's behavior.
+ * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
 @ExperimentalMaterial3Api
 @Composable
@@ -30,7 +30,7 @@ fun CoreDialog(
     selection: CoreSelection,
     header: Header? = null,
     body: @Composable () -> Unit,
-    onPositiveValid: () -> Boolean = { true },
+    onPositiveValid: Boolean = true,
     onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {

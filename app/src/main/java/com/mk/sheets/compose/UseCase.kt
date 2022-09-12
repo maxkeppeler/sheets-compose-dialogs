@@ -1,6 +1,9 @@
 package com.mk.sheets.compose
 
-enum class UseCase(val category: UseCaseCategory, vararg val specifics: String) {
+import java.io.Serializable
+
+
+enum class UseCase(val category: UseCaseCategory, vararg val specifics: String) : Serializable {
 
     CORE_SAMPLE_1(
         UseCaseCategory.CORE,

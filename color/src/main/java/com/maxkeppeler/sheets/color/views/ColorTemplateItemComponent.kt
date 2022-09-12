@@ -27,6 +27,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param modifier The modifier that is applied to this component.
  * @param color The color that this item represents.
  * @param selected If the color was selected.
+ * @param inputDisabled If input is disabled.
  * @param onColorClick The listener that returns the selected color.
  */
 @Composable
@@ -34,6 +35,7 @@ internal fun ColorTemplateItemComponent(
     modifier: Modifier = Modifier,
     color: Int,
     selected: Boolean,
+    inputDisabled: Boolean = false,
     onColorClick: (Int) -> Unit
 ) {
     val colorShape = MaterialTheme.shapes.medium
@@ -43,7 +45,8 @@ internal fun ColorTemplateItemComponent(
                 .align(Alignment.Center)
                 .aspectRatio(1f),
             shape = colorShape,
-            onClick = { onColorClick(color) }
+            onClick = { onColorClick(color) },
+            enabled = !inputDisabled
         ) {
 
             Box(modifier = Modifier.fillMaxSize()) {

@@ -17,6 +17,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param modifier The modifier that is applied to this component.
  * @param selection The selection configuration.
  * @param options The list of options.
+ * @param inputDisabled If input is disabled.
  * @param onOptionChange Listener that is invoked when the state of an option changes.
  */
 @Composable
@@ -24,6 +25,7 @@ fun ListOptionComponent(
     modifier: Modifier,
     selection: ListSelection,
     options: List<ListOption>,
+    inputDisabled: Boolean,
     onOptionChange: (ListOption) -> Unit,
 ) {
 
@@ -48,6 +50,7 @@ fun ListOptionComponent(
             ListOptionItemComponent(
                 selection = selection,
                 option = option,
+                inputDisabled = inputDisabled,
                 onClick = onClick,
             )
         }

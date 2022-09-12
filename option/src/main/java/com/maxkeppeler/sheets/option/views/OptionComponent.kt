@@ -12,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
@@ -26,6 +27,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param modifier The modifier that is applied to this component.
  * @param config The general configuration.
  * @param options The list of options.
+ * @param inputDisabled If input is disabled.
  * @param onOptionChange Listener that is invoked when the state of an option changes.
  */
 @Composable
@@ -33,6 +35,7 @@ fun OptionComponent(
     modifier: Modifier,
     config: OptionConfig,
     options: List<Option>,
+    inputDisabled: Boolean,
     onOptionChange: (Option) -> Unit,
 ) {
 
@@ -53,7 +56,7 @@ fun OptionComponent(
         onOptionChange(newOption)
     }
 
-    val size = rememberSaveable { mutableStateOf<Size?>(null) }
+    val size = remember { mutableStateOf<Size?>(null) }
 
     when (config.mode) {
         DisplayMode.GRID_HORIZONTAL -> {
@@ -68,6 +71,7 @@ fun OptionComponent(
                 items(options) { option ->
                     OptionItemComponent(
                         option = option,
+                        inputDisabled = inputDisabled,
                         onClick = onClick,
                         size = size,
                     )
@@ -82,6 +86,7 @@ fun OptionComponent(
                 items(options) { option ->
                     OptionItemComponent(
                         option = option,
+                        inputDisabled = inputDisabled,
                         onClick = onClick,
                         size = size,
                     )
@@ -95,6 +100,7 @@ fun OptionComponent(
                 items(options) { option ->
                     OptionItemComponent(
                         option = option,
+                        inputDisabled = inputDisabled,
                         onClick = onClick,
                         grid = false
                     )

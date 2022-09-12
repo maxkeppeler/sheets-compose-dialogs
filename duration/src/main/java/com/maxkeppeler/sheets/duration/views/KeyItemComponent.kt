@@ -28,16 +28,23 @@ import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The item component of the keyboard.
+ * @param key The key that the component represents.
+ * @param onEnterValue The listener that is invoked when a value was clicked.
+ * @param onBackspaceAction The listener that is invoked when [Constants.ACTION_BACKSPACE] was clicked.
+ * @param onEmptyAction The listener that is invoked when [Constants.ACTION_CLEAR] was clicked.
+ */
 @Composable
 internal fun KeyItemComponent(
-    option: String,
+    key: String,
+    onEnterValue: (String) -> Unit,
     onBackspaceAction: () -> Unit,
     onEmptyAction: () -> Unit,
-    onEnterValue: (String) -> Unit
 ) {
     val haptic = LocalHapticFeedback.current
-    val isActionBackspace = option == Constants.ACTION_BACKSPACE
-    val isActionClear = option == Constants.ACTION_CLEAR
+    val isActionBackspace = key == Constants.ACTION_BACKSPACE
+    val isActionClear = key == Constants.ACTION_CLEAR
     var cornerRadius by remember { mutableStateOf(Constants.KEYBOARD_ITEM_CORNER_RADIUS_DEFAULT) }
     val animatedCornerRadius =
         animateIntAsState(cornerRadius, tween(Constants.KEYBOARD_ANIM_CORNER_RADIUS))
@@ -67,7 +74,7 @@ internal fun KeyItemComponent(
                 onClick = {
                     if (isActionBackspace) onBackspaceAction()
                     else if (isActionClear) onEmptyAction()
-                    else onEnterValue(option)
+                    else onEnterValue(key)
                     haptic.performHapticFeedback(HapticFeedbackType.TextHandleMove)
                 },
             ),
@@ -87,7 +94,7 @@ internal fun KeyItemComponent(
             )
         } else {
             Text(
-                text = option,
+                text = key,
                 style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
             )
         }

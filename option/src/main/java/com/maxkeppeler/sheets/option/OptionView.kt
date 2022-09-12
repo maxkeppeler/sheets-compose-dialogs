@@ -6,13 +6,12 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
@@ -22,8 +21,6 @@ import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionSelection
 import com.maxkeppeler.sheets.option.views.OptionBoundsComponent
 import com.maxkeppeler.sheets.option.views.OptionComponent
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 /**
  * Option view for the use-case to display a list or grid of options.
@@ -43,67 +40,20 @@ fun OptionView(
 ) {
 
     val coroutine = rememberCoroutineScope()
-    val options = remember {
-        val sortedOptions =
-            selection.options.mapIndexed { i, option -> option.apply { position = i } }
-        val value = sortedOptions.toTypedArray()
-        mutableStateListOf(*value)
-    }
-    val selectedOptions = remember(options.toList()) {
-        val selectedOptions = options.toList().filter { it.selected }.toTypedArray()
-        when (selection) {
-            is OptionSelection.Multiple -> Unit
-            is OptionSelection.Single -> {
-                if (selectedOptions.size > 1) {
-                    throw IllegalStateException("$selection does not support multiple selected options.")
-                }
-            }
-        }
-        mutableStateListOf(*selectedOptions)
-    }
-
-    val onInvokeListener = {
-        when (selection) {
-            is OptionSelection.Multiple -> {
-                val indices = selectedOptions.map { it.position }
-                selection.onSelectOptions(indices, selectedOptions.toList())
-            }
-            is OptionSelection.Single -> {
-                val option = selectedOptions.first()
-                selection.onSelectOption(option.position, option)
-            }
-        }
-    }
-
-    val onSelection: (() -> Unit) -> Unit = { selectionUnit ->
-        coroutine.launch {
-            delay(BaseConstants.SUCCESS_DISMISS_DELAY)
-            selectionUnit()
-            onCancel()
-        }
-    }
-
-    val selectOption: (Option) -> Unit = { option ->
-        options[option.position] = option
-    }
+    val state = rememberSaveable(
+        saver = OptionState.Saver(selection, config),
+        init = { OptionState(selection, config) }
+    )
 
     val processSelection: (Option) -> Unit = { option ->
-        when (selection) {
-            is OptionSelection.Multiple -> {
-                selection.maxChoices?.takeIf { selection.maxChoicesStrict }?.let { maxChoices ->
-                    if (!option.selected || selectedOptions.size < maxChoices) selectOption(option)
-                } ?: selectOption(option)
-            }
-            is OptionSelection.Single -> {
-                selectedOptions.forEach { selectedOption ->
-                    val disabledOption = selectedOption.copy(selected = false)
-                        .apply { position = selectedOption.position }
-                    options[selectedOption.position] = disabledOption
-                }
-                selectOption(option)
-            }
-        }
-        if (!selection.withButtonView) onSelection(onInvokeListener)
+        state.processSelection(option)
+        BaseBehaviors.autoFinish(
+            selection = selection,
+            coroutine = coroutine,
+            onSelection = state::onFinish,
+            onFinished = onCancel,
+            onDisableInput = state::disableInput
+        )
     }
 
     FrameBase(
@@ -112,41 +62,24 @@ fun OptionView(
         content = {
             OptionBoundsComponent(
                 selection = selection,
-                selectedOptions = selectedOptions
+                selectedOptions = state.selectedOptions
             )
-
             OptionComponent(
                 modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
                 config = config,
-                options = options,
+                options = state.options,
+                inputDisabled = state.inputDisabled,
                 onOptionChange = processSelection
             )
         },
         buttonsVisible = selection.withButtonView,
         buttons = {
             ButtonsComponent(
-                onPositiveValid = {
-                    when (selection) {
-                        is OptionSelection.Single -> selectedOptions.isNotEmpty()
-                        is OptionSelection.Multiple -> {
-                            selectedOptions.isNotEmpty()
-                                    && (selection.minChoices?.let { selectedOptions.size >= it }
-                                ?: true)
-                                    && (selection.maxChoices?.let { selectedOptions.size <= it }
-                                ?: true)
-                        }
-                    }
-                },
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    onInvokeListener()
-                    onCancel()
-                }
+                onPositiveValid = state.valid,
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = state::onFinish,
+                onCancel = onCancel
             )
         }
     )

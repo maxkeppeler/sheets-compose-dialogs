@@ -36,7 +36,7 @@ internal fun CoreSample1(closeSelection: () -> Unit) {
         header = Header.Default(
             titleText = "Custom Dialog"
         ),
-        onPositiveValid = { true },
+        onPositiveValid = true,
         body = {
             Text(text = "Test")
         },

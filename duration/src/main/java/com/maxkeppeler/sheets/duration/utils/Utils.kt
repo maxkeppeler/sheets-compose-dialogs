@@ -137,7 +137,7 @@ internal fun parseToSeconds(time: StringBuilder, format: DurationFormat): Long {
     return timeInSeconds
 }
 
-internal fun getInputOptions(config: DurationConfig): List<String> {
+internal fun getInputKeys(config: DurationConfig): List<String> {
     return mutableListOf(
         *(1..9).toList().map { it.toString() }.toTypedArray(),
         if (config.displayClearButton) Constants.ACTION_CLEAR else "00",

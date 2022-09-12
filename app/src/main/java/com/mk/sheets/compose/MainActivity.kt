@@ -1,15 +1,15 @@
-@file:OptIn(ExperimentalMaterialApi::class)
-
 package com.mk.sheets.compose
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
 import com.mk.sheets.compose.samples.*
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 
@@ -19,7 +19,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             SheetsComposeTheme {
-                Showcase()
+                androidx.compose.material3.Surface(
+                    modifier = Modifier.fillMaxSize(),
+                    color = MaterialTheme.colorScheme.background
+                ) {
+                    Showcase()
+                }
             }
         }
     }
@@ -28,7 +33,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun Showcase() {
 
-    val useCase = remember { mutableStateOf<UseCase?>(null) }
+    val useCase = rememberSaveable { mutableStateOf<UseCase?>(null) }
     val onReset = { useCase.value = null }
     UseCasesDemo { newUseCase -> useCase.value = newUseCase }
 

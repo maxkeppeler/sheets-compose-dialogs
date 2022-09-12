@@ -42,7 +42,7 @@ internal fun convertTimeTextValuesIntoTime(
     is24HourFormat: Boolean,
     isAm: Boolean,
     timeValueUnits: List<StringBuilder>
-): LocalTime? {
+): LocalTime {
 
     val hour = timeValueUnits[0].toString().toInt()
     val min = timeValueUnits[1].toString().toInt()

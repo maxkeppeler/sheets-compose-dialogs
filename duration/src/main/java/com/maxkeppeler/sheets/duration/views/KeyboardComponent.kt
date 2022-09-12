@@ -12,9 +12,16 @@ import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.duration.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The keyboard component that is used to input the clock time.
+ * @param keys A list of keys that will be displayed.
+ * @param onEnterValue The listener that is invoked when a value was clicked.
+ * @param onBackspaceAction The listener that is invoked when [Constants.ACTION_BACKSPACE] was clicked.
+ * @param onEmptyAction The listener that is invoked when [Constants.ACTION_CLEAR] was clicked.
+ */
 @Composable
 internal fun KeyboardComponent(
-    options: List<String>,
+    keys: List<String>,
     onEnterValue: (String) -> Unit,
     onBackspaceAction: () -> Unit,
     onEmptyAction: () -> Unit
@@ -30,9 +37,9 @@ internal fun KeyboardComponent(
         columns = GridCells.Fixed(Constants.KEYBOARD_COLUMNS),
         userScrollEnabled = false
     ) {
-        items(options) { option ->
+        items(keys) { option ->
             KeyItemComponent(
-                option = option,
+                key = option,
                 onBackspaceAction = onBackspaceAction,
                 onEmptyAction = onEmptyAction,
                 onEnterValue = onEnterValue

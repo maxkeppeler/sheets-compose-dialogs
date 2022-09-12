@@ -24,12 +24,14 @@ import com.maxkeppeler.sheets.core.R as RC
  * The template mode that displays a list of colors to choose from.
  * @param colors A list of colors that are displayed.
  * @param selectedColor The color that is currently selected.
+ * @param inputDisabled If input is disabled.
  * @param onColorClick The listener that returns the selected color.
  */
 @Composable
 internal fun ColorTemplateComponent(
     colors: List<Int>,
     selectedColor: Int?,
+    inputDisabled: Boolean,
     onColorClick: (Int) -> Unit
 ) {
     LazyVerticalGrid(
@@ -59,6 +61,7 @@ internal fun ColorTemplateComponent(
                 modifier = Modifier.padding(dimensionResource(RC.dimen.scd_small_50)),
                 color = color,
                 selected = selected,
+                inputDisabled = inputDisabled,
                 onColorClick = onColorClick
             )
         }

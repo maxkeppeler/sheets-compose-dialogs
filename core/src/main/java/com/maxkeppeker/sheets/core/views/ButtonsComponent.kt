@@ -7,26 +7,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeler.sheets.core.R
 
 /**
  * Header component of the dialog.
- * @param negativeButton The button that is displayed as the negative button in the dialog.
- * @param positiveButton The button that is displayed as the positive button in the dialog.
+ * @param selection The selection configuration for the dialog.
  * @param onPositive Listener that is invoked when the positive button is clicked.
  * @param onNegative Listener that is invoked when the negative button is clicked.
- * @param onPositiveValid Listener that is invoked to check if the dialog is valid and the positive button is enabled.
+ * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun ButtonsComponent(
-    negativeButton: SelectionButton? = null,
-    positiveButton: SelectionButton? = null,
+    selection: BaseSelection,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
-    onPositiveValid: () -> Boolean = { true }
+    onCancel: () -> Unit,
+    onPositiveValid: Boolean = true,
 ) {
 
     Row(
@@ -42,17 +42,17 @@ fun ButtonsComponent(
             modifier = Modifier
                 .wrapContentWidth()
                 .padding(end = dimensionResource(id = R.dimen.scd_normal_100)),
-            button = negativeButton,
-            onClick = onNegative,
+            button = selection.negativeButton,
+            onClick = { onNegative(); onCancel() },
             defaultText = stringResource(id = R.string.cancel)
         )
 
         SelectionButtonComponent(
             modifier = Modifier
                 .wrapContentWidth(),
-            button = positiveButton,
-            onClick = onPositive,
-            enabled = onPositiveValid(),
+            button = selection.positiveButton,
+            onClick = { onPositive(); onCancel() },
+            enabled = onPositiveValid,
             defaultText = stringResource(id = R.string.ok)
         )
     }

@@ -5,21 +5,18 @@ package com.maxkeppeler.sheets.duration
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
-import com.maxkeppeler.sheets.duration.utils.getInputOptions
-import com.maxkeppeler.sheets.duration.utils.getValuePairs
-import com.maxkeppeler.sheets.duration.utils.parseCurrentTime
-import com.maxkeppeler.sheets.duration.utils.parseToSeconds
-import com.maxkeppeler.sheets.duration.views.TimeDisplayComponent
 import com.maxkeppeler.sheets.duration.views.KeyboardComponent
+import com.maxkeppeler.sheets.duration.views.TimeDisplayComponent
+import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Duration view for the use-case to to select a duration time.
@@ -36,89 +33,38 @@ fun DurationView(
     header: Header? = null,
     onCancel: () -> Unit = {},
 ) {
-    var timeTextValue by rememberSaveable {
-        val parseTime = parseCurrentTime(config.timeFormat, config.currentTime)
-        mutableStateOf(parseTime)
-    }
 
-    val timeInfoInSeconds by remember(timeTextValue) {
-        val value = parseToSeconds(timeTextValue, config.timeFormat)
-        val minTime = if (value != 0L && value < config.minTime) config.minTime else null
-        val maxTime = if (value != 0L && value > config.maxTime) config.maxTime else null
-        mutableStateOf(Triple(value, minTime, maxTime))
-    }
-
-    val onEnterValue: (String) -> Unit = {
-        val newTimeBuilder = timeTextValue.apply {
-            if (length >= config.timeFormat.length) {
-                repeat(it.length) { deleteCharAt(0) }
-            }
-            append(it)
-        }
-        timeTextValue = StringBuilder(newTimeBuilder.toString())
-    }
-
-    val onBackspaceAction: () -> Unit = {
-        val newTimeBuilder = timeTextValue.apply {
-            deleteCharAt(lastIndex)
-            insert(0, 0.toString())
-        }
-        timeTextValue = StringBuilder(newTimeBuilder)
-    }
-
-    val onEmptyAction: () -> Unit = {
-        timeTextValue = StringBuilder(parseCurrentTime(config.timeFormat))
-    }
-
-    val valuePairs = remember(timeTextValue) {
-        val value = getValuePairs(timeTextValue, config)
-        mutableStateOf(value)
-    }
-
-    val options by rememberSaveable { mutableStateOf(getInputOptions(config)) }
-
-    val indexOfFirstValue by remember(valuePairs.value) {
-        val indexOfFirstValue =
-            valuePairs.value
-                .indexOfFirst { runCatching { it.first.toInt() != 0 }.getOrNull() ?: false }
-                .takeUnless { it == -1 }
-        mutableStateOf(indexOfFirstValue)
-    }
+    val state = rememberSaveable(
+        saver = DurationState.Saver(selection, config),
+        init = { DurationState(selection, config) }
+    )
 
     FrameBase(
         header = { HeaderComponent(header) },
-        contentPaddingValues = PaddingValues(top = 24.dp),
+        contentPaddingValues = PaddingValues(
+            top = dimensionResource(RC.dimen.scd_normal_150)
+        ),
         content = {
             TimeDisplayComponent(
-                indexOfFirstValue = indexOfFirstValue,
-                valuePairs = valuePairs.value,
-                minTimeValue = timeInfoInSeconds.second,
-                maxTimeValue = timeInfoInSeconds.third
+                indexOfFirstValue = state.indexOfFirstValue,
+                valuePairs = state.valuePairs,
+                minTimeValue = state.timeInfoInSeconds.second,
+                maxTimeValue = state.timeInfoInSeconds.third
             )
             KeyboardComponent(
-                options = options,
-                onEnterValue = onEnterValue,
-                onBackspaceAction = onBackspaceAction,
-                onEmptyAction = onEmptyAction
+                keys = state.keys,
+                onEnterValue = state::onEnterValue,
+                onBackspaceAction = state::onBackspaceAction,
+                onEmptyAction = state::onEmptyAction
             )
         },
         buttons = {
             ButtonsComponent(
-                onPositiveValid = {
-                    timeInfoInSeconds.first > 0
-                            && timeInfoInSeconds.second == null
-                            && timeInfoInSeconds.third == null
-                },
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    selection.onPositiveClick(timeInfoInSeconds.first)
-                    onCancel()
-                }
+                onPositiveValid = state.valid,
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = state::onFinish,
+                onCancel = onCancel
             )
         }
     )

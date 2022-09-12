@@ -56,8 +56,8 @@ internal fun ColorCustomControlComponent(
 
     Column(modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_150))) {
         colorItems.forEachIndexed { index, entry ->
-            if (config.allowCustomColorAlphaValues && index == 0
-                || !config.allowCustomColorAlphaValues && index > 0
+            if ((config.allowCustomColorAlphaValues)
+                || (!config.allowCustomColorAlphaValues && index > 0)
             ) {
                 ColorCustomControlItemComponent(
                     label = entry.first,

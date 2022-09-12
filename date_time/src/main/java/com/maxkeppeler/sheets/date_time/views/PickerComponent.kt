@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -50,14 +51,14 @@ internal fun PickerComponent(
         mutableStateListOf(*values)
     }
 
-    var day by remember { mutableStateOf<UnitOptionEntry?>(null) }
-    var month by remember { mutableStateOf<UnitOptionEntry?>(null) }
-    var year by remember { mutableStateOf<UnitOptionEntry?>(null) }
+    var day by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
+    var month by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
+    var year by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
 
-    var sec by remember { mutableStateOf<UnitOptionEntry?>(null) }
-    var min by remember { mutableStateOf<UnitOptionEntry?>(null) }
-    var hour by remember { mutableStateOf<UnitOptionEntry?>(null) }
-    var isAm by remember { mutableStateOf(if (is24HourFormat(pattern)) null else true) }
+    var sec by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
+    var min by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
+    var hour by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
+    var isAm by rememberSaveable { mutableStateOf(if (is24HourFormat(pattern)) null else true) }
 
     if (isDate) {
         LaunchedEffect(day, month, year) {

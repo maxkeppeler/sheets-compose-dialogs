@@ -10,10 +10,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyGridScope
-import androidx.compose.foundation.lazy.grid.LazyGridState
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.*
 import androidx.compose.material.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -53,7 +50,6 @@ import com.maxkeppeler.sheets.core.R as RC
 internal fun CalendarBaseSelectionComponent(
     modifier: Modifier,
     yearListState: LazyListState,
-    calendarGridState: LazyGridState,
     cells: Int,
     mode: CalendarDisplayMode,
     nextDisabled: Boolean,
@@ -117,7 +113,6 @@ internal fun CalendarBaseSelectionComponent(
     when (mode) {
         CalendarDisplayMode.CALENDAR -> {
             LazyVerticalGrid(
-                state = calendarGridState,
                 columns = GridCells.Fixed(cells),
                 modifier = dateModifier,
                 userScrollEnabled = false,

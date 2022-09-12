@@ -22,12 +22,14 @@ import com.maxkeppeler.sheets.core.R as RC
  * The item component for an option.
  * @param selection The selection configuration.
  * @param option The option that will be displayed.
+ * @param inputDisabled If input is disabled.
  * @param onClick Listener that is invoked when the option is clicked.
  */
 @Composable
 internal fun ListOptionItemComponent(
     selection: ListSelection,
     option: ListOption,
+    inputDisabled: Boolean,
     onClick: (ListOption) -> Unit
 ) {
 
@@ -49,7 +51,7 @@ internal fun ListOptionItemComponent(
         .padding(bottom = dimensionResource(id = RC.dimen.scd_small_50))
         .fillMaxWidth()
         .clip(MaterialTheme.shapes.medium)
-        .clickable { onClick(option) }
+        .clickable(!inputDisabled) { onClick(option) }
         .then(if (!showSelectionView && option.selected) Modifier.background(backgroundColor) else Modifier)
 
     Row(

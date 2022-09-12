@@ -3,19 +3,17 @@
 package com.maxkeppeler.sheets.date_time
 
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
 import com.maxkeppeler.sheets.date_time.views.PickerComponent
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import java.time.LocalDate
-import java.time.LocalTime
 
 /**
  * Date Time dialog for the use-case to select a date, time or both in a quick way.
@@ -33,44 +31,20 @@ fun DateTimeView(
     header: Header? = null,
 ) {
     val coroutine = rememberCoroutineScope()
-
-    var dateSelection by remember { mutableStateOf<LocalDate?>(null) }
-    var timeSelection by remember { mutableStateOf<LocalTime?>(null) }
-
-    val onInvokeListener = {
-        when (selection) {
-            is DateTimeSelection.Date -> selection.onPositiveClick(dateSelection!!)
-            is DateTimeSelection.Time -> selection.onPositiveClick(timeSelection!!)
-            is DateTimeSelection.DateTime -> {
-                val value = dateSelection!!.atTime(timeSelection!!)
-                selection.onPositiveClick(value)
-            }
-        }
-    }
-
-    val onSelection: (() -> Unit) -> Unit = { selectionUnit ->
-        coroutine.launch {
-            delay(BaseConstants.SUCCESS_DISMISS_DELAY)
-            selectionUnit()
-            onCancel()
-        }
-    }
+    val state = rememberSaveable(
+        saver = DateTimeState.Saver(selection, config),
+        init = { DateTimeState(selection, config) }
+    )
 
     val processSelection: () -> Unit = {
-        if (!selection.withButtonView) {
-            when {
-                selection is DateTimeSelection.Date && dateSelection != null -> {
-                    onSelection(onInvokeListener)
-                }
-                selection is DateTimeSelection.Time && timeSelection != null -> {
-                    onSelection(onInvokeListener)
-                }
-                selection is DateTimeSelection.DateTime
-                        && dateSelection != null && timeSelection != null -> {
-                    onSelection(onInvokeListener)
-                }
-            }
-        }
+        BaseBehaviors.autoFinish(
+            selection = selection,
+            condition = state.valid,
+            coroutine = coroutine,
+            onSelection = state::onFinish,
+            onFinished = onCancel,
+            onDisableInput = state::disableInput
+        )
     }
 
     FrameBase(
@@ -81,7 +55,10 @@ fun DateTimeView(
                     config = config,
                     locale = selection.locale,
                     formatStyle = selection.dateFormatStyle!!,
-                    onDateValueChange = { dateSelection = it; processSelection() }
+                    onDateValueChange = { date ->
+                        state.processSelection(date)
+                        processSelection()
+                    }
                 )
             }
 
@@ -90,7 +67,10 @@ fun DateTimeView(
                     config = config,
                     locale = selection.locale,
                     formatStyle = selection.timeFormatStyle!!,
-                    onTimeValueChange = { timeSelection = it; processSelection() }
+                    onTimeValueChange = { time ->
+                        state.processSelection(time)
+                        processSelection()
+                    }
                 )
             }
 
@@ -99,11 +79,11 @@ fun DateTimeView(
                 is DateTimeSelection.Time -> timePicker()
                 is DateTimeSelection.DateTime -> {
                     if (selection.startWithTime) {
-                        if (timeSelection == null) timePicker()
-                        if (timeSelection != null) datePicker()
+                        if (state.timeSelection == null) timePicker()
+                        if (state.timeSelection != null) datePicker()
                     } else {
-                        if (dateSelection == null) datePicker()
-                        if (dateSelection != null) timePicker()
+                        if (state.dateSelection == null) datePicker()
+                        if (state.dateSelection != null) timePicker()
                     }
                 }
             }
@@ -111,23 +91,11 @@ fun DateTimeView(
         buttonsVisible = selection.withButtonView,
         buttons = {
             ButtonsComponent(
-                onPositiveValid = {
-                    when (selection) {
-                        is DateTimeSelection.Date -> dateSelection != null
-                        is DateTimeSelection.Time -> timeSelection != null
-                        is DateTimeSelection.DateTime -> dateSelection != null && timeSelection != null
-                    }
-                },
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    onInvokeListener()
-                    onCancel()
-                }
+                onPositiveValid = state.valid,
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = state::onFinish,
+                onCancel = onCancel
             )
         }
     )

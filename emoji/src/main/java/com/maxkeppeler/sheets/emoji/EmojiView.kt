@@ -3,34 +3,34 @@
 package com.maxkeppeler.sheets.emoji
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiSelection
+import com.maxkeppeler.sheets.emoji.utils.Constants
 import com.maxkeppeler.sheets.emoji.utils.EmojiInstaller
 import com.maxkeppeler.sheets.emoji.views.EmojiHeaderComponent
 import com.maxkeppeler.sheets.emoji.views.EmojiItemComponent
 import com.vanniktech.emoji.Emoji
-import com.vanniktech.emoji.google.GoogleEmojiProvider
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -48,67 +48,31 @@ fun EmojiView(
     header: Header? = null,
     onCancel: () -> Unit = {},
 ) {
-
     DisposableEffect(Unit) {
         EmojiInstaller.installProvider(config.emojiProvider)
         onDispose { EmojiInstaller.destroyProvider() }
     }
 
     val coroutine = rememberCoroutineScope()
-    val selectedEmoji = rememberSaveable { mutableStateOf<Emoji?>(null) }
+    val state = rememberSaveable(
+        saver = EmojiState.Saver(selection, config),
+        init = { EmojiState(selection, config) }
+    )
 
-    val categories = remember {
-        val categories = GoogleEmojiProvider().categories
-        mutableStateOf(categories)
-    }
-
-    var selectedCategory by remember { mutableStateOf(0) }
-
-    val emojis = remember(selectedCategory) {
-        val value = categories.value[selectedCategory].emojis
-        mutableStateOf(value)
-    }
-    val categoryIcons = remember {
-        val value = listOf(
-            Icons.Rounded.EmojiEmotions,
-            Icons.Rounded.EmojiNature,
-            Icons.Rounded.EmojiFoodBeverage,
-            Icons.Rounded.EmojiTransportation,
-            Icons.Rounded.EmojiEvents,
-            Icons.Rounded.EmojiObjects,
-            Icons.Rounded.EmojiSymbols,
-            Icons.Rounded.EmojiFlags,
+    val processSelection: (Emoji) -> Unit = { emoji ->
+        state.processSelection(emoji)
+        BaseBehaviors.autoFinish(
+            selection = selection,
+            coroutine = coroutine,
+            onSelection = state::onFinish,
+            onFinished = onCancel,
+            onDisableInput = state::disableInput
         )
-        mutableStateOf(value)
     }
+
     val headerState = rememberLazyListState()
-
-    LaunchedEffect(selectedCategory) {
-        headerState.animateScrollToItem(selectedCategory)
-    }
-
-    val onInvokeListener = {
-        when (selection) {
-            is EmojiSelection.Emoji -> {
-                selection.onPositiveClick(selectedEmoji.value!!)
-            }
-            is EmojiSelection.Unicode -> {
-                selection.onPositiveClick(selectedEmoji.value!!.unicode)
-            }
-        }
-    }
-
-    val onSelection: (() -> Unit) -> Unit = { selectionUnit ->
-        coroutine.launch {
-            delay(BaseConstants.SUCCESS_DISMISS_DELAY)
-            selectionUnit()
-            onCancel()
-        }
-    }
-
-    val onEmojiClickHandler: (Emoji) -> Unit = { emoji ->
-        selectedEmoji.value = emoji
-        if (!selection.withButtonView) onSelection(onInvokeListener)
+    LaunchedEffect(state.selectedCategory) {
+        headerState.animateScrollToItem(state.selectedCategory)
     }
 
     FrameBase(
@@ -117,11 +81,11 @@ fun EmojiView(
         content = {
             EmojiHeaderComponent(
                 config = config,
-                categories = categories.value,
-                categoryIcons = categoryIcons.value,
-                selectedCategory = selectedCategory,
+                categories = state.categories,
+                categoryIcons = Constants.CATEGORY_SYMBOLS,
+                selectedCategory = state.selectedCategory,
                 headerState = headerState,
-                onChangeCategory = { selectedCategory = it }
+                onChangeCategory = state::selectCategory
             )
 
             LazyVerticalGrid(
@@ -133,13 +97,13 @@ fun EmojiView(
                     end = dimensionResource(RC.dimen.scd_normal_100),
                     bottom = if (selection.withButtonView) 0.dp else dimensionResource(RC.dimen.scd_normal_100),
                 ),
-                columns = GridCells.Fixed(categories.value.size)
+                columns = GridCells.Fixed(state.categories.size)
             ) {
-                items(emojis.value, key = { it.unicode }) { emoji ->
+                items(state.categoryEmojis, key = { it.unicode }) { emoji ->
                     EmojiItemComponent(
                         emoji = emoji,
-                        selectedEmoji = selectedEmoji.value,
-                        onClick = onEmojiClickHandler,
+                        selectedEmoji = state.selectedEmoji,
+                        onClick = processSelection,
                     )
                 }
             }
@@ -147,17 +111,11 @@ fun EmojiView(
         buttonsVisible = selection.withButtonView,
         buttons = {
             ButtonsComponent(
-                onPositiveValid = { selectedEmoji.value != null },
-                negativeButton = selection.negativeButton,
-                positiveButton = selection.positiveButton,
-                onNegative = {
-                    selection.onNegativeClick?.invoke()
-                    onCancel()
-                },
-                onPositive = {
-                    onInvokeListener()
-                    onCancel()
-                }
+                onPositiveValid = state.valid,
+                selection = selection,
+                onNegative = { selection.onNegativeClick?.invoke() },
+                onPositive = state::onFinish,
+                onCancel = onCancel
             )
         }
     )
