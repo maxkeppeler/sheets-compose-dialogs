@@ -13,6 +13,8 @@ sealed class EmojiSelection : BaseSelection() {
     /**
      * Select the emoji as unicode.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -20,6 +22,8 @@ sealed class EmojiSelection : BaseSelection() {
      */
     class Unicode(
         override val withButtonView: Boolean = true,
+        override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -29,6 +33,8 @@ sealed class EmojiSelection : BaseSelection() {
     /**
      * Select the emoji.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -36,6 +42,8 @@ sealed class EmojiSelection : BaseSelection() {
      */
     class Emoji(
         override val withButtonView: Boolean = true,
+        override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,

@@ -18,6 +18,8 @@ sealed class OptionSelection(
      * Single-choice selection for the list dialog.
      * @param options The options that will be displayed.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -26,6 +28,8 @@ sealed class OptionSelection(
     class Single(
         override val options: List<Option>,
         override val withButtonView: Boolean = true,
+        override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -38,6 +42,8 @@ sealed class OptionSelection(
      * @param minChoices The minimum amount of choices that are allowed.
      * @param maxChoices The maximum amount of choices that are allowed.
      * @param maxChoicesStrict Allow the user to temporarily select more options than maximum choices.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -48,6 +54,8 @@ sealed class OptionSelection(
         @IntRange(from = 1L, to = 90L) val minChoices: Int? = null,
         @IntRange(from = 3L, to = 90L) val maxChoices: Int? = null,
         val maxChoicesStrict: Boolean = true,
+        override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,

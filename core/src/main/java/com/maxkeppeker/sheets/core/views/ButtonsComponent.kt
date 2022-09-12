@@ -38,18 +38,26 @@ fun ButtonsComponent(
         horizontalArrangement = Arrangement.End
     ) {
 
+        selection.extraButton?.let {
+            SelectionButtonComponent(
+                modifier = Modifier.wrapContentWidth(),
+                button = selection.extraButton,
+                onClick = { },
+            )
+            Spacer(modifier = Modifier.weight(1f))
+        }
+
         SelectionButtonComponent(
             modifier = Modifier
                 .wrapContentWidth()
-                .padding(end = dimensionResource(id = R.dimen.scd_normal_100)),
+                .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
             button = selection.negativeButton,
             onClick = { onNegative(); onCancel() },
             defaultText = stringResource(id = R.string.cancel)
         )
 
         SelectionButtonComponent(
-            modifier = Modifier
-                .wrapContentWidth(),
+            modifier = Modifier.wrapContentWidth(),
             button = selection.positiveButton,
             onClick = { onPositive(); onCancel() },
             enabled = onPositiveValid,
@@ -72,7 +80,7 @@ private fun SelectionButtonComponent(
     button: SelectionButton?,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    defaultText: String
+    defaultText: String = ""
 ) {
     val buttonContent: @Composable RowScope.() -> Unit = {
         button?.icon?.let { icon ->
@@ -104,6 +112,14 @@ private fun SelectionButtonComponent(
         }
         button.type == ButtonStyle.ELEVATED -> {
             ElevatedButton(
+                modifier = modifier,
+                onClick = onClick,
+                enabled = enabled,
+                content = buttonContent
+            )
+        }
+        button.type == ButtonStyle.OUTLINED -> {
+            OutlinedButton(
                 modifier = modifier,
                 onClick = onClick,
                 enabled = enabled,

@@ -13,6 +13,7 @@ sealed class ClockSelection : BaseSelection() {
     /**
      * Select a time with hours and minutes.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that is aligned to the start of the dialog and can be used for a custom action.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -20,6 +21,7 @@ sealed class ClockSelection : BaseSelection() {
      */
     class HoursMinutes(
         override val withButtonView: Boolean = false,
+        override val extraButton: SelectionButton? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -29,6 +31,7 @@ sealed class ClockSelection : BaseSelection() {
     /**
      * Select a time with hours, minutes and seconds.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that is aligned to the start of the dialog and can be used for a custom action.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -36,6 +39,7 @@ sealed class ClockSelection : BaseSelection() {
      */
     class HoursMinutesSeconds(
         override val withButtonView: Boolean = false,
+        override val extraButton: SelectionButton? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,

@@ -18,5 +18,10 @@ enum class ButtonStyle {
     /**
      * Filled button.
      */
-    FILLED
+    FILLED,
+
+    /**
+     * Outlined button.
+     */
+    OUTLINED
 }
