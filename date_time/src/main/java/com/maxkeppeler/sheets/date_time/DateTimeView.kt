@@ -63,7 +63,7 @@ fun DateTimeView(
     }
 
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         content = {
             val datePicker = @Composable {
                 PickerComponent(
@@ -103,16 +103,15 @@ fun DateTimeView(
                 }
             }
         },
-        buttonsVisible = selection.withButtonView,
-        buttons = {
-            ButtonsComponent(
-                onPositiveValid = state.valid,
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView
+    ) {
+        ButtonsComponent(
+            onPositiveValid = state.valid,
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }
 

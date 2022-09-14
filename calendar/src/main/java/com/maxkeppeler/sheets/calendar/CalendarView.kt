@@ -71,9 +71,8 @@ fun CalendarView(
     }
 
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         content = {
-
             CalendarTopComponent(
                 config = config,
                 mode = state.mode,
@@ -86,7 +85,6 @@ fun CalendarView(
                 onMonthClick = { state.onMonthSelectionClick() },
                 onYearClick = { state.onYearSelectionClick() },
             )
-
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),
                 yearListState = yearListState,
@@ -125,15 +123,14 @@ fun CalendarView(
                 }
             )
         },
-        buttonsVisible = selection.withButtonView && state.mode == CalendarDisplayMode.CALENDAR,
-        buttons = {
-            ButtonsComponent(
-                selection = selection,
-                onPositiveValid = state.valid,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView && state.mode == CalendarDisplayMode.CALENDAR
+    ) {
+        ButtonsComponent(
+            selection = selection,
+            onPositiveValid = state.valid,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }

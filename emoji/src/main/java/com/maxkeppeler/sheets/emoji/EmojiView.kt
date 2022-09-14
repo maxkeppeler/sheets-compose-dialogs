@@ -18,6 +18,7 @@
 package com.maxkeppeler.sheets.emoji
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -91,8 +92,7 @@ fun EmojiView(
     }
 
     FrameBase(
-        header = { HeaderComponent(header) },
-        contentPaddingValues = PaddingValues(0.dp),
+        header = header,
         content = {
             EmojiHeaderComponent(
                 config = config,
@@ -108,10 +108,10 @@ fun EmojiView(
                     .dynamicContentWrapOrMaxHeight(this)
                     .padding(top = dimensionResource(RC.dimen.scd_normal_100)),
                 contentPadding = PaddingValues(
-                    start = dimensionResource(RC.dimen.scd_normal_100),
-                    end = dimensionResource(RC.dimen.scd_normal_100),
                     bottom = if (selection.withButtonView) 0.dp else dimensionResource(RC.dimen.scd_normal_100),
                 ),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
                 columns = GridCells.Fixed(state.categories.size)
             ) {
                 items(state.categoryEmojis, key = { it.unicode }) { emoji ->
@@ -123,16 +123,15 @@ fun EmojiView(
                 }
             }
         },
-        buttonsVisible = selection.withButtonView,
-        buttons = {
-            ButtonsComponent(
-                onPositiveValid = state.valid,
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView
+    ) {
+        ButtonsComponent(
+            onPositiveValid = state.valid,
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }
 

@@ -106,7 +106,7 @@ internal class CalendarState(
         }
 
     val yearIndex: Int
-        get() = cameraDate.year.minus(yearsRange.first).minus(1)
+        get() = cameraDate.year.minus(yearsRange.first)
 
     fun onPrevious() {
         cameraDate = when (config.style) {

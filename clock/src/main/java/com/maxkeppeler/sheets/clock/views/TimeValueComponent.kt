@@ -49,13 +49,15 @@ internal fun TimeValueComponent(
     onAm: (Boolean) -> Unit,
 ) {
 
-    Box(
-        modifier = Modifier.fillMaxWidth()
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(bottom = dimensionResource(RC.dimen.scd_normal_100)),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Row(
             modifier = Modifier
-                .align(Alignment.Center)
                 .wrapContentWidth(),
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.Bottom
@@ -101,11 +103,10 @@ internal fun TimeValueComponent(
 
         }
         if (!is24hourFormat) {
-            Column(
+            Row(
                 Modifier
-                    .align(Alignment.TopEnd)
-                    .padding(end = dimensionResource(RC.dimen.scd_normal_100)),
-                horizontalAlignment = Alignment.CenterHorizontally
+                    .padding(top = dimensionResource(RC.dimen.scd_small_50)),
+                verticalAlignment = Alignment.CenterVertically
             ) {
                 TimeTypeItemComponent(
                     modifier = Modifier,

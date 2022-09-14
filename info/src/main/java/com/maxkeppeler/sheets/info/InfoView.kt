@@ -45,17 +45,16 @@ fun InfoView(
     onCancel: () -> Unit = {},
 ) {
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         content = { BodyComponent(body) },
-        buttonsVisible = selection.withButtonView,
-        buttons = {
-            ButtonsComponent(
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = selection.onPositiveClick::invoke,
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView
+    ) {
+        ButtonsComponent(
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = selection.onPositiveClick::invoke,
+            onCancel = onCancel
+        )
+    }
 }
 

@@ -17,7 +17,6 @@ package com.maxkeppeler.sheets.clock.utils
 
 import androidx.annotation.RestrictTo
 import androidx.compose.runtime.MutableState
-import com.maxkeppeler.sheets.clock.models.ClockConfig
 import java.time.LocalTime
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -38,7 +37,7 @@ internal fun convertTimeIntoTimeTextValues(
         currentTime.hour
     } else {
         var hours = if (!isAm(currentTime)) currentTime.hour.minus(12) else currentTime.hour
-        if(hours == 0) hours += 12 else hours
+        if(hours == 0) hours += 12
         hours
     }
 
@@ -75,7 +74,7 @@ internal fun convertTimeTextValuesIntoTime(
 }
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-internal fun getInputKeys(config: ClockConfig): List<String> {
+internal fun getInputKeys(): List<String> {
     return mutableListOf(
         *(1..9).toList().map { it.toString() }.toTypedArray(),
         Constants.ACTION_PREV,
@@ -93,9 +92,6 @@ internal fun getDisabledInputKeys(
 ): List<String> {
 
     val hourBuffer = timeValues[0]
-    val minBuffer = timeValues[1]
-    val secBuffer = timeValues.getOrNull(2)
-
     val isHours = groupIndex == 0
 
     return when {

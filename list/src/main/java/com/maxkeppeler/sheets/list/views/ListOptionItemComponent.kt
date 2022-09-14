@@ -63,7 +63,6 @@ internal fun ListOptionItemComponent(
     else MaterialTheme.colorScheme.onSurface
 
     val containerModifier = Modifier
-        .padding(bottom = dimensionResource(id = RC.dimen.scd_small_50))
         .fillMaxWidth()
         .clip(MaterialTheme.shapes.medium)
         .clickable(!inputDisabled) { onClick(option) }

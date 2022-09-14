@@ -70,7 +70,7 @@ fun ColorView(
     }
 
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         content = {
             ColorSelectionModeComponent(
                 config = config,
@@ -100,16 +100,15 @@ fun ColorView(
         },
         buttonsVisible = selection.withButtonView
                 || !selection.withButtonView
-                && config.displayMode != ColorSelectionMode.TEMPLATE,
-        buttons = {
-            ButtonsComponent(
-                selection = selection,
-                onPositiveValid = state.valid,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
-        }
-    )
+                && config.displayMode != ColorSelectionMode.TEMPLATE
+    ) {
+        ButtonsComponent(
+            selection = selection,
+            onPositiveValid = state.valid,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }
 

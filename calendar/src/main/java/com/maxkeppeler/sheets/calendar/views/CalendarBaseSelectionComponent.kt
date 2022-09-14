@@ -18,10 +18,7 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -39,10 +36,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarSwipeAction
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
+import dev.chrisbanes.snapper.SnapOffsets
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -50,7 +49,6 @@ import com.maxkeppeler.sheets.core.R as RC
  * The main component for the selection of the use-case as well as the selection of month and year within the dialog.
  * @param modifier The modifier that is applied to this component.
  * @param yearListState The state of the year list selection view.
- * @param calendarGridState The state of the calendar grid view.
  * @param cells The amount of cells / columns that are used for the calendar grid view.
  * @param mode The display mode of the dialog.
  * @param nextDisabled Whenever the navigation to the next period is disabled.
@@ -103,13 +101,13 @@ internal fun CalendarBaseSelectionComponent(
         .fillMaxWidth()
         .padding(top = dimensionResource(RC.dimen.scd_normal_100))
 
-    val dateModifier = baseModifier.swipeable(
+    val gridDateModifier = baseModifier.swipeable(
         state = swipeableState,
         anchors = anchors,
         thresholds = { _, _ -> FractionalThreshold(0.5f) },
         orientation = Orientation.Horizontal
     )
-    val yearModifier = baseModifier
+    val gridYearModifier = baseModifier
         .graphicsLayer { alpha = 0.99F }
         .drawWithContent {
             val colorStops = arrayOf(
@@ -125,11 +123,16 @@ internal fun CalendarBaseSelectionComponent(
             )
         }
 
+    val behavior = rememberSnapperFlingBehavior(
+        lazyListState = yearListState,
+        snapOffsetForItem = SnapOffsets.Center,
+    )
+
     when (mode) {
         CalendarDisplayMode.CALENDAR -> {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(cells),
-                modifier = dateModifier,
+                modifier = gridDateModifier,
                 userScrollEnabled = false,
             ) {
                 onCalendarView()
@@ -137,7 +140,7 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.YEAR -> {
             Column(
-                modifier = Modifier.padding(vertical = dimensionResource(RC.dimen.scd_normal_150)),
+                modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -146,9 +149,11 @@ internal fun CalendarBaseSelectionComponent(
                     style = MaterialTheme.typography.titleMedium,
                 )
                 LazyRow(
-                    modifier = yearModifier,
+                    modifier = gridYearModifier,
                     state = yearListState,
-                    flingBehavior = rememberSnapperFlingBehavior(yearListState)
+                    flingBehavior = behavior,
+                    contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_large_100)),
+                    horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_50))
                 ) {
                     onYearView()
                 }
@@ -156,7 +161,7 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.MONTH -> {
             Column(
-                modifier = Modifier.padding(vertical = dimensionResource(RC.dimen.scd_normal_150)),
+                modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

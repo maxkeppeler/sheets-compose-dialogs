@@ -40,7 +40,10 @@ internal fun TimeValueComponent(
     hintView: Boolean = false
 ) {
 
-    val containerModifier = if (hintView) Modifier.wrapContentWidth() else Modifier.fillMaxWidth()
+    val containerModifier = if (!hintView) Modifier
+        .fillMaxWidth()
+        .padding(bottom = dimensionResource(RC.dimen.scd_normal_100))
+    else Modifier.wrapContentWidth()
 
     Row(
         modifier = containerModifier,

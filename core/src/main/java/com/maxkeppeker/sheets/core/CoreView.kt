@@ -17,7 +17,6 @@
 
 package com.maxkeppeker.sheets.core
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.CoreSelection
@@ -34,7 +33,6 @@ import com.maxkeppeker.sheets.core.views.base.FrameBase
  * @param onCancel Listener that is invoked when the use-case was canceled.
  * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
-@ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun CoreView(
@@ -46,18 +44,17 @@ fun CoreView(
 ) {
 
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         content = { body() },
-        buttonsVisible = selection.withButtonView,
-        buttons = {
-            ButtonsComponent(
-                onPositiveValid = onPositiveValid,
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = { selection.onPositiveClick?.invoke() },
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView
+    ) {
+        ButtonsComponent(
+            onPositiveValid = onPositiveValid,
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = { selection.onPositiveClick?.invoke() },
+            onCancel = onCancel
+        )
+    }
 }
 

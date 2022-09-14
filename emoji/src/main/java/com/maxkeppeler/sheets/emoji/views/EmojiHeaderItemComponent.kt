@@ -44,7 +44,6 @@ internal fun EmojiHeaderItemComponent(
 ) {
     Row(
         modifier = Modifier
-            .padding(dimensionResource(RC.dimen.scd_small_25))
             .aspectRatio(1f, true)
             .clip(if (selected) RoundedCornerShape(50) else MaterialTheme.shapes.small)
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)

@@ -23,9 +23,9 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
@@ -55,10 +55,7 @@ fun DurationView(
     )
 
     FrameBase(
-        header = { HeaderComponent(header) },
-        contentPaddingValues = PaddingValues(
-            top = dimensionResource(RC.dimen.scd_normal_150)
-        ),
+        header = header,
         content = {
             TimeDisplayComponent(
                 indexOfFirstValue = state.indexOfFirstValue,
@@ -72,15 +69,14 @@ fun DurationView(
                 onBackspaceAction = state::onBackspaceAction,
                 onEmptyAction = state::onEmptyAction
             )
-        },
-        buttons = {
-            ButtonsComponent(
-                onPositiveValid = state.valid,
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
         }
-    )
+    ) {
+        ButtonsComponent(
+            onPositiveValid = state.valid,
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }

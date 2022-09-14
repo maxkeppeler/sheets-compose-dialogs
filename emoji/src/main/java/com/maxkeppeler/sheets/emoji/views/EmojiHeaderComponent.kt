@@ -15,7 +15,7 @@
  */
 package com.maxkeppeler.sheets.emoji.views
 
-import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
@@ -24,13 +24,12 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.emoji.models.EmojiCategoryAppearance
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.vanniktech.emoji.EmojiCategory
-import com.maxkeppeler.sheets.core.R as RC
 
 
 /**
@@ -54,10 +53,9 @@ internal fun EmojiHeaderComponent(
     when (config.categoryAppearance) {
         EmojiCategoryAppearance.SYMBOL -> {
             LazyVerticalGrid(
-                modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_100)),
-                contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_normal_100)),
                 columns = GridCells.Fixed(categories.size),
                 userScrollEnabled = false,
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.scd_small_25)),
             ) {
                 items(categoryIcons) { icon ->
                     val selected = categoryIcons.indexOf(icon) == selectedCategory
@@ -72,7 +70,6 @@ internal fun EmojiHeaderComponent(
         EmojiCategoryAppearance.TEXT -> {
             LazyRow(
                 state = headerState,
-                contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_normal_100)),
             ) {
                 items(categories) {
                     val selected = categories.indexOf(it) == selectedCategory

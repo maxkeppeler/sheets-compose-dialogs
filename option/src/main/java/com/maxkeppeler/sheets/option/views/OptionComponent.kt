@@ -16,6 +16,7 @@
 package com.maxkeppeler.sheets.option.views
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -28,7 +29,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.res.dimensionResource
@@ -54,12 +54,9 @@ fun OptionComponent(
     onOptionChange: (Option) -> Unit,
 ) {
 
-    val lazyContainerModifier = modifier
+    val verticalDirectionModifier = modifier
         .fillMaxWidth()
-        .padding(
-            horizontal = dimensionResource(RC.dimen.scd_normal_100),
-            vertical = dimensionResource(RC.dimen.scd_normal_100)
-        )
+        .padding(horizontal = dimensionResource(RC.dimen.scd_normal_150))
 
     val columnsLimits = config.gridColumns
     val columns = if (options.size < columnsLimits) options.size else columnsLimits
@@ -76,12 +73,8 @@ fun OptionComponent(
     when (config.mode) {
         DisplayMode.GRID_HORIZONTAL -> {
             LazyRow(
-                modifier = Modifier.padding(
-                    top = dimensionResource(RC.dimen.scd_normal_100)
-                ),
-                contentPadding = PaddingValues(
-                    horizontal = dimensionResource(RC.dimen.scd_normal_100)
-                )
+                contentPadding = PaddingValues(horizontal = dimensionResource(RC.dimen.scd_normal_150)),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
             ) {
                 items(options) { option ->
                     OptionItemComponent(
@@ -95,8 +88,10 @@ fun OptionComponent(
         }
         DisplayMode.GRID_VERTICAL -> {
             LazyVerticalGrid(
-                modifier = lazyContainerModifier,
+                modifier = verticalDirectionModifier,
                 columns = GridCells.Fixed(columns),
+                horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
             ) {
                 items(options) { option ->
                     OptionItemComponent(
@@ -110,7 +105,8 @@ fun OptionComponent(
         }
         DisplayMode.LIST -> {
             LazyColumn(
-                modifier = lazyContainerModifier,
+                modifier = verticalDirectionModifier,
+                verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
             ) {
                 items(options) { option ->
                     OptionItemComponent(

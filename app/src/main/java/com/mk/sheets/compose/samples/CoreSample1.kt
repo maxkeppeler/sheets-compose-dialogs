@@ -48,9 +48,6 @@ internal fun CoreSample1(closeSelection: () -> Unit) {
                 ButtonStyle.ELEVATED
             ),
         ),
-        header = Header.Default(
-            titleText = "Custom Dialog"
-        ),
         onPositiveValid = true,
         body = {
             Text(text = "Test")

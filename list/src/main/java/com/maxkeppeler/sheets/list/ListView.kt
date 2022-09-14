@@ -30,7 +30,6 @@ import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListOption
@@ -64,6 +63,7 @@ fun ListView(
         state.processSelection(option)
         BaseBehaviors.autoFinish(
             selection = selection,
+            condition = state.valid,
             coroutine = coroutine,
             onSelection = state::onFinish,
             onFinished = onCancel,
@@ -72,8 +72,7 @@ fun ListView(
     }
 
     FrameBase(
-        header = { HeaderComponent(header) },
-        contentPaddingValues = PaddingValues(0.dp),
+        header = header,
         content = {
             ListOptionBoundsComponent(
                 selection = selection,
@@ -87,16 +86,15 @@ fun ListView(
                 onOptionChange = processSelection
             )
         },
-        buttonsVisible = selection.withButtonView,
-        buttons = {
-            ButtonsComponent(
-                onPositiveValid = state.valid,
-                selection = selection,
-                onNegative = { selection.onNegativeClick?.invoke() },
-                onPositive = state::onFinish,
-                onCancel = onCancel
-            )
-        }
-    )
+        buttonsVisible = selection.withButtonView
+    ) {
+        ButtonsComponent(
+            onPositiveValid = state.valid,
+            selection = selection,
+            onNegative = { selection.onNegativeClick?.invoke() },
+            onPositive = state::onFinish,
+            onCancel = onCancel
+        )
+    }
 }
 

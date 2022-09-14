@@ -31,10 +31,6 @@ internal fun InfoSample1(closeSelection: () -> Unit) {
 
     InfoDialog(
         show = true,
-        header = Header.Default(
-            titleText = "Do you want to work?",
-            subtitleText = "It's essential"
-        ),
         body = Body.Default(
             bodyText = "this is a very long text bla bla",
             postBody = {

@@ -53,7 +53,7 @@ internal class ClockState(
     var time by mutableStateOf(stateData?.time ?: getInitTime())
     var isAm by mutableStateOf(stateData?.isAm ?: isAm(time))
     var timeTextValues by mutableStateOf(getTimeInTextValues())
-    val keys by mutableStateOf(getInputKeys(config))
+    val keys by mutableStateOf(getInputKeys())
     var disabledKeys by mutableStateOf(getCurrentDisabledKeys())
 
     private fun isInit24HourFormat(): Boolean {

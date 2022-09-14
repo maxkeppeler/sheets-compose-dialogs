@@ -16,12 +16,15 @@
 package com.maxkeppeler.sheets.list.views
 
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -44,13 +47,6 @@ fun ListOptionComponent(
     onOptionChange: (ListOption) -> Unit,
 ) {
 
-    val lazyContainerModifier = modifier
-        .fillMaxWidth()
-        .padding(
-            horizontal = dimensionResource(id = RC.dimen.scd_normal_100),
-            vertical = dimensionResource(id = RC.dimen.scd_normal_100)
-        )
-
     val onClick: (ListOption) -> Unit = { option ->
         val newOption = option.copy(selected = !option.selected).apply {
             position = option.position
@@ -59,7 +55,8 @@ fun ListOptionComponent(
     }
 
     LazyColumn(
-        modifier = lazyContainerModifier,
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
     ) {
         items(options) { option ->
             ListOptionItemComponent(

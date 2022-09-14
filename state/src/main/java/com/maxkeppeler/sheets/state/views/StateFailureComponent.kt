@@ -32,7 +32,7 @@ internal fun StateFailureComponent(state: State) {
     state.customView?.invoke() ?: run {
         Icon(
             modifier = Modifier
-                .padding(top = dimensionResource(id = RC.dimen.scd_normal_100))
+                .padding(vertical = dimensionResource(id = RC.dimen.scd_normal_100))
                 .size(dimensionResource(id = RC.dimen.scd_size_350)),
             imageVector = Icons.Rounded.Error,
             contentDescription = null,

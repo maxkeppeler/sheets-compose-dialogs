@@ -46,14 +46,14 @@ internal fun OptionBoundsComponent(
     selectedOptions: List<Option>
 ) {
     val selectedAmount = selectedOptions.size
-
-    when (selection) {
-        is OptionSelection.Single -> Unit
-        is OptionSelection.Multiple -> {
+    when {
+        selection is OptionSelection.Multiple
+                && (selection.minChoices != null
+                || selection.maxChoices != null) -> {
             Row(
                 modifier = Modifier
                     .padding(horizontal = dimensionResource(id = RC.dimen.scd_normal_150))
-                    .padding(top = dimensionResource(id = RC.dimen.scd_normal_100)),
+                    .padding(bottom = dimensionResource(id = RC.dimen.scd_normal_100)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
 
@@ -92,6 +92,7 @@ internal fun OptionBoundsComponent(
                 }
             }
         }
+        else -> Unit
     }
 }
 

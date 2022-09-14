@@ -43,7 +43,6 @@ internal fun EmojiTextHeaderItemComponent(
 ) {
     Text(
         modifier = Modifier
-            .padding(top = dimensionResource(RC.dimen.scd_normal_100))
             .clip(RoundedCornerShape(50))
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }

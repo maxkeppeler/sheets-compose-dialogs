@@ -59,7 +59,6 @@ internal fun OptionItemComponent(
     else MaterialTheme.colorScheme.onSurface
 
     val containerModifier = Modifier
-        .padding(dimensionResource(RC.dimen.scd_small_50))
         .wrapContentHeight()
         .clip(MaterialTheme.shapes.medium)
         .clickable(!inputDisabled && !option.disabled) { onClick(option) }

@@ -31,18 +31,16 @@ import com.maxkeppeler.sheets.core.R as RC
 /**
  * Header component of the dialog.
  * @param header Implementation of the header.
- * @param alternateContent Content when dialog has no header.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun HeaderComponent(
-    header: Header?,
-    alternateContent: @Composable () -> Unit = {}
+    header: Header,
+    contentHorizontalPadding: PaddingValues,
 ) {
     when (header) {
         is Header.Custom -> header.header.invoke()
-        is Header.Default -> DefaultHeaderComponent(header)
-        null -> alternateContent()
+        is Header.Default -> DefaultHeaderComponent(header, contentHorizontalPadding)
     }
 }
 
@@ -51,12 +49,15 @@ fun HeaderComponent(
  * @param header The data of the default header.
  */
 @Composable
-private fun DefaultHeaderComponent(header: Header.Default) {
+private fun DefaultHeaderComponent(
+    header: Header.Default,
+    contentHorizontalPadding: PaddingValues
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(top = dimensionResource(id = RC.dimen.scd_normal_150))
-            .padding(horizontal = dimensionResource(id = RC.dimen.scd_normal_150)),
+            .padding(contentHorizontalPadding)
+            .padding(top = dimensionResource(id = RC.dimen.scd_normal_150)),
         horizontalAlignment = if (header.icon != null) Alignment.CenterHorizontally else Alignment.Start
     ) {
         header.icon?.let {

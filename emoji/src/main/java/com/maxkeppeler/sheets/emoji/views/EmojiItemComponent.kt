@@ -67,7 +67,6 @@ internal fun EmojiItemComponent(
             .onGloballyPositioned {
                 if (size.value != it.size) size.value = it.size
             }
-            .padding(dimensionResource(RC.dimen.scd_small_25))
             .clip(MaterialTheme.shapes.small)
             .background(
                 when {

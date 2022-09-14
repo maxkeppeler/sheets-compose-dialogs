@@ -79,7 +79,6 @@ internal fun KeyItemComponent(
 
     Row(
         modifier = Modifier
-            .padding(dimensionResource(RC.dimen.scd_small_50))
             .aspectRatio(1f)
             .alpha(if (disabled) Constants.KEYBOARD_ALPHA_ITEM_DISABLED else Constants.KEYBOARD_ALPHA_ITEM_ENABLED)
             .clip(RoundedCornerShape(animatedCornerRadius.value))

@@ -16,6 +16,7 @@
 package com.maxkeppeler.sheets.duration.views
 
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.grid.GridCells
@@ -43,14 +44,11 @@ internal fun KeyboardComponent(
 ) {
 
     LazyVerticalGrid(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(
-                horizontal = dimensionResource(RC.dimen.scd_normal_150),
-                vertical = dimensionResource(RC.dimen.scd_normal_100)
-            ),
+        modifier = Modifier.fillMaxWidth(),
         columns = GridCells.Fixed(Constants.KEYBOARD_COLUMNS),
-        userScrollEnabled = false
+        userScrollEnabled = false,
+        horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
+        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
     ) {
         items(keys) { option ->
             KeyItemComponent(

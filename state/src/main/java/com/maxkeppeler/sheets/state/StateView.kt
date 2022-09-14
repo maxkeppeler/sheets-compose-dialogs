@@ -25,7 +25,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.core.R as RC
 import com.maxkeppeler.sheets.state.models.StateConfig
@@ -49,9 +48,9 @@ fun StateView(
     onCancel: () -> Unit = {},
 ) {
     FrameBase(
-        header = { HeaderComponent(header) },
+        header = header,
         contentHorizontalAlignment = Alignment.CenterHorizontally,
-        contentPaddingValues = PaddingValues(
+        horizontalContentPadding = PaddingValues(
             horizontal = dimensionResource(id = RC.dimen.scd_normal_100),
             vertical = dimensionResource(id = RC.dimen.scd_normal_100)
         ),
