@@ -5,7 +5,7 @@ pluginManagement {
         gradlePluginPortal()
     }
 }
-rootProject.name = "sheets-compose-dialog"
+rootProject.name = "sheets-compose-dialogs"
 include(
     ":app",
     // Include all modules
