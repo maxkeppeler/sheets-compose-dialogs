@@ -68,8 +68,7 @@ internal fun CalendarDateItemComponent(
 
     val disabledModifier = Modifier
         .aspectRatio(1f, true)
-        .padding(dimensionResource(RC.dimen.scd_small_50))
-        .clip(MaterialTheme.shapes.extraSmall)
+        .clip(MaterialTheme.shapes.medium)
         .background(MaterialTheme.colorScheme.surfaceVariant)
 
     val selectedModifier = Modifier
@@ -80,7 +79,7 @@ internal fun CalendarDateItemComponent(
 
     val normalModifier = Modifier
         .aspectRatio(1f, true)
-        .clip(MaterialTheme.shapes.extraSmall)
+        .clip(MaterialTheme.shapes.medium)
         .clickable { data.date?.let { onDateClick(it) } }
 
     val otherMonthModifier = Modifier
