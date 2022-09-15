@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scd_calendar_dialog_select_month">Monat auswählen</string>
+    <string name="scd_calendar_dialog_select_year">Jahr auswählen</string>
+    <string name="scd_calendar_dialog_prev_week">Letzte Woche</string>
+    <string name="scd_calendar_dialog_next_week">Nächste Woche</string>
+    <string name="scd_calendar_dialog_prev_month">Nächsten Monat</string>
+    <string name="scd_calendar_dialog_next_month">Letzten Monat</string>
+</resources>

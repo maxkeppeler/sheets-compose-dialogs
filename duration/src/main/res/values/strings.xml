@@ -4,13 +4,10 @@
 
     <string name="sheets_at_least_placeholder" translatable="true">Minimum</string>
     <string name="sheets_at_most_placeholder" translatable="true">Maximum</string>
-
     <string name="sheets_hour_code" translatable="true">h</string>
     <string name="sheets_minute_code" translatable="true">m</string>
     <string name="sheets_second_code" translatable="true">s</string>
-    <string name="sheets_day_code" translatable="true">D</string>
-
-    <string name="scd_duration_dialog_delete_last_input">Delete last input</string>
-    <string name="scd_duration_dialog_clear_input">Clear input</string>
+    <string name="scd_duration_dialog_delete_last_input" translatable="true">Delete last input</string>
+    <string name="scd_duration_dialog_clear_input" translatable="true">Clear input</string>
 
 </resources>

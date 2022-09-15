@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scd_color_dialog_alpha">Alpha</string>
+    <string name="scd_color_dialog_red">Red</string>
+    <string name="scd_color_dialog_green">Green</string>
+    <string name="scd_color_dialog_blue">Blue</string>
+    <string name="scd_color_dialog_argb">ARGB</string>
+    <string name="scd_color_dialog_color">Farbe</string>
+    <string name="scd_color_dialog_template_colors">Farbvorlagen</string>
+    <string name="scd_color_dialog_custom_color">Eigene Farbe</string>
+    <string name="scd_color_dialog_no_color">Keine Farbe</string>
+    <string name="scd_color_dialog_copy_color">Kopiere Farbe</string>
+    <string name="scd_color_dialog_paste_color">Füge Farbe ein</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code">Gebe eine gültige aRGB-Farbe ein.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty">Nichts einzufügen</string>
+
+</resources>

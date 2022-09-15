@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour">Stunden</string>
+    <string name="sheets_compose_dialogs_date_time_minutes">Minuten</string>
+    <string name="sheets_compose_dialogs_date_time_seconds">Sekunden</string>
+    <string name="sheets_compose_dialogs_date_time_day">Tag</string>
+    <string name="sheets_compose_dialogs_date_time_month">Monat</string>
+    <string name="sheets_compose_dialogs_date_time_year">Jahr</string>
+
+</resources>
