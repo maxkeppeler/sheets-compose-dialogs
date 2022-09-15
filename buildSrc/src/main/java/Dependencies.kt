@@ -25,6 +25,7 @@ object Dependencies {
         const val UI_TOOLING = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
         const val ICONS_EXTENDED = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
         const val ANIMATION = "androidx.compose.animation:animation:${Versions.COMPOSE}"
+        const val ANIMATION_GRAPHICS = "androidx.compose.animation:animation-graphics:${Versions.COMPOSE}"
 
         object Test {
             const val JUNIT = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"

@@ -13,18 +13,23 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+@file:OptIn(ExperimentalAnimationGraphicsApi::class)
+
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
+import androidx.compose.animation.graphics.res.animatedVectorResource
+import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
+import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ChevronLeft
 import androidx.compose.material.icons.rounded.ChevronRight
-import androidx.compose.material.icons.rounded.ExpandLess
-import androidx.compose.material.icons.rounded.ExpandMore
 import androidx.compose.material3.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -68,8 +73,23 @@ internal fun CalendarTopComponent(
     onYearClick: () -> Unit,
 ) {
 
-    val enterTransition = fadeIn() + expandIn(expandFrom = Alignment.Center, clip = false)
+    val enterTransition = expandIn(expandFrom = Alignment.Center, clip = false) + fadeIn()
     val exitTransition = shrinkOut(shrinkTowards = Alignment.Center, clip = false) + fadeOut()
+
+    val chevronAVD = AnimatedImageVector.animatedVectorResource(R.drawable.avd_chevron_down_up)
+    var chevronMonthAtEnd by remember { mutableStateOf(false) }
+    var chevronYearAtEnd by remember { mutableStateOf(false) }
+
+    LaunchedEffect(mode) {
+        when (mode) {
+            CalendarDisplayMode.CALENDAR -> {
+                chevronMonthAtEnd = false
+                chevronYearAtEnd = false
+            }
+            CalendarDisplayMode.MONTH -> chevronYearAtEnd = false
+            CalendarDisplayMode.YEAR -> chevronMonthAtEnd = false
+        }
+    }
 
     val selectableContainerModifier = Modifier.clip(MaterialTheme.shapes.extraSmall)
     val selectableItemModifier = Modifier
@@ -114,7 +134,12 @@ internal fun CalendarTopComponent(
         ) {
             Row(
                 modifier = selectableContainerModifier
-                    .clickable(config.monthSelection) { onMonthClick() },
+                    .clickable(config.monthSelection) {
+                        if (config.monthSelection) {
+                            chevronMonthAtEnd = !chevronMonthAtEnd
+                        }
+                        onMonthClick()
+                    },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -126,7 +151,7 @@ internal fun CalendarTopComponent(
                 if (config.monthSelection) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        imageVector = if (mode == CalendarDisplayMode.MONTH) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
+                        painter = rememberAnimatedVectorPainter(chevronAVD, chevronMonthAtEnd),
                         contentDescription = stringResource(R.string.scd_calendar_dialog_select_month),
                         tint = MaterialTheme.colorScheme.primary
                     )
@@ -135,7 +160,12 @@ internal fun CalendarTopComponent(
 
             Row(
                 modifier = selectableContainerModifier
-                    .clickable(config.yearSelection) { onYearClick() },
+                    .clickable(config.yearSelection) {
+                        if (config.yearSelection) {
+                            chevronYearAtEnd = !chevronYearAtEnd
+                        }
+                        onYearClick()
+                    },
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
@@ -147,7 +177,7 @@ internal fun CalendarTopComponent(
                 if (config.yearSelection) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        imageVector = if (mode == CalendarDisplayMode.MONTH) Icons.Rounded.ExpandLess else Icons.Rounded.ExpandMore,
+                        painter = rememberAnimatedVectorPainter(chevronAVD, chevronYearAtEnd),
                         contentDescription = stringResource(id = R.string.scd_calendar_dialog_select_year),
                         tint = MaterialTheme.colorScheme.primary
                     )

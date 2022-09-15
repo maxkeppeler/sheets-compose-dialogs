@@ -30,6 +30,7 @@ class LibraryModulePlugin : Plugin<Project> {
             implementation(Dependencies.Compose.UI)
             implementation(Dependencies.Compose.UI_TOOLING)
             implementation(Dependencies.Compose.ANIMATION)
+            implementation(Dependencies.Compose.ANIMATION_GRAPHICS)
             implementation(Dependencies.Compose.RUNTIME)
             implementation(Dependencies.Compose.MATERIAL)
             implementation(Dependencies.Compose.MATERIAL_3)
