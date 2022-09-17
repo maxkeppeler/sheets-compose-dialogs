@@ -17,69 +17,64 @@
 
 package com.maxkeppeler.sheets.clock
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.views.KeyboardComponent
 import com.maxkeppeler.sheets.clock.views.TimeValueComponent
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Clock view for the use-case to to select a clock time.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun ClockView(
+    sheetState: SheetState,
     selection: ClockSelection,
     config: ClockConfig = ClockConfig(),
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val state = rememberSaveable(
-        saver = ClockState.Saver(context, selection, config),
-        init = { ClockState(context, selection, config) }
-    )
+    val clockState = rememberClockState(context, selection, config)
+    StateHandler(sheetState, clockState)
 
     FrameBase(
         header = header,
         content = {
             TimeValueComponent(
-                unitValues = state.timeTextValues,
-                isAm = state.isAm,
-                is24hourFormat = state.is24HourFormat,
-                valueIndex = state.valueIndex.value,
-                groupIndex = state.groupIndex.value,
-                onGroupClick = state::onValueGroupClick,
-                onAm = state::onChange12HourFormatValue,
+                unitValues = clockState.timeTextValues,
+                isAm = clockState.isAm,
+                is24hourFormat = clockState.is24HourFormat,
+                valueIndex = clockState.valueIndex.value,
+                groupIndex = clockState.groupIndex.value,
+                onGroupClick = clockState::onValueGroupClick,
+                onAm = clockState::onChange12HourFormatValue,
             )
             KeyboardComponent(
-                keys = state.keys,
-                disabledKeys = state.disabledKeys,
-                onEnterValue = state::onEnterValue,
-                onPrevAction = state::onPrevAction,
-                onNextAction = state::onNextAction
+                keys = clockState.keys,
+                disabledKeys = clockState.disabledKeys,
+                onEnterValue = clockState::onEnterValue,
+                onPrevAction = clockState::onPrevAction,
+                onNextAction = clockState::onNextAction
             )
         }
     ) {
         ButtonsComponent(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = clockState::onFinish,
+            onClose = sheetState::finish
         )
     }
 }

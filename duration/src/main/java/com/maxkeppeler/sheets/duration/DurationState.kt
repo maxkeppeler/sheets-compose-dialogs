@@ -15,11 +15,13 @@
  */
 package com.maxkeppeler.sheets.duration
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
 import com.maxkeppeler.sheets.duration.utils.getInputKeys
@@ -38,7 +40,7 @@ internal class DurationState(
     val selection: DurationSelection,
     val config: DurationConfig,
     stateData: DurationStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var timeTextValue by mutableStateOf(stateData?.timeTextValue ?: getInitTimeTextValue())
     var timeInfoInSeconds by mutableStateOf(getInitTimeInfoInSeconds())
@@ -112,6 +114,13 @@ internal class DurationState(
         selection.onPositiveClick(timeInfoInSeconds.first)
     }
 
+    override fun reset() {
+        timeTextValue = getInitTimeTextValue()
+        timeInfoInSeconds = getInitTimeInfoInSeconds()
+        valuePairs = getInitValuePairs()
+        indexOfFirstValue = getInitIndexOfFirstValue()
+    }
+
     companion object {
 
         /**
@@ -136,3 +145,17 @@ internal class DurationState(
         val timeTextValue: StringBuilder,
     ) : Serializable
 }
+
+/**
+ * Create a DurationState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberDurationState(
+    selection: DurationSelection,
+    config: DurationConfig,
+): DurationState = rememberSaveable(
+    saver = DurationState.Saver(selection, config),
+    init = { DurationState(selection, config) }
+)

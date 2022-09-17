@@ -13,31 +13,22 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.maxkeppeler.sheets.info.models
+package com.maxkeppeker.sheets.core.models.base
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 
-/**
- * Defined implementations of a body for the info dialog.
- */
-abstract class Body {
-
-    /**
-     * Standard implementation of a body.
-     * @param bodyText Text that will set as the title
-     * @param preBody Content that is added before the body text.
-     * @param postBody Content that is added after the body text.
-     */
-    data class Default(
-        val bodyText: String,
-        val preBody: @Composable () -> Unit = {},
-        val postBody: @Composable () -> Unit = {}
-    ) : Body()
-
-    /**
-     * Custom implementation of a body.
-     */
-    data class Custom(
-        val body: @Composable () -> Unit
-    ) : Body()
+@Composable
+fun StateHandler(
+    sheetState: SheetState,
+    baseState: BaseTypeState,
+) {
+    DisposableEffect(sheetState.visible, sheetState.reset) {
+        if (!sheetState.visible || sheetState.reset) {
+            baseState.reset()
+            sheetState.clearReset()
+        }
+        onDispose {}
+    }
 }

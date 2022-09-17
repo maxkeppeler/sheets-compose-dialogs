@@ -26,11 +26,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.CoreSelection
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 
 /**
  * Core dialog that functions as the base of a custom use-case.
- * @param show If the dialog should be displayed or not.
+ * @param state The state of the sheet.
  * @param selection The selection configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
  * @param body The body content to be displayed inside the dialog.
@@ -41,25 +42,23 @@ import com.maxkeppeker.sheets.core.views.base.DialogBase
 @ExperimentalMaterial3Api
 @Composable
 fun CoreDialog(
-    show: Boolean,
+    state: SheetState,
     selection: CoreSelection,
     header: Header? = null,
     body: @Composable () -> Unit,
     onPositiveValid: Boolean = true,
-    onClose: () -> Unit,
     properties: DialogProperties = DialogProperties(),
 ) {
 
     DialogBase(
-        show = show,
-        onClose = onClose,
+        state = state,
         properties = properties,
     ) {
         CoreView(
+            sheetState = state,
             selection = selection,
             header = header,
             body = body,
-            onCancel = onClose,
             onPositiveValid = onPositiveValid
         )
     }

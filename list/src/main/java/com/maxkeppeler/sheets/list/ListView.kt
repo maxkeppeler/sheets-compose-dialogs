@@ -18,16 +18,15 @@
 
 package com.maxkeppeler.sheets.list
 
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
@@ -39,35 +38,33 @@ import com.maxkeppeler.sheets.list.views.ListOptionComponent
 
 /**
  * List view for the use-case to display a list of options.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun ListView(
+    sheetState: SheetState,
     selection: ListSelection,
     config: ListConfig = ListConfig(),
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
     val coroutine = rememberCoroutineScope()
-    val state = rememberSaveable(
-        saver = ListState.Saver(selection, config),
-        init = { ListState(selection, config) }
-    )
+    val listState = rememberListState(selection, config)
+    StateHandler(sheetState, listState)
 
     val processSelection: (ListOption) -> Unit = { option ->
-        state.processSelection(option)
+        listState.processSelection(option)
         BaseBehaviors.autoFinish(
             selection = selection,
-            condition = state.valid,
+            condition = listState.valid,
             coroutine = coroutine,
-            onSelection = state::onFinish,
-            onFinished = onCancel,
-            onDisableInput = state::disableInput
+            onSelection = listState::onFinish,
+            onFinished = sheetState::finish,
+            onDisableInput = listState::disableInput
         )
     }
 
@@ -76,24 +73,24 @@ fun ListView(
         content = {
             ListOptionBoundsComponent(
                 selection = selection,
-                selectedOptions = state.selectedOptions
+                selectedOptions = listState.selectedOptions
             )
             ListOptionComponent(
                 modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
                 selection = selection,
-                options = state.options,
-                inputDisabled = state.inputDisabled,
+                options = listState.options,
+                inputDisabled = listState.inputDisabled,
                 onOptionChange = processSelection
             )
         },
         buttonsVisible = selection.withButtonView
     ) {
         ButtonsComponent(
-            onPositiveValid = state.valid,
+            onPositiveValid = listState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = listState::onFinish,
+            onClose = sheetState::finish
         )
     }
 }

@@ -13,23 +13,31 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.maxkeppeler.sheets.info.views
+package com.maxkeppeler.sheets.info.models
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import com.maxkeppeler.sheets.info.models.InfoBody
 
 /**
- * Body component for the info dialog.
- * @param body Implementation of the body.
+ * Defined implementations of a body for the info dialog.
  */
-@ExperimentalMaterial3Api
-@Composable
-fun BodyComponent(
-    body: InfoBody,
-) {
-    when (body) {
-        is InfoBody.Custom -> body.body.invoke()
-        is InfoBody.Default -> DefaultBodyComponent(body)
-    }
+abstract class InfoBody {
+
+    /**
+     * Standard implementation of a body.
+     * @param bodyText Text that will set as the title
+     * @param preBody Content that is added before the body text.
+     * @param postBody Content that is added after the body text.
+     */
+    data class Default(
+        val bodyText: String,
+        val preBody: @Composable () -> Unit = {},
+        val postBody: @Composable () -> Unit = {}
+    ) : InfoBody()
+
+    /**
+     * Custom implementation of a body.
+     */
+    data class Custom(
+        val body: @Composable () -> Unit
+    ) : InfoBody()
 }

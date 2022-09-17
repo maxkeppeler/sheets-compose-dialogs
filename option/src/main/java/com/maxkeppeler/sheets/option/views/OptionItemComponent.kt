@@ -18,20 +18,15 @@ package com.maxkeppeler.sheets.option.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.option.models.Option
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The item component for an option.
@@ -64,10 +59,10 @@ internal fun OptionItemComponent(
         .clickable(!inputDisabled && !option.disabled) { onClick(option) }
         .then(if (option.disabled || option.selected) Modifier.background(backgroundColor) else Modifier)
 
-    val showInfoDialog = rememberSaveable { mutableStateOf(false) }
+    val detailDialogState = rememberSheetState(false)
     option.details?.let {
         OptionDetailsDialog(
-            show = showInfoDialog,
+            state = detailDialogState,
             option = option,
             backgroundColor = backgroundColor,
             iconColor = iconColor,
@@ -75,7 +70,7 @@ internal fun OptionItemComponent(
         )
     }
 
-    val onInfoClick = { showInfoDialog.value = !showInfoDialog.value }
+    val onInfoClick = { detailDialogState.show() }
 
     if (grid) OptionGridItemComponent(
         option = option,

@@ -24,34 +24,40 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 
 /**
  * Base component for a dialog.
- * @param show If the dialog should be displayed or not.
+ * @param state The state of the sheet.
  * @param properties DialogProperties for further customization of this dialog's behavior.
  * @param onDialogClick Listener that is invoked when the dialog was clicked.
  * @param content The content to be displayed inside the dialog.
  */
 @Composable
 fun DialogBase(
-    show: Boolean,
+    state: SheetState = rememberSheetState(true),
     properties: DialogProperties = DialogProperties(),
     onDialogClick: (() -> Unit)? = null,
-    onClose: () -> Unit,
     content: @Composable () -> Unit,
 ) {
-    if (!show) return
+    LaunchedEffect(Unit) {
+        state.markAsEmbedded()
+    }
+
+    if (!state.visible) return
 
     val boxInteractionSource = remember { MutableInteractionSource() }
     val contentInteractionSource = remember { MutableInteractionSource() }
 
     Dialog(
-        onDismissRequest = onClose,
+        onDismissRequest = state::dismiss,
         properties = properties,
     ) {
 
@@ -65,7 +71,7 @@ fun DialogBase(
                 .clickable(
                     interactionSource = boxInteractionSource,
                     indication = null,
-                    onClick = onClose
+                    onClick = state::dismiss
                 )
         ) {
             Surface(

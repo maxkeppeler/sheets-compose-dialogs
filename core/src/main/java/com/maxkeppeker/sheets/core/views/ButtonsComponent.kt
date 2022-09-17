@@ -40,7 +40,7 @@ fun ButtonsComponent(
     selection: BaseSelection,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
-    onCancel: () -> Unit,
+    onClose: () -> Unit,
     onPositiveValid: Boolean = true,
 ) {
 
@@ -67,14 +67,14 @@ fun ButtonsComponent(
                 .wrapContentWidth()
                 .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
             button = selection.negativeButton,
-            onClick = { onNegative(); onCancel() },
+            onClick = { onNegative(); onClose() },
             defaultText = stringResource(id = R.string.cancel)
         )
 
         SelectionButtonComponent(
             modifier = Modifier.wrapContentWidth(),
             button = selection.positiveButton,
-            onClick = { onPositive(); onCancel() },
+            onClick = { onPositive(); onClose() },
             enabled = onPositiveValid,
             defaultText = stringResource(id = R.string.ok)
         )

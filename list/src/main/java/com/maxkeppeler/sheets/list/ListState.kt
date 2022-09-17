@@ -15,11 +15,13 @@
  */
 package com.maxkeppeler.sheets.list
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -35,7 +37,7 @@ internal class ListState(
     val selection: ListSelection,
     val config: ListConfig,
     stateData: ListStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var options by mutableStateOf(stateData?.options ?: getInitOptions())
     var selectedOptions by mutableStateOf(getCurrentSelectedOptions())
@@ -109,6 +111,10 @@ internal class ListState(
         }
     }
 
+    override fun reset() {
+        selectedOptions = getCurrentSelectedOptions()
+    }
+
     companion object {
 
         /**
@@ -133,3 +139,18 @@ internal class ListState(
         val options: List<ListOption>
     ) : Serializable
 }
+
+
+/**
+ * Create a ListState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberListState(
+    selection: ListSelection,
+    config: ListConfig
+): ListState = rememberSaveable(
+    saver = ListState.Saver(selection, config),
+    init = { ListState(selection, config) }
+)

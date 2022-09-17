@@ -16,13 +16,10 @@
 package com.maxkeppeler.sheets.input
 
 import android.os.Bundle
-import android.util.Log
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputSelection
 import java.io.Serializable
@@ -35,7 +32,7 @@ import java.io.Serializable
 internal class InputState(
     val selection: InputSelection,
     stateData: InputStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var input = mutableStateListOf(*(stateData?.input ?: getInitInput()).toTypedArray())
     var valid by mutableStateOf(isValid())
@@ -74,6 +71,11 @@ internal class InputState(
         selection.onPositiveClick?.invoke(bundle)
     }
 
+    override fun reset() {
+        input.clear()
+        input.addAll(getInitInput())
+    }
+
     companion object {
 
         /**
@@ -97,3 +99,16 @@ internal class InputState(
         val input: List<Input>
     ) : Serializable
 }
+
+
+/**
+ * Create a InputState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ */
+@Composable
+internal fun rememberInputState(
+    selection: InputSelection,
+): InputState = rememberSaveable(
+    saver = InputState.Saver(selection),
+    init = { InputState(selection) }
+)

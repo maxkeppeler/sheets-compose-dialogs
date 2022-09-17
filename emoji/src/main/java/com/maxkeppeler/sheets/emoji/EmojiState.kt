@@ -15,11 +15,13 @@
  */
 package com.maxkeppeler.sheets.emoji
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 import com.vanniktech.emoji.Emoji
@@ -37,7 +39,7 @@ internal class EmojiState(
     val selection: EmojiSelection,
     val config: EmojiConfig,
     stateData: EmojiStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var selectedEmoji by mutableStateOf<Emoji?>(stateData?.selectedEmoji)
     var selectedCategory by mutableStateOf(0)
@@ -79,6 +81,11 @@ internal class EmojiState(
         }
     }
 
+    override fun reset() {
+        selectedEmoji = null
+        selectedCategory = 0
+    }
+
     companion object {
 
         /**
@@ -104,3 +111,17 @@ internal class EmojiState(
         val selectedEmoji: Emoji?
     ) : Serializable
 }
+
+/**
+ * Create a EmojiState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberEmojiState(
+    selection: EmojiSelection,
+    config: EmojiConfig
+): EmojiState = rememberSaveable(
+    saver = EmojiState.Saver(selection, config),
+    init = { EmojiState(selection, config) }
+)

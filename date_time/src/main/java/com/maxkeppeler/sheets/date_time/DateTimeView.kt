@@ -20,11 +20,11 @@ package com.maxkeppeler.sheets.date_time
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
@@ -32,33 +32,31 @@ import com.maxkeppeler.sheets.date_time.views.PickerComponent
 
 /**
  * Date Time dialog for the use-case to select a date, time or both in a quick way.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun DateTimeView(
+    sheetState: SheetState,
     selection: DateTimeSelection,
     config: DateTimeConfig = DateTimeConfig(),
-    onCancel: () -> Unit = {},
     header: Header? = null,
 ) {
     val coroutine = rememberCoroutineScope()
-    val state = rememberSaveable(
-        saver = DateTimeState.Saver(selection, config),
-        init = { DateTimeState(selection, config) }
-    )
+    val dateTimeState = rememberDateTimeState(selection, config)
+    StateHandler(sheetState, dateTimeState)
 
     val processSelection: () -> Unit = {
         BaseBehaviors.autoFinish(
             selection = selection,
-            condition = state.valid,
+            condition = dateTimeState.valid,
             coroutine = coroutine,
-            onSelection = state::onFinish,
-            onFinished = onCancel,
-            onDisableInput = state::disableInput
+            onSelection = dateTimeState::onFinish,
+            onFinished = sheetState::finish,
+            onDisableInput = dateTimeState::disableInput
         )
     }
 
@@ -71,7 +69,7 @@ fun DateTimeView(
                     locale = selection.locale,
                     formatStyle = selection.dateFormatStyle!!,
                     onDateValueChange = { date ->
-                        state.processSelection(date)
+                        dateTimeState.processSelection(date)
                         processSelection()
                     }
                 )
@@ -83,7 +81,7 @@ fun DateTimeView(
                     locale = selection.locale,
                     formatStyle = selection.timeFormatStyle!!,
                     onTimeValueChange = { time ->
-                        state.processSelection(time)
+                        dateTimeState.processSelection(time)
                         processSelection()
                     }
                 )
@@ -94,11 +92,11 @@ fun DateTimeView(
                 is DateTimeSelection.Time -> timePicker()
                 is DateTimeSelection.DateTime -> {
                     if (selection.startWithTime) {
-                        if (state.timeSelection == null) timePicker()
-                        if (state.timeSelection != null) datePicker()
+                        if (dateTimeState.timeSelection == null) timePicker()
+                        if (dateTimeState.timeSelection != null) datePicker()
                     } else {
-                        if (state.dateSelection == null) datePicker()
-                        if (state.dateSelection != null) timePicker()
+                        if (dateTimeState.dateSelection == null) datePicker()
+                        if (dateTimeState.dateSelection != null) timePicker()
                     }
                 }
             }
@@ -106,11 +104,11 @@ fun DateTimeView(
         buttonsVisible = selection.withButtonView
     ) {
         ButtonsComponent(
-            onPositiveValid = state.valid,
+            onPositiveValid = dateTimeState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = dateTimeState::onFinish,
+            onClose = sheetState::finish
         )
     }
 }

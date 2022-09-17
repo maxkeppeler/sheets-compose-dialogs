@@ -22,7 +22,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
-import com.maxkeppeler.sheets.info.models.Body
+import com.maxkeppeler.sheets.info.models.InfoBody
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -30,7 +30,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param body The data of the default body.
  */
 @Composable
-internal fun DefaultBodyComponent(body: Body.Default) {
+internal fun DefaultBodyComponent(body: InfoBody.Default) {
     Column(
         modifier = Modifier
             .padding(horizontal = dimensionResource(id = RC.dimen.scd_normal_150))

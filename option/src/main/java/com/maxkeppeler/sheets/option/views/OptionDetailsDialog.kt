@@ -20,7 +20,6 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,6 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.option.models.Option
@@ -35,7 +35,7 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Option dialog for the use-case to display a list or grid of options.
- * @param show If the dialog should be displayed or not.
+ * @param state The state of the sheet.
  * @param option The option that will be displayed.
  * @param backgroundColor The color that is used for the background of the option.
  * @param iconColor The color that is used for the icon of the option.
@@ -43,16 +43,15 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun OptionDetailsDialog(
-    show: MutableState<Boolean>,
+    state: SheetState,
     option: Option,
     backgroundColor: Color,
     iconColor: Color,
     textColor: Color
 ) {
     DialogBase(
-        show = show.value,
-        onClose = { show.value = false },
-        onDialogClick = { show.value = !show.value }) {
+        state = state,
+        onDialogClick = { state.hide() }) {
         Column {
             Row(
                 modifier = Modifier

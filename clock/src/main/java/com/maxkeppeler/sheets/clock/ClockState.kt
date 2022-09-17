@@ -17,25 +17,23 @@ package com.maxkeppeler.sheets.clock
 
 import android.content.Context
 import android.text.format.DateFormat
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.utils.*
-import com.maxkeppeler.sheets.clock.utils.convertTimeIntoTimeTextValues
-import com.maxkeppeler.sheets.clock.utils.inputValue
 import com.maxkeppeler.sheets.clock.utils.isAm
-import com.maxkeppeler.sheets.clock.utils.moveToNextIndex
-import com.maxkeppeler.sheets.clock.utils.moveToPreviousIndex
 import java.io.Serializable
 import java.time.LocalTime
 
 /**
  * Handles the clock state.
- * @param context The context that is used to resolve the colors.
+ * @param context The context that is used to check if the 24hFormat is used.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param stateData The data of the state when the state is required to be restored.
@@ -45,7 +43,7 @@ internal class ClockState(
     val selection: ClockSelection,
     val config: ClockConfig,
     stateData: ClockStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var groupIndex = mutableStateOf(stateData?.groupIndex ?: 0)
     var valueIndex = mutableStateOf(stateData?.valueIndex ?: 0)
@@ -149,6 +147,13 @@ internal class ClockState(
         }
     }
 
+    override fun reset() {
+        groupIndex.value = 0
+        valueIndex.value = 0
+        is24HourFormat = isInit24HourFormat()
+        time = getInitTime()
+    }
+
     companion object {
 
         /**
@@ -187,3 +192,19 @@ internal class ClockState(
         val isAm: Boolean
     ) : Serializable
 }
+
+/**
+ * Create a ClockState and remember it.
+ * @param context The context that is used to check if the 24hFormat is used.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberClockState(
+    context: Context,
+    selection: ClockSelection,
+    config: ClockConfig,
+): ClockState = rememberSaveable(
+    saver = ClockState.Saver(context, selection, config),
+    init = { ClockState(context, selection, config) }
+)

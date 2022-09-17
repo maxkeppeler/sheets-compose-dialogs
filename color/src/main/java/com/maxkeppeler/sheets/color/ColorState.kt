@@ -16,11 +16,13 @@
 package com.maxkeppeler.sheets.color
 
 import android.content.Context
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
 import com.maxkeppeler.sheets.color.models.ColorSelectionMode
@@ -38,7 +40,7 @@ internal class ColorState(
     val selection: ColorSelection,
     val config: ColorConfig = ColorConfig(),
     stateData: ColorStateData? = null,
-) : BaseState() {
+) : BaseTypeState() {
 
     var color by mutableStateOf(stateData?.color ?: getInitColor())
     val colors by mutableStateOf(getInitColors())
@@ -71,6 +73,10 @@ internal class ColorState(
         selection.onSelectColor(color!!)
     }
 
+    override fun reset() {
+        color = getInitColor()
+    }
+
     companion object {
 
         /**
@@ -98,3 +104,19 @@ internal class ColorState(
         val displayMode: ColorSelectionMode
     ) : Serializable
 }
+
+/**
+ * Create a ColorState and remember it.
+ * @param context The context that is used to resolve the colors.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberColorState(
+    context: Context,
+    selection: ColorSelection,
+    config: ColorConfig,
+): ColorState = rememberSaveable(
+    saver = ColorState.Saver(context, selection, config),
+    init = { ColorState(context, selection, config) }
+)

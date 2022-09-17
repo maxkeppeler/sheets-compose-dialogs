@@ -13,7 +13,6 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
 @file:Suppress("UNUSED_PARAMETER")
 
 package com.maxkeppeler.sheets.state
@@ -26,17 +25,16 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.views.base.FrameBase
-import com.maxkeppeler.sheets.core.R as RC
 import com.maxkeppeler.sheets.state.models.StateConfig
 import com.maxkeppeler.sheets.state.models.StateSelection
 import com.maxkeppeler.sheets.state.views.StateComponent
+import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * State dialog for the use-case to display various states.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
@@ -45,7 +43,6 @@ fun StateView(
     selection: StateSelection? = null,
     config: StateConfig,
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
     FrameBase(
         header = header,

@@ -20,7 +20,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import java.io.Serializable
 
-abstract class BaseState : Serializable {
+abstract class BaseTypeState : Serializable {
 
     open var inputDisabled by mutableStateOf(false)
 
@@ -28,4 +28,5 @@ abstract class BaseState : Serializable {
         inputDisabled = true
     }
 
+    abstract fun reset()
 }

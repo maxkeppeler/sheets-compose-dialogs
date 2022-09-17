@@ -17,7 +17,8 @@ package com.maxkeppeler.sheets.calendar
 
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
-import com.maxkeppeker.sheets.core.views.BaseState
+import androidx.compose.runtime.saveable.rememberSaveable
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
 import java.io.Serializable
@@ -34,8 +35,9 @@ import java.time.Month
 internal class CalendarState(
     val selection: CalendarSelection,
     val config: CalendarConfig,
-    stateData: CalendarStateData? = null
-): BaseState() {
+    stateData: CalendarStateData? = null,
+) : BaseTypeState() {
+
     val today by mutableStateOf(LocalDate.now())
     var mode by mutableStateOf(stateData?.mode ?: CalendarDisplayMode.CALENDAR)
     var cameraDate by mutableStateOf(stateData?.cameraDate ?: selection.initialCameraDate)
@@ -193,8 +195,13 @@ internal class CalendarState(
         }
     }
 
-    companion object {
+    override fun reset() {
+        date.value = null
+        dates.clear()
+        range.clear()
+    }
 
+    companion object {
         /**
          * [Saver] implementation.
          * @param selection The selection configuration for the dialog view.
@@ -214,7 +221,9 @@ internal class CalendarState(
                     rangeSelectionStart = state.isRangeSelectionStart
                 )
             },
-            restore = { data -> CalendarState(selection, config, data) }
+            restore = { data ->
+                CalendarState(selection, config, data)
+            }
         )
     }
 
@@ -259,3 +268,17 @@ internal class CalendarState(
         }
     }
 }
+
+/**
+ * Create a CalendarState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberCalendarState(
+    selection: CalendarSelection,
+    config: CalendarConfig,
+): CalendarState = rememberSaveable(
+    saver = CalendarState.Saver(selection, config),
+    init = { CalendarState(selection, config) }
+)

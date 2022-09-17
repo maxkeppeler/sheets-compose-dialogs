@@ -13,11 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.maxkeppeler.sheets.emoji
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -30,15 +29,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiSelection
@@ -51,18 +50,18 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Emoji view for the use-case to to select any emoji or a variant, if available.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun EmojiView(
+    sheetState: SheetState,
     selection: EmojiSelection,
     config: EmojiConfig = EmojiConfig(),
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
     DisposableEffect(Unit) {
         EmojiInstaller.installProvider(config.emojiProvider)
@@ -70,25 +69,23 @@ fun EmojiView(
     }
 
     val coroutine = rememberCoroutineScope()
-    val state = rememberSaveable(
-        saver = EmojiState.Saver(selection, config),
-        init = { EmojiState(selection, config) }
-    )
+    val emojiState = rememberEmojiState(selection, config)
+    StateHandler(sheetState, emojiState)
 
     val processSelection: (Emoji) -> Unit = { emoji ->
-        state.processSelection(emoji)
+        emojiState.processSelection(emoji)
         BaseBehaviors.autoFinish(
             selection = selection,
             coroutine = coroutine,
-            onSelection = state::onFinish,
-            onFinished = onCancel,
-            onDisableInput = state::disableInput
+            onSelection = emojiState::onFinish,
+            onFinished = sheetState::finish,
+            onDisableInput = emojiState::disableInput
         )
     }
 
     val headerState = rememberLazyListState()
-    LaunchedEffect(state.selectedCategory) {
-        headerState.animateScrollToItem(state.selectedCategory)
+    LaunchedEffect(emojiState.selectedCategory) {
+        headerState.animateScrollToItem(emojiState.selectedCategory)
     }
 
     FrameBase(
@@ -96,11 +93,11 @@ fun EmojiView(
         content = {
             EmojiHeaderComponent(
                 config = config,
-                categories = state.categories,
+                categories = emojiState.categories,
                 categoryIcons = Constants.CATEGORY_SYMBOLS,
-                selectedCategory = state.selectedCategory,
+                selectedCategory = emojiState.selectedCategory,
                 headerState = headerState,
-                onChangeCategory = state::selectCategory
+                onChangeCategory = emojiState::selectCategory
             )
 
             LazyVerticalGrid(
@@ -112,12 +109,12 @@ fun EmojiView(
                 ),
                 horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
                 verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_25)),
-                columns = GridCells.Fixed(state.categories.size)
+                columns = GridCells.Fixed(emojiState.categories.size)
             ) {
-                items(state.categoryEmojis, key = { it.unicode }) { emoji ->
+                items(emojiState.categoryEmojis, key = { it.unicode }) { emoji ->
                     EmojiItemComponent(
                         emoji = emoji,
-                        selectedEmoji = state.selectedEmoji,
+                        selectedEmoji = emojiState.selectedEmoji,
                         onClick = processSelection,
                     )
                 }
@@ -126,11 +123,11 @@ fun EmojiView(
         buttonsVisible = selection.withButtonView
     ) {
         ButtonsComponent(
-            onPositiveValid = state.valid,
+            onPositiveValid = emojiState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = emojiState::onFinish,
+            onClose = sheetState::finish
         )
     }
 }

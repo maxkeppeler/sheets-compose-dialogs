@@ -20,14 +20,14 @@ package com.maxkeppeler.sheets.color
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
-import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
@@ -38,34 +38,32 @@ import com.maxkeppeler.sheets.color.views.ColorTemplateComponent
 
 /**
  * Color view for the use-case to to select a color.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterial3Api
 @Composable
 fun ColorView(
+    sheetState: SheetState,
     selection: ColorSelection,
     config: ColorConfig = ColorConfig(),
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
     val context = LocalContext.current
-    val state = rememberSaveable(
-        saver = ColorState.Saver(context, selection, config),
-        init = { ColorState(context, selection, config) }
-    )
+    val colorState = rememberColorState(context, selection, config)
+    StateHandler(sheetState, colorState)
 
     val coroutine = rememberCoroutineScope()
     val onSelection: (Int) -> Unit = {
-        state.processSelection(it)
+        colorState.processSelection(it)
         BaseBehaviors.autoFinish(
             selection = selection,
             coroutine = coroutine,
-            onSelection = state::onFinish,
-            onFinished = onCancel,
-            onDisableInput = state::disableInput
+            onSelection = colorState::onFinish,
+            onFinished = sheetState::finish,
+            onDisableInput = colorState::disableInput
         )
     }
 
@@ -75,26 +73,26 @@ fun ColorView(
             ColorSelectionModeComponent(
                 config = config,
                 selection = selection,
-                mode = state.displayMode,
-                onModeChange = { state.displayMode = it },
+                mode = colorState.displayMode,
+                onModeChange = { colorState.displayMode = it },
                 onNoColorClick = {
                     selection.onSelectNone?.invoke()
-                    onCancel()
+                    sheetState.finish()
                 }
             )
-            when (state.displayMode) {
+            when (colorState.displayMode) {
                 ColorSelectionMode.TEMPLATE ->
                     ColorTemplateComponent(
-                        colors = state.colors,
-                        selectedColor = state.color,
-                        inputDisabled = state.inputDisabled,
+                        colors = colorState.colors,
+                        selectedColor = colorState.color,
+                        inputDisabled = colorState.inputDisabled,
                         onColorClick = onSelection
                     )
                 ColorSelectionMode.CUSTOM ->
                     ColorCustomComponent(
                         config = config,
-                        color = state.color ?: Color.Gray.toArgb(),
-                        onColorChange = state::processSelection,
+                        color = colorState.color ?: Color.Gray.toArgb(),
+                        onColorChange = colorState::processSelection,
                     )
             }
         },
@@ -104,10 +102,10 @@ fun ColorView(
     ) {
         ButtonsComponent(
             selection = selection,
-            onPositiveValid = state.valid,
+            onPositiveValid = colorState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = colorState::onFinish,
+            onClose = sheetState::finish
         )
     }
 }

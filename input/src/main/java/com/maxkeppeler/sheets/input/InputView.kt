@@ -20,9 +20,10 @@ package com.maxkeppeler.sheets.input
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
@@ -32,32 +33,30 @@ import com.maxkeppeler.sheets.input.views.InputComponent
 
 /**
  * Info view for the use-case to display simple information.
+ * @param sheetState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
- * @param onCancel Listener that is invoked when the use-case was canceled.
  */
 @ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun InputView(
+    sheetState: SheetState,
     selection: InputSelection,
     config: InputConfig = InputConfig(),
     header: Header? = null,
-    onCancel: () -> Unit = {},
 ) {
-    val state = rememberSaveable(
-        saver = InputState.Saver(selection),
-        init = { InputState(selection) }
-    )
+    val inputState = rememberInputState(selection)
+    StateHandler(sheetState, inputState)
 
     FrameBase(
         header = header,
         content = {
             InputComponent(
                 modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
-                input = state.input,
-                onInputUpdated = state::updateInput,
+                input = inputState.input,
+                onInputUpdated = inputState::updateInput,
                 columns = config.columns,
             )
         },
@@ -65,10 +64,10 @@ fun InputView(
     ) {
         ButtonsComponent(
             selection = selection,
-            onPositiveValid = state.valid,
+            onPositiveValid = inputState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = state::onFinish,
-            onCancel = onCancel
+            onPositive = inputState::onFinish,
+            onClose = sheetState::finish,
         )
     }
 }

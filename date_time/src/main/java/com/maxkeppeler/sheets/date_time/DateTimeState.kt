@@ -15,11 +15,13 @@
  */
 package com.maxkeppeler.sheets.date_time
 
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import com.maxkeppeker.sheets.core.views.BaseState
+import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
 import java.io.Serializable
@@ -36,7 +38,7 @@ internal class DateTimeState(
     val selection: DateTimeSelection,
     val config: DateTimeConfig,
     stateData: DateTimeStateData? = null
-) : BaseState() {
+) : BaseTypeState() {
 
     var dateSelection by mutableStateOf<LocalDate?>(stateData?.dateSelection)
     var timeSelection by mutableStateOf<LocalTime?>(stateData?.timeSelection)
@@ -73,6 +75,11 @@ internal class DateTimeState(
         }
     }
 
+    override fun reset() {
+        dateSelection = null
+        timeSelection = null
+    }
+
     companion object {
 
         /**
@@ -98,3 +105,17 @@ internal class DateTimeState(
         val timeSelection: LocalTime?
     ) : Serializable
 }
+
+/**
+ * Create a DateTimeState and remember it.
+ * @param selection The selection configuration for the dialog view.
+ * @param config The general configuration for the dialog view.
+ */
+@Composable
+internal fun rememberDateTimeState(
+    selection: DateTimeSelection,
+    config: DateTimeConfig,
+): DateTimeState = rememberSaveable(
+    saver = DateTimeState.Saver(selection, config),
+    init = { DateTimeState(selection, config) }
+)
