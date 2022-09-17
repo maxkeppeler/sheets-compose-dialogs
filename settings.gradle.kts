@@ -18,6 +18,7 @@ include(
     ":color",
     ":option",
     ":state",
+    ":input",
     ":emoji",
     ":list",
 )
