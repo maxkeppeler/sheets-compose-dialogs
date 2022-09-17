@@ -32,10 +32,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 
 @Composable
-internal fun UseCasesDemo(onSelectUseCase: (UseCase) -> Unit) {
+internal fun ShowcaseSamples(
+    onSelectSample: (Sample) -> Unit
+) {
 
-    val groupedByCategories = remember {
-        val value = UseCase.values().groupBy { it.category }
+    val groupedByType = remember {
+        val value = Sample.values().groupBy { it.category }
         mutableStateOf(value)
     }
 
@@ -45,17 +47,19 @@ internal fun UseCasesDemo(onSelectUseCase: (UseCase) -> Unit) {
         verticalArrangement = Arrangement.spacedBy(16.dp),
         horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
-        groupedByCategories.value.forEach { category ->
-            item(span = { GridItemSpan(2) }) { UseCaseCategoryItem(category) }
-            itemsIndexed(category.value) { i, useCase ->
-                UseCaseItem(i, useCase, onSelectUseCase)
+        groupedByType.value.forEach { type ->
+            item(span = { GridItemSpan(2) }) { HeaderItem(type) }
+            itemsIndexed(type.value) { i, sample ->
+                SampleItem(i, sample, onSelectSample)
             }
         }
     }
 }
 
 @Composable
-internal fun UseCaseCategoryItem(setup: Map.Entry<UseCaseCategory, List<UseCase>>) {
+private fun HeaderItem(
+    setup: Map.Entry<UseCaseType, List<Sample>>
+) {
     Text(
         modifier = Modifier.padding(top = 24.dp, bottom = 8.dp),
         text = setup.key.title,
@@ -64,9 +68,12 @@ internal fun UseCaseCategoryItem(setup: Map.Entry<UseCaseCategory, List<UseCase>
 }
 
 @Composable
-internal fun UseCaseItem(index: Int, useCase: UseCase, onSelectUseCase: (UseCase) -> Unit) {
+private fun SampleItem(
+    index: Int, sample: Sample,
+    onSelectSample: (Sample) -> Unit
+) {
     ElevatedCard(
-        onClick = { onSelectUseCase(useCase) }
+        onClick = { onSelectSample(sample) }
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
             Text(
@@ -74,9 +81,9 @@ internal fun UseCaseItem(index: Int, useCase: UseCase, onSelectUseCase: (UseCase
                 style = MaterialTheme.typography.titleMedium
             )
             Spacer(Modifier.height(12.dp))
-            useCase.specifics.forEach { info ->
+            sample.specifics.forEach { info ->
                 Row(
-                    modifier = Modifier.padding(bottom = if (index < UseCase.values().size) 4.dp else 0.dp),
+                    modifier = Modifier.padding(bottom = if (index < Sample.values().size) 4.dp else 0.dp),
                 ) {
                     Icon(
                         modifier = Modifier

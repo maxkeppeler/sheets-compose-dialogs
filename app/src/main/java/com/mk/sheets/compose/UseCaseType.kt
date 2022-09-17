@@ -15,7 +15,7 @@
  */
 package com.mk.sheets.compose
 
-enum class UseCaseCategory(val title: String) {
+enum class UseCaseType(val title: String) {
     CORE("⚒️  Core Dialog"),
     INFO("ℹ️  Info Dialog"),
     COLOR("\uD83C\uDFA8  Color Dialog"),

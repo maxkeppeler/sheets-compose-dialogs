@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Showcase()
+                    Samples()
                 }
             }
         }
@@ -46,59 +46,59 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun Showcase() {
+private fun Samples() {
 
-    val useCase = rememberSaveable { mutableStateOf<UseCase?>(null) }
-    val onReset = { useCase.value = null }
-    UseCasesDemo { newUseCase -> useCase.value = newUseCase }
+    val currentSample = rememberSaveable { mutableStateOf<Sample?>(null) }
+    val onReset = { currentSample.value = null }
+    ShowcaseSamples { currentSample.value = it }
 
-    when (useCase.value) {
+    when (currentSample.value) {
 
-        UseCase.CORE_SAMPLE_1 -> CoreSample1(onReset)
-        UseCase.INFO_SAMPLE_1 -> InfoSample1(onReset)
+        Sample.CORE_SAMPLE_1 -> CoreSample1(onReset)
+        Sample.INFO_SAMPLE_1 -> InfoSample1(onReset)
 
-        UseCase.COLOR_SAMPLE_1 -> ColorSample1(onReset)
-        UseCase.COLOR_SAMPLE_2 -> ColorSample2(onReset)
-        UseCase.COLOR_SAMPLE_3 -> ColorSample3(onReset)
+        Sample.COLOR_SAMPLE_1 -> ColorSample1(onReset)
+        Sample.COLOR_SAMPLE_2 -> ColorSample2(onReset)
+        Sample.COLOR_SAMPLE_3 -> ColorSample3(onReset)
 
-        UseCase.CALENDAR_SAMPLE_1 -> CalendarSample1(onReset)
-        UseCase.CALENDAR_SAMPLE_2 -> CalendarSample2(onReset)
-        UseCase.CALENDAR_SAMPLE_3 -> CalendarSample3(onReset)
+        Sample.CALENDAR_SAMPLE_1 -> CalendarSample1(onReset)
+        Sample.CALENDAR_SAMPLE_2 -> CalendarSample2(onReset)
+        Sample.CALENDAR_SAMPLE_3 -> CalendarSample3(onReset)
 
-        UseCase.CLOCK_SAMPLE_1 -> ClockSample1(onReset)
-        UseCase.CLOCK_SAMPLE_2 -> ClockSample2(onReset)
+        Sample.CLOCK_SAMPLE_1 -> ClockSample1(onReset)
+        Sample.CLOCK_SAMPLE_2 -> ClockSample2(onReset)
 
-        UseCase.DATE_TIME_SAMPLE_1 -> DateTimeSample1(onReset)
-        UseCase.DATE_TIME_SAMPLE_2 -> DateTimeSample2(onReset)
-        UseCase.DATE_TIME_SAMPLE_3 -> DateTimeSample3(onReset)
+        Sample.DATE_TIME_SAMPLE_1 -> DateTimeSample1(onReset)
+        Sample.DATE_TIME_SAMPLE_2 -> DateTimeSample2(onReset)
+        Sample.DATE_TIME_SAMPLE_3 -> DateTimeSample3(onReset)
 
-        UseCase.DURATION_SAMPLE_1 -> DurationSample1(onReset)
-        UseCase.DURATION_SAMPLE_2 -> DurationSample2(onReset)
+        Sample.DURATION_SAMPLE_1 -> DurationSample1(onReset)
+        Sample.DURATION_SAMPLE_2 -> DurationSample2(onReset)
 
-        UseCase.OPTION_SAMPLE_1 -> OptionSample1(onReset)
-        UseCase.OPTION_SAMPLE_2 -> OptionSample2(onReset)
-        UseCase.OPTION_SAMPLE_3 -> OptionSample3(onReset)
+        Sample.OPTION_SAMPLE_1 -> OptionSample1(onReset)
+        Sample.OPTION_SAMPLE_2 -> OptionSample2(onReset)
+        Sample.OPTION_SAMPLE_3 -> OptionSample3(onReset)
 
-        UseCase.LIST_SAMPLE_1 -> ListSample1(onReset)
-        UseCase.LIST_SAMPLE_2 -> ListSample2(onReset)
-        UseCase.LIST_SAMPLE_3 -> ListSample3(onReset)
-        UseCase.LIST_SAMPLE_4 -> ListSample4(onReset)
+        Sample.LIST_SAMPLE_1 -> ListSample1(onReset)
+        Sample.LIST_SAMPLE_2 -> ListSample2(onReset)
+        Sample.LIST_SAMPLE_3 -> ListSample3(onReset)
+        Sample.LIST_SAMPLE_4 -> ListSample4(onReset)
 
-        UseCase.INPUT_SAMPLE_1 -> InputSample1(onReset)
-        UseCase.INPUT_SAMPLE_2 -> InputSample2(onReset)
-        UseCase.INPUT_SAMPLE_3 -> InputSample3(onReset)
-        UseCase.INPUT_SAMPLE_4 -> InputSample4(onReset)
+        Sample.INPUT_SAMPLE_1 -> InputSample1(onReset)
+        Sample.INPUT_SAMPLE_2 -> InputSample2(onReset)
+        Sample.INPUT_SAMPLE_3 -> InputSample3(onReset)
+        Sample.INPUT_SAMPLE_4 -> InputSample4(onReset)
 
-        UseCase.EMOJI_SAMPLE_1 -> EmojiSample1(onReset)
-        UseCase.EMOJI_SAMPLE_2 -> EmojiSample2(onReset)
+        Sample.EMOJI_SAMPLE_1 -> EmojiSample1(onReset)
+        Sample.EMOJI_SAMPLE_2 -> EmojiSample2(onReset)
 
-        UseCase.STATE_SAMPLE_1 -> StateSample1(onReset)
-        UseCase.STATE_SAMPLE_2 -> StateSample2(onReset)
-        UseCase.STATE_SAMPLE_3 -> StateSample3(onReset)
-        UseCase.STATE_SAMPLE_4 -> StateSample4(onReset)
-        UseCase.STATE_SAMPLE_5 -> StateSample5(onReset)
-        UseCase.STATE_SAMPLE_6 -> StateSample6(onReset)
-        UseCase.STATE_SAMPLE_7 -> StateSample7(onReset)
+        Sample.STATE_SAMPLE_1 -> StateSample1(onReset)
+        Sample.STATE_SAMPLE_2 -> StateSample2(onReset)
+        Sample.STATE_SAMPLE_3 -> StateSample3(onReset)
+        Sample.STATE_SAMPLE_4 -> StateSample4(onReset)
+        Sample.STATE_SAMPLE_5 -> StateSample5(onReset)
+        Sample.STATE_SAMPLE_6 -> StateSample6(onReset)
+        Sample.STATE_SAMPLE_7 -> StateSample7(onReset)
         null -> Unit
     }
 }
