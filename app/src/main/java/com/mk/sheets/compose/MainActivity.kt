@@ -53,6 +53,7 @@ private fun Showcase() {
     UseCasesDemo { newUseCase -> useCase.value = newUseCase }
 
     when (useCase.value) {
+
         UseCase.CORE_SAMPLE_1 -> CoreSample1(onReset)
         UseCase.INFO_SAMPLE_1 -> InfoSample1(onReset)
 
@@ -82,6 +83,11 @@ private fun Showcase() {
         UseCase.LIST_SAMPLE_2 -> ListSample2(onReset)
         UseCase.LIST_SAMPLE_3 -> ListSample3(onReset)
         UseCase.LIST_SAMPLE_4 -> ListSample4(onReset)
+
+        UseCase.INPUT_SAMPLE_1 -> InputSample1(onReset)
+        UseCase.INPUT_SAMPLE_2 -> InputSample2(onReset)
+        UseCase.INPUT_SAMPLE_3 -> InputSample3(onReset)
+        UseCase.INPUT_SAMPLE_4 -> InputSample4(onReset)
 
         UseCase.EMOJI_SAMPLE_1 -> EmojiSample1(onReset)
         UseCase.EMOJI_SAMPLE_2 -> EmojiSample2(onReset)

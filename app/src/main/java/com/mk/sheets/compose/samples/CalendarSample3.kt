@@ -26,6 +26,7 @@ import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.models.CalendarTimeline
 import java.time.LocalDate
 
 @Composable
@@ -39,6 +40,7 @@ internal fun CalendarSample3(closeSelection: () -> Unit) {
     CalendarDialog(
         show = true,
         config = CalendarConfig(
+            disabledTimeline = CalendarTimeline.PAST,
             style = CalendarStyle.MONTH,
         ),
         selection = CalendarSelection.Period(

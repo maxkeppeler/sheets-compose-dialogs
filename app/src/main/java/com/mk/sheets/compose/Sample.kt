@@ -171,6 +171,30 @@ enum class UseCase(val category: UseCaseCategory, vararg val specifics: String) 
         "Simple list",
     ),
 
+    INPUT_SAMPLE_1(
+        UseCaseCategory.INPUT,
+        "Text",
+        "Divider",
+        "RadioButtonGroup with header & required",
+    ),
+
+    INPUT_SAMPLE_2(
+        UseCaseCategory.INPUT,
+        "CheckboxGroup with header & required",
+    ),
+
+    INPUT_SAMPLE_3(
+        UseCaseCategory.INPUT,
+        "Text",
+        "2 checkboxes",
+        "2 columns",
+    ),
+
+    INPUT_SAMPLE_4(
+        UseCaseCategory.INPUT,
+        "TextField with header & custom validation",
+    ),
+
     EMOJI_SAMPLE_1(
         UseCaseCategory.EMOJI,
         "Android rendering",

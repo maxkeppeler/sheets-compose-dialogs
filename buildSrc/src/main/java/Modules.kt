@@ -9,5 +9,6 @@ enum class Modules(val path: String) {
     DURATION(":duration"),
     OPTION(":option"),
     LIST(":list"),
+    INPUT(":input"),
     EMOJI(":emoji"),
 }

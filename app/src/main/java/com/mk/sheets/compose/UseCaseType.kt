@@ -26,5 +26,6 @@ enum class UseCaseCategory(val title: String) {
     OPTION("\uD83E\uDEA7  Option Dialog"),
     LIST("✅️  List Dialog"),
     EMOJI("\uD83D\uDE1C  Emoji Dialog"),
+    INPUT("\uD83D\uDD8A️ Input Dialog"),
     STATE("\uD83D\uDD03  State Dialog")
 }
