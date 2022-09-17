@@ -5,6 +5,7 @@ object Dependencies {
         const val CORE_KTX = "androidx.core:core-ktx:1.8.0"
         const val LIFECYCLE_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
         const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:1.5.1"
+        const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:2.5.0"
 
         object Test {
             const val JUNIT = "androidx.test.ext:junit:1.1.3"

@@ -20,12 +20,10 @@ package com.mk.sheets.compose.samples
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.list.ListDialog
-import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
-import com.maxkeppeler.sheets.option.OptionDialog
-import com.maxkeppeler.sheets.option.models.*
 import com.mk.sheets.compose.R
 
 @Composable
@@ -52,7 +50,7 @@ internal fun ListSample3(closeSelection: () -> Unit) {
     )
 
     ListDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = ListSelection.Multiple(
             showCheckBoxes = true,
             minChoices = 2,
@@ -60,7 +58,6 @@ internal fun ListSample3(closeSelection: () -> Unit) {
             options = options
         ) { indecies, options ->
             // Handle selection
-        },
-        onClose = { closeSelection() }
+        }
     )
 }

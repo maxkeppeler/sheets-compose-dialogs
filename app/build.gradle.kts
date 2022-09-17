@@ -70,6 +70,7 @@ dependencies {
     implementation(Dependencies.AndroidX.CORE_KTX)
     implementation(Dependencies.AndroidX.LIFECYCLE_KTX)
     implementation(Dependencies.AndroidX.ACTIVITY_COMPOSE)
+    implementation(Dependencies.AndroidX.NAVIGATION_COMPOSE)
 
     // Compose libs
     implementation(Dependencies.Compose.UI)

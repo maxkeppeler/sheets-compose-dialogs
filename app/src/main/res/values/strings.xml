@@ -1,3 +1,6 @@
 <resources>
     <string name="app_name" translatable="false">Sheets</string>
+    <string name="showcase_dialogs">Dialog Samples</string>
+    <string name="screen_showcase_bottom_sheet">BottomSheet</string>
+    <string name="screen_showcase_popup">PopUp</string>
 </resources>

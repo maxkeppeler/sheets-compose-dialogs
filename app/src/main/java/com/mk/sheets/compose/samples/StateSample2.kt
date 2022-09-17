@@ -24,13 +24,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.maxkeppeler.sheets.emoji.EmojiDialog
-import com.maxkeppeler.sheets.emoji.models.EmojiSelection
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
 import com.maxkeppeler.sheets.state.models.State
 import com.maxkeppeler.sheets.state.models.StateConfig
-import com.maxkeppeler.sheets.state.models.StateSelection
 import kotlinx.coroutines.delay
 
 @Composable
@@ -48,8 +46,7 @@ internal fun StateSample2(closeSelection: () -> Unit) {
         ProgressIndicator.Linear(progressAnimated)
     )
     StateDialog(
-        show = true,
-        config = StateConfig(state = state),
-        onClose = { closeSelection() }
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        config = StateConfig(state = state)
     )
 }

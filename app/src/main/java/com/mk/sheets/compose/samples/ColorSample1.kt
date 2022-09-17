@@ -23,8 +23,11 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.color.ColorDialog
-import com.maxkeppeler.sheets.color.models.*
+import com.maxkeppeler.sheets.color.models.ColorConfig
+import com.maxkeppeler.sheets.color.models.ColorSelection
+import com.maxkeppeler.sheets.color.models.MultipleColors
 
 @Composable
 internal fun ColorSample1(closeSelection: () -> Unit) {
@@ -41,7 +44,7 @@ internal fun ColorSample1(closeSelection: () -> Unit) {
     )
 
     ColorDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = ColorSelection(
             onSelectNone = { color.value = null },
             onSelectColor = { color.value = it },
@@ -49,6 +52,5 @@ internal fun ColorSample1(closeSelection: () -> Unit) {
         config = ColorConfig(
             templateColors = templateColors,
         ),
-        onClose = { closeSelection() }
     )
 }

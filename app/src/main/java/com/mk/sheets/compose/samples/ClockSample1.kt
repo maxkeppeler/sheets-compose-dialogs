@@ -21,6 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.clock.ClockDialog
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
@@ -31,7 +32,7 @@ internal fun ClockSample1(closeSelection: () -> Unit) {
 
     val selectedTime = remember { mutableStateOf(LocalTime.of(23, 20, 0)) }
     ClockDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = ClockSelection.HoursMinutes { hours, minutes ->
             selectedTime.value = LocalTime.of(hours, minutes, 0)
         },
@@ -39,6 +40,5 @@ internal fun ClockSample1(closeSelection: () -> Unit) {
             defaultTime = selectedTime.value,
             is24HourFormat = true
         ),
-        onClose = { closeSelection() }
     )
 }

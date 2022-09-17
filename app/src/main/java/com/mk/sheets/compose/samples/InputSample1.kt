@@ -22,6 +22,7 @@ import androidx.compose.material.icons.filled.Language
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.input.InputDialog
 import com.maxkeppeler.sheets.input.models.*
 
@@ -44,16 +45,13 @@ internal fun InputSample1(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = InputSelection(
             input = inputOptions,
             onPositiveClick = { result ->
                 val selectionIndex = result.getInt("Source") // or index 2 if no key was set
                 // Handle selection
             },
-        ),
-        onClose = {
-            closeSelection()
-        }
+        )
     )
 }

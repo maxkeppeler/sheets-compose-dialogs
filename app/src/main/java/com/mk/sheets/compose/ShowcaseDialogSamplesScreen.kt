@@ -1,0 +1,164 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
+package com.mk.sheets.compose
+
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.GridItemSpan
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Circle
+import androidx.compose.material.icons.filled.Info
+import androidx.compose.material3.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.mk.sheets.compose.models.Sample
+import com.mk.sheets.compose.models.UseCaseType
+import com.mk.sheets.compose.samples.*
+
+@Composable
+fun ShowcaseDialogSamplesScreen() {
+
+    val currentSample = rememberSaveable { mutableStateOf<Sample?>(null) }
+    val onReset = { currentSample.value = null }
+    val onResetSheet: SheetState.() -> Unit = { currentSample.value = null }
+    ShowcaseSamples { currentSample.value = it }
+
+    when (currentSample.value) {
+
+        Sample.CORE_SAMPLE_1 -> CoreSample1(onReset)
+        Sample.INFO_SAMPLE_1 -> InfoSample1(onReset)
+
+        Sample.COLOR_SAMPLE_1 -> ColorSample1(onReset)
+        Sample.COLOR_SAMPLE_2 -> ColorSample2(onReset)
+        Sample.COLOR_SAMPLE_3 -> ColorSample3(onReset)
+
+        Sample.CALENDAR_SAMPLE_1 -> CalendarSample1(onResetSheet)
+        Sample.CALENDAR_SAMPLE_2 -> CalendarSample2(onResetSheet)
+        Sample.CALENDAR_SAMPLE_3 -> CalendarSample3(onResetSheet)
+
+        Sample.CLOCK_SAMPLE_1 -> ClockSample1(onReset)
+        Sample.CLOCK_SAMPLE_2 -> ClockSample2(onReset)
+
+        Sample.DATE_TIME_SAMPLE_1 -> DateTimeSample1(onReset)
+        Sample.DATE_TIME_SAMPLE_2 -> DateTimeSample2(onReset)
+        Sample.DATE_TIME_SAMPLE_3 -> DateTimeSample3(onReset)
+
+        Sample.DURATION_SAMPLE_1 -> DurationSample1(onReset)
+        Sample.DURATION_SAMPLE_2 -> DurationSample2(onReset)
+
+        Sample.OPTION_SAMPLE_1 -> OptionSample1(onReset)
+        Sample.OPTION_SAMPLE_2 -> OptionSample2(onReset)
+        Sample.OPTION_SAMPLE_3 -> OptionSample3(onReset)
+
+        Sample.LIST_SAMPLE_1 -> ListSample1(onReset)
+        Sample.LIST_SAMPLE_2 -> ListSample2(onReset)
+        Sample.LIST_SAMPLE_3 -> ListSample3(onReset)
+        Sample.LIST_SAMPLE_4 -> ListSample4(onReset)
+
+        Sample.INPUT_SAMPLE_1 -> InputSample1(onReset)
+        Sample.INPUT_SAMPLE_2 -> InputSample2(onReset)
+        Sample.INPUT_SAMPLE_3 -> InputSample3(onReset)
+        Sample.INPUT_SAMPLE_4 -> InputSample4(onReset)
+
+        Sample.EMOJI_SAMPLE_1 -> EmojiSample1(onReset)
+        Sample.EMOJI_SAMPLE_2 -> EmojiSample2(onReset)
+
+        Sample.STATE_SAMPLE_1 -> StateSample1(onReset)
+        Sample.STATE_SAMPLE_2 -> StateSample2(onReset)
+        Sample.STATE_SAMPLE_3 -> StateSample3(onReset)
+        Sample.STATE_SAMPLE_4 -> StateSample4(onReset)
+        Sample.STATE_SAMPLE_5 -> StateSample5(onReset)
+        Sample.STATE_SAMPLE_6 -> StateSample6(onReset)
+        Sample.STATE_SAMPLE_7 -> StateSample7(onReset)
+        null -> Unit
+    }
+}
+
+@Composable
+internal fun ShowcaseSamples(
+    onSelectSample: (Sample) -> Unit
+) {
+
+    val groupedByType = remember {
+        val value = Sample.values().groupBy { it.category }
+        mutableStateOf(value)
+    }
+
+    LazyVerticalGrid(
+        contentPadding = PaddingValues(16.dp),
+        columns = GridCells.Fixed(2),
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
+    ) {
+        item(span = { GridItemSpan(2) }) {
+            Row(Modifier.padding(top = 8.dp)) {
+                Icon(imageVector = Icons.Filled.Info, null)
+                Text(
+                    modifier = Modifier.padding(start = 16.dp),
+                    text = "Click the samples to interact with the respective dialog.",
+                    style = MaterialTheme.typography.bodyMedium,
+                )
+            }
+        }
+        groupedByType.value.forEach { type ->
+            item(span = { GridItemSpan(2) }) { HeaderItem(type) }
+            itemsIndexed(type.value) { i, sample ->
+                SampleItem(i, sample, onSelectSample)
+            }
+        }
+    }
+}
+
+@Composable
+private fun HeaderItem(
+    setup: Map.Entry<UseCaseType, List<Sample>>
+) {
+    Text(
+        modifier = Modifier.padding(top = 24.dp, bottom = 8.dp),
+        text = setup.key.title,
+        style = MaterialTheme.typography.titleMedium
+    )
+}
+
+@Composable
+private fun SampleItem(
+    index: Int, sample: Sample,
+    onSelectSample: (Sample) -> Unit
+) {
+    ElevatedCard(
+        onClick = { onSelectSample(sample) }
+    ) {
+        Column(modifier = Modifier.padding(12.dp)) {
+            Text(
+                text = "${index.plus(1)}. Sample",
+                style = MaterialTheme.typography.titleMedium
+            )
+            Spacer(Modifier.height(12.dp))
+            sample.specifics.forEach { info ->
+                Row(
+                    modifier = Modifier.padding(bottom = if (index < Sample.values().size) 4.dp else 0.dp),
+                ) {
+                    Icon(
+                        modifier = Modifier
+                            .padding(top = 6.dp)
+                            .size(8.dp),
+                        imageVector = Icons.Filled.Circle,
+                        contentDescription = null
+                    )
+                    Text(
+                        modifier = Modifier.padding(start = 8.dp),
+                        text = info,
+                        style = MaterialTheme.typography.bodyMedium
+                    )
+                }
+            }
+        }
+    }
+}

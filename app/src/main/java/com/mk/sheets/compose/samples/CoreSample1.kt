@@ -26,15 +26,15 @@ import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.CoreDialog
 import com.maxkeppeker.sheets.core.models.CoreSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
-import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 
 @Composable
 internal fun CoreSample1(closeSelection: () -> Unit) {
 
     CoreDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = CoreSelection(
             withButtonView = true,
             negativeButton = SelectionButton(
@@ -52,8 +52,5 @@ internal fun CoreSample1(closeSelection: () -> Unit) {
         body = {
             Text(text = "Test")
         },
-        onClose = {
-            closeSelection()
-        }
     )
 }

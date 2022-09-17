@@ -19,8 +19,12 @@ package com.mk.sheets.compose.samples
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.input.InputDialog
-import com.maxkeppeler.sheets.input.models.*
+import com.maxkeppeler.sheets.input.models.InputCheckbox
+import com.maxkeppeler.sheets.input.models.InputConfig
+import com.maxkeppeler.sheets.input.models.InputSelection
+import com.maxkeppeler.sheets.input.models.InputText
 
 @Composable
 internal fun InputSample3(closeSelection: () -> Unit) {
@@ -34,7 +38,7 @@ internal fun InputSample3(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         config = InputConfig(columns = 2),
         selection = InputSelection(
             input = inputOptions,
@@ -42,7 +46,6 @@ internal fun InputSample3(closeSelection: () -> Unit) {
                 val selectionIndex = result.getIntArray("Fruits") // or index 0 if no key was set
                 // Handle selection
             },
-        ),
-        onClose = { closeSelection() }
+        )
     )
 }

@@ -22,6 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
 import com.maxkeppeler.sheets.state.models.State
@@ -31,12 +32,15 @@ import kotlinx.coroutines.delay
 @Composable
 internal fun StateSample1(closeSelection: () -> Unit) {
 
+    val sheetState = rememberSheetState(visible = false, onCloseRequest = { closeSelection() })
+
     val state = remember {
         val startState =
             State.Loading(labelText = "Fetching new data...", ProgressIndicator.Circular())
         mutableStateOf<State>(startState)
     }
     LaunchedEffect(Unit) {
+        sheetState.show()
         delay(2000)
         state.value = State.Failure(labelText = "Fetching data failed. Trying again.")
         delay(2000)
@@ -44,11 +48,12 @@ internal fun StateSample1(closeSelection: () -> Unit) {
             State.Loading(labelText = "Fetching new data...", ProgressIndicator.Circular())
         delay(2000)
         state.value = State.Success(labelText = "Data fetched..!")
+        delay(2000)
+        sheetState.hide()
     }
 
     StateDialog(
-        show = true,
-        config = StateConfig(state = state.value),
-        onClose = { closeSelection() }
+        state = sheetState,
+        config = StateConfig(state = state.value)
     )
 }

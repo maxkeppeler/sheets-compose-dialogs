@@ -21,20 +21,18 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import com.maxkeppeler.sheets.date_time.DateTimeDialog
-import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.duration.DurationDialog
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationFormat
 import com.maxkeppeler.sheets.duration.models.DurationSelection
-import java.time.LocalTime
 
 @Composable
 internal fun DurationSample1(closeSelection: () -> Unit) {
 
     val selectedTimeInSeconds = remember { mutableStateOf<Long>(240) }
     DurationDialog(
-        show = true,
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
         selection = DurationSelection { newTimeInSeconds ->
             selectedTimeInSeconds.value = newTimeInSeconds
         },
@@ -42,6 +40,5 @@ internal fun DurationSample1(closeSelection: () -> Unit) {
             timeFormat = DurationFormat.HH_MM_SS,
             currentTime = selectedTimeInSeconds.value,
         ),
-        onClose = { closeSelection() }
     )
 }

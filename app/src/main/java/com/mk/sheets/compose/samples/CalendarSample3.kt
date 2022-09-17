@@ -22,6 +22,8 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -30,7 +32,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarTimeline
 import java.time.LocalDate
 
 @Composable
-internal fun CalendarSample3(closeSelection: () -> Unit) {
+internal fun CalendarSample3(closeSelection: SheetState.() -> Unit) {
 
     val selectedDateRange = remember {
         val value = Range(LocalDate.now().minusDays(5), LocalDate.now())
@@ -38,7 +40,7 @@ internal fun CalendarSample3(closeSelection: () -> Unit) {
     }
 
     CalendarDialog(
-        show = true,
+        state = rememberSheetState(true, onCloseRequest = closeSelection),
         config = CalendarConfig(
             disabledTimeline = CalendarTimeline.PAST,
             style = CalendarStyle.MONTH,
@@ -48,6 +50,5 @@ internal fun CalendarSample3(closeSelection: () -> Unit) {
         ) { startDate, endDate ->
             selectedDateRange.value = Range(startDate, endDate)
         },
-        onClose = { closeSelection() }
     )
 }

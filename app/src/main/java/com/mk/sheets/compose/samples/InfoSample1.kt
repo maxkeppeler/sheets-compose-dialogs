@@ -21,17 +21,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.info.InfoDialog
-import com.maxkeppeler.sheets.info.models.Body
+import com.maxkeppeler.sheets.info.models.InfoBody
 import com.maxkeppeler.sheets.info.models.InfoSelection
 
 @Composable
 internal fun InfoSample1(closeSelection: () -> Unit) {
 
     InfoDialog(
-        show = true,
-        body = Body.Default(
+        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        body = InfoBody.Default(
             bodyText = "this is a very long text bla bla",
             postBody = {
                 TextButton(onClick = { /*TODO*/ }) {
@@ -39,7 +39,9 @@ internal fun InfoSample1(closeSelection: () -> Unit) {
                 }
             }
         ),
-        selection = InfoSelection(onPositiveClick = {}, onNegativeClick = {}),
-        onClose = { closeSelection() }
+        selection = InfoSelection(
+            onPositiveClick = {},
+            onNegativeClick = {}
+        )
     )
 }
