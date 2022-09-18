@@ -25,7 +25,6 @@ fun BottomSheetSample(
 ) {
     val coroutine = rememberCoroutineScope()
     val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
-
     val dialogSheetState = rememberSheetState(onCloseRequest = { hideBottomSheet() })
 
     ModalBottomSheetLayout(

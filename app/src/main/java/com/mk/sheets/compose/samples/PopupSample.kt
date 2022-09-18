@@ -20,7 +20,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 
 @Composable
-internal fun ShowcasePopupSample(visible: Boolean, onHide: () -> Unit) {
+internal fun PopupSample(visible: Boolean, onHide: () -> Unit) {
 
     if (!visible) return
 

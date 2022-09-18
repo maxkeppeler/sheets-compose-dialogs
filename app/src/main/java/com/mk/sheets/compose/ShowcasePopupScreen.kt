@@ -8,17 +8,9 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
-import com.maxkeppeler.sheets.calendar.CalendarView
-import com.maxkeppeler.sheets.calendar.models.CalendarConfig
-import com.maxkeppeler.sheets.calendar.models.CalendarSelection
-import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.core.R
-import com.mk.sheets.compose.samples.ShowcasePopupSample
+import com.mk.sheets.compose.samples.PopupSample
 
 @Composable
 internal fun ShowcasePopupScreen() {
@@ -43,7 +35,7 @@ internal fun ShowcasePopupScreen() {
             textAlign = TextAlign.Center
         )
 
-        ShowcasePopupSample(
+        PopupSample(
             visible = showPopup,
             onHide = { showPopup = false }
         )

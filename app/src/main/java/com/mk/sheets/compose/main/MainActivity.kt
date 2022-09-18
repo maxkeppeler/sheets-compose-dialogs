@@ -13,10 +13,11 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalFoundationApi::class)
+@file:OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 
 package com.mk.sheets.compose.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,10 +28,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.mk.sheets.compose.R
 import com.mk.sheets.compose.models.Screen
 import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
 
@@ -57,10 +61,12 @@ class MainActivity : ComponentActivity() {
 private fun ScrapBook(
     navController: NavHostController,
 ) {
-    val items = listOf(Screen.ShowcaseDialogSamples, Screen.ShowcasePopup, Screen.ShowcaseBottomSheet)
+    val items =
+        listOf(Screen.ShowcaseDialogSamples, Screen.ShowcasePopup, Screen.ShowcaseBottomSheet)
     val (screen, destination) = remember { mutableStateOf<Screen>(Screen.ShowcaseDialogSamples) }
 
     Scaffold(
+        topBar = { TopBar() },
         bottomBar = { BottomBar(screen, navController, items) },
         floatingActionButtonPosition = FabPosition.End,
     ) { innerPadding ->
@@ -70,6 +76,36 @@ private fun ScrapBook(
             destination = destination,
         )
     }
+}
+
+@Composable
+private fun TopBar() {
+
+    val context = LocalContext.current
+    val gitHubUrl = "https://github.com/maxkeppeler/sheets-compose-dialogs"
+
+    SmallTopAppBar(
+        title = {
+            Text(
+                text = stringResource(R.string.app_name_full),
+                style = MaterialTheme.typography.headlineSmall
+            )
+        },
+        actions = {
+            IconButton(
+                onClick = {
+                    val intent = Intent.parseUri(gitHubUrl, Intent.URI_INTENT_SCHEME)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    context.startActivity(intent)
+                }
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.ic_github),
+                    contentDescription = stringResource(R.string.github_repository),
+                )
+            }
+        }
+    )
 }
 
 @Composable
