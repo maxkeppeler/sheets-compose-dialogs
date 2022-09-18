@@ -5,4 +5,5 @@
     <string name="screen_showcase_bottom_sheet">BottomSheet</string>
     <string name="screen_showcase_popup">PopUp</string>
     <string name="github_repository">GitHub repository</string>
+    <string name="donate_paypal">Donate with PayPal</string>
 </resources>
