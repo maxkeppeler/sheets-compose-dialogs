@@ -9,13 +9,10 @@ object Dependencies {
 
         object Test {
             const val JUNIT = "androidx.test.ext:junit:1.1.3"
-            const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
+            const val ESPRESSO_CORE =
+                "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
         }
     }
-
-    const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
-    const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.3.0"
-    const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
 
     object Compose {
 
@@ -24,9 +21,11 @@ object Dependencies {
         const val MATERIAL = "androidx.compose.material:material:${Versions.COMPOSE}"
         const val MATERIAL_3 = "androidx.compose.material3:material3:1.0.0-alpha15"
         const val UI_TOOLING = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
-        const val ICONS_EXTENDED = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
+        const val ICONS_EXTENDED =
+            "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
         const val ANIMATION = "androidx.compose.animation:animation:${Versions.COMPOSE}"
-        const val ANIMATION_GRAPHICS = "androidx.compose.animation:animation-graphics:${Versions.COMPOSE}"
+        const val ANIMATION_GRAPHICS =
+            "androidx.compose.animation:animation-graphics:${Versions.COMPOSE}"
 
         object Test {
             const val JUNIT = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
@@ -47,4 +46,18 @@ object Dependencies {
 
         const val JUNIT = "junit:junit:${Versions.JUNIT}"
     }
+
+    object Kotlin {
+        const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.0"
+        const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
+    }
+
+    object Gradle {
+        const val BUILD = "com.android.tools.build:gradle:7.3.0"
+    }
+
+    const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.3.0"
+    const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
+
+    const val MAVEN_PUBLISH = "com.vanniktech:gradle-maven-publish-plugin:0.21.0"
 }

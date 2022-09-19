@@ -13,11 +13,28 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
+import com.android.build.gradle.LibraryExtension
+
 plugins {
-    id("com.android.application") version ("7.2.2") apply false
-    id("com.android.library") version ("7.2.2") apply false
-    id("org.jetbrains.kotlin.android") version ("1.7.0") apply false
-    id("com.diffplug.spotless") version ("6.10.0")
+    id(Plugins.APPLICATION.id) version (Plugins.APPLICATION.version) apply false
+    id(Plugins.LIBRARY.id) version (Plugins.APPLICATION.version) apply false
+    id(Plugins.KOTLIN.id) version (Plugins.KOTLIN.version) apply false
+    id(Plugins.SPOTLESS.id) version (Plugins.SPOTLESS.version)
+}
+
+buildscript {
+
+    repositories {
+        google()
+        mavenCentral()
+        maven("https://plugins.gradle.org/m2/")
+    }
+
+    dependencies {
+        classpath(Dependencies.Kotlin.GRADLE_PLUGIN)
+        classpath(Dependencies.Gradle.BUILD)
+        classpath(Dependencies.MAVEN_PUBLISH)
+    }
 }
 
 allprojects {
@@ -28,7 +45,8 @@ allprojects {
 }
 
 subprojects {
-    plugins.apply("com.diffplug.spotless")
+    plugins.apply(Plugins.SPOTLESS.id)
+    project.plugins.applyBaseConfig(project)
     spotless {
         kotlin {
             target("**/*.kt")
@@ -37,7 +55,73 @@ subprojects {
         }
         kotlinGradle {
             target("*.gradle.kts", "gradle/*.gradle.kts", "buildSrc/*.gradle.kts")
-            licenseHeaderFile(rootProject.file("copyright.kt"), "import|tasks|apply|plugins|rootProject")
+            licenseHeaderFile(
+                rootProject.file("copyright.kt"),
+                "import|tasks|apply|plugins|rootProject"
+            )
+        }
+    }
+}
+
+
+/**
+ * Apply base configurations to the subjects that include specific custom plugins.
+ */
+fun PluginContainer.applyBaseConfig(project: Project) {
+    whenPluginAdded {
+        when (this) {
+            is LibraryModulePlugin -> {
+                project.extensions
+                    .getByType<LibraryExtension>()
+                    .apply {
+                        baselibraryConfig()
+                    }
+            }
+        }
+    }
+}
+
+/**
+ * Apply base library configurations to the subprojects that include the plugin [LibraryModulePlugin].
+ */
+fun com.android.build.gradle.BaseExtension.baselibraryConfig() {
+
+    compileSdkVersion(App.COMPILE_SDK)
+
+    defaultConfig {
+        minSdk = App.MIN_SDK
+        targetSdk = App.TARGET_SDK
+        testInstrumentationRunner = App.TEST_INSTRUMENTATION_RUNNER
+    }
+
+    compileOptions.apply {
+        sourceCompatibility(JavaVersion.VERSION_1_8)
+        targetCompatibility(JavaVersion.VERSION_1_8)
+    }
+
+    buildFeatures.compose = true
+    composeOptions.kotlinCompilerExtensionVersion = Versions.COMPOSE
+
+    packagingOptions.resources.excludes += listOf(
+        "META-INF/DEPENDENCIES.txt",
+        "META-INF/LICENSE",
+        "META-INF/LICENSE.txt",
+        "META-INF/NOTICE",
+        "META-INF/NOTICE.txt",
+        "META-INF/AL2.0",
+        "META-INF/LGPL2.1"
+    )
+
+    tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+        kotlinOptions {
+            jvmTarget = "1.8"
+            freeCompilerArgs = freeCompilerArgs + listOf(
+                "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+                "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
+                "-Xopt-in=androidx.compose.ui.test.ExperimentalTestApi",
+                "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi",
+                "-Xopt-in=androidx.compose.ui.ExperimentalComposeUiApi",
+            )
         }
     }
 }

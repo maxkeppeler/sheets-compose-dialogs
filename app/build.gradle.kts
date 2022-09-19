@@ -14,12 +14,12 @@
  *  limitations under the License.
  */
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
-    id("kotlin-android")
+    id(Plugins.APPLICATION.id)
+    id(Plugins.KOTLIN.id)
 }
 
 android {
+    namespace = App.ID
     defaultConfig {
         applicationId = App.ID
         compileSdk = App.COMPILE_SDK
@@ -62,30 +62,50 @@ android {
 
 dependencies {
 
+    // Modules
+
     Modules.values().forEach { module ->
-        api(project(module.path))
+        apis(project(module.path))
     }
 
-    implementation(Dependencies.KOTLIN_STD)
-    implementation(Dependencies.AndroidX.CORE_KTX)
-    implementation(Dependencies.AndroidX.LIFECYCLE_KTX)
-    implementation(Dependencies.AndroidX.ACTIVITY_COMPOSE)
-    implementation(Dependencies.AndroidX.NAVIGATION_COMPOSE)
+
+    // Kotlin libs
+
+    implementations(Dependencies.Kotlin.KOTLIN_STD)
+
+
+    // AndroidX libs
+
+    implementations(
+        Dependencies.AndroidX.CORE_KTX,
+        Dependencies.AndroidX.LIFECYCLE_KTX,
+        Dependencies.AndroidX.ACTIVITY_COMPOSE,
+        Dependencies.AndroidX.NAVIGATION_COMPOSE,
+    )
+
 
     // Compose libs
-    implementation(Dependencies.Compose.UI)
-    implementation(Dependencies.Compose.UI_TOOLING)
-    implementation(Dependencies.Compose.ANIMATION)
-    implementation(Dependencies.Compose.RUNTIME)
-    implementation(Dependencies.Compose.MATERIAL)
-    implementation(Dependencies.Compose.MATERIAL_3)
-    implementation(Dependencies.Compose.ICONS_EXTENDED)
+
+    implementations(
+        Dependencies.Compose.UI,
+        Dependencies.Compose.UI_TOOLING,
+        Dependencies.Compose.ANIMATION,
+        Dependencies.Compose.RUNTIME,
+        Dependencies.Compose.MATERIAL,
+        Dependencies.Compose.MATERIAL_3,
+        Dependencies.Compose.ICONS_EXTENDED,
+    )
 
     // Test libs
+
+    androidTestImplementations(
+        Dependencies.AndroidX.Test.JUNIT,
+        Dependencies.AndroidX.Test.ESPRESSO_CORE,
+        Dependencies.Compose.Test.JUNIT
+    )
+    debugImplementations(
+        Dependencies.Compose.Test.TOOLING,
+        Dependencies.Compose.Test.MANIFEST
+    )
     testImplementation(Dependencies.Test.JUNIT)
-    androidTestImplementation(Dependencies.AndroidX.Test.JUNIT)
-    androidTestImplementation(Dependencies.AndroidX.Test.ESPRESSO_CORE)
-    androidTestImplementation(Dependencies.Compose.Test.JUNIT)
-    debugImplementation(Dependencies.Compose.Test.TOOLING)
-    debugImplementation(Dependencies.Compose.Test.MANIFEST)
 }

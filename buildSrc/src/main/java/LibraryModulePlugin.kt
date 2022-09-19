@@ -1,78 +1,67 @@
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.dsl.DependencyHandler
+import org.gradle.kotlin.dsl.project
 
 class LibraryModulePlugin : Plugin<Project> {
 
     override fun apply(project: Project) {
         with(project) {
             applyPlugins()
-            dependenciesConf()
+            applyDependencies()
         }
     }
 
     private fun Project.applyPlugins() {
         plugins.run {
-            apply("com.android.library")
-            apply("org.jetbrains.kotlin.android")
-            apply("kotlin-android")
+            apply(Plugins.LIBRARY.id)
+            apply(Plugins.KOTLIN.id)
+            apply(Plugins.MAVEN_PUBLISH.id)
         }
     }
 
-    private fun Project.dependenciesConf() {
+    private fun Project.applyDependencies() {
 
         dependencies.apply {
 
-            implementation(Dependencies.KOTLIN_STD)
-            implementation(Dependencies.AndroidX.CORE_KTX)
+            // All modules require the core module
+
+            if (name != Modules.CORE.moduleName) {
+                apis(project(Modules.CORE.path))
+            }
+
+
+            // AndroidX & Kotlin libs
+
+            implementations(Dependencies.Kotlin.KOTLIN_STD)
+            implementations(Dependencies.AndroidX.CORE_KTX)
+
 
             // Compose libs
-            implementation(Dependencies.Compose.UI)
-            implementation(Dependencies.Compose.UI_TOOLING)
-            implementation(Dependencies.Compose.ANIMATION)
-            implementation(Dependencies.Compose.ANIMATION_GRAPHICS)
-            implementation(Dependencies.Compose.RUNTIME)
-            implementation(Dependencies.Compose.MATERIAL)
-            implementation(Dependencies.Compose.MATERIAL_3)
-            implementation(Dependencies.Compose.ICONS_EXTENDED)
+
+            implementations(
+                Dependencies.Compose.UI,
+                Dependencies.Compose.UI_TOOLING,
+                Dependencies.Compose.ANIMATION,
+                Dependencies.Compose.ANIMATION_GRAPHICS,
+                Dependencies.Compose.RUNTIME,
+                Dependencies.Compose.MATERIAL,
+                Dependencies.Compose.MATERIAL_3,
+                Dependencies.Compose.ICONS_EXTENDED,
+            )
+
 
             // Test libs
-            testImplementation(Dependencies.Test.JUNIT)
-            androidTestImplementation(Dependencies.AndroidX.Test.JUNIT)
-            androidTestImplementation(Dependencies.AndroidX.Test.ESPRESSO_CORE)
-            androidTestImplementation(Dependencies.Compose.Test.JUNIT)
-            debugImplementation(Dependencies.Compose.Test.MANIFEST)
-       }
-    }
 
-    //util functions for adding the different type dependencies from build.gradle file
-    fun DependencyHandler.kapt(vararg list: String) {
-        list.forEach { dependency ->
-            add("kapt", dependency)
-        }
-    }
-
-    fun DependencyHandler.implementation(vararg list: String) {
-        list.forEach { dependency ->
-            add("implementation", dependency)
-        }
-    }
-
-    fun DependencyHandler.debugImplementation(vararg list: String) {
-        list.forEach { dependency ->
-            add("debugImplementation", dependency)
-        }
-    }
-
-    fun DependencyHandler.androidTestImplementation(vararg list: String) {
-        list.forEach { dependency ->
-            add("androidTestImplementation", dependency)
-        }
-    }
-
-    fun DependencyHandler.testImplementation(vararg list: String) {
-        list.forEach { dependency ->
-            add("testImplementation", dependency)
+            androidTestImplementations(
+                Dependencies.AndroidX.Test.JUNIT,
+                Dependencies.AndroidX.Test.ESPRESSO_CORE,
+                Dependencies.Compose.Test.JUNIT
+            )
+            debugImplementations(
+                Dependencies.Compose.Test.TOOLING,
+                Dependencies.Compose.Test.MANIFEST
+            )
+            testImplementations(Dependencies.Test.JUNIT)
         }
     }
 }
