@@ -56,6 +56,7 @@ object Dependencies {
         const val BUILD = "com.android.tools.build:gradle:7.3.0"
     }
 
+    const val DOKKA = "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
     const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.3.0"
     const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
 

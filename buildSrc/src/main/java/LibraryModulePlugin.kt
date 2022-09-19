@@ -15,6 +15,7 @@ class LibraryModulePlugin : Plugin<Project> {
         plugins.run {
             apply(Plugins.LIBRARY.id)
             apply(Plugins.KOTLIN.id)
+            apply(Plugins.DOKKA.id)
             apply(Plugins.MAVEN_PUBLISH.id)
         }
     }

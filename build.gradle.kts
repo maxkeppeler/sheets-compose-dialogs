@@ -20,6 +20,7 @@ plugins {
     id(Plugins.LIBRARY.id) version (Plugins.APPLICATION.version) apply false
     id(Plugins.KOTLIN.id) version (Plugins.KOTLIN.version) apply false
     id(Plugins.SPOTLESS.id) version (Plugins.SPOTLESS.version)
+    id(Plugins.DOKKA.id) version (Plugins.DOKKA.version)
 }
 
 buildscript {
@@ -34,6 +35,7 @@ buildscript {
         classpath(Dependencies.Kotlin.GRADLE_PLUGIN)
         classpath(Dependencies.Gradle.BUILD)
         classpath(Dependencies.MAVEN_PUBLISH)
+        classpath(Dependencies.DOKKA)
     }
 }
 
@@ -42,6 +44,10 @@ allprojects {
         google()
         mavenCentral()
     }
+}
+
+tasks.dokkaHtmlMultiModule.configure {
+    outputDirectory.set(projectDir.resolve("docs/api"))
 }
 
 subprojects {
