@@ -16,6 +16,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.mk.sheets.compose.models.Sample
@@ -28,7 +29,11 @@ fun ShowcaseDialogSamplesScreen() {
     val currentSample = rememberSaveable { mutableStateOf<Sample?>(null) }
     val onReset = { currentSample.value = null }
     val onResetSheet: SheetState.() -> Unit = { currentSample.value = null }
-    ShowcaseSamples { currentSample.value = it }
+
+    ShowcaseSamples(
+        modifier = Modifier.alpha(if (currentSample.value != null) 0f else 1f),
+        onSelectSample = { currentSample.value = it }
+    )
 
     when (currentSample.value) {
 
@@ -83,6 +88,7 @@ fun ShowcaseDialogSamplesScreen() {
 
 @Composable
 internal fun ShowcaseSamples(
+    modifier: Modifier,
     onSelectSample: (Sample) -> Unit
 ) {
 
@@ -92,6 +98,7 @@ internal fun ShowcaseSamples(
     }
 
     LazyVerticalGrid(
+        modifier = modifier,
         contentPadding = PaddingValues(16.dp),
         columns = GridCells.Fixed(2),
         verticalArrangement = Arrangement.spacedBy(16.dp),
