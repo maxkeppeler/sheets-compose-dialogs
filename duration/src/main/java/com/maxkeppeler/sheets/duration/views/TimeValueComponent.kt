@@ -25,24 +25,27 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The value component that reflects one unit and its value.
  * @param valuePairs The list of value pairs that will be displayed.
+ * @param valid If the current value is valid.
  * @param indexOfFirstValue The index of the first valid value.
  * @param hintView If the current component will be displays as a small hint or not.
  */
 @Composable
 internal fun TimeValueComponent(
     valuePairs: List<Pair<String, String>>,
+    valid: Boolean = true,
     indexOfFirstValue: Int? = null,
     hintView: Boolean = false
 ) {
 
     val containerModifier = if (!hintView) Modifier
         .fillMaxWidth()
-        .padding(bottom = dimensionResource(RC.dimen.scd_normal_100))
+        .padding(bottom = if (valid) dimensionResource(RC.dimen.scd_normal_100) else 0.dp)
     else Modifier.wrapContentWidth()
 
     Row(

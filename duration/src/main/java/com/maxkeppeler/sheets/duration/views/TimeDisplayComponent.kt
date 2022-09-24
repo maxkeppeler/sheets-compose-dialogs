@@ -35,7 +35,8 @@ internal fun TimeDisplayComponent(
 
     TimeValueComponent(
         indexOfFirstValue = indexOfFirstValue,
-        valuePairs = valuePairs
+        valuePairs = valuePairs,
+        valid = minTimeValue == null && maxTimeValue == null
     )
 
     TimeInfoComponent(

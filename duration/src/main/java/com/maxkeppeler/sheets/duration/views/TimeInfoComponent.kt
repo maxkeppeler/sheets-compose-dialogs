@@ -19,14 +19,16 @@ package com.maxkeppeler.sheets.duration.views
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
 import com.maxkeppeler.sheets.duration.R
-
+import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
+import com.maxkeppeler.sheets.core.R as RC
 /**
  * The info component that will show a hint if the selected time is out of the specified bounds.
  * @param minTimeValue The minimum valid time.
@@ -42,22 +44,21 @@ internal fun TimeInfoComponent(
 
         val labelRes =
             if (minTimeValue != null) R.string.sheets_at_least_placeholder
-            else if (maxTimeValue != null) R.string.sheets_at_most_placeholder
-            else null
+            else R.string.sheets_at_most_placeholder
 
         val options = getFormattedHintTime(minTimeValue ?: maxTimeValue!!)
-        labelRes?.let {
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.Center,
-                verticalAlignment = Alignment.Bottom
-            ) {
-                Text(text = stringResource(id = labelRes))
-                TimeValueComponent(
-                    valuePairs = options,
-                    hintView = true
-                )
-            }
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(bottom = dimensionResource(RC.dimen.scd_normal_100)),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Text(text = stringResource(id = labelRes))
+            TimeValueComponent(
+                valuePairs = options,
+                hintView = true
+            )
         }
     }
 }
