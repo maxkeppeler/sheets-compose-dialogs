@@ -1,3 +1,9 @@
+<style>
+td, th {
+   border: none!important;
+}
+</style>
+
 # Sheets-Compose-Dialogs
 
 <p>
@@ -81,8 +87,20 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_color_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_color_sample_1.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_color_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_color_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_color_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_color_sample_1.gif" /></td> 
+    <td width="25%"><img src="docs/res/dark/dialog_color_sample_2.gif" /></td> 
+    <td width="25%"><img src="docs/res/dark/dialog_color_sample_3.gif" /></td> 
   </tr>
 </table>
 
@@ -90,17 +108,40 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_calendar_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_calendar_sample_2.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_3.gif" /></td>
   </tr>
 </table>
+
 
 ## Clock Dialog / View
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_clock_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_clock_sample_2.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_clock_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_clock_sample_2.gif" /></td>
   </tr>
 </table>
 
@@ -109,8 +150,18 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_duration_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_duration_sample_2.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_duration_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_duration_sample_2.gif" /></td>
   </tr>
 </table>
 
@@ -118,17 +169,42 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_date-time_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_date-time_sample_3.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
   </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_3.gif" /></td>
+  </tr>
+  <tr>
+     <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_3.gif" /></td>
+ </tr>
 </table>
+
 
 ## Option Dialog / View
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_option_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_option_sample_3.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_option_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_option_sample_3.gif" /></td>
   </tr>
 </table>
 
@@ -137,17 +213,46 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_list_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_list_sample_2.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th>Sample 4</th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_list_sample_4.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_list_sample_4.gif" /></td>
   </tr>
 </table>
+
 
 ## Input Dialog / View
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_input_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_input_sample_4.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th>Sample 4</th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_input_sample_4.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_input_sample_4.gif" /></td>
   </tr>
 </table>
 
@@ -155,11 +260,20 @@ dependencies {
 </br>
 <table>
   <tr>
-    <td><img src="docs/res/light/dialog_emoji_sample_1.gif" /></td>
-    <td><img src="docs/res/dark/dialog_emoji_sample_2.gif" /></td> 
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/light/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/light/dialog_emoji_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="docs/res/dark/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="docs/res/dark/dialog_emoji_sample_2.gif" /></td>
   </tr>
 </table>
-
 
 ## Support this project
 
