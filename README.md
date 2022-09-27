@@ -48,28 +48,6 @@ for PopUps, BottomSheets and other containers.
 
 <img src="art/showcase.png" alt="sheets Library">
 
-## Table of Contents
-
-- [Get started](#get-started)
-    - [Info Dialog/ View](#info)
-    - [Clock Dialog/ View](#clock)
-    - [Duration Dialog/ View](#duration)
-    - [Input Dialog/ View](#input)
-    - [Calendar Dialog/ View](#calendar)
-    - [DateTime Dialog/ View](#date-time)
-    - [Color Dialog/ View](#color)
-    - [Option Dialog/ View](#option)
-    - [List Dialog/ View](#list)
-    - [Emoji Dialog/ View](#emoji)
-    - [State Dialog/ View](#state)
-    - [Core Dialog/ View](#core)
-- [Misc](#misc)
-    - [Support this project](#support-this-project)
-    - [Contribute](#contribute)
-    - [Donate](#donate)
-    - [Showcase](#showcase)
-    - [License](#license)
-
 # Get started
 
 A sheet can dynamically be displayed as either a dialog or as a bottom-sheet. Check out
@@ -96,6 +74,92 @@ dependencies {
   implementation 'com.maxkeppeler.sheets-compose-dialogs:<module>]:<latest-version>'
 }
 ```
+
+</br>
+
+## Color Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_color_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_color_sample_1.gif" /></td> 
+  </tr>
+</table>
+
+## Calendar Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_calendar_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_calendar_sample_2.gif" /></td> 
+  </tr>
+</table>
+
+## Clock Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_clock_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_clock_sample_2.gif" /></td> 
+  </tr>
+</table>
+
+
+## Duration Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_duration_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_duration_sample_2.gif" /></td> 
+  </tr>
+</table>
+
+## Date-Time Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_date-time_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_date-time_sample_3.gif" /></td> 
+  </tr>
+</table>
+
+## Option Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_option_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_option_sample_3.gif" /></td> 
+  </tr>
+</table>
+
+
+## List Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_list_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_list_sample_2.gif" /></td> 
+  </tr>
+</table>
+
+## Input Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_input_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_input_sample_4.gif" /></td> 
+  </tr>
+</table>
+
+## Emoji Dialog / View
+</br>
+<table>
+  <tr>
+    <td><img src="docs/res/light/dialog_emoji_sample_1.gif" /></td>
+    <td><img src="docs/res/dark/dialog_emoji_sample_2.gif" /></td> 
+  </tr>
+</table>
+
 
 ## Support this project
 
