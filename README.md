@@ -1,9 +1,3 @@
-<style>
-td, th {
-   border: none!important;
-}
-</style>
-
 # Sheets-Compose-Dialogs
 
 <p>
@@ -55,13 +49,13 @@ for PopUps, BottomSheets and other containers.
 <img src="art/showcase.png" alt="sheets Library">
 
 # Get started
+The library contains various use-cases. Each module represents one use-case and contains a `*Dialog` and `*View`. You can use the `*Dialog` directly while you can use the `*View` for bottom sheets, popups and other non-scrollable elements.
 
-A sheet can dynamically be displayed as either a dialog or as a bottom-sheet. Check out
-the [sample](https://github.com/MaxKeppeler/sheets/blob/main/sample/sample.apk).
+As the `core` module is the foundation of all other use-cases, you have to implement that additionally to the ones you want to use.
 
-You have to use the `core` module as it is the foundation of any sheet.
+## Requirement
 
-In your top-level `build.gradle` file:
+In your top-level `build.gradle`
 
 ```gradle
 repositories {
@@ -77,14 +71,32 @@ In your app `build.gradle` file:
 ```gradle
 dependencies {
   ...
-  implementation 'com.maxkeppeler.sheets-compose-dialogs:<module>]:<latest-version>'
+  implementation 'com.maxkeppeler.sheets-compose-dialogs:core:<version>' // necessary
+  implementation 'com.maxkeppeler.sheets-compose-dialogs:<module>:<version>'
 }
 ```
+Replace `<version>` with the (latest or preferred) version of the library.
 
+Replace `<module>` with the module you want to use.
+
+Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date-time` | `option` | `list` | `input` | `emoji` | `state`  
+
+# Resources 
+
+📖 Get a better insight into the API\
+[Sheets-Compose-Dialogs API Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/){target="_blank"}
+
+✨ General documentation, resources and setup samples and more\
+[Sheets-Compose-Dialogs General Documentation](https://maxkeppeler.notion.site/sheets-compose-dialogs-804f0ebcb2c84b98b7afa5f687295aed){target="_blank"}
+
+# Showcase
+Check out some of the use-cases as dialogs. All of them could be displayed within a PopUp, BottomSheet or another container view as well.
+</br>
 </br>
 
 ## Color Dialog / View
-</br>
+Select a 
+Check out some of the use-cases as dialogs. All of them could be displayed within a popup, BottomSheet or another container view as well.
 <table>
   <tr>
     <th>Sample 1</th>
@@ -314,7 +326,7 @@ Show your appreciation by donating me a coffee. Thank you very much!
 
 Check out some apps which are using this library.<br/>
 
-- [Mangata](http://mangata-mk.com)
+- [Mangata (Soon)](http://mangata-mk.com)
 
 ## License
 
