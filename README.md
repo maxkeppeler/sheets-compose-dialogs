@@ -46,7 +46,7 @@ for PopUps, BottomSheets and other containers.
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
 </a>
 
-<img src="art/showcase.png" alt="sheets Library">
+<img src="docs/res/showcase.png" alt="sheets Library">
 
 # Get started
 The library contains various use-cases. Each module represents one use-case and contains a `*Dialog` and `*View`. You can use the `*Dialog` directly while you can use the `*View` for bottom sheets, popups and other non-scrollable elements.
