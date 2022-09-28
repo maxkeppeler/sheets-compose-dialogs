@@ -79,7 +79,7 @@ Replace `<version>` with the (latest or preferred) version of the library.
 
 Replace `<module>` with the module you want to use.
 
-Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date-time` | `option` | `list` | `input` | `emoji` | `state`  
+Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date_time` | `option` | `list` | `input` | `emoji` | `state`  
 
 # Resources 
 
@@ -95,8 +95,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 </br>
 
 ## Color Dialog / View
-Select a 
-Check out some of the use-cases as dialogs. All of them could be displayed within a popup, BottomSheet or another container view as well.
+The color dialog / view allows you to pick a color from a range of template colors or a custom color.
 <table>
   <tr>
     <th>Sample 1</th>
@@ -117,6 +116,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 </table>
 
 ## Calendar Dialog / View
+The calendar dialog / view allows you to pick a date, multiple dates or a range.
 </br>
 <table>
   <tr>
@@ -139,6 +139,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 
 
 ## Clock Dialog / View
+The clock dialog / view allows you to pick a clock time, in either the 12-Hour-Format or the 24-Hour-Format.
 </br>
 <table>
   <tr>
@@ -159,6 +160,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 
 
 ## Duration Dialog / View
+The duration dialog / view allows you to pick a duration time within the bounds of a time format.
 </br>
 <table>
   <tr>
@@ -178,6 +180,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 </table>
 
 ## Date-Time Dialog / View
+The date-time dialog / view allows you to pick a date and/ or clock-time in a quick spinner-styled way.
 </br>
 <table>
   <tr>
@@ -200,6 +203,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 
 
 ## Option Dialog / View
+The option dialog / view allows you to pick one or multiple options. Options can be preselected, disabled and the selection can be limited.
 </br>
 <table>
   <tr>
@@ -222,6 +226,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 
 
 ## List Dialog / View
+The list dialog / view allows you to pick one or multiple options within a vertical list. Options can be preselected and the selection can be limited. The options can be displayed with a CheckBoxes and RadioButtons depending on the selection type.
 </br>
 <table>
   <tr>
@@ -246,6 +251,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 
 
 ## Input Dialog / View
+The input dialog / view allows you to build up a small form of various components to collect quickly information.
 </br>
 <table>
   <tr>
@@ -269,6 +275,7 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
 </table>
 
 ## Emoji Dialog / View
+The emoji dialog / view allows you to pick an emoji.
 </br>
 <table>
   <tr>
@@ -286,6 +293,8 @@ Check out some of the use-cases as dialogs. All of them could be displayed withi
     <td width="25%"><img src="docs/res/dark/dialog_emoji_sample_2.gif" /></td>
   </tr>
 </table>
+
+Credits to [Vannik Tech's Emoji library](https://github.com/vanniktech/Emoji) - this module makes use of that lib.
 
 ## Support this project
 
