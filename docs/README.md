@@ -2,7 +2,7 @@
 
 <p>
 
-  <img src="docs/res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+  <img src="res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
 
   <p>
 
@@ -44,7 +44,7 @@ An Android library that offers dialogs & views for various use cases - build wit
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
 </a>
 
-<img src="docs/res/showcase.png" alt="sheets Library">
+<img src="res/showcase.png" alt="sheets Library">
 
 # Get started
 The library contains various use-cases. Each module represents one use-case and contains a `*Dialog` and `*View`. You can use the `*Dialog` directly while you can use the `*View` for bottom sheets, popups and other non-scrollable elements.
@@ -102,14 +102,14 @@ The color dialog / view allows you to pick a color from a range of template colo
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_color_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_color_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_color_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_color_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_color_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_color_sample_3.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_color_sample_1.gif" /></td> 
-    <td width="25%"><img src="docs/res/dark/dialog_color_sample_2.gif" /></td> 
-    <td width="25%"><img src="docs/res/dark/dialog_color_sample_3.gif" /></td> 
+    <td width="25%"><img src="res/dark/dialog_color_sample_1.gif" /></td> 
+    <td width="25%"><img src="res/dark/dialog_color_sample_2.gif" /></td> 
+    <td width="25%"><img src="res/dark/dialog_color_sample_3.gif" /></td> 
   </tr>
 </table>
 
@@ -124,14 +124,14 @@ The calendar dialog / view allows you to pick a date, multiple dates or a range.
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_calendar_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_3.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_calendar_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_3.gif" /></td>
   </tr>
 </table>
 
@@ -147,12 +147,12 @@ The clock dialog / view allows you to pick a clock time, in either the 12-Hour-F
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_clock_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_clock_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_clock_sample_2.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_clock_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_clock_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_clock_sample_2.gif" /></td>
   </tr>
 </table>
 
@@ -168,12 +168,12 @@ The duration dialog / view allows you to pick a duration time within the bounds 
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_duration_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_duration_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_duration_sample_2.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_duration_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_duration_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_duration_sample_2.gif" /></td>
   </tr>
 </table>
 
@@ -188,14 +188,14 @@ The date-time dialog / view allows you to pick a date and/ or clock-time in a qu
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_date-time_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_3.gif" /></td>
   </tr>
   <tr>
-     <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_date-time_sample_3.gif" /></td>
+     <td width="25%"><img src="res/dark/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_date-time_sample_3.gif" /></td>
  </tr>
 </table>
 
@@ -211,14 +211,14 @@ The option dialog / view allows you to pick one or multiple options. Options can
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_option_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_option_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_option_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_option_sample_3.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_option_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_option_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_option_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_option_sample_3.gif" /></td>
   </tr>
 </table>
 
@@ -234,16 +234,16 @@ The list dialog / view allows you to pick one or multiple options within a verti
     <th>Sample 4</th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_list_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_list_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_list_sample_3.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_list_sample_4.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_4.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_list_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_list_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_list_sample_3.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_list_sample_4.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_4.gif" /></td>
   </tr>
 </table>
 
@@ -259,16 +259,16 @@ The input dialog / view allows you to build up a small form of various component
     <th>Sample 4</th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_input_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_input_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_input_sample_3.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_input_sample_4.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_4.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_input_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_input_sample_2.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_input_sample_3.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_input_sample_4.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_4.gif" /></td>
   </tr>
 </table>
 
@@ -283,12 +283,12 @@ The emoji dialog / view allows you to pick an emoji.
     <th></th>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/light/dialog_emoji_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/light/dialog_emoji_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_emoji_sample_2.gif" /></td>
   </tr>
   <tr>
-    <td width="25%"><img src="docs/res/dark/dialog_emoji_sample_1.gif" /></td>
-    <td width="25%"><img src="docs/res/dark/dialog_emoji_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_emoji_sample_2.gif" /></td>
   </tr>
 </table>
 
