@@ -1,0 +1,247 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" charset="UTF-8">
+    <title>DateTime</title>
+<link href="../../../../images/logo-icon.svg" rel="icon" type="image/svg"><script>var pathToRoot = "../../../../";</script>    <script>const storage = localStorage.getItem("dokka-dark-mode")
+const savedDarkMode = storage ? JSON.parse(storage) : false
+if(savedDarkMode === true){
+    document.getElementsByTagName("html")[0].classList.add("theme-dark")
+}</script>
+<script type="text/javascript" src="../../../../scripts/sourceset_dependencies.js" async></script>
+<link href="../../../../styles/style.css" rel="Stylesheet">
+<link href="../../../../styles/jetbrains-mono.css" rel="Stylesheet">
+<link href="../../../../styles/main.css" rel="Stylesheet">
+<link href="../../../../styles/prism.css" rel="Stylesheet">
+<link href="../../../../styles/logo-styles.css" rel="Stylesheet">
+<script type="text/javascript" src="../../../../scripts/clipboard.js" async></script>
+<script type="text/javascript" src="../../../../scripts/navigation-loader.js" async></script>
+<script type="text/javascript" src="../../../../scripts/platform-content-handler.js" async></script>
+<script type="text/javascript" src="../../../../scripts/main.js" defer></script>
+<script type="text/javascript" src="../../../../scripts/prism.js" async></script></head>
+<body>
+<div class="navigation-wrapper" id="navigation-wrapper">
+    <div id="leftToggler"><span class="icon-toggler"></span></div>
+    <div class="library-name">
+<a href="../../../../index.html">
+<span>sheets-compose-dialogs</span>            </a>    </div>
+    <div>
+    </div>
+    <div class="pull-right d-flex">
+        <button id="theme-toggle-button"><span id="theme-toggle"></span></button>
+        <div id="searchBar"></div>
+    </div>
+</div>
+<div id="container">
+    <div id="leftColumn">
+        <div id="sideMenu"></div>
+    </div>
+    <div id="main">
+<div class="main-content" id="content" pageids="date_time::com.maxkeppeler.sheets.date_time.models/DateTimeSelection.DateTime///PointingToDeclaration//-2083958105">
+  <div class="breadcrumbs"><a href="../../../index.html">date_time</a><span class="delimiter">/</span><a href="../../index.html">com.maxkeppeler.sheets.date_time.models</a><span class="delimiter">/</span><a href="../index.html">DateTimeSelection</a><span class="delimiter">/</span><a href="index.html">DateTime</a></div>
+  <div class="cover ">
+    <h1 class="cover"><span>Date</span><wbr><span><span>Time</span></span></h1>
+    <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword">data </span><span class="token keyword">class </span><a href="index.html">DateTime</a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>withButtonView<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>extraButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>onExtraButtonClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>negativeButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>onNegativeClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>positiveButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>locale<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/Locale.html">Locale</a><span class="token operator"> = </span>Locale.getDefault()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>dateFormatStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="token operator"> = </span>FormatStyle.MEDIUM<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>timeFormatStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="token operator"> = </span>FormatStyle.SHORT<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>startWithTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;<span class="token keyword">val </span>onPositiveClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html">LocalDateTime</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span> : <a href="../index.html">DateTimeSelection</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div><p class="paragraph">Select a date &amp; time.</p></div></div>
+  </div>
+  <div class="tabbedcontent">
+    <div class="tabs-section" tabs-section="tabs-section"><button class="section-tab" data-active="" data-togglable="Constructors">Constructors</button><button class="section-tab" data-togglable="Properties">Properties</button><button class="section-tab" data-togglable="Parameters">Parameters</button></div>
+    <div class="tabs-section-body">
+      <h2 class="">Parameters</h2>
+      <div data-togglable="Parameters">
+        <div class="platform-hinted WithExtraAttributes" data-platform-hinted="data-platform-hinted" data-togglable="Parameters"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><div data-togglable="Parameters"><div class="table" data-togglable="Parameters"><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>with</span><wbr><span>Button</span><wbr><span><span>View</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">Show the dialog with the buttons view.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>extra</span><wbr><span><span>Button</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">An extra button that can be used for a custom action.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>on</span><wbr><span>Extra</span><wbr><span>Button</span><wbr><span><span>Click</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The listener that is invoked when the extra button is clicked.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>negative</span><wbr><span><span>Button</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The button that will be used as a negative button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>on</span><wbr><span>Negative</span><wbr><span><span>Click</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The listener that is invoked when the negative button is clicked.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>positive</span><wbr><span><span>Button</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The button that will be used as a positive button.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span><span>locale</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The locale that is used for the date and time format.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>date</span><wbr><span>Format</span><wbr><span><span>Style</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The style of the date format.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>time</span><wbr><span>Format</span><wbr><span><span>Style</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The style of the time format.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>start</span><wbr><span>With</span><wbr><span><span>Time</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">If the time selection should be shown before the date selection.</p></div></div></div></div></div><div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release"><div class="main-subrow keyValue WithExtraAttributes"><div class=""><span class="inline-flex"><div><span>on</span><wbr><span>Positive</span><wbr><span><span>Click</span></span></div></span></div><div><div class="title"><div data-togglable="Parameters"><p class="paragraph">The listener that returns the selected date-time.</p></div></div></div></div></div></div></div></div></div>
+      </div>
+      <h2 class="tabbedcontent">Constructors</h2>
+      <div class="table" data-togglable="Constructors"><a data-name="2071017138%2FConstructors%2F-2083958105" anchor-label="DateTime" id="2071017138%2FConstructors%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue TabbedContent">
+            <div class=""><span class="inline-flex">
+                <div><a href="-date-time.html"><span>Date</span><wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="2071017138%2FConstructors%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">fun </span><a href="-date-time.html"><span class="token function">DateTime</span></a><span class="token punctuation">(</span><span class="parameters wrapped"><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;withButtonView<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;extraButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;onExtraButtonClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;negativeButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;onNegativeClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;positiveButton<span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;locale<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/Locale.html">Locale</a><span class="token operator"> = </span>Locale.getDefault()<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;dateFormatStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="token operator"> = </span>FormatStyle.MEDIUM<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;timeFormatStyle<span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="token operator"> = </span>FormatStyle.SHORT<span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;startWithTime<span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="token punctuation">, </span></span><span class="parameter indented">&nbsp;&nbsp;&nbsp;&nbsp;onPositiveClick<span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html">LocalDateTime</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a></span></span><span class="token punctuation">)</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <h2 class="">Properties</h2>
+      <div class="table" data-togglable="Properties"><a data-name="-1571374268%2FProperties%2F-2083958105" anchor-label="dateFormatStyle" id="-1571374268%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="date-format-style.html"><span>date</span><wbr><span>Format</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1571374268%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-1571374268%2FProperties%2F-2083958105" anchor-label="dateFormatStyle" id="-1571374268%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="date-format-style.html">dateFormatStyle</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1447122546%2FProperties%2F-2083958105" anchor-label="extraButton" id="-1447122546%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="extra-button.html"><span>extra</span><wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1447122546%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-1447122546%2FProperties%2F-2083958105" anchor-label="extraButton" id="-1447122546%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="extra-button.html">extraButton</a><span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="6132688%2FProperties%2F-2083958105" anchor-label="locale" id="6132688%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="locale.html"><span><span>locale</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="6132688%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="6132688%2FProperties%2F-2083958105" anchor-label="locale" id="6132688%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="locale.html">locale</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/util/Locale.html">Locale</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-16202237%2FProperties%2F-2083958105" anchor-label="negativeButton" id="-16202237%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="negative-button.html"><span>negative</span><wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-16202237%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-16202237%2FProperties%2F-2083958105" anchor-label="negativeButton" id="-16202237%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="negative-button.html">negativeButton</a><span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1559291451%2FProperties%2F-2083958105" anchor-label="onExtraButtonClick" id="-1559291451%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-extra-button-click.html"><span>on</span><wbr><span>Extra</span><wbr><span>Button</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1559291451%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-1559291451%2FProperties%2F-2083958105" anchor-label="onExtraButtonClick" id="-1559291451%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="on-extra-button-click.html">onExtraButtonClick</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1714729732%2FProperties%2F-2083958105" anchor-label="onNegativeClick" id="-1714729732%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-negative-click.html"><span>on</span><wbr><span>Negative</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1714729732%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-1714729732%2FProperties%2F-2083958105" anchor-label="onNegativeClick" id="-1714729732%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="on-negative-click.html">onNegativeClick</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-893686848%2FProperties%2F-2083958105" anchor-label="onPositiveClick" id="-893686848%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="on-positive-click.html"><span>on</span><wbr><span>Positive</span><wbr><span><span>Click</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-893686848%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-893686848%2FProperties%2F-2083958105" anchor-label="onPositiveClick" id="-893686848%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="on-positive-click.html">onPositiveClick</a><span class="token operator">: </span><span class="token punctuation">(</span><span class="token keyword"></span><a href="https://developer.android.com/reference/kotlin/java/time/LocalDateTime.html">LocalDateTime</a><span class="token punctuation">)</span><span class="token operator"> -&gt; </span><span class="token keyword"></span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-unit/index.html">Unit</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-333676609%2FProperties%2F-2083958105" anchor-label="positiveButton" id="-333676609%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="positive-button.html"><span>positive</span><wbr><span><span>Button</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-333676609%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-333676609%2FProperties%2F-2083958105" anchor-label="positiveButton" id="-333676609%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="positive-button.html">positiveButton</a><span class="token operator">: </span><a href="../../../../core/com.maxkeppeker.sheets.core.models.base/-selection-button/index.html">SelectionButton</a><span class="token operator">?</span><span class="token operator"> = </span>null<span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="867904603%2FProperties%2F-2083958105" anchor-label="startWithTime" id="867904603%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="start-with-time.html"><span>start</span><wbr><span>With</span><wbr><span><span>Time</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="867904603%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="867904603%2FProperties%2F-2083958105" anchor-label="startWithTime" id="867904603%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword"></span><span class="token keyword">val </span><a href="start-with-time.html">startWithTime</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">false</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-1292158237%2FProperties%2F-2083958105" anchor-label="timeFormatStyle" id="-1292158237%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="time-format-style.html"><span>time</span><wbr><span>Format</span><wbr><span><span>Style</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-1292158237%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-1292158237%2FProperties%2F-2083958105" anchor-label="timeFormatStyle" id="-1292158237%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="time-format-style.html">timeFormatStyle</a><span class="token operator">: </span><a href="https://developer.android.com/reference/kotlin/java/time/format/FormatStyle.html">FormatStyle</a><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+<a data-name="-734272467%2FProperties%2F-2083958105" anchor-label="withButtonView" id="-734272467%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a>
+        <div class="table-row" data-filterable-current=":date_time:dokkaHtmlPartial/release" data-filterable-set=":date_time:dokkaHtmlPartial/release">
+          <div class="main-subrow keyValue ">
+            <div class=""><span class="inline-flex">
+                <div><a href="with-button-view.html"><span>with</span><wbr><span>Button</span><wbr><span><span>View</span></span></a></div>
+<span class="anchor-wrapper"><span class="anchor-icon" pointing-to="-734272467%2FProperties%2F-2083958105"></span>
+                  <div class="copy-popup-wrapper "><span class="copy-popup-icon"></span><span>Link copied to clipboard</span></div>
+                </span></span></div>
+            <div>
+              <div class="title">
+                <div class="platform-hinted " data-platform-hinted="data-platform-hinted" data-togglable="Properties"><div class="content sourceset-depenent-content" data-active="" data-togglable=":date_time:dokkaHtmlPartial/release"><a data-name="-734272467%2FProperties%2F-2083958105" anchor-label="withButtonView" id="-734272467%2FProperties%2F-2083958105" data-filterable-set=":date_time:dokkaHtmlPartial/release"></a><div class="symbol monospace"><span class="token keyword">open </span><span class="token keyword">override </span><span class="token keyword">val </span><a href="with-button-view.html">withButtonView</a><span class="token operator">: </span><a href="https://kotlinlang.org/api/latest/jvm/stdlib/kotlin/-boolean/index.html">Boolean</a><span class="token operator"> = </span><span class="token boolean">true</span><span class="top-right-position"><span class="copy-icon"></span><div class="copy-popup-wrapper popup-to-left"><span class="copy-popup-icon"></span><span>Content copied to clipboard</span></div></span></div></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      <div class="footer">
+        <span class="go-to-top-icon"><a href="#content" id="go-to-top-link"></a></span><span>© 2022 Copyright</span><span class="pull-right"><span>Generated by </span><a href="https://github.com/Kotlin/dokka"><span>dokka</span><span class="padded-icon"></span></a></span>
+      </div>
+    </div>
+</div>
+
+</body></html>
+

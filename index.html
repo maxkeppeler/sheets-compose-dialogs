@@ -1,0 +1,883 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="An Android library that offers dialogs & views for various use cases - build with Jetpack Compose. All of the dialogs & views are easy and quick to implement.">
+      
+      
+        <meta name="author" content="Maximilian Keppeler">
+      
+      
+        <link rel="canonical" href="https://maxkeppeler.github.io/sheets-compose-dialogs/">
+      
+      <link rel="icon" href="assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+    
+    
+      
+        <title>Sheets-Compose-Dialogs</title>
+      
+    
+    
+      <link rel="stylesheet" href="assets/stylesheets/main.1d29e8d0.min.css">
+      
+        
+        <link rel="stylesheet" href="assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL(".",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="blue">
+  
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&"object"==typeof palette.color)for(var key of Object.keys(palette.color))document.body.setAttribute("data-md-color-"+key,palette.color[key])</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sheets-compose-dialogs" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="." title="Sheets-Compose-Dialogs" class="md-header__button md-logo" aria-label="Sheets-Compose-Dialogs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Sheets-Compose-Dialogs
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Home
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <form class="md-header__option" data-md-component="palette">
+        
+          
+          
+          <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="red" data-md-color-accent="blue"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_1">
+          
+            <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_2" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4zM7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/></svg>
+            </label>
+          
+        
+          
+          
+          <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="red" data-md-color-accent="blue"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_2">
+          
+            <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_1" hidden>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3Z"/></svg>
+            </label>
+          
+        
+      </form>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/maxkeppeler/sheets-compose-dialogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sheets-Compose-Dialogs
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="." title="Sheets-Compose-Dialogs" class="md-nav__button md-logo" aria-label="Sheets-Compose-Dialogs" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54Z"/></svg>
+
+    </a>
+    Sheets-Compose-Dialogs
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/maxkeppeler/sheets-compose-dialogs" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Sheets-Compose-Dialogs
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+      <a href="." class="md-nav__link md-nav__link--active">
+        Home
+      </a>
+      
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/core/" class="md-nav__link">
+        Core API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/color/" class="md-nav__link">
+        Color API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/calendar/" class="md-nav__link">
+        Calendar API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/clock/" class="md-nav__link">
+        Clock API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/duration/" class="md-nav__link">
+        Duration API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/date_time/" class="md-nav__link">
+        Date-Time API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/info/" class="md-nav__link">
+        Info API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/input/" class="md-nav__link">
+        Input API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/list/" class="md-nav__link">
+        List API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/option/" class="md-nav__link">
+        Option API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/emoji/" class="md-nav__link">
+        Emoji API
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="api/state/" class="md-nav__link">
+        State API
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/edit/master/docs/README.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="sheets-compose-dialogs">Sheets-Compose-Dialogs</h1>
+<p>
+
+  <img src="res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+
+  <p>
+
+An Android library that offers dialogs & views for various use cases - build with Jetpack Compose. All of the dialogs & views are easy and quick to implement. Views can be used for PopUps, BottomSheets and other containers.
+
+   <a href="https://search.maven.org/search?q=g:%22com.maxkeppeler.sheets-compose-dialogs%22">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets-compose-dialogs/core.svg?label=Maven%20Central">
+   </a>
+
+   <a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
+   </a>
+
+   <a href="https://www.apache.org/licenses/LICENSE-2.0">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets-compose-dialogs?core=%23007EC6&label=">
+   </a>
+
+<a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Give this library a star" src="https://img.shields.io/github/stars/maxkeppeler/sheets-compose-dialogs?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets-compose-dialogs/fork">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Fork this library" src="https://img.shields.io/github/forks/maxkeppeler/sheets-compose-dialogs?style=social">
+</a>
+
+<a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Watch this library" src="https://img.shields.io/github/watchers/maxkeppeler/sheets.svg?style=social&amp;label=Watch">
+</a>
+
+<a href="https://github.com/maxkeppeler/">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow me on GitHub" src="https://img.shields.io/github/followers/maxkeppeler?style=social&label=Follow">
+</a>
+
+<a href="https://twitter.com/intent/tweet?text=Checkout%20this%20beautiful%20library!%20%23android%20%23androiddev%20%23library%20%40maxkeppeler%20%0A%0Ahttps%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Share this library on Twitter" src="https://img.shields.io/twitter/url?style=social&url=https%3A%2F%2Fgithub.com%2Fmaxkeppeler%2Fsheets&label=Share">
+</a>
+
+<a href="https://twitter.com/max_keppeler">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
+</a>
+
+<img src="res/showcase.png" alt="sheets Library">
+
+# Get started
+The library contains various use-cases. Each module represents one use-case and contains a `*Dialog` and `*View`. You can use the `*Dialog` directly while you can use the `*View` for bottom sheets, popups and other non-scrollable elements.
+
+As the `core` module is the foundation of all other use-cases, you have to implement that additionally to the ones you want to use.
+
+## Requirement
+
+In your top-level `build.gradle`
+
+
+<pre><code class="language-gradle">repositories {
+  ...
+  mavenCentral()
+}
+</code></pre>
+
+
+In your app `build.gradle` file:
+
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets-compose-dialogs/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
+
+
+<pre><code class="language-gradle">dependencies {
+  ...
+  implementation 'com.maxkeppeler.sheets-compose-dialogs:core:&lt;version&gt;' // necessary
+  implementation 'com.maxkeppeler.sheets-compose-dialogs:&lt;module&gt;:&lt;version&gt;'
+}
+</code></pre>
+
+Replace `<version>` with the (latest or preferred) version of the library.
+
+Replace `<module>` with the module you want to use.
+
+Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date_time` | `option` | `list` | `input` | `emoji` | `state`  
+
+# Resources 
+
+📖 Get a better insight into the API\
+[Sheets-Compose-Dialogs API Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/)
+
+✨ General documentation, resources and setup samples and more\
+[Sheets-Compose-Dialogs General Documentation](https://maxkeppeler.notion.site/sheets-compose-dialogs-804f0ebcb2c84b98b7afa5f687295aed）
+
+# Showcase
+Check out some of the use-cases as dialogs. All of them could be displayed within a PopUp, BottomSheet or another container view as well.
+</br>
+</br>
+
+## Color Dialog / View
+The color dialog / view allows you to pick a color from a range of template colors or a custom color.
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_color_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_color_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_color_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_color_sample_1.gif" /></td> 
+    <td width="25%"><img src="res/dark/dialog_color_sample_2.gif" /></td> 
+    <td width="25%"><img src="res/dark/dialog_color_sample_3.gif" /></td> 
+  </tr>
+</table>
+
+## Calendar Dialog / View
+The calendar dialog / view allows you to pick a date, multiple dates or a range.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_calendar_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_calendar_sample_3.gif" /></td>
+  </tr>
+</table>
+
+
+## Clock Dialog / View
+The clock dialog / view allows you to pick a clock time, in either the 12-Hour-Format or the 24-Hour-Format.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_clock_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_clock_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_clock_sample_2.gif" /></td>
+  </tr>
+</table>
+
+
+## Duration Dialog / View
+The duration dialog / view allows you to pick a duration time within the bounds of a time format.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_duration_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_duration_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_duration_sample_2.gif" /></td>
+  </tr>
+</table>
+
+## Date-Time Dialog / View
+The date-time dialog / view allows you to pick a date and/ or clock-time in a quick spinner-styled way.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_date-time_sample_3.gif" /></td>
+  </tr>
+  <tr>
+     <td width="25%"><img src="res/dark/dialog_date-time_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_date-time_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_date-time_sample_3.gif" /></td>
+ </tr>
+</table>
+
+
+## Option Dialog / View
+The option dialog / view allows you to pick one or multiple options. Options can be preselected, disabled and the selection can be limited.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_option_sample_3.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_option_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_option_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_option_sample_3.gif" /></td>
+  </tr>
+</table>
+
+
+## List Dialog / View
+The list dialog / view allows you to pick one or multiple options within a vertical list. Options can be preselected and the selection can be limited. The options can be displayed with a CheckBoxes and RadioButtons depending on the selection type.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th>Sample 4</th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_list_sample_4.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_list_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_list_sample_4.gif" /></td>
+  </tr>
+</table>
+
+
+## Input Dialog / View
+The input dialog / view allows you to build up a small form of various components to collect quickly information.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th>Sample 3</th>
+    <th>Sample 4</th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_input_sample_4.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_input_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_2.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_3.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_input_sample_4.gif" /></td>
+  </tr>
+</table>
+
+## Emoji Dialog / View
+The emoji dialog / view allows you to pick an emoji.
+</br>
+<table>
+  <tr>
+    <th>Sample 1</th>
+    <th>Sample 2</th>
+    <th></th>
+    <th></th>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/light/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="res/light/dialog_emoji_sample_2.gif" /></td>
+  </tr>
+  <tr>
+    <td width="25%"><img src="res/dark/dialog_emoji_sample_1.gif" /></td>
+    <td width="25%"><img src="res/dark/dialog_emoji_sample_2.gif" /></td>
+  </tr>
+</table>
+
+Credits to [Vannik Tech's Emoji library](https://github.com/vanniktech/Emoji) - this module makes use of that lib.
+
+## Support this project
+
+- Leave a star and tell others about it
+- Watch for updates and improvements.
+- [Open an issue](https://github.com/MaxKeppeler/sheets/issues/) if you see or got any error.
+- Leave your
+  thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and
+  showcase your implementation.
+- Donate me a coffee. ;)
+
+## Contribute
+
+1. Open an issue to discuss what you would like to change.
+2. Fork the Project
+3. Create your feature branch (feature-[some-name])
+4. Commit your changes
+5. Push to the branch (origin feature-[some-name])
+6. Open a pull request
+
+## Donate
+
+Show your appreciation by donating me a coffee. Thank you very much!
+
+<a href="https://ko-fi.com/maxkeppeler" target='_blank'>
+ <img width="180" src='https://cdn.ko-fi.com/cdn/kofi2.png?v=2' alt='Buy Me a Coffee at ko-fi.com' />
+</a>
+
+<a href="https://www.buymeacoffee.com/maxkeppeler" target="_blank">
+    <img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160">
+</a>
+
+<a href="https://www.paypal.me/maximiliankeppeler" target="_blank">
+    <img src="https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif" alt="Donate on PaPal" width="160">
+</a>
+
+## Showcase
+
+Check out some apps which are using this library.<br/>
+
+- [Mangata (Soon)](http://mangata-mk.com)
+
+## License
+
+    Copyright 2022 Maximilian Keppeler https://maxkeppeler.com
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+      
+        
+        <a href="api/core/" class="md-footer__link md-footer__link--next" aria-label="Next: Core API" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Core API
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": ".", "features": [], "search": "assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
+    
+    
+      <script src="assets/javascripts/bundle.0238f547.min.js"></script>
+      
+    
+  </body>
+</html>
