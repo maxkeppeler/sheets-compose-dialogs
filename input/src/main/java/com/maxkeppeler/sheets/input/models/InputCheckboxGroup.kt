@@ -43,8 +43,10 @@ class InputCheckboxGroup(
 
     internal var value: List<Int> = enabledIndices
         set(value) {
-            field = value
-            onChange()
+            if (field != value) {
+                field = value
+                onChange()
+            }
             valid = isValid()
         }
 

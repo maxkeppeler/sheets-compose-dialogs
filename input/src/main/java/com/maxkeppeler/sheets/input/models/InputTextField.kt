@@ -69,8 +69,10 @@ data class InputTextField(
 
     internal var value: String? = text
         set(value) {
-            field = value
-            onChange()
+            if (field != value) {
+                field = value
+                onChange()
+            }
             valid = isValid()
         }
 

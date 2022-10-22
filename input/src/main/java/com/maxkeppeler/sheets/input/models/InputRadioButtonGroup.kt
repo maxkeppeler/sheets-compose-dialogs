@@ -43,8 +43,10 @@ class InputRadioButtonGroup(
 
     internal var value: Int? = selectedIndex
         set(value) {
-            field = value
-            onChange()
+            if (field != value) {
+                field = value
+                onChange()
+            }
             valid = isValid()
         }
 

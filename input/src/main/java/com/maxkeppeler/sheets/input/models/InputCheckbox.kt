@@ -43,8 +43,10 @@ class InputCheckbox(
 
     internal var value: Boolean = enabled
         set(value) {
-            field = value
-            onChange()
+            if (field != value) {
+                field = value
+                onChange()
+            }
             valid = isValid()
         }
 
