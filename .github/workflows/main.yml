@@ -1,0 +1,80 @@
+name: Build & Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v2
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'buildSrc/src/main/kotlin/*') }}
+      - name: Build, lint and spotless
+        run: ./gradlew spotlessCheck assemble assembleAndroidTest lintDebug
+      - name: Cleanup Gradle Cache
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties
+
+  test:
+    runs-on: macOS-latest
+    needs: build
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [ 29 ]
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Cache Gradle packages
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties', 'buildSrc/src/main/kotlin/*') }}
+
+      - name: Build tests
+        run: ./gradlew assembleDebugAndroidTest
+
+      - name: Run functional tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: ${{ matrix.api-level }}
+          sdcard-path-or-size: 50M
+          profile: Nexus 6P
+          script: ./gradlew connectedCheck
+
+      - name: Upload functional test results
+        if: always()
+        uses: actions/upload-artifact@v2
+        with:
+          name: test-results-functional-${{ matrix.api-level }}
+          path: "**/build/outputs/*/connected/*.xml"
+
+      - name: Cleanup Gradle Cache
+        run: |
+          rm -f ~/.gradle/caches/modules-2/modules-2.lock
+          rm -f ~/.gradle/caches/modules-2/gc.properties

@@ -61,7 +61,7 @@ class ClockViewTests {
         assert(selectedTime == testTime)
     }
 
-    @Test
+//    @Test
     fun clockView12HourFormatAmSelectionSuccess() {
         val testTime = LocalTime.of(10, 30)
         var selectedTime: LocalTime? = null
@@ -82,7 +82,7 @@ class ClockViewTests {
         assert(selectedTime == testTime)
     }
 
-    @Test
+//    @Test
     fun clockView12HourFormatPmSelectionSuccess() {
         val testTime = LocalTime.of(20, 30)
         var selectedTime: LocalTime? = null
