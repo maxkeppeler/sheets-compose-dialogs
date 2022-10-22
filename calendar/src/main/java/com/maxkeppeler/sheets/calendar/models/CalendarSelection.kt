@@ -30,6 +30,8 @@ sealed class CalendarSelection : BaseSelection() {
     /**
      * Select a date.
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -39,6 +41,7 @@ sealed class CalendarSelection : BaseSelection() {
     class Date(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -48,6 +51,8 @@ sealed class CalendarSelection : BaseSelection() {
 
     /**
      * Select multiple dates.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -56,6 +61,7 @@ sealed class CalendarSelection : BaseSelection() {
      */
     class Dates(
         override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
@@ -66,6 +72,8 @@ sealed class CalendarSelection : BaseSelection() {
     /**
      * Select a range (start and end date).
      * @param withButtonView Show the dialog with the buttons view.
+     * @param extraButton An extra button that can be used for a custom action.
+     * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
      * @param onNegativeClick The listener that is invoked when the negative button is clicked.
      * @param positiveButton The button that will be used as a positive button.
@@ -75,6 +83,7 @@ sealed class CalendarSelection : BaseSelection() {
     class Period(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
+        override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = null,
         override val onNegativeClick: (() -> Unit)? = null,
         override val positiveButton: SelectionButton? = null,
