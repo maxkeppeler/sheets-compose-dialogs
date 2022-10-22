@@ -16,9 +16,6 @@
 import com.android.build.gradle.LibraryExtension
 
 plugins {
-    id(Plugins.APPLICATION.id) version (Plugins.APPLICATION.version) apply false
-    id(Plugins.LIBRARY.id) version (Plugins.APPLICATION.version) apply false
-    id(Plugins.KOTLIN.id) version (Plugins.KOTLIN.version) apply false
     id(Plugins.SPOTLESS.id) version (Plugins.SPOTLESS.version)
     id(Plugins.DOKKA.id) version (Plugins.DOKKA.version)
 }
