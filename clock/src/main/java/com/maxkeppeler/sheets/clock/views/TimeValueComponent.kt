@@ -35,6 +35,8 @@ import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.clock.R
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -109,13 +111,13 @@ internal fun TimeValueComponent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TimeTypeItemComponent(
-                    modifier = Modifier,
+                    modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 0),
                     selected = isAm,
                     onClick = { onAm.invoke(true) },
                     text = stringResource(id = R.string.scd_clock_dialog_am),
                 )
                 TimeTypeItemComponent(
-                    modifier = Modifier,
+                    modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 1),
                     selected = !isAm,
                     onClick = { onAm.invoke(false) },
                     text = stringResource(id = R.string.scd_clock_dialog_pm),

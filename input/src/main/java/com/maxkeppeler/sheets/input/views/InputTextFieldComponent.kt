@@ -23,17 +23,21 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputTextField
 import com.maxkeppeler.sheets.input.models.InputTextFieldType
 
 /**
  * TextField component.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputTextFieldComponent(
+    index: Int,
     input: InputTextField,
     onInputUpdated: (Input) -> Unit
 ) {
@@ -46,7 +50,9 @@ internal fun InputTextFieldComponent(
     }
 
     Row(
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier
+            .testTags(TestTags.INPUT_ITEM_TEXT_FIELD, index)
+            .fillMaxWidth(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         TextFieldErrorContainer(
@@ -56,6 +62,10 @@ internal fun InputTextFieldComponent(
             when (input.type) {
                 InputTextFieldType.OUTLINED -> {
                     OutlinedTextField(
+                        modifier = Modifier.testTags(
+                            TestTags.INPUT_ITEM_TEXT_FIELD_TYPE,
+                            InputTextFieldType.OUTLINED
+                        ),
                         value = text ?: "",
                         onValueChange = { text = it },
                         textStyle = input.textStyle ?: LocalTextStyle.current,
@@ -69,6 +79,10 @@ internal fun InputTextFieldComponent(
                 }
                 InputTextFieldType.DEFAULT -> {
                     TextField(
+                        modifier = Modifier.testTags(
+                            TestTags.INPUT_ITEM_TEXT_FIELD_TYPE,
+                            InputTextFieldType.DEFAULT
+                        ),
                         value = text ?: "",
                         onValueChange = { text = it },
                         textStyle = input.textStyle ?: LocalTextStyle.current,

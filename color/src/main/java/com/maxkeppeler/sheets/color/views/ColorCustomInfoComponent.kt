@@ -33,6 +33,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.color.utils.Constants
 import com.maxkeppeler.sheets.color.utils.copyColorIntoClipboard
@@ -78,7 +80,9 @@ internal fun ColorCustomInfoComponent(
     ) {
 
         ColorTemplateItemComponent(
-            modifier = Modifier.size(Constants.COLOR_CUSTOM_ITEM_SIZE),
+            modifier = Modifier
+                .testTags(TestTags.COLOR_CUSTOM_SELECTION, color)
+                .size(Constants.COLOR_CUSTOM_ITEM_SIZE),
             color = color,
             selected = false,
             onColorClick = onColorChange

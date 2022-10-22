@@ -34,6 +34,8 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.viewinterop.AndroidView
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.vanniktech.emoji.Emoji
 import com.vanniktech.emoji.EmojiTextView
 import com.maxkeppeler.sheets.core.R as RC
@@ -64,6 +66,7 @@ internal fun EmojiItemComponent(
 
     BoxWithConstraints(
         modifier = Modifier
+            .testTags(TestTags.EMOJI_SELECTION, emoji.unicode)
             .onGloballyPositioned {
                 if (size.value != it.size) size.value = it.size
             }

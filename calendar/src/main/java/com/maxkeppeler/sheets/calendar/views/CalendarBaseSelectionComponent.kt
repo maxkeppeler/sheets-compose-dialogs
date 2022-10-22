@@ -145,7 +145,8 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.YEAR -> {
             Column(
-                modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_150)),
+                modifier = Modifier
+                    .padding(top = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -166,7 +167,8 @@ internal fun CalendarBaseSelectionComponent(
         }
         CalendarDisplayMode.MONTH -> {
             Column(
-                modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_150)),
+                modifier = Modifier
+                    .padding(top = dimensionResource(RC.dimen.scd_normal_150)),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {

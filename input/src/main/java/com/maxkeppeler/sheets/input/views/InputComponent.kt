@@ -19,7 +19,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
@@ -47,10 +47,10 @@ internal fun InputComponent(
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
     ) {
-        items(
+        itemsIndexed(
             items = input,
-            span = { GridItemSpan(it.columns ?: columns) },
-            itemContent = { input -> InputItemComponent(input, onInputUpdated) }
+            span = { _, input -> GridItemSpan(input.columns ?: columns) },
+            itemContent = { index, input -> InputItemComponent(index, input, onInputUpdated) }
         )
     }
 }

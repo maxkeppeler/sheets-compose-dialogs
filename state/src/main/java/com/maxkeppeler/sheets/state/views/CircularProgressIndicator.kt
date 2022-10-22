@@ -22,7 +22,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.state.R
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
 import com.maxkeppeler.sheets.core.R as RC
@@ -42,11 +45,15 @@ internal fun CircularProgressIndicator(
             Box(modifier = Modifier.wrapContentSize()) {
                 CircularProgressIndicator(
                     progress = progress,
-                    modifier = circularIndicatorModifier.align(Alignment.Center)
+                    modifier = circularIndicatorModifier
+                        .testTags(TestTags.STATE_LOADING_CIRCULAR, progress)
+                        .align(Alignment.Center)
                 )
                 if (indicator.showProgressPercentage) {
                     Text(
-                        modifier = Modifier.align(Alignment.Center),
+                        modifier = Modifier
+                            .testTag(TestTags.STATE_LOADING_LABEL_PERCENTAGE)
+                            .align(Alignment.Center),
                         text = "${progress.times(100)} %",
                         style = MaterialTheme.typography.labelMedium,
                     )
@@ -55,6 +62,7 @@ internal fun CircularProgressIndicator(
         } ?: run {
             CircularProgressIndicator(
                 modifier = circularIndicatorModifier
+                    .testTag(TestTags.STATE_LOADING_CIRCULAR)
             )
         }
 }

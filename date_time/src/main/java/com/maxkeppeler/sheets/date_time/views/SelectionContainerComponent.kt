@@ -35,6 +35,8 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
@@ -87,6 +89,7 @@ internal fun SelectionContainerComponent(
         flingBehavior = behavior,
         contentPadding = contentPadding,
         modifier = Modifier
+            .testTags(TestTags.DATE_TIME_VALUE_CONTAINER_SELECTION, unit::class.simpleName!!)
             .height(LocalDensity.current.run { height.value.toDp() })
             .padding(top = heightOffsetTopPadding)
             .graphicsLayer { alpha = 0.99F }
@@ -108,6 +111,7 @@ internal fun SelectionContainerComponent(
             item {
                 SelectionValueItem(
                     modifier = Modifier
+                        .testTags(TestTags.DATE_TIME_VALUE_SELECTION, unit.javaClass.simpleName, option.value)
                         .widthIn(min = LocalDensity.current.run { animatedWidth.value.toDp() })
                         .onGloballyPositioned { coordinates ->
                             if (itemHeight.value < coordinates.size.height) {

@@ -24,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -49,6 +51,7 @@ internal fun TextFieldErrorContainer(
                 color = MaterialTheme.colorScheme.error,
                 style = MaterialTheme.typography.labelMedium,
                 modifier = Modifier
+                    .testTags(TestTags.INPUT_ITEM_TEXT_FIELD_ERROR_TEXT)
                     .fillMaxWidth()
                     .padding(top = dimensionResource(RC.dimen.scd_small_100))
             )

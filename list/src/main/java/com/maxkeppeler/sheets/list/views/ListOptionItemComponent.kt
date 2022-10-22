@@ -28,6 +28,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeler.sheets.list.models.ListOption
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -63,6 +65,7 @@ internal fun ListOptionItemComponent(
     else MaterialTheme.colorScheme.onSurface
 
     val containerModifier = Modifier
+        .testTags(TestTags.LIST_VIEW_SELECTION, option.position)
         .fillMaxWidth()
         .clip(MaterialTheme.shapes.medium)
         .clickable(!inputDisabled) { onClick(option) }

@@ -16,16 +16,18 @@
 package com.maxkeppeler.sheets.emoji.views
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.grid.itemsIndexed
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.emoji.models.EmojiCategoryAppearance
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
@@ -53,30 +55,34 @@ internal fun EmojiHeaderComponent(
     when (config.categoryAppearance) {
         EmojiCategoryAppearance.SYMBOL -> {
             LazyVerticalGrid(
+                modifier = Modifier.testTags(TestTags.EMOJI_CATEGORY, config.categoryAppearance),
                 columns = GridCells.Fixed(categories.size),
                 userScrollEnabled = false,
                 horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.scd_small_25)),
             ) {
-                items(categoryIcons) { icon ->
-                    val selected = categoryIcons.indexOf(icon) == selectedCategory
+                itemsIndexed(categoryIcons) { index, icon ->
+                    val selected = index == selectedCategory
                     EmojiHeaderItemComponent(
                         imageVector = icon,
+                        index = index,
                         selected = selected,
-                        onClick = { onChangeCategory(categoryIcons.indexOf(icon)) }
+                        onClick = { onChangeCategory(index) }
                     )
                 }
             }
         }
         EmojiCategoryAppearance.TEXT -> {
             LazyRow(
+                modifier = Modifier.testTags(TestTags.EMOJI_CATEGORY, config.categoryAppearance),
                 state = headerState,
             ) {
-                items(categories) {
-                    val selected = categories.indexOf(it) == selectedCategory
+                itemsIndexed(categories) { index, category ->
+                    val selected = index == selectedCategory
                     EmojiTextHeaderItemComponent(
-                        name = it.categoryNames["en"] ?: "",
+                        name = category.categoryNames["en"] ?: "",
                         selected = selected,
-                        onClick = { onChangeCategory(categories.indexOf(it)) }
+                        index = index,
+                        onClick = { onChangeCategory(index) }
                     )
                 }
             }

@@ -21,7 +21,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -38,6 +41,7 @@ internal fun LinearProgressIndicator(
         ?: indicator.value?.let { progress ->
             if (indicator.showProgressPercentage) {
                 Text(
+                    modifier = Modifier.testTag(TestTags.STATE_LOADING_LABEL_PERCENTAGE),
                     text = "${progress.times(100)} %",
                     style = MaterialTheme.typography.labelMedium,
                 )
@@ -45,10 +49,12 @@ internal fun LinearProgressIndicator(
             LinearProgressIndicator(
                 progress = progress,
                 modifier = linearIndicatorModifier
+                    .testTags(TestTags.STATE_LOADING_LINEAR, progress)
             )
         } ?: run {
             LinearProgressIndicator(
                 modifier = linearIndicatorModifier
+                    .testTag(TestTags.STATE_LOADING_LINEAR)
             )
         }
 }

@@ -28,23 +28,28 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The emoji header item component.
  * @param imageVector The symbol of the category.
  * @param selected If the current category is selected.
+ * @param index Index of category item.
  * @param onClick The listener that is invoked when this component is clicked.
  */
 @Composable
 internal fun EmojiHeaderItemComponent(
     imageVector: ImageVector,
     selected: Boolean,
+    index: Int,
     onClick: () -> Unit
 ) {
     Row(
         modifier = Modifier
             .aspectRatio(1f, true)
+            .testTags(TestTags.EMOJI_CATEGORY_TAB, index)
             .clip(if (selected) RoundedCornerShape(50) else MaterialTheme.shapes.small)
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }

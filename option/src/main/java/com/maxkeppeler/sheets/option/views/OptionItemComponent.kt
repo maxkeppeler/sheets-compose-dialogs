@@ -26,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.option.models.Option
 
 /**
@@ -54,6 +56,7 @@ internal fun OptionItemComponent(
     else MaterialTheme.colorScheme.onSurface
 
     val containerModifier = Modifier
+        .testTags(TestTags.OPTION_VIEW_SELECTION, option.position)
         .wrapContentHeight()
         .clip(MaterialTheme.shapes.medium)
         .clickable(!inputDisabled && !option.disabled) { onClick(option) }

@@ -26,6 +26,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import com.maxkeppeler.sheets.core.R as RC
@@ -37,6 +38,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param onValueChange The listener that returns the new value of the color value.
  * @param colorItemLabelWidth The width of the label.
  * @param colorValueLabelWidth The width of the value.
+ * @param sliderTestTag The text that is used for the test tag.
  */
 @Composable
 internal fun ColorCustomControlItemComponent(
@@ -44,7 +46,8 @@ internal fun ColorCustomControlItemComponent(
     value: Int,
     onValueChange: (Int) -> Unit,
     colorItemLabelWidth: MutableState<Int?>,
-    colorValueLabelWidth: MutableState<Int?>
+    colorValueLabelWidth: MutableState<Int?>,
+    sliderTestTag: String,
 ) {
 
     val wrapOrFixedModifier: @Composable (MutableState<Int?>) -> Modifier = { stateWidth ->
@@ -72,6 +75,7 @@ internal fun ColorCustomControlItemComponent(
 
         Slider(
             modifier = Modifier
+                .testTag(sliderTestTag)
                 .weight(1f)
                 .padding(horizontal = dimensionResource(RC.dimen.scd_normal_100)),
             valueRange = 0f..255f,

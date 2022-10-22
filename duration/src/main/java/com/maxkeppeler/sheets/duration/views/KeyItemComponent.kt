@@ -22,7 +22,10 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Backspace
@@ -39,6 +42,8 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
@@ -76,6 +81,7 @@ internal fun KeyItemComponent(
 
     Row(
         modifier = Modifier
+            .testTags(TestTags.KEYBOARD_KEY, key)
             .aspectRatio(1f)
             .clip(RoundedCornerShape(animatedCornerRadius.value))
             .background(

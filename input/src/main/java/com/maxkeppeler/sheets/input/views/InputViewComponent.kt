@@ -16,15 +16,13 @@
 package com.maxkeppeler.sheets.input.views
 
 import androidx.compose.runtime.Composable
-import com.maxkeppeler.sheets.input.models.InputView
+import com.maxkeppeler.sheets.input.models.InputCustomView
 
 /**
  * Custom view component.
  * @param input The input that this component reflects.
  */
 @Composable
-internal fun InputViewComponent(
-    input: InputView
-) {
+internal fun InputCustomViewComponent(input: InputCustomView) {
     input.view()
 }

@@ -21,7 +21,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.info.models.InfoBody
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -33,12 +35,14 @@ import com.maxkeppeler.sheets.core.R as RC
 internal fun DefaultBodyComponent(body: InfoBody.Default) {
     Column(
         modifier = Modifier
+            .testTag(TestTags.INFO_BODY_DEFAULT)
             .padding(horizontal = dimensionResource(id = RC.dimen.scd_normal_150))
             .padding(top = dimensionResource(id = RC.dimen.scd_normal_100))
     ) {
         body.preBody()
 
         Text(
+            modifier = Modifier.testTag(TestTags.INFO_BODY_DEFAULT_TEXT),
             text = body.bodyText,
             style = MaterialTheme.typography.bodyMedium
         )

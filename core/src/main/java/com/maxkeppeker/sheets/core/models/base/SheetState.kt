@@ -34,7 +34,7 @@ import java.io.Serializable
  */
 class SheetState(
     visible: Boolean,
-    embedded: Boolean,
+    embedded: Boolean = true,
     val onFinishedRequest: (SheetState.() -> Unit)? = null,
     val onDismissRequest: (SheetState.() -> Unit)? = null,
     val onCloseRequest: (SheetState.() -> Unit)? = null,

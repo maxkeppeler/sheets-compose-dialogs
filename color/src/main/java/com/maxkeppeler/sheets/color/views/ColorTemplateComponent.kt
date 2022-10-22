@@ -32,6 +32,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.color.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -73,7 +75,9 @@ internal fun ColorTemplateComponent(
         items(colors) { color ->
             val selected = color == selectedColor
             ColorTemplateItemComponent(
-                modifier = Modifier.padding(dimensionResource(RC.dimen.scd_small_50)),
+                modifier = Modifier
+                    .testTags(TestTags.COLOR_TEMPLATE_SELECTION, color)
+                    .padding(dimensionResource(RC.dimen.scd_small_50)),
                 color = color,
                 selected = selected,
                 inputDisabled = inputDisabled,

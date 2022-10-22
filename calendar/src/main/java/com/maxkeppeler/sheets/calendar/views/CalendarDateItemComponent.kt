@@ -37,12 +37,14 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The date item component of the calendar view.
+ * @param modifier The modifier that is applied to this component.
  * @param data The data for the date.
  * @param selection The selection configuration for the dialog view.
  * @param onDateClick The listener that is invoked when a date is clicked.
  */
 @Composable
 internal fun CalendarDateItemComponent(
+    modifier: Modifier = Modifier,
     data: CalendarDateData,
     selection: CalendarSelection,
     onDateClick: (LocalDate) -> Unit = {},
@@ -96,9 +98,9 @@ internal fun CalendarDateItemComponent(
         }
 
     val parentModifier = when (selection) {
-        is CalendarSelection.Date -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Dates -> Modifier.padding(dimensionResource(RC.dimen.scd_small_25))
-        is CalendarSelection.Period -> Modifier.padding(vertical = dimensionResource(RC.dimen.scd_small_25))
+        is CalendarSelection.Date -> modifier.padding(dimensionResource(RC.dimen.scd_small_25))
+        is CalendarSelection.Dates -> modifier.padding(dimensionResource(RC.dimen.scd_small_25))
+        is CalendarSelection.Period -> modifier.padding(vertical = dimensionResource(RC.dimen.scd_small_25))
     }
 
     val cellModifier = when {

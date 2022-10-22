@@ -21,17 +21,21 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputRadioButtonGroup
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * RadioButton-Group component.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputRadioButtonGroupComponent(
+    index: Int,
     input: InputRadioButtonGroup,
     onInputUpdated: (Input) -> Unit
 ) {
@@ -43,9 +47,13 @@ internal fun InputRadioButtonGroupComponent(
         })
     }
 
-    Column {
+    Column(
+        modifier = Modifier
+            .testTags(TestTags.INPUT_ITEM_RADIOBUTTON_GROUP, index)
+    ) {
         input.items.forEachIndexed { index, item ->
             InputRadioButtonItemComponent(
+                index = index,
                 text = item,
                 selected = selectedIndex == index,
                 onSelected = { selectedIndex = index }

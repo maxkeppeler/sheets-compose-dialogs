@@ -18,28 +18,35 @@ package com.maxkeppeler.sheets.input.views
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.InputText
 
 /**
  * Text component.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  */
 @Composable
 internal fun InputTextComponent(
+    index: Int,
     input: InputText
 ) {
 
     Row(
-        modifier = Modifier.fillMaxWidth().padding(),
+        modifier = Modifier
+            .testTags(TestTags.INPUT_ITEM_TEXT, index)
+            .fillMaxWidth()
+            .padding(),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Text(
+            modifier = Modifier.testTags(TestTags.INPUT_ITEM_TEXT_TEXT, index),
             text = input.text,
             style = MaterialTheme.typography.bodyMedium,
         )

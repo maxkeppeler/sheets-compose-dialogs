@@ -18,12 +18,16 @@ package com.maxkeppeler.sheets.state.views
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.state.models.State
 
 @Composable
 internal fun StateLabel(state: State) {
     state.labelText?.let { label ->
         Text(
+            modifier = Modifier.testTag(TestTags.STATE_VIEW_LABEL_TEXT),
             text = label,
             style = MaterialTheme.typography.labelMedium,
         )

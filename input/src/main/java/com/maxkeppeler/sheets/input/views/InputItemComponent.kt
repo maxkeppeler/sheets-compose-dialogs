@@ -18,28 +18,28 @@ package com.maxkeppeler.sheets.input.views
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 import com.maxkeppeler.sheets.input.models.Input
 
 /**
  * The parent container for the individual input item type components.
  * It handles the additional header and the required-overlay.
+ * @param index The index of the input.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputItemComponent(
+    index: Int,
     input: Input,
     onInputUpdated: (Input) -> Unit
 ) {
     Box {
         Column {
-            input.header?.let { InputItemHeaderComponent(it) }
-            InputItemTypeComponent(input, onInputUpdated)
+            input.header?.let { InputItemHeaderComponent(index, it) }
+            InputItemTypeComponent(index, input, onInputUpdated)
         }
         if (input.required && !input.valid) {
-            InputItemOverlayComponent(Modifier.align(Alignment.TopEnd))
+            InputItemOverlayComponent(index)
         }
     }
 }

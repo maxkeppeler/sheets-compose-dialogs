@@ -22,10 +22,13 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.calcCalendarDateData
 import java.time.DayOfWeek
 import java.time.LocalDate
+import java.time.format.DateTimeFormatter
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -78,6 +81,10 @@ internal fun LazyGridScope.setupCalendarSelectionView(
         ) ?: return@items
 
         CalendarDateItemComponent(
+            modifier = Modifier.testTags(
+                TestTags.CALENDAR_DATE_SELECTION,
+                date.format(DateTimeFormatter.ISO_DATE)
+            ),
             data = dateData,
             selection = selection,
             onDateClick = onSelect

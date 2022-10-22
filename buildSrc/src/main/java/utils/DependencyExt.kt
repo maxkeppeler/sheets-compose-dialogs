@@ -7,25 +7,25 @@ fun DependencyHandler.apis(vararg list: ProjectDependency) {
     }
 }
 
-fun DependencyHandler.implementations(vararg list: String) {
+fun DependencyHandler.implementations(vararg list: Any) {
     list.forEach { dependency ->
         add("implementation", dependency)
     }
 }
 
-fun DependencyHandler.debugImplementations(vararg list: String) {
+fun DependencyHandler.debugImplementations(vararg list: Any) {
     list.forEach { dependency ->
         add("debugImplementation", dependency)
     }
 }
 
-fun DependencyHandler.androidTestImplementations(vararg list: String) {
+fun DependencyHandler.androidTestImplementations(vararg list: Any) {
     list.forEach { dependency ->
         add("androidTestImplementation", dependency)
     }
 }
 
-fun DependencyHandler.testImplementations(vararg list: String) {
+fun DependencyHandler.testImplementations(vararg list: Any) {
     list.forEach { dependency ->
         add("testImplementation", dependency)
     }

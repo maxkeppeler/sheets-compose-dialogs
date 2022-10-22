@@ -22,10 +22,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -55,6 +57,7 @@ private fun DefaultHeaderComponent(
 ) {
     Column(
         modifier = Modifier
+            .testTag(TestTags.HEADER_DEFAULT)
             .fillMaxWidth()
             .padding(contentHorizontalPadding)
             .padding(top = dimensionResource(id = RC.dimen.scd_normal_150)),
@@ -62,7 +65,9 @@ private fun DefaultHeaderComponent(
     ) {
         header.icon?.let {
             IconComponent(
-                modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
+                modifier = Modifier
+                    .testTag(TestTags.HEADER_DEFAULT_ICON)
+                    .size(dimensionResource(RC.dimen.scd_size_150)),
                 iconSource = it,
                 defaultTint = MaterialTheme.colorScheme.secondary
             )
@@ -70,10 +75,12 @@ private fun DefaultHeaderComponent(
         Text(
             text = header.title,
             style = MaterialTheme.typography.headlineSmall,
-            modifier = Modifier.padding(
-                top = if (header.icon != null) dimensionResource(id = RC.dimen.scd_normal_100)
-                else 0.dp
-            ),
+            modifier = Modifier
+                .testTag(TestTags.HEADER_DEFAULT_TEXT)
+                .padding(
+                    top = if (header.icon != null) dimensionResource(id = RC.dimen.scd_normal_100)
+                    else 0.dp
+                ),
             color = MaterialTheme.colorScheme.onSurface,
             textAlign = if (header.icon != null) TextAlign.Center else TextAlign.Start
         )

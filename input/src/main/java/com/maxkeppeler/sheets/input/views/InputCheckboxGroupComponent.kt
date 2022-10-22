@@ -24,17 +24,21 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputCheckboxGroup
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Checkbox-Group component.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputCheckboxGroupComponent(
+    index: Int,
     input: InputCheckboxGroup,
     onInputUpdated: (Input) -> Unit
 ) {
@@ -46,9 +50,13 @@ internal fun InputCheckboxGroupComponent(
         })
     }
 
-    Column {
+    Column(
+        modifier = Modifier
+            .testTags(TestTags.INPUT_ITEM_CHECKBOX_GROUP, index)
+    ) {
         input.items.forEachIndexed { index, item ->
             InputCheckboxItemComponent(
+                index = index,
                 text = item,
                 selected = selectedIndices.contains(index),
                 onSelected = {

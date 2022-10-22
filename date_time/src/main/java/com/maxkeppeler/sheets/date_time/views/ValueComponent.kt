@@ -27,6 +27,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -44,6 +46,7 @@ internal fun ValueComponent(
 ) {
     Text(
         modifier = Modifier
+            .testTags(TestTags.DATE_TIME_VALUE_SELECTION, if(unit is UnitSelection.Hour) "Hour" else unit.javaClass.simpleName)
             .onGloballyPositioned { coordinates ->
                 if (width.value < coordinates.size.width) {
                     width.value = coordinates.size.width

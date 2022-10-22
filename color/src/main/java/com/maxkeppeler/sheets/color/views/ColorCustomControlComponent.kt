@@ -28,6 +28,8 @@ import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testSequenceTagOf
 import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.core.R as RC
@@ -80,6 +82,10 @@ internal fun ColorCustomControlComponent(
                     onValueChange = { entry.second.value = it },
                     colorItemLabelWidth = colorItemLabelWidth,
                     colorValueLabelWidth = colorValueLabelWidth,
+                    sliderTestTag = testSequenceTagOf(
+                        TestTags.COLOR_CUSTOM_VALUE_SLIDER,
+                        index.toString()
+                    ),
                 )
             }
         }

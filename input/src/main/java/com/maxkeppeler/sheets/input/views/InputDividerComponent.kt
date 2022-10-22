@@ -23,15 +23,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Divider component.
+ * @param index The index of the input relative to all inputs.
  */
 @Composable
-internal fun InputDividerComponent() {
+internal fun InputDividerComponent(
+    index: Int,
+) {
     Divider(
         Modifier
+            .testTags(TestTags.INPUT_ITEM_DIVIDER, index)
             .fillMaxWidth()
             .padding(
                 top = dimensionResource(RC.dimen.scd_small_100),

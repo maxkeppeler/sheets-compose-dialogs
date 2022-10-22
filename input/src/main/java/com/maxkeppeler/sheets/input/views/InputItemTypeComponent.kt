@@ -20,21 +20,23 @@ import com.maxkeppeler.sheets.input.models.*
 
 /**
  * The type component that displays the respective correct input type.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputItemTypeComponent(
+    index: Int,
     input: Input,
     onInputUpdated: (Input) -> Unit
 ) {
     when (input) {
-        is InputRadioButtonGroup -> InputRadioButtonGroupComponent(input, onInputUpdated)
-        is InputCheckboxGroup -> InputCheckboxGroupComponent(input, onInputUpdated)
-        is InputCheckbox -> InputCheckboxComponent(input, onInputUpdated)
-        is InputTextField -> InputTextFieldComponent(input, onInputUpdated)
-        is InputText -> InputTextComponent(input)
-        is InputDivider -> InputDividerComponent()
-        is InputView -> InputViewComponent(input)
+        is InputRadioButtonGroup -> InputRadioButtonGroupComponent(index, input, onInputUpdated)
+        is InputCheckboxGroup -> InputCheckboxGroupComponent(index, input, onInputUpdated)
+        is InputCheckbox -> InputCheckboxComponent(index, input, onInputUpdated)
+        is InputTextField -> InputTextFieldComponent(index, input, onInputUpdated)
+        is InputText -> InputTextComponent(index, input)
+        is InputDivider -> InputDividerComponent(index)
+        is InputCustomView -> InputCustomViewComponent(input)
     }
 }

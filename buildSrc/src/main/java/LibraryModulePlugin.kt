@@ -56,8 +56,10 @@ class LibraryModulePlugin : Plugin<Project> {
             androidTestImplementations(
                 Dependencies.AndroidX.Test.JUNIT,
                 Dependencies.AndroidX.Test.ESPRESSO_CORE,
-                Dependencies.Compose.Test.JUNIT
+                Dependencies.Compose.Test.JUNIT,
+                project(":test")
             )
+
             debugImplementations(
                 Dependencies.Compose.Test.TOOLING,
                 Dependencies.Compose.Test.MANIFEST

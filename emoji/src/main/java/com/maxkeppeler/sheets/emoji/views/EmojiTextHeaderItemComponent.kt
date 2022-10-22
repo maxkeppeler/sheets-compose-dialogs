@@ -26,6 +26,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R as RC
 
 
@@ -33,16 +35,19 @@ import com.maxkeppeler.sheets.core.R as RC
  * The textual header item component.
  * @param name The name of the category.
  * @param selected If the current category is selected.
+ * @param index Index of category item.
  * @param onClick The listener that is invoked when this component is clicked.
  */
 @Composable
 internal fun EmojiTextHeaderItemComponent(
     name: String,
     selected: Boolean,
+    index: Int,
     onClick: () -> Unit
 ) {
     Text(
         modifier = Modifier
+            .testTags(TestTags.EMOJI_CATEGORY_TAB, index)
             .clip(RoundedCornerShape(50))
             .background(if (selected) MaterialTheme.colorScheme.primaryContainer else Color.Transparent)
             .clickable { onClick() }

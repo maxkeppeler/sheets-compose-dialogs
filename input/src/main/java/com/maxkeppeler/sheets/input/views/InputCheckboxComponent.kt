@@ -25,17 +25,21 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.input.models.Input
 import com.maxkeppeler.sheets.input.models.InputCheckbox
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Checkbox component.
+ * @param index The index of the input relative to all inputs.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputCheckboxComponent(
+    index: Int,
     input: InputCheckbox,
     onInputUpdated: (Input) -> Unit
 ) {
@@ -49,6 +53,7 @@ internal fun InputCheckboxComponent(
 
     Row(
         modifier = Modifier
+            .testTags(TestTags.INPUT_ITEM_CHECKBOX, index)
             .fillMaxWidth()
             .clip(MaterialTheme.shapes.small)
             .clickable { checked = !checked },
@@ -57,6 +62,7 @@ internal fun InputCheckboxComponent(
 
         Checkbox(
             modifier = Modifier
+                .testTags(TestTags.INPUT_ITEM_CHECKBOX_CHECKBOX, index)
                 .padding(start = dimensionResource(RC.dimen.scd_small_50))
                 .size(dimensionResource(RC.dimen.scd_normal_150)),
             checked = checked,
@@ -71,6 +77,7 @@ internal fun InputCheckboxComponent(
                 .wrapContentHeight(),
         ) {
             Text(
+                modifier = Modifier.testTags(TestTags.INPUT_ITEM_CHECKBOX_TEXT, index),
                 text = input.text,
                 style = MaterialTheme.typography.labelLarge
             )

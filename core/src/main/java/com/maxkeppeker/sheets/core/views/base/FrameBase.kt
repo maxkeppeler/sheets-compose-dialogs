@@ -17,17 +17,16 @@
 
 package com.maxkeppeker.sheets.core.views.base
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.BaseValues
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.core.R as RC
@@ -43,12 +42,11 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 fun FrameBase(
-    header: Header? = null, //, @Composable ColumnScope.() -> Unit,
+    header: Header? = null,
     contentHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
     horizontalContentPadding: PaddingValues = BaseValues.CONTENT_DEFAULT_PADDING,
     content: @Composable ColumnScope.() -> Unit,
     buttonsVisible: Boolean = true,
-
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
@@ -59,21 +57,28 @@ fun FrameBase(
 
         header?.let {
             // Display header
-            HeaderComponent(
-                header = header,
-                contentHorizontalPadding = PaddingValues(
-                    start = horizontalContentPadding.calculateStartPadding(layoutDirection),
-                    end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+            Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_HEADER)) {
+                HeaderComponent(
+                    header = header,
+                    contentHorizontalPadding = PaddingValues(
+                        start = horizontalContentPadding.calculateStartPadding(layoutDirection),
+                        end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+                    )
                 )
-            )
+            }
         } ?: run {
             // If no header is defined, add extra spacing to the content top padding
-            Spacer(Modifier.height(dimensionResource(RC.dimen.scd_small_100)))
+            Spacer(
+                modifier = Modifier
+                    .testTag(TestTags.FRAME_BASE_NO_HEADER)
+                    .height(dimensionResource(RC.dimen.scd_small_100))
+            )
         }
 
         // Spacing between content and header is usually 16dp
         Column(
             modifier = Modifier
+                .testTag(TestTags.FRAME_BASE_CONTENT)
                 .padding(
                     PaddingValues(
                         start = horizontalContentPadding.calculateStartPadding(layoutDirection),
@@ -88,8 +93,15 @@ fun FrameBase(
         )
 
         buttons?.let { buttons ->
-            if (buttonsVisible) buttons.invoke(this)
-            else Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_150)))
+            if (buttonsVisible) {
+                Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_BUTTONS)) {
+                    buttons.invoke(this)
+                }
+            } else Spacer(
+                modifier = Modifier
+                    .testTag(TestTags.FRAME_BASE_NO_BUTTONS)
+                    .height(dimensionResource(RC.dimen.scd_normal_150))
+            )
         }
     }
 }

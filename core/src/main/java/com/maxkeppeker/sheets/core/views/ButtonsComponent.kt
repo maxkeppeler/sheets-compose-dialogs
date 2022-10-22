@@ -20,11 +20,14 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R
 
 /**
@@ -55,9 +58,11 @@ fun ButtonsComponent(
 
         selection.extraButton?.let {
             SelectionButtonComponent(
-                modifier = Modifier.wrapContentWidth(),
+                modifier = Modifier
+                    .wrapContentWidth(),
                 button = selection.extraButton,
-                onClick = { },
+                onClick = { selection.onExtraButtonClick?.invoke() },
+                testTag = TestTags.BUTTON_EXTRA,
             )
             Spacer(modifier = Modifier.weight(1f))
         }
@@ -68,15 +73,18 @@ fun ButtonsComponent(
                 .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
             button = selection.negativeButton,
             onClick = { onNegative(); onClose() },
-            defaultText = stringResource(id = R.string.cancel)
+            defaultText = stringResource(id = R.string.cancel),
+            testTag = TestTags.BUTTON_NEGATIVE,
         )
 
         SelectionButtonComponent(
-            modifier = Modifier.wrapContentWidth(),
+            modifier = Modifier
+                .wrapContentWidth(),
             button = selection.positiveButton,
             onClick = { onPositive(); onClose() },
             enabled = onPositiveValid,
-            defaultText = stringResource(id = R.string.ok)
+            defaultText = stringResource(id = R.string.ok),
+            testTag = TestTags.BUTTON_POSITIVE,
         )
     }
 }
@@ -88,6 +96,7 @@ fun ButtonsComponent(
  * @param onClick Listener that is invoked when the button is clicked.
  * @param enabled Controls the enabled state of this button. When false, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.
  * @param defaultText The text that is used by default in the button data does not contain a text.
+ * @param testTag The text that is used for the test tag.
  */
 @Composable
 private fun SelectionButtonComponent(
@@ -95,12 +104,15 @@ private fun SelectionButtonComponent(
     button: SelectionButton?,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    defaultText: String = ""
+    defaultText: String = "",
+    testTag: String
 ) {
     val buttonContent: @Composable RowScope.() -> Unit = {
         button?.icon?.let { icon ->
             IconComponent(
-                modifier = Modifier.size(dimensionResource(R.dimen.scd_size_100)),
+                modifier = Modifier
+                    .testTags(testTag, TestTags.BUTTON_ICON)
+                    .size(dimensionResource(R.dimen.scd_size_100)),
                 iconSource = icon,
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.scd_small_100)))
@@ -111,7 +123,7 @@ private fun SelectionButtonComponent(
     when {
         button == null || button.type == ButtonStyle.TEXT -> {
             TextButton(
-                modifier = modifier,
+                modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
@@ -119,7 +131,7 @@ private fun SelectionButtonComponent(
         }
         button.type == ButtonStyle.FILLED -> {
             Button(
-                modifier = modifier,
+                modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
@@ -127,7 +139,7 @@ private fun SelectionButtonComponent(
         }
         button.type == ButtonStyle.ELEVATED -> {
             ElevatedButton(
-                modifier = modifier,
+                modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
@@ -135,7 +147,7 @@ private fun SelectionButtonComponent(
         }
         button.type == ButtonStyle.OUTLINED -> {
             OutlinedButton(
-                modifier = modifier,
+                modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent

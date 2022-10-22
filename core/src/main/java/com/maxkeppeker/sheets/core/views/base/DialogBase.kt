@@ -28,10 +28,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.utils.TestTags
 
 /**
  * Base component for a dialog.
@@ -67,6 +69,7 @@ fun DialogBase(
         Box(
             contentAlignment = Alignment.Center,
             modifier = Modifier
+                .testTag(TestTags.DIALOG_BASE_CONTAINER)
                 .fillMaxSize()
                 .clickable(
                     interactionSource = boxInteractionSource,
@@ -76,6 +79,7 @@ fun DialogBase(
         ) {
             Surface(
                 modifier = Modifier
+                    .testTag(TestTags.DIALOG_BASE_CONTENT)
                     .fillMaxWidth()
                     .animateContentSize()
                     .clickable(
