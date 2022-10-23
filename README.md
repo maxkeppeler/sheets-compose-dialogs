@@ -12,6 +12,10 @@ An Android library that offers dialogs & views for various use cases - build wit
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="Version of Sheets library" src="https://img.shields.io/maven-central/v/com.maxkeppeler.sheets-compose-dialogs/core.svg?label=Maven%20Central">
    </a>
 
+  <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/actions/workflows/main.yml/badge.svg">
+  <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://github.com/maxkeppeler/sheets-compose-dialogs/actions/workflows/main.yml/badge.svg">
+  </a>
+
    <a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
      <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
    </a>
@@ -53,6 +57,8 @@ As the `core` module is the foundation of all other use-cases, you have to imple
 
 ## Requirement
 
+Try out the sample [sample APK](https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/sample.apk).
+
 In your top-level `build.gradle`
 
 ```gradle
@@ -64,7 +70,7 @@ repositories {
 
 In your app `build.gradle` file:
 
-[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets-compose-dialogs/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets/core)
+[ ![Download](https://img.shields.io/maven-central/v/com.maxkeppeler.sheets-compose-dialogs/core.svg?label=Maven%20Central) ](https://search.maven.org/artifact/com.maxkeppeler.sheets-compose-dialogs/core)
 
 ```gradle
 dependencies {
