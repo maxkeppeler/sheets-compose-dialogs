@@ -68,6 +68,23 @@ dependencies {
         apis(project(module.path))
     }
 
+    // Dependencies of sheets-compose-dialogs
+//
+//    val sheetsVersion = "0.0.1"
+//
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:core:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:info:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:color:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:calendar:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:clock:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:duration:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:date-time:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:option:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:list:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:input:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:state:$sheetsVersion")
+//    implementation("com.maxkeppeler.sheets-compose-dialogs:emoji:$sheetsVersion")
+
 
     // Kotlin libs
 
