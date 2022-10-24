@@ -296,25 +296,6 @@ The emoji dialog / view allows you to pick an emoji.
 
 Credits to [Vannik Tech's Emoji library](https://github.com/vanniktech/Emoji) - this module makes use of that lib.
 
-## Support this project
-
-- Leave a star and tell others about it
-- Watch for updates and improvements.
-- [Open an issue](https://github.com/MaxKeppeler/sheets/issues/) if you see or got any error.
-- Leave your
-  thanks [here](https://github.com/MaxKeppeler/sheets/discussions/categories/show-and-tell) and
-  showcase your implementation.
-- Donate me a coffee. ;)
-
-## Contribute
-
-1. Open an issue to discuss what you would like to change.
-2. Fork the Project
-3. Create your feature branch (feature-[some-name])
-4. Commit your changes
-5. Push to the branch (origin feature-[some-name])
-6. Open a pull request
-
 ## Donate
 
 Show your appreciation by donating me a coffee. Thank you very much!
