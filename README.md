@@ -16,12 +16,8 @@ An Android library that offers dialogs & views for various use cases - build wit
   <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://github.com/maxkeppeler/sheets-compose-dialogs/actions/workflows/main.yml/badge.svg">
   </a>
 
-   <a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
-     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://img.shields.io/codacy/grade/9a3b68b152e149fd82f0873e2fed78d5?label=Code%20Quality">
-   </a>
-
-   <a href="https://www.apache.org/licenses/LICENSE-2.0">
-     <img style="margin-right: 4px; margin-bottom: 8px;" alt="GitHub" src="https://img.shields.io/github/license/maxkeppeler/sheets-compose-dialogs?core=%23007EC6&label=">
+   <a href="https://www.codacy.com/gh/MaxKeppeler/sheets-compose-dialogs/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maxkeppeler/sheets-compose-dialogs&amp;utm_campaign=Badge_Grade">
+     <img style="margin-right: 4px; margin-bottom: 8px;" alt="Codacy code quality of Sheets library" src="https://app.codacy.com/project/badge/Grade/01ab26610ff84b8e9ca375b3d139962d">
    </a>
 
 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs">
@@ -41,7 +37,7 @@ An Android library that offers dialogs & views for various use cases - build wit
 </a>
 
 <a href="https://twitter.com/max_keppeler">
-  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/maxkeppeler?label=Follow&style=social">
+  <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/max_keppeler?label=Follow&style=social">
 </a>
 
 <img src="docs/res/showcase.png" alt="sheets Library">
