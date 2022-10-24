@@ -43,6 +43,8 @@ android {
     compileOptions {
         sourceCompatibility(JavaVersion.VERSION_1_8)
         targetCompatibility(JavaVersion.VERSION_1_8)
+        // Flag to enable support for the new language APIs
+        isCoreLibraryDesugaringEnabled = true
     }
     kotlinOptions {
         jvmTarget = "1.8"
@@ -85,6 +87,8 @@ dependencies {
 //    implementation("com.maxkeppeler.sheets-compose-dialogs:state:$sheetsVersion")
 //    implementation("com.maxkeppeler.sheets-compose-dialogs:emoji:$sheetsVersion")
 
+
+    coreLibraryDesugaring(Dependencies.DESUGAR)
 
     // Kotlin libs
 
