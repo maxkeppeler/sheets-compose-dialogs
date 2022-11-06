@@ -104,7 +104,7 @@ internal val CalendarSelection.initialCameraDate: LocalDate
             is CalendarSelection.Dates -> selectedDates?.firstOrNull()
             is CalendarSelection.Period -> selectedRange?.lower
         } ?: LocalDate.now()
-        return cameraDateBasedOnMode.beginOfWeek
+        return cameraDateBasedOnMode
     }
 
 /**
