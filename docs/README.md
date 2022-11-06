@@ -77,7 +77,7 @@ Replace `<version>` with the (latest or preferred) version of the library.
 
 Replace `<module>` with the module you want to use.
 
-Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date_time` | `option` | `list` | `input` | `emoji` | `state`  
+Available modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date-time` | `option` | `list` | `input` | `emoji` | `state`  
 
 # Resources 
 
