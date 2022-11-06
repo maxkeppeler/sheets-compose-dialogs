@@ -119,7 +119,7 @@ fun com.android.build.gradle.BaseExtension.baselibraryConfig() {
         kotlinOptions {
             jvmTarget = "1.8"
             freeCompilerArgs = freeCompilerArgs + listOf(
-                "-Xopt-in=androidx.compose.material.ExperimentalMaterialApi",
+                "-Xopt-in=androidx.compose.material.ExperimentalMaterial3Api",
                 "-Xopt-in=androidx.compose.animation.ExperimentalAnimationApi",
                 "-Xopt-in=androidx.compose.ui.test.ExperimentalTestApi",
                 "-Xopt-in=androidx.compose.foundation.ExperimentalFoundationApi",
