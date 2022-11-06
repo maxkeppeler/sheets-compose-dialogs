@@ -112,7 +112,7 @@ dependencies {
         Dependencies.Compose.UI_TOOLING,
         Dependencies.Compose.ANIMATION,
         Dependencies.Compose.RUNTIME,
-        Dependencies.Compose.MATERIAL,
+        Dependencies.Compose.MATERIAL_2,
         Dependencies.Compose.MATERIAL_3,
         Dependencies.Compose.ICONS_EXTENDED,
     )

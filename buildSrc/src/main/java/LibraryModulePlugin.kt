@@ -45,7 +45,6 @@ class LibraryModulePlugin : Plugin<Project> {
                 Dependencies.Compose.ANIMATION,
                 Dependencies.Compose.ANIMATION_GRAPHICS,
                 Dependencies.Compose.RUNTIME,
-                Dependencies.Compose.MATERIAL,
                 Dependencies.Compose.MATERIAL_3,
                 Dependencies.Compose.ICONS_EXTENDED,
             )

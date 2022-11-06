@@ -2,15 +2,14 @@ object Dependencies {
 
     object AndroidX {
 
-        const val CORE_KTX = "androidx.core:core-ktx:1.8.0"
-        const val LIFECYCLE_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1"
-        const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:1.5.1"
-        const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:2.5.0"
+        const val CORE_KTX = "androidx.core:core-ktx:${Versions.CORE}"
+        const val LIFECYCLE_KTX = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.RUNTIME}"
+        const val ACTIVITY_COMPOSE = "androidx.activity:activity-compose:${Versions.COMPOSE_ACTIVITY}"
+        const val NAVIGATION_COMPOSE = "androidx.navigation:navigation-compose:${Versions.COMPOSE_NAVIGATION}"
 
         object Test {
             const val JUNIT = "androidx.test.ext:junit:1.1.3"
-            const val ESPRESSO_CORE =
-                "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
+            const val ESPRESSO_CORE = "androidx.test.espresso:espresso-core:${Versions.ESPRESSO_CORE}"
         }
     }
 
@@ -18,14 +17,12 @@ object Dependencies {
 
         const val UI = "androidx.compose.ui:ui:${Versions.COMPOSE}"
         const val RUNTIME = "androidx.compose.runtime:runtime:${Versions.COMPOSE}"
-        const val MATERIAL = "androidx.compose.material:material:${Versions.COMPOSE}"
-        const val MATERIAL_3 = "androidx.compose.material3:material3:1.0.0-alpha15"
+        const val MATERIAL_2 = "androidx.compose.material:material:${Versions.COMPOSE}"
+        const val MATERIAL_3 = "androidx.compose.material3:material3:${Versions.COMPOSE_MD3}"
         const val UI_TOOLING = "androidx.compose.ui:ui-tooling-preview:${Versions.COMPOSE}"
-        const val ICONS_EXTENDED =
-            "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
+        const val ICONS_EXTENDED = "androidx.compose.material:material-icons-extended:${Versions.COMPOSE}"
         const val ANIMATION = "androidx.compose.animation:animation:${Versions.COMPOSE}"
-        const val ANIMATION_GRAPHICS =
-            "androidx.compose.animation:animation-graphics:${Versions.COMPOSE}"
+        const val ANIMATION_GRAPHICS = "androidx.compose.animation:animation-graphics:${Versions.COMPOSE}"
 
         object Test {
             const val JUNIT = "androidx.compose.ui:ui-test-junit4:${Versions.COMPOSE}"
@@ -48,17 +45,19 @@ object Dependencies {
     }
 
     object Kotlin {
-        const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.0"
+
+        const val GRADLE_PLUGIN = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.KOTLIN}"
         const val KOTLIN_STD = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.KOTLIN}"
     }
 
     object Gradle {
-        const val BUILD = "com.android.tools.build:gradle:7.3.0"
+
+        const val BUILD = "com.android.tools.build:gradle:${Versions.GRADLE}"
     }
 
-    const val DOKKA = "org.jetbrains.dokka:dokka-gradle-plugin:1.6.0"
-    const val SNAPPER = "dev.chrisbanes.snapper:snapper:0.3.0"
-    const val DESUGAR = "com.android.tools:desugar_jdk_libs:1.1.5"
+    const val DOKKA = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.DOKKA}"
+    const val SNAPPER = "dev.chrisbanes.snapper:snapper:${Versions.SNAPPER}"
+    const val DESUGAR = "com.android.tools:desugar_jdk_libs:${Versions.DESUGAR}"
 
-    const val MAVEN_PUBLISH = "com.vanniktech:gradle-maven-publish-plugin:0.21.0"
+    const val MAVEN_PUBLISH = "com.vanniktech:gradle-maven-publish-plugin:${Versions.MAVEN_PUBLISH}"
 }
