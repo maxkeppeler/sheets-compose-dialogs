@@ -15,7 +15,6 @@
  */
 package com.maxkeppeker.sheets.core.models.base
 
-import android.util.Log
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -43,10 +42,16 @@ class SheetState(
     var embedded by mutableStateOf(embedded)
     var reset by mutableStateOf(false)
 
+    /**
+     * Display the dialog / view.
+     */
     fun show() {
         visible = true
     }
 
+    /**
+     * Hide the dialog / view.
+     */
     fun hide() {
         visible = false
         reset = true
@@ -54,12 +59,12 @@ class SheetState(
         onCloseRequest?.invoke(this)
     }
 
-    private fun invokeReset() {
-        reset = true
+    internal fun clearReset() {
+        reset = false
     }
 
-    fun clearReset() {
-        reset = false
+    private fun invokeReset() {
+        reset = true
     }
 
     // Closed
@@ -70,9 +75,10 @@ class SheetState(
         onCloseRequest?.invoke(this)
     }
 
-    // Use case finished
+    /**
+     * Finish the use-case view.
+     */
     fun finish() {
-        Log.d("SheetState", "finish")
         /*
             We don't want to remove the view itself,
             but inform through the state that the use-case is done.
@@ -87,7 +93,6 @@ class SheetState(
     }
 
     internal fun markAsEmbedded() {
-        Log.d("SheetState", "markAsEmbedded")
         embedded = false
     }
 

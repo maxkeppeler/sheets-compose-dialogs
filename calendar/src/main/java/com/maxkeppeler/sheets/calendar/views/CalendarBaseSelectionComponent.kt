@@ -13,11 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalSnapperApi::class, ExperimentalMaterialApi::class)
+@file:OptIn(ExperimentalSnapperApi::class)
 
 package com.maxkeppeler.sheets.calendar.views
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyListState
@@ -25,14 +24,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.FractionalThreshold
-import androidx.compose.material.rememberSwipeableState
-import androidx.compose.material.swipeable
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
@@ -44,7 +38,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
-import com.maxkeppeler.sheets.calendar.models.CalendarSwipeAction
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.SnapOffsets
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
@@ -56,10 +49,6 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param yearListState The state of the year list selection view.
  * @param cells The amount of cells / columns that are used for the calendar grid view.
  * @param mode The display mode of the dialog.
- * @param nextDisabled Whenever the navigation to the next period is disabled.
- * @param prevDisabled Whenever the navigation to the previous period is disabled.
- * @param onPrev The listener that is invoked when the navigation to the previous period is invoked.
- * @param onNext The listener that is invoked when the navigation to the next period is invoked.
  * @param onCalendarView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.CALENDAR].
  * @param onMonthView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.MONTH].
  * @param onYearView The content that will be displayed if the [CalendarDisplayMode] is in [CalendarDisplayMode.YEAR].
@@ -70,48 +59,15 @@ internal fun CalendarBaseSelectionComponent(
     yearListState: LazyListState,
     cells: Int,
     mode: CalendarDisplayMode,
-    nextDisabled: Boolean,
-    prevDisabled: Boolean,
-    onPrev: () -> Unit,
-    onNext: () -> Unit,
     onCalendarView: LazyGridScope.() -> Unit,
     onMonthView: LazyGridScope.() -> Unit,
     onYearView: LazyListScope.() -> Unit
 ) {
 
-    val swipeableState = rememberSwipeableState(CalendarSwipeAction.NONE)
-    val anchors = mapOf(
-        0f to CalendarSwipeAction.NEXT,
-        150f to CalendarSwipeAction.NONE,
-        300f to CalendarSwipeAction.PREV
-    )
-
-    when (swipeableState.currentValue) {
-        CalendarSwipeAction.NEXT -> {
-            LaunchedEffect(swipeableState.currentValue) {
-                if (!nextDisabled) onNext()
-                swipeableState.snapTo(CalendarSwipeAction.NONE)
-            }
-        }
-        CalendarSwipeAction.PREV -> {
-            LaunchedEffect(swipeableState.currentValue) {
-                if (!prevDisabled) onPrev()
-                swipeableState.snapTo(CalendarSwipeAction.NONE)
-            }
-        }
-        CalendarSwipeAction.NONE -> Unit
-    }
-
     val baseModifier = modifier
         .fillMaxWidth()
         .padding(top = dimensionResource(RC.dimen.scd_normal_100))
 
-    val gridDateModifier = baseModifier.swipeable(
-        state = swipeableState,
-        anchors = anchors,
-        thresholds = { _, _ -> FractionalThreshold(0.5f) },
-        orientation = Orientation.Horizontal
-    )
     val gridYearModifier = baseModifier
         .graphicsLayer { alpha = 0.99F }
         .drawWithContent {
@@ -137,7 +93,7 @@ internal fun CalendarBaseSelectionComponent(
         CalendarDisplayMode.CALENDAR -> {
             LazyVerticalGrid(
                 columns = GridCells.Fixed(cells),
-                modifier = gridDateModifier,
+                modifier = baseModifier,
                 userScrollEnabled = false,
             ) {
                 onCalendarView()

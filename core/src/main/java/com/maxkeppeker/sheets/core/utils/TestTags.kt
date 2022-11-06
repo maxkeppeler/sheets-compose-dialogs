@@ -15,6 +15,9 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
+/**
+ * Test tags that used for the compose UI tests.
+ */
 object TestTags {
 
     /*

@@ -93,10 +93,6 @@ fun CalendarView(
                 yearListState = yearListState,
                 mode = calendarState.mode,
                 cells = calendarState.cells,
-                nextDisabled = calendarState.isNextDisabled,
-                prevDisabled = calendarState.isPrevDisabled,
-                onNext = calendarState::onNext,
-                onPrev = calendarState::onPrevious,
                 onCalendarView = {
                     setupCalendarSelectionView(
                         config = config,

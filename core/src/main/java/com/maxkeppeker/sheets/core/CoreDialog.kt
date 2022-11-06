@@ -13,14 +13,10 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(
-    ExperimentalMaterialApi::class, ExperimentalMaterial3Api::class,
-    ExperimentalMaterialApi::class, ExperimentalMaterialApi::class
-)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.maxkeppeker.sheets.core
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
@@ -36,7 +32,6 @@ import com.maxkeppeker.sheets.core.views.base.DialogBase
  * @param header The header to be displayed at the top of the dialog.
  * @param body The body content to be displayed inside the dialog.
  * @param onPositiveValid Listener that is invoked to check if the dialog input is valid.
- * @param onClose Listener that is invoked to indicate that the use-case is done and the view should be closed.
  * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
 @ExperimentalMaterial3Api

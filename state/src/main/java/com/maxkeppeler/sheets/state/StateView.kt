@@ -18,7 +18,6 @@
 package com.maxkeppeler.sheets.state
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -36,7 +35,6 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
  */
-@ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun StateView(

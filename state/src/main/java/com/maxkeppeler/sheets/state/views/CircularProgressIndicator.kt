@@ -16,7 +16,6 @@
 package com.maxkeppeler.sheets.state.views
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -43,7 +42,7 @@ internal fun CircularProgressIndicator(
         ?: indicator.customIndicator?.invoke()
         ?: indicator.value?.let { progress ->
             Box(modifier = Modifier.wrapContentSize()) {
-                CircularProgressIndicator(
+                androidx.compose.material3.CircularProgressIndicator(
                     progress = progress,
                     modifier = circularIndicatorModifier
                         .testTags(TestTags.STATE_LOADING_CIRCULAR, progress)
@@ -60,7 +59,7 @@ internal fun CircularProgressIndicator(
                 }
             }
         } ?: run {
-            CircularProgressIndicator(
+            androidx.compose.material3.CircularProgressIndicator(
                 modifier = circularIndicatorModifier
                     .testTag(TestTags.STATE_LOADING_CIRCULAR)
             )

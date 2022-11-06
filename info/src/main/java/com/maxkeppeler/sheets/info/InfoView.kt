@@ -17,7 +17,6 @@
 
 package com.maxkeppeler.sheets.info
 
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.Header
@@ -35,7 +34,6 @@ import com.maxkeppeler.sheets.info.views.BodyComponent
  * @param header The header to be displayed at the top of the dialog view.
  * @param body The body content to be displayed inside the dialog view.
  */
-@ExperimentalMaterialApi
 @ExperimentalMaterial3Api
 @Composable
 fun InfoView(
