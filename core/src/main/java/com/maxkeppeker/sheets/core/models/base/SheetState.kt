@@ -32,7 +32,7 @@ import java.io.Serializable
  * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
  */
 class SheetState(
-    visible: Boolean,
+    visible: Boolean = false,
     embedded: Boolean = true,
     val onFinishedRequest: (SheetState.() -> Unit)? = null,
     val onDismissRequest: (SheetState.() -> Unit)? = null,
@@ -143,7 +143,7 @@ class SheetState(
  */
 @Composable
 fun rememberSheetState(
-    visible: Boolean = true,
+    visible: Boolean = false,
     embedded: Boolean = true,
     onCloseRequest: (SheetState.() -> Unit)? = null,
     onFinishedRequest: (SheetState.() -> Unit)? = null,
