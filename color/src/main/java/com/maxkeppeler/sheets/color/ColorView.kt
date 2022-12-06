@@ -83,6 +83,7 @@ fun ColorView(
             when (colorState.displayMode) {
                 ColorSelectionMode.TEMPLATE ->
                     ColorTemplateComponent(
+                        config = config,
                         colors = colorState.colors,
                         selectedColor = colorState.color,
                         inputDisabled = colorState.inputDisabled,

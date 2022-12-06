@@ -19,16 +19,19 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
 import com.maxkeppeler.sheets.input.models.Input
+import com.maxkeppeler.sheets.input.models.InputConfig
 
 /**
  * The parent container for the individual input item type components.
  * It handles the additional header and the required-overlay.
+ * @param config The general configuration for the dialog view.
  * @param index The index of the input.
  * @param input The input that this component reflects.
  * @param onInputUpdated The listener that returns the updated input.
  */
 @Composable
 internal fun InputItemComponent(
+    config: InputConfig,
     index: Int,
     input: Input,
     onInputUpdated: (Input) -> Unit
@@ -39,7 +42,7 @@ internal fun InputItemComponent(
             InputItemTypeComponent(index, input, onInputUpdated)
         }
         if (input.required && !input.valid) {
-            InputItemOverlayComponent(index)
+            InputItemOverlayComponent(config, index)
         }
     }
 }

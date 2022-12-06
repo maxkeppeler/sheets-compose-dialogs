@@ -15,22 +15,21 @@
  */
 package com.maxkeppeler.sheets.emoji.utils
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.*
+import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 
 /**
  * Emoji dialog specific constants.
  */
 internal object Constants {
 
-    val CATEGORY_SYMBOLS = listOf(
-        Icons.Rounded.EmojiEmotions,
-        Icons.Rounded.EmojiNature,
-        Icons.Rounded.EmojiFoodBeverage,
-        Icons.Rounded.EmojiTransportation,
-        Icons.Rounded.EmojiEvents,
-        Icons.Rounded.EmojiObjects,
-        Icons.Rounded.EmojiSymbols,
-        Icons.Rounded.EmojiFlags,
+    fun getCategorySymbols(config: EmojiConfig) = listOf(
+        config.icons.EmojiEmotions,
+        config.icons.EmojiNature,
+        config.icons.EmojiFoodBeverage,
+        config.icons.EmojiTransportation,
+        config.icons.EmojiEvents,
+        config.icons.EmojiObjects,
+        config.icons.EmojiSymbols,
+        config.icons.EmojiFlags,
     )
 }

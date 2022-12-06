@@ -94,7 +94,7 @@ fun EmojiView(
             EmojiHeaderComponent(
                 config = config,
                 categories = emojiState.categories,
-                categoryIcons = Constants.CATEGORY_SYMBOLS,
+                categoryIcons = Constants.getCategorySymbols(config),
                 selectedCategory = emojiState.selectedCategory,
                 headerState = headerState,
                 onChangeCategory = emojiState::selectCategory

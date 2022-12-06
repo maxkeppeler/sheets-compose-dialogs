@@ -15,7 +15,9 @@
  */
 package com.maxkeppeler.sheets.color.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 
 /**
  * The general configuration for the clock dialog.
@@ -23,10 +25,12 @@ import com.maxkeppeker.sheets.core.models.base.BaseConfigs
  * @param defaultDisplayMode Default view when opening ColorDialog.
  * @param templateColors Colors for the [ColorSelectionMode.TEMPLATE]-view.
  * @param allowCustomColorAlphaValues Allow alpha values in the custom color picker.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 data class ColorConfig(
     val displayMode: ColorSelectionMode? = null,
     val defaultDisplayMode: ColorSelectionMode? = null,
     val templateColors: MultipleColors = MultipleColors.ColorsInt(),
     val allowCustomColorAlphaValues: Boolean = true,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

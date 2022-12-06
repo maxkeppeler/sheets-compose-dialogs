@@ -22,8 +22,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -35,10 +33,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.core.graphics.alpha
 import com.maxkeppeler.sheets.color.R
+import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The template item component that represents one color.
+ * @param config The general configuration for the dialog view.
  * @param modifier The modifier that is applied to this component.
  * @param color The color that this item represents.
  * @param selected If the color was selected.
@@ -47,6 +47,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun ColorTemplateItemComponent(
+    config: ColorConfig,
     modifier: Modifier = Modifier,
     color: Int,
     selected: Boolean,
@@ -89,7 +90,7 @@ internal fun ColorTemplateItemComponent(
                 Icon(
                     modifier = Modifier
                         .size(dimensionResource(RC.dimen.scd_size_100)),
-                    imageVector = Icons.Rounded.Check,
+                    imageVector = config.icons.Check,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary
                 )

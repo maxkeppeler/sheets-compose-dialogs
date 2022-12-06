@@ -17,8 +17,6 @@ package com.maxkeppeler.sheets.state.views
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Error
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -27,17 +25,26 @@ import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.state.models.State
+import com.maxkeppeler.sheets.state.models.StateConfig
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The failure state component.
+ * @param config The general configuration for the dialog view.
+ * @param state The failure state data.
+ */
 @Composable
-internal fun StateFailureComponent(state: State) {
+internal fun StateFailureComponent(
+    config: StateConfig,
+    state: State.Failure
+) {
     state.customView?.invoke() ?: run {
         Icon(
             modifier = Modifier
                 .testTag(TestTags.STATE_FAILURE)
                 .padding(vertical = dimensionResource(id = RC.dimen.scd_normal_100))
                 .size(dimensionResource(id = RC.dimen.scd_size_350)),
-            imageVector = Icons.Rounded.Error,
+            imageVector = config.icons.Error,
             contentDescription = null,
             tint = Color.Red
         )

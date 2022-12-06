@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Backspace
-import androidx.compose.material.icons.outlined.Clear
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -45,11 +42,13 @@ import androidx.compose.ui.text.font.FontWeight
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.duration.R
+import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The item component of the keyboard.
+ * @param config The general configuration for the dialog view.
  * @param key The key that the component represents.
  * @param onEnterValue The listener that is invoked when a value was clicked.
  * @param onBackspaceAction The listener that is invoked when [Constants.ACTION_BACKSPACE] was clicked.
@@ -57,6 +56,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun KeyItemComponent(
+    config: DurationConfig,
     key: String,
     onEnterValue: (String) -> Unit,
     onBackspaceAction: () -> Unit,
@@ -105,7 +105,7 @@ internal fun KeyItemComponent(
             Icon(
                 modifier = Modifier
                     .size(dimensionResource(RC.dimen.scd_size_175)),
-                imageVector = if (isActionBackspace) Icons.Outlined.Backspace else Icons.Outlined.Clear,
+                imageVector = if (isActionBackspace) config.icons.Backspace else config.icons.Clear,
                 contentDescription = stringResource(
                     if (isActionBackspace) R.string.scd_duration_dialog_delete_last_input
                     else R.string.scd_duration_dialog_clear_input

@@ -16,15 +16,19 @@
 package com.maxkeppeler.sheets.option.models
 
 import androidx.annotation.IntRange
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 import com.maxkeppeler.sheets.option.utils.Constants.GRID_COLUMNS_DEFAULT
 
 /**
  * The general configuration for the option dialog.
  * @param mode The mode that is used to display the options.
  * @param gridColumns The amount of columns when display mode is [DisplayMode.GRID_VERTICAL].
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 class OptionConfig(
     val mode: DisplayMode = DisplayMode.GRID_VERTICAL,
-    @IntRange(from = 1, to = 5) val gridColumns: Int = GRID_COLUMNS_DEFAULT
+    @IntRange(from = 1, to = 5) val gridColumns: Int = GRID_COLUMNS_DEFAULT,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

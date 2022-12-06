@@ -18,16 +18,12 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.animation.*
-import androidx.compose.animation.core.tween
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ChevronLeft
-import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -113,7 +109,7 @@ internal fun CalendarTopComponent(
                 ) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        imageVector = Icons.Rounded.ChevronLeft,
+                        imageVector = config.icons.ChevronLeft,
                         contentDescription = stringResource(
                             when (config.style) {
                                 CalendarStyle.MONTH -> R.string.scd_calendar_dialog_prev_month
@@ -199,7 +195,7 @@ internal fun CalendarTopComponent(
                 ) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                        imageVector = Icons.Rounded.ChevronRight,
+                        imageVector = config.icons.ChevronRight,
                         contentDescription = stringResource(
                             when (config.style) {
                                 CalendarStyle.MONTH -> R.string.scd_calendar_dialog_next_month

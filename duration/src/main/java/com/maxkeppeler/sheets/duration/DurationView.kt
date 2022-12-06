@@ -58,6 +58,7 @@ fun DurationView(
                 maxTimeValue = durationState.timeInfoInSeconds.third
             )
             KeyboardComponent(
+                config = config,
                 keys = durationState.keys,
                 onEnterValue = durationState::onEnterValue,
                 onBackspaceAction = durationState::onBackspaceAction,

@@ -21,10 +21,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Apps
-import androidx.compose.material.icons.rounded.NotInterested
-import androidx.compose.material.icons.rounded.Tune
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -80,7 +76,7 @@ internal fun ColorSelectionModeComponent(
                 )
                 Icon(
                     modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                    imageVector = if (mode != ColorSelectionMode.TEMPLATE) Icons.Rounded.Apps else Icons.Rounded.Tune,
+                    imageVector = if (mode != ColorSelectionMode.TEMPLATE) config.icons.Apps else config.icons.Tune,
                     contentDescription = text,
                     tint = MaterialTheme.colorScheme.primary
                 )
@@ -103,7 +99,7 @@ internal fun ColorSelectionModeComponent(
             ) {
                 Icon(
                     modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
-                    imageVector = Icons.Rounded.NotInterested,
+                    imageVector = config.icons.NotInterested,
                     contentDescription = stringResource(R.string.scd_color_dialog_no_color),
                     tint = MaterialTheme.colorScheme.primary
                 )

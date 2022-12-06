@@ -15,21 +15,23 @@
  */
 package com.maxkeppeler.sheets.date_time.views
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ExpandMore
 import androidx.compose.material3.Icon
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 
 /**
  * Component that is applied above the value component if no selection was made.
  * @param modifier The modifier that is applied to this component.
  */
 @Composable
-internal fun ValueEmptyOverlayComponent(modifier: Modifier) {
+internal fun ValueEmptyOverlayComponent(
+    config: DateTimeConfig,
+    modifier: Modifier
+) {
     Icon(
         modifier = modifier,
-        imageVector = Icons.Filled.ExpandMore,
+        imageVector = config.icons.ExpandMore,
         contentDescription = null
     )
 }

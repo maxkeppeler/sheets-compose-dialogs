@@ -29,9 +29,11 @@ import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.option.models.OptionConfig
 
 /**
  * The item component for an option.
+ * @param config The general configuration.
  * @param option The option that will be displayed.
  * @param onClick The listener that is invoked when an option was clicked.
  * @param grid Display option as a grid item.
@@ -40,6 +42,7 @@ import com.maxkeppeler.sheets.option.models.Option
  */
 @Composable
 internal fun OptionItemComponent(
+    config: OptionConfig,
     option: Option,
     inputDisabled: Boolean,
     onClick: (Option) -> Unit,
@@ -76,6 +79,7 @@ internal fun OptionItemComponent(
     val onInfoClick = { detailDialogState.show() }
 
     if (grid) OptionGridItemComponent(
+        config = config,
         option = option,
         modifier = containerModifier,
         iconColor = iconColor,
@@ -83,6 +87,7 @@ internal fun OptionItemComponent(
         size = size,
         onInfoClick = onInfoClick
     ) else OptionListItemComponent(
+        config = config,
         option = option,
         modifier = containerModifier,
         iconColor = iconColor,

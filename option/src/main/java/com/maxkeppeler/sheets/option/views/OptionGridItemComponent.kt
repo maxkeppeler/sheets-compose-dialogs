@@ -31,11 +31,13 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.toSize
 import com.maxkeppeker.sheets.core.views.IconComponent
-import com.maxkeppeler.sheets.core.R as RC
 import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.option.models.OptionConfig
+import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The grid item component for an option.
+ * @param config The general configuration.
  * @param option The option that will be displayed.
  * @param modifier The modifier that is applied to this component.
  * @param iconColor The color of the icon.
@@ -45,6 +47,7 @@ import com.maxkeppeler.sheets.option.models.Option
  */
 @Composable
 internal fun OptionGridItemComponent(
+    config: OptionConfig,
     option: Option,
     modifier: Modifier,
     iconColor: Color,
@@ -115,7 +118,8 @@ internal fun OptionGridItemComponent(
         InfoContainerComponent(
             modifier = Modifier.align(Alignment.TopEnd),
             optionInfo = option.details,
-            onClick = onInfoClick
+            onClick = onInfoClick,
+            config = config,
         )
     }
 }

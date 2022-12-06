@@ -15,14 +15,18 @@
  */
 package com.maxkeppeler.sheets.emoji.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 
 /**
  * The general configuration for the emoji dialog.
  * @param categoryAppearance The appearance of the categories.
  * @param emojiProvider The emoji provider that will be used to render the emojis.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 data class EmojiConfig(
     val categoryAppearance: EmojiCategoryAppearance = EmojiCategoryAppearance.SYMBOL,
-    val emojiProvider: EmojiProvider = EmojiProvider.GOOGLE
+    val emojiProvider: EmojiProvider = EmojiProvider.GOOGLE,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

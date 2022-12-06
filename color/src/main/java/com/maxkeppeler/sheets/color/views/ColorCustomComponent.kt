@@ -33,6 +33,7 @@ internal fun ColorCustomComponent(
 ) {
     Column {
         ColorCustomInfoComponent(
+            config = config,
             color = color,
             onColorChange = onColorChange,
         )

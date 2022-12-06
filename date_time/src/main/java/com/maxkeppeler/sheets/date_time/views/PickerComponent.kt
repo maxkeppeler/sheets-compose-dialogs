@@ -25,7 +25,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
@@ -137,6 +136,7 @@ internal fun PickerComponent(
                         unitSelection?.let { unit ->
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 UnitContainerComponent(
+                                    config = config,
                                     unit = unit,
                                     height = height,
                                     onValueChange = { onValueSelection(unit, it) },
@@ -159,6 +159,7 @@ internal fun PickerComponent(
             }
             isAm?.let {
                 UnitContainerComponent(
+                    config = config,
                     unit = UnitSelection.AmPm(),
                     height = height,
                     onValueChange = {

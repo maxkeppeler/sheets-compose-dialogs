@@ -17,15 +17,21 @@ package com.maxkeppeler.sheets.state.views
 
 import androidx.compose.runtime.Composable
 import com.maxkeppeler.sheets.state.models.State
+import com.maxkeppeler.sheets.state.models.StateConfig
 
+/**
+ * The state component that displays the respective current state.
+ * @param config The general configuration for the dialog view.
+ */
 @Composable
-internal fun StateComponent(state: State) {
+internal fun StateComponent(config: StateConfig) {
+    val state = config.state
     state.preView?.invoke()
     StateLabel(state)
     when (state) {
         is State.Loading -> StateLoadingComponent(state)
-        is State.Failure -> StateFailureComponent(state)
-        is State.Success -> StateSuccessComponent(state)
+        is State.Failure -> StateFailureComponent(config, state)
+        is State.Success -> StateSuccessComponent(config, state)
     }
     state.postView?.invoke()
 }

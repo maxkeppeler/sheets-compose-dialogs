@@ -15,7 +15,9 @@
  */
 package com.maxkeppeler.sheets.calendar.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
 
@@ -28,6 +30,7 @@ import java.time.LocalDate
  * @param maxYear The maximum year that is selectable.
  * @param disabledDates A list of dates that will be marked as disabled and can not be selected.
  * @param disabledTimeline The timeline you want to disable and which dates can not be selected.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 class CalendarConfig(
     val style: CalendarStyle = CalendarStyle.MONTH,
@@ -36,5 +39,6 @@ class CalendarConfig(
     val minYear: Int = Constants.DEFAULT_MIN_YEAR,
     val maxYear: Int = Constants.DEFAULT_MAX_YEAR,
     val disabledDates: List<LocalDate>? = null,
-    val disabledTimeline: CalendarTimeline? = null
+    val disabledTimeline: CalendarTimeline? = null,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

@@ -27,9 +27,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.ChevronLeft
-import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -46,11 +43,13 @@ import androidx.compose.ui.text.font.FontWeight
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.clock.R
+import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The item component of the keyboard.
+ * @param config The general configuration for the dialog view.
  * @param key The key that the component represents.
  * @param disabled Whenever the current key is disabled.
  * @param onEnterValue The listener that is invoked when a value was clicked.
@@ -59,6 +58,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun KeyItemComponent(
+    config: ClockConfig,
     key: String,
     disabled: Boolean = false,
     onEnterValue: (Int) -> Unit,
@@ -110,7 +110,7 @@ internal fun KeyItemComponent(
             Icon(
                 modifier = Modifier
                     .size(dimensionResource(RC.dimen.scd_size_175)),
-                imageVector = if (isActionNext) Icons.Outlined.ChevronRight else Icons.Outlined.ChevronLeft,
+                imageVector = if (isActionNext) config.icons.ChevronRight else config.icons.ChevronLeft,
                 contentDescription = stringResource(if (isActionNext) R.string.scd_clock_dialog_next_value else R.string.scd_clock_dialog_previous_value),
                 tint = MaterialTheme.colorScheme.secondary
             )

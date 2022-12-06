@@ -34,11 +34,13 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
+import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.utils.Constants
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The template mode that displays a list of colors to choose from.
+ * @param config The general configuration for the dialog view.
  * @param colors A list of colors that are displayed.
  * @param selectedColor The color that is currently selected.
  * @param inputDisabled If input is disabled.
@@ -46,6 +48,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun ColorTemplateComponent(
+    config: ColorConfig,
     colors: List<Int>,
     selectedColor: Int?,
     inputDisabled: Boolean,
@@ -75,6 +78,7 @@ internal fun ColorTemplateComponent(
         items(colors) { color ->
             val selected = color == selectedColor
             ColorTemplateItemComponent(
+                config = config,
                 modifier = Modifier
                     .testTags(TestTags.COLOR_TEMPLATE_SELECTION, color)
                     .padding(dimensionResource(RC.dimen.scd_small_50)),

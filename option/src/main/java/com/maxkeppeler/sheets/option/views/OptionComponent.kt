@@ -78,6 +78,7 @@ fun OptionComponent(
             ) {
                 items(options) { option ->
                     OptionItemComponent(
+                        config = config,
                         option = option,
                         inputDisabled = inputDisabled,
                         onClick = onClick,
@@ -95,6 +96,7 @@ fun OptionComponent(
             ) {
                 items(options) { option ->
                     OptionItemComponent(
+                        config = config,
                         option = option,
                         inputDisabled = inputDisabled,
                         onClick = onClick,
@@ -110,6 +112,7 @@ fun OptionComponent(
             ) {
                 items(options) { option ->
                     OptionItemComponent(
+                        config = config,
                         option = option,
                         inputDisabled = inputDisabled,
                         onClick = onClick,

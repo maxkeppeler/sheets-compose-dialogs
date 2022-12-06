@@ -15,6 +15,8 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
+
 /**
  * Defines module-wide constants.
  */
@@ -23,4 +25,6 @@ object BaseConstants {
     // Behaviours
 
     const val SUCCESS_DISMISS_DELAY = 600L
+
+    val DEFAULT_ICON_STYLE = LibIcons.Rounded
 }

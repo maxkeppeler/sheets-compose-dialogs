@@ -62,6 +62,7 @@ fun ClockView(
                 onAm = clockState::onChange12HourFormatValue,
             )
             KeyboardComponent(
+                config = config,
                 keys = clockState.keys,
                 disabledKeys = clockState.disabledKeys,
                 onEnterValue = clockState::onEnterValue,

@@ -15,9 +15,14 @@
  */
 package com.maxkeppeler.sheets.list.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 
 /**
  * The general configuration for the list dialog.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
-class ListConfig : BaseConfigs()
+data class ListConfig(
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
+) : BaseConfigs()

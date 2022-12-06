@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeler.sheets.input.models.Input
+import com.maxkeppeler.sheets.input.models.InputConfig
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -31,26 +32,33 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param modifier The modifier that is applied to this component.
  * @param input The list of input options.
  * @param onInputUpdated The listener that returns the updated input.
- * @param columns The amount of columns for the view.
+ * @param config The general configuration for the dialog view.
  */
 @Composable
 internal fun InputComponent(
     modifier: Modifier,
     input: List<Input>,
     onInputUpdated: (Input) -> Unit,
-    columns: Int
+    config: InputConfig,
 ) {
 
     LazyVerticalGrid(
         modifier = modifier,
-        columns = GridCells.Fixed(columns),
+        columns = GridCells.Fixed(config.columns),
         horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
         verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
     ) {
         itemsIndexed(
             items = input,
-            span = { _, input -> GridItemSpan(input.columns ?: columns) },
-            itemContent = { index, input -> InputItemComponent(index, input, onInputUpdated) }
+            span = { _, input -> GridItemSpan(input.columns ?: config.columns) },
+            itemContent = { index, input ->
+                InputItemComponent(
+                    config = config,
+                    index = index,
+                    input = input,
+                    onInputUpdated = onInputUpdated
+                )
+            }
         )
     }
 }

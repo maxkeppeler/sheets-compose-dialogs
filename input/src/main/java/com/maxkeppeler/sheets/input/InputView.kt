@@ -55,7 +55,7 @@ fun InputView(
                 modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
                 input = inputState.input,
                 onInputUpdated = inputState::updateInput,
-                columns = config.columns,
+                config = config,
             )
         },
         buttonsVisible = selection.withButtonView

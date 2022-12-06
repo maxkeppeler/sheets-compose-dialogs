@@ -19,9 +19,6 @@ package com.maxkeppeler.sheets.color.views
 
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ContentCopy
-import androidx.compose.material.icons.rounded.ContentPaste
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -36,6 +33,7 @@ import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.color.R
+import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.utils.Constants
 import com.maxkeppeler.sheets.color.utils.copyColorIntoClipboard
 import com.maxkeppeler.sheets.color.utils.getFormattedColor
@@ -45,11 +43,13 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * A information view for the custom color picker.
+ * @param config The general configuration for the dialog view.
  * @param color The color that is currently selected.
  * @param onColorChange The listener that returns a selected color.
  */
 @Composable
 internal fun ColorCustomInfoComponent(
+    config: ColorConfig,
     color: Int,
     onColorChange: (Int) -> Unit,
 ) {
@@ -80,6 +80,7 @@ internal fun ColorCustomInfoComponent(
     ) {
 
         ColorTemplateItemComponent(
+            config = config,
             modifier = Modifier
                 .testTags(TestTags.COLOR_CUSTOM_SELECTION, color)
                 .size(Constants.COLOR_CUSTOM_ITEM_SIZE),
@@ -133,7 +134,7 @@ internal fun ColorCustomInfoComponent(
                         Icon(
                             modifier = Modifier
                                 .size(dimensionResource(RC.dimen.scd_size_150)),
-                            imageVector = Icons.Rounded.ContentCopy,
+                            imageVector = config.icons.ContentCopy,
                             contentDescription = stringResource(R.string.scd_color_dialog_copy_color),
                         )
                     }
@@ -145,7 +146,7 @@ internal fun ColorCustomInfoComponent(
                         Icon(
                             modifier = Modifier
                                 .size(dimensionResource(RC.dimen.scd_size_150)),
-                            imageVector = Icons.Rounded.ContentPaste,
+                            imageVector = config.icons.ContentPaste,
                             contentDescription = stringResource(R.string.scd_color_dialog_paste_color),
                         )
                     }

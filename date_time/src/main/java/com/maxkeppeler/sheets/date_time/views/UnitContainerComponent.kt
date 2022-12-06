@@ -22,20 +22,23 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.res.dimensionResource
-import com.maxkeppeler.sheets.core.R as RC
+import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
+import com.maxkeppeler.sheets.core.R as RC
 
 
 /**
  * The container of a unit that was found in the localized pattern.
  * It switches between the view and selection mode.
+ * @param config The general configuration for the dialog view.
  * @param unit The unit of the value.
  * @param height The height of the component.
  * @param onValueChange The listener that returns the selected unit option item.
  */
 @Composable
 internal fun UnitContainerComponent(
+    config: DateTimeConfig,
     unit: UnitSelection,
     height: MutableState<Int>,
     onValueChange: (UnitOptionEntry) -> Unit
@@ -58,6 +61,7 @@ internal fun UnitContainerComponent(
                 })
         } else {
             ValueContainerComponent(
+                config = config,
                 unit = unit,
                 width = width,
                 expanded = expanded

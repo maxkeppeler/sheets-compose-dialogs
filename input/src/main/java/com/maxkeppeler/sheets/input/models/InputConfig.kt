@@ -15,12 +15,16 @@
  */
 package com.maxkeppeler.sheets.input.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 
 /**
  * The general configuration for the input dialog.
  * @param columns Set the amount of columns inputs can span.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 data class InputConfig(
     val columns: Int = 1,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

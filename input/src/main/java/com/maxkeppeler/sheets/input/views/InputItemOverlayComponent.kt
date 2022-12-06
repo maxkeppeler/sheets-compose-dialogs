@@ -18,8 +18,6 @@ package com.maxkeppeler.sheets.input.views
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -28,6 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
+import com.maxkeppeler.sheets.input.models.InputConfig
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -35,14 +34,17 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param index The index of the input relative to all inputs.
  */
 @Composable
-internal fun BoxScope.InputItemOverlayComponent(index: Int) {
+internal fun BoxScope.InputItemOverlayComponent(
+    config: InputConfig,
+    index: Int
+) {
     Icon(
         modifier = Modifier
             .align(Alignment.TopEnd)
             .testTags(TestTags.INPUT_ITEM_OVERLAY, index)
             .padding(dimensionResource(RC.dimen.scd_small_100))
             .size(dimensionResource(RC.dimen.scd_size_50)),
-        imageVector = Icons.Filled.Star,
+        imageVector = config.icons.Star,
         contentDescription = null,
         tint = MaterialTheme.colorScheme.error
     )

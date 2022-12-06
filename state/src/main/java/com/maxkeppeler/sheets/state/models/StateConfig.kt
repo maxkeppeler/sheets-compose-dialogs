@@ -15,12 +15,16 @@
  */
 package com.maxkeppeler.sheets.state.models
 
+import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
+import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 
 /**
  * The general configuration for the state dialog.
  * @param state The state of dialog that will be shown.
+ * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 data class StateConfig(
     val state: State,
+    override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

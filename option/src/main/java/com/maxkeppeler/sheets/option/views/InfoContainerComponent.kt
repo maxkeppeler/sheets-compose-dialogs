@@ -21,19 +21,26 @@ package com.maxkeppeler.sheets.option.views
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.option.models.OptionConfig
 import com.maxkeppeler.sheets.option.models.OptionDetails
 import com.maxkeppeler.sheets.core.R as RC
 
+/**
+ * The info container that is displayed on an option.
+ * @param config The general configuration.
+ * @param modifier The modifier that is applied to this component.
+ * @param optionInfo The OptionDetails data that this item represents.
+ * @param onClick The listener that is invoked when the info button is clicked.
+ */
 @Composable
 internal fun InfoContainerComponent(
+    config: OptionConfig,
     modifier: Modifier = Modifier,
     optionInfo: OptionDetails?,
     onClick: () -> Unit
@@ -54,7 +61,7 @@ internal fun InfoContainerComponent(
             Icon(
                 modifier = Modifier
                     .size(dimensionResource(RC.dimen.scd_size_100)),
-                imageVector = Icons.Rounded.Info,
+                imageVector = config.icons.Info,
                 contentDescription = null,
             )
         }
