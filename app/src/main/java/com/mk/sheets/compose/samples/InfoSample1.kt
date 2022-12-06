@@ -30,7 +30,9 @@ import com.maxkeppeler.sheets.info.models.InfoSelection
 internal fun InfoSample1(closeSelection: () -> Unit) {
 
     InfoDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(
+            visible = true,
+            onCloseRequest = { closeSelection() }),
         body = InfoBody.Default(
             bodyText = "this is a very long text bla bla",
             postBody = {

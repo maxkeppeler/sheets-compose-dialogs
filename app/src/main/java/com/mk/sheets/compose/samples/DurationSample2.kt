@@ -32,7 +32,7 @@ internal fun DurationSample2(closeSelection: () -> Unit) {
 
     val selectedTimeInSeconds = remember { mutableStateOf<Long>(240) }
     DurationDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = DurationSelection { newTimeInSeconds ->
             selectedTimeInSeconds.value = newTimeInSeconds
         },

@@ -50,7 +50,7 @@ internal fun ListSample1(closeSelection: () -> Unit) {
     )
 
     ListDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ListSelection.Single(
             showRadioButtons = true,
             options = options

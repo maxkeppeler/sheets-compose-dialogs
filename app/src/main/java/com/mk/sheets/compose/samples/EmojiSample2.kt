@@ -30,7 +30,7 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 internal fun EmojiSample2(closeSelection: () -> Unit) {
 
     EmojiDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = EmojiSelection.Unicode(
             onPositiveClick = { emojiUnicode ->
                 // Handle selection

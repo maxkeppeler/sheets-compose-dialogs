@@ -32,7 +32,7 @@ internal fun StateSample6(closeSelection: () -> Unit) {
     )
 
     StateDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         config = StateConfig(state = state)
     )
 }

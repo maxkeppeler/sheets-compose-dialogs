@@ -35,7 +35,7 @@ internal fun ListSample4(closeSelection: () -> Unit) {
     )
 
     ListDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ListSelection.Single(
             options = options
         ) { index, option ->

@@ -39,7 +39,7 @@ internal fun CalendarSample1(closeSelection: SheetState.() -> Unit) {
         LocalDate.now().plusDays(3),
     )
     CalendarDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         config = CalendarConfig(
             yearSelection = true,
             monthSelection = true,

@@ -46,7 +46,7 @@ internal fun InputSample4(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = InputSelection(
             input = inputOptions,
             onPositiveClick = { result ->

@@ -46,7 +46,7 @@ internal fun StateSample2(closeSelection: () -> Unit) {
         ProgressIndicator.Linear(progressAnimated)
     )
     StateDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         config = StateConfig(state = state)
     )
 }

@@ -32,7 +32,7 @@ internal fun ClockSample2(closeSelection: () -> Unit) {
 
     val selectedTime = remember { mutableStateOf<LocalTime?>(null) }
     ClockDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ClockSelection.HoursMinutesSeconds { hours, minutes, seconds ->
             selectedTime.value = LocalTime.of(hours, minutes, seconds)
         },

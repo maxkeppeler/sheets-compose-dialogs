@@ -61,7 +61,7 @@ internal fun OptionSample3(closeSelection: () -> Unit) {
     )
 
     OptionDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = OptionSelection.Multiple(
             minChoices = 2,
             maxChoices = 3,

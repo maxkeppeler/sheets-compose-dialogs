@@ -35,7 +35,7 @@ internal fun CalendarSample2(closeSelection: SheetState.() -> Unit) {
     val selectedDate = remember { mutableStateOf<LocalDate?>(LocalDate.now().minusDays(3)) }
 
     CalendarDialog(
-        state = rememberSheetState(true, onCloseRequest = closeSelection),
+        state = rememberSheetState(visible = true, true, onCloseRequest = closeSelection),
         config = CalendarConfig(
             yearSelection = true,
             style = CalendarStyle.WEEK,

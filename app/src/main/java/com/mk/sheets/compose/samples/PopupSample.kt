@@ -54,7 +54,7 @@ internal fun PopupSample(visible: Boolean, onHide: () -> Unit) {
                 shadowElevation = 4.dp,
             ) {
                 CalendarView(
-                    sheetState = rememberSheetState(
+                    sheetState = rememberSheetState(visible = true,
                         onCloseRequest = { onHide() },
                     ),
                     config = CalendarConfig(

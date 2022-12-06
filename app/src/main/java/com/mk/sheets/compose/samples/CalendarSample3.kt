@@ -40,7 +40,7 @@ internal fun CalendarSample3(closeSelection: SheetState.() -> Unit) {
     }
 
     CalendarDialog(
-        state = rememberSheetState(true, onCloseRequest = closeSelection),
+        state = rememberSheetState(visible = true, true, onCloseRequest = closeSelection),
         config = CalendarConfig(
             disabledTimeline = CalendarTimeline.PAST,
             style = CalendarStyle.MONTH,

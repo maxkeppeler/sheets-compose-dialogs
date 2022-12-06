@@ -34,7 +34,7 @@ import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 internal fun CoreSample1(closeSelection: () -> Unit) {
 
     CoreDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = CoreSelection(
             withButtonView = true,
             negativeButton = SelectionButton(

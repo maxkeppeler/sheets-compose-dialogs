@@ -38,7 +38,7 @@ internal fun InputSample3(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         config = InputConfig(columns = 2),
         selection = InputSelection(
             input = inputOptions,

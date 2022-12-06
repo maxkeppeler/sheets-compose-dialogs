@@ -44,7 +44,7 @@ internal fun ColorSample1(closeSelection: () -> Unit) {
     )
 
     ColorDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ColorSelection(
             onSelectNone = { color.value = null },
             onSelectColor = { color.value = it },

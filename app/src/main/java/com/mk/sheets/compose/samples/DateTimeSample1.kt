@@ -31,7 +31,7 @@ internal fun DateTimeSample1(closeSelection: () -> Unit) {
 
     val selectedDateTime = remember { mutableStateOf<LocalDateTime?>(null) }
     DateTimeDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = DateTimeSelection.DateTime { newDateTime ->
             selectedDateTime.value = newDateTime
         },

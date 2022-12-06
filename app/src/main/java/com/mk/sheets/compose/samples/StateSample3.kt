@@ -46,7 +46,7 @@ internal fun StateSample3(closeSelection: () -> Unit) {
         ProgressIndicator.Circular(progressAnimated)
     )
     StateDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         config = StateConfig(state = state)
     )
 }

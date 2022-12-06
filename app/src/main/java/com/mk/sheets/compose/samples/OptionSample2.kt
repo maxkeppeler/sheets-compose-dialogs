@@ -53,7 +53,7 @@ internal fun OptionSample2(closeSelection: () -> Unit) {
     )
 
     OptionDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = OptionSelection.Single(options) { index, option ->
             // Handle selection
         },

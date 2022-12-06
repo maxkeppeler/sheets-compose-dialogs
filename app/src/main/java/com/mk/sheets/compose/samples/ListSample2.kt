@@ -50,7 +50,7 @@ internal fun ListSample2(closeSelection: () -> Unit) {
     )
 
     ListDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ListSelection.Multiple(
             showCheckBoxes = true,
             options = options

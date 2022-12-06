@@ -36,7 +36,7 @@ internal fun ColorSample3(closeSelection: () -> Unit) {
     val color = remember { mutableStateOf(Color.Red.toArgb()) }
 
     ColorDialog(
-        state = rememberSheetState(onCloseRequest = { closeSelection() }),
+        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ColorSelection(
             selectedColor = SingleColor(color.value),
             onSelectColor = { color.value = it },
