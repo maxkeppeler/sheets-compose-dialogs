@@ -36,7 +36,6 @@ internal fun DefaultBodyComponent(body: InfoBody.Default) {
     Column(
         modifier = Modifier
             .testTag(TestTags.INFO_BODY_DEFAULT)
-            .padding(horizontal = dimensionResource(id = RC.dimen.scd_normal_150))
             .padding(top = dimensionResource(id = RC.dimen.scd_normal_100))
     ) {
         body.preBody()
