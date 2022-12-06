@@ -109,6 +109,7 @@ internal class InputState(
 internal fun rememberInputState(
     selection: InputSelection,
 ): InputState = rememberSaveable(
+    inputs = arrayOf(selection),
     saver = InputState.Saver(selection),
     init = { InputState(selection) }
 )

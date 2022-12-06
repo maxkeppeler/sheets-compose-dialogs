@@ -117,6 +117,7 @@ internal fun rememberColorState(
     selection: ColorSelection,
     config: ColorConfig,
 ): ColorState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = ColorState.Saver(context, selection, config),
     init = { ColorState(context, selection, config) }
 )

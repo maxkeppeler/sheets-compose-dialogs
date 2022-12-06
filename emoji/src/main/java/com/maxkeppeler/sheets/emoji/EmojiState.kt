@@ -122,6 +122,7 @@ internal fun rememberEmojiState(
     selection: EmojiSelection,
     config: EmojiConfig
 ): EmojiState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = EmojiState.Saver(selection, config),
     init = { EmojiState(selection, config) }
 )

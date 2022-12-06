@@ -148,6 +148,7 @@ internal fun rememberOptionState(
     selection: OptionSelection,
     config: OptionConfig
 ): OptionState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = OptionState.Saver(selection, config),
     init = { OptionState(selection, config) }
 )

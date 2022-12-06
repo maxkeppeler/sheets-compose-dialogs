@@ -24,8 +24,8 @@ fun StateHandler(
     sheetState: SheetState,
     baseState: BaseTypeState,
 ) {
-    DisposableEffect(sheetState.visible, sheetState.reset) {
-        if (!sheetState.visible || sheetState.reset) {
+    DisposableEffect(sheetState.reset) {
+        if (sheetState.reset) {
             baseState.reset()
             sheetState.clearReset()
         }

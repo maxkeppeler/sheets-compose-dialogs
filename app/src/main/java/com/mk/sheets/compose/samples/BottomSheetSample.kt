@@ -25,6 +25,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import com.maxkeppeker.sheets.core.models.base.rememberSheetState
 import com.maxkeppeler.sheets.calendar.CalendarView
@@ -40,7 +41,19 @@ fun BottomSheetSample(
 ) {
     val coroutine = rememberCoroutineScope()
     val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
-    val dialogSheetState = rememberSheetState(visible = true, onCloseRequest = { hideBottomSheet() })
+    val dialogSheetState =
+        rememberSheetState(visible = true, onCloseRequest = { hideBottomSheet(); })
+
+    LaunchedEffect(state.currentValue) {
+        when (state.currentValue) {
+            ModalBottomSheetValue.Hidden,
+            ModalBottomSheetValue.Expanded -> {
+                dialogSheetState.invokeReset() // Manually reset internal state if required
+            }
+            ModalBottomSheetValue.HalfExpanded -> Unit
+
+        }
+    }
 
     ModalBottomSheetLayout(
         content = screenContent,

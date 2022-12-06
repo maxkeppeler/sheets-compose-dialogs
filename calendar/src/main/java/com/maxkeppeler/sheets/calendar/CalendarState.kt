@@ -279,6 +279,7 @@ internal fun rememberCalendarState(
     selection: CalendarSelection,
     config: CalendarConfig,
 ): CalendarState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = CalendarState.Saver(selection, config),
     init = { CalendarState(selection, config) }
 )

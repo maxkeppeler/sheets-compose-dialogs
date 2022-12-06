@@ -116,6 +116,7 @@ internal fun rememberDateTimeState(
     selection: DateTimeSelection,
     config: DateTimeConfig,
 ): DateTimeState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = DateTimeState.Saver(selection, config),
     init = { DateTimeState(selection, config) }
 )

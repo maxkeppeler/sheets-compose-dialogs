@@ -151,6 +151,7 @@ internal fun rememberListState(
     selection: ListSelection,
     config: ListConfig
 ): ListState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = ListState.Saver(selection, config),
     init = { ListState(selection, config) }
 )

@@ -205,6 +205,7 @@ internal fun rememberClockState(
     selection: ClockSelection,
     config: ClockConfig,
 ): ClockState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = ClockState.Saver(context, selection, config),
     init = { ClockState(context, selection, config) }
 )

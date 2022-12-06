@@ -156,6 +156,7 @@ internal fun rememberDurationState(
     selection: DurationSelection,
     config: DurationConfig,
 ): DurationState = rememberSaveable(
+    inputs = arrayOf(selection, config),
     saver = DurationState.Saver(selection, config),
     init = { DurationState(selection, config) }
 )

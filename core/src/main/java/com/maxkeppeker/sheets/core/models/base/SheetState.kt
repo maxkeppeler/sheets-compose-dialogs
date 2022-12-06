@@ -54,7 +54,6 @@ class SheetState(
      */
     fun hide() {
         visible = false
-        reset = true
         onDismissRequest?.invoke(this)
         onCloseRequest?.invoke(this)
     }
@@ -63,13 +62,15 @@ class SheetState(
         reset = false
     }
 
-    private fun invokeReset() {
+    /**
+     * Reset the current state data.
+     */
+    fun invokeReset() {
         reset = true
     }
 
     // Closed
     internal fun dismiss() {
-        invokeReset()
         if (!embedded) visible = false
         onDismissRequest?.invoke(this)
         onCloseRequest?.invoke(this)
@@ -85,9 +86,7 @@ class SheetState(
             The parent container (Dialog, PopUp, BottomSheet)
             can be hidden with the use-case view.
          */
-        invokeReset()
         if (!embedded) visible = false
-
         onFinishedRequest?.invoke(this)
         onCloseRequest?.invoke(this)
     }
