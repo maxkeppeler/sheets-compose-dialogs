@@ -312,6 +312,8 @@ Show your appreciation by donating me a coffee. Thank you very much!
 
 Check out some apps which are using this library.<br/>
 
+- [WearSocials](https://play.google.com/store/apps/details?id=com.mk.wearsocials)
+- [Respawn](https://play.google.com/store/apps/details?id=com.nek12.respawn)
 - [Mangata (Soon)](http://mangata-mk.com)
 
 ## License
