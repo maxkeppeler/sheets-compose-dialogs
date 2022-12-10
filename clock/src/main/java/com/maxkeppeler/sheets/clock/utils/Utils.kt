@@ -21,7 +21,7 @@ import java.time.LocalTime
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun isAm(currentTime: LocalTime): Boolean {
-    return currentTime.hour <= 12
+    return currentTime.hour < 12
 }
 
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
