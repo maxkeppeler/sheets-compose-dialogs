@@ -54,6 +54,10 @@ subprojects {
         kotlin {
             target("**/*.kt")
 //            ktlint(Versions.KT_LINT)
+        }
+        kotlin {
+            target("**/*.kt")
+            targetExclude("**/core/icons/**/*.*")
             licenseHeaderFile(rootProject.file("copyright.kt"))
         }
         kotlinGradle {
