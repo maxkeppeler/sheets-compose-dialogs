@@ -89,10 +89,16 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
+
       - name: Build APK
         run: bash ./gradlew assembleDebug --stacktrace
-      - name: Upload APK
-        uses: actions/upload-artifact@v3.1.2
+
+      - name: Download APK
+        uses: actions/download-artifact@v3
         with:
-          name: apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: sample.apk
+          path: app/sample/
+
+      - name: Display structure of downloaded files
+        run: ls -R
+        working-directory: app/sample/
