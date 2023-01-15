@@ -34,13 +34,13 @@ import java.io.Serializable
 class SheetState(
     visible: Boolean = false,
     embedded: Boolean = true,
-    val onFinishedRequest: (SheetState.() -> Unit)? = null,
-    val onDismissRequest: (SheetState.() -> Unit)? = null,
-    val onCloseRequest: (SheetState.() -> Unit)? = null,
+    internal val onFinishedRequest: (SheetState.() -> Unit)? = null,
+    internal val onDismissRequest: (SheetState.() -> Unit)? = null,
+    internal val onCloseRequest: (SheetState.() -> Unit)? = null,
 ) {
-    var visible by mutableStateOf(visible)
-    var embedded by mutableStateOf(embedded)
-    var reset by mutableStateOf(false)
+    internal var visible by mutableStateOf(visible)
+    internal var embedded by mutableStateOf(embedded)
+    internal var reset by mutableStateOf(false)
 
     /**
      * Display the dialog / view.
@@ -69,7 +69,6 @@ class SheetState(
         reset = true
     }
 
-    // Closed
     internal fun dismiss() {
         if (!embedded) visible = false
         onDismissRequest?.invoke(this)
@@ -97,23 +96,31 @@ class SheetState(
 
     companion object {
 
-        fun Saver(): Saver<SheetState, *> = Saver(
+        /**
+         * [Saver] implementation.
+         * Lambda functions need to be passed to new sheet state as they can not be serialized.
+         * @param onCloseRequest The listener that is invoked when the dialog was closed through any cause.
+         * @param onFinishedRequest The listener that is invoked when the dialog's use-case was finished by the user accordingly (negative, positive, selection).
+         * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
+         */
+        fun Saver(
+            onCloseRequest: (SheetState.() -> Unit)?,
+            onFinishedRequest: (SheetState.() -> Unit)?,
+            onDismissRequest: (SheetState.() -> Unit)?
+        ): Saver<SheetState, *> = Saver(
             save = { state ->
                 SheetStateData(
                     visible = state.visible,
                     embedded = state.embedded,
-                    onCloseRequest = state.onCloseRequest,
-                    onFinishedRequest = state.onFinishedRequest,
-                    onDismissRequest = state.onDismissRequest
                 )
             },
             restore = { data ->
                 SheetState(
                     visible = data.visible,
                     embedded = data.embedded,
-                    onCloseRequest = data.onCloseRequest,
-                    onFinishedRequest = data.onFinishedRequest,
-                    onDismissRequest = data.onDismissRequest,
+                    onCloseRequest = onCloseRequest,
+                    onFinishedRequest = onFinishedRequest,
+                    onDismissRequest = onDismissRequest,
                 )
             }
         )
@@ -126,9 +133,6 @@ class SheetState(
     data class SheetStateData(
         val visible: Boolean,
         val embedded: Boolean,
-        val onCloseRequest: (SheetState.() -> Unit)?,
-        val onFinishedRequest: (SheetState.() -> Unit)?,
-        val onDismissRequest: (SheetState.() -> Unit)?,
     ) : Serializable
 }
 
@@ -147,16 +151,19 @@ fun rememberSheetState(
     onCloseRequest: (SheetState.() -> Unit)? = null,
     onFinishedRequest: (SheetState.() -> Unit)? = null,
     onDismissRequest: (SheetState.() -> Unit)? = null,
-): SheetState =
-    rememberSaveable(
-        saver = SheetState.Saver(),
-        init = {
-            SheetState(
-                visible = visible,
-                embedded = embedded,
-                onCloseRequest = onCloseRequest,
-                onFinishedRequest = onFinishedRequest,
-                onDismissRequest = onDismissRequest
-            )
-        }
-    )
+): SheetState = rememberSaveable(
+    saver = SheetState.Saver(
+        onCloseRequest = onCloseRequest,
+        onFinishedRequest = onFinishedRequest,
+        onDismissRequest = onDismissRequest
+    ),
+    init = {
+        SheetState(
+            visible = visible,
+            embedded = embedded,
+            onCloseRequest = onCloseRequest,
+            onFinishedRequest = onFinishedRequest,
+            onDismissRequest = onDismissRequest
+        )
+    }
+)
