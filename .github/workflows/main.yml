@@ -93,6 +93,12 @@ jobs:
       - name: Build APK
         run: bash ./gradlew assembleDebug --stacktrace
 
+      - name: Upload APK
+        uses: actions/upload-artifact@v3.1.2
+        with:
+          name: sample.apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
       - name: Download APK
         uses: actions/download-artifact@v3
         with:
