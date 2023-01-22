@@ -74,7 +74,7 @@ fun DialogBase(
                 .clickable(
                     interactionSource = boxInteractionSource,
                     indication = null,
-                    onClick = state::dismiss
+                    onClick = { if (properties.dismissOnClickOutside) state.dismiss() }
                 )
         ) {
             Surface(
