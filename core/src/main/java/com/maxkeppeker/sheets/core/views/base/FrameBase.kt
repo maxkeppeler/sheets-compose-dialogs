@@ -17,17 +17,19 @@
 
 package com.maxkeppeker.sheets.core.views.base
 
+import android.content.res.Configuration
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.BaseValues
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -46,10 +48,14 @@ fun FrameBase(
     contentHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
     horizontalContentPadding: PaddingValues = BaseValues.CONTENT_DEFAULT_PADDING,
     content: @Composable ColumnScope.() -> Unit,
+    contentLandscape: @Composable (RowScope.() -> Unit)? = null,
     buttonsVisible: Boolean = true,
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
+    val configuration = LocalConfiguration.current
+
+
 
     Column(
         modifier = Modifier.wrapContentHeight()
@@ -75,22 +81,34 @@ fun FrameBase(
             )
         }
 
-        // Spacing between content and header is usually 16dp
-        Column(
-            modifier = Modifier
-                .testTag(TestTags.FRAME_BASE_CONTENT)
-                .padding(
-                    PaddingValues(
-                        start = horizontalContentPadding.calculateStartPadding(layoutDirection),
-                        end = horizontalContentPadding.calculateEndPadding(layoutDirection),
-                        // Enforce default top spacing
-                        top = dimensionResource(RC.dimen.scd_normal_100),
-                    )
+        val contentModifier = Modifier
+            .testTag(TestTags.FRAME_BASE_CONTENT)
+            .padding(
+                PaddingValues(
+                    start = horizontalContentPadding.calculateStartPadding(
+                        layoutDirection
+                    ),
+                    end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+                    // Enforce default top spacing
+                    top = dimensionResource(RC.dimen.scd_normal_100),
                 )
-                .fillMaxWidth(),
-            horizontalAlignment = contentHorizontalAlignment,
-            content = content
-        )
+            )
+        when {
+            configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && contentLandscape != null -> {
+                Row(
+                    modifier = contentModifier,
+                    verticalAlignment = Alignment.CenterVertically,
+                    content = contentLandscape
+                )
+            }
+            else -> {
+                Column(
+                    modifier = contentModifier.fillMaxWidth(),
+                    horizontalAlignment = contentHorizontalAlignment,
+                    content = content
+                )
+            }
+        }
 
         buttons?.let { buttons ->
             if (buttonsVisible) {
