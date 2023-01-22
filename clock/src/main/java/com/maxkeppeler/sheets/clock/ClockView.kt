@@ -17,9 +17,14 @@
 
 package com.maxkeppeler.sheets.clock
 
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
@@ -28,7 +33,9 @@ import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.views.KeyboardComponent
-import com.maxkeppeler.sheets.clock.views.TimeValueComponent
+import com.maxkeppeler.sheets.clock.views.LandscapeTimeValueComponent
+import com.maxkeppeler.sheets.clock.views.PortraitTimeValueComponent
+import com.maxkeppeler.sheets.core.R
 
 /**
  * Clock view for the use-case to to select a clock time.
@@ -52,7 +59,10 @@ fun ClockView(
     FrameBase(
         header = header,
         content = {
-            TimeValueComponent(
+            PortraitTimeValueComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(R.dimen.scd_normal_100)),
                 unitValues = clockState.timeTextValues,
                 isAm = clockState.isAm,
                 is24hourFormat = clockState.is24HourFormat,
@@ -61,7 +71,35 @@ fun ClockView(
                 onGroupClick = clockState::onValueGroupClick,
                 onAm = clockState::onChange12HourFormatValue,
             )
+
             KeyboardComponent(
+                modifier = Modifier.weight(1f, false),
+                config = config,
+                keys = clockState.keys,
+                disabledKeys = clockState.disabledKeys,
+                onEnterValue = clockState::onEnterValue,
+                onPrevAction = clockState::onPrevAction,
+                onNextAction = clockState::onNextAction
+            )
+        },
+        contentLandscape = {
+            LandscapeTimeValueComponent(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .weight(1f, true),
+                verticalArrangement = Arrangement.Center,
+                unitValues = clockState.timeTextValues,
+                isAm = clockState.isAm,
+                is24hourFormat = clockState.is24HourFormat,
+                valueIndex = clockState.valueIndex.value,
+                groupIndex = clockState.groupIndex.value,
+                onGroupClick = clockState::onValueGroupClick,
+                onAm = clockState::onChange12HourFormatValue,
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            KeyboardComponent(
+                modifier = Modifier.weight(1f, true),
+                orientation = Orientation.Horizontal,
                 config = config,
                 keys = clockState.keys,
                 disabledKeys = clockState.disabledKeys,

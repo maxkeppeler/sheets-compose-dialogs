@@ -20,12 +20,10 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,6 +38,8 @@ import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.clock.R
@@ -61,6 +61,7 @@ internal fun KeyItemComponent(
     config: ClockConfig,
     key: String,
     disabled: Boolean = false,
+    orientation: Orientation = Orientation.Vertical,
     onEnterValue: (Int) -> Unit,
     onPrevAction: () -> Unit,
     onNextAction: () -> Unit,
@@ -85,7 +86,8 @@ internal fun KeyItemComponent(
     Row(
         modifier = Modifier
             .testTags(TestTags.KEYBOARD_KEY, key)
-            .aspectRatio(1f)
+            .aspectRatio(1f, true)
+            .sizeIn(minHeight = 35.dp, minWidth = 35.dp, maxWidth = 42.dp, maxHeight = 42.dp)
             .alpha(if (disabled) Constants.KEYBOARD_ALPHA_ITEM_DISABLED else Constants.KEYBOARD_ALPHA_ITEM_ENABLED)
             .clip(RoundedCornerShape(animatedCornerRadius.value))
             .background(
@@ -107,18 +109,28 @@ internal fun KeyItemComponent(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (isActionNext || isActionPrev) {
+            val size = dimensionResource(RC.dimen.scd_size_175)
             Icon(
-                modifier = Modifier
-                    .size(dimensionResource(RC.dimen.scd_size_175)),
+                modifier = Modifier.size(size),
                 imageVector = if (isActionNext) config.icons.ChevronRight else config.icons.ChevronLeft,
                 contentDescription = stringResource(if (isActionNext) R.string.scd_clock_dialog_next_value else R.string.scd_clock_dialog_previous_value),
                 tint = MaterialTheme.colorScheme.secondary
             )
         } else {
-            Text(
-                text = key,
-                style = MaterialTheme.typography.headlineLarge.copy(fontWeight = FontWeight.Bold)
-            )
+            Box(contentAlignment = Alignment.Center) {
+                Text(
+                    text = key,
+                    style = when(orientation) {
+                        Orientation.Vertical -> MaterialTheme.typography.headlineLarge.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                        Orientation.Horizontal -> MaterialTheme.typography.headlineSmall.copy(
+                            fontWeight = FontWeight.Bold
+                        )
+                    },
+                    textAlign = TextAlign.Center,
+                )
+            }
         }
     }
 }

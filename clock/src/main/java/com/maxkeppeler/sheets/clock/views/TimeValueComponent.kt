@@ -41,7 +41,9 @@ import com.maxkeppeler.sheets.clock.R
 import com.maxkeppeler.sheets.core.R as RC
 
 @Composable
-internal fun TimeValueComponent(
+internal fun PortraitTimeValueComponent(
+    modifier: Modifier,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
     valueIndex: Int,
     groupIndex: Int,
     unitValues: List<StringBuilder>,
@@ -52,10 +54,9 @@ internal fun TimeValueComponent(
 ) {
 
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = dimensionResource(RC.dimen.scd_normal_100)),
-        horizontalAlignment = Alignment.CenterHorizontally
+        modifier = modifier,
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = verticalArrangement,
     ) {
 
         Row(
@@ -102,12 +103,103 @@ internal fun TimeValueComponent(
                     )
                 }
             }
-
         }
         if (!is24hourFormat) {
             Row(
                 Modifier
                     .padding(top = dimensionResource(RC.dimen.scd_small_50)),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                TimeTypeItemComponent(
+                    modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 0),
+                    selected = isAm,
+                    onClick = { onAm.invoke(true) },
+                    text = stringResource(id = R.string.scd_clock_dialog_am),
+                )
+                TimeTypeItemComponent(
+                    modifier = Modifier.testTags(TestTags.CLOCK_12_HOUR_FORMAT, 1),
+                    selected = !isAm,
+                    onClick = { onAm.invoke(false) },
+                    text = stringResource(id = R.string.scd_clock_dialog_pm),
+                )
+            }
+        }
+    }
+}
+
+
+@Composable
+internal fun LandscapeTimeValueComponent(
+    modifier: Modifier,
+    verticalArrangement: Arrangement.Vertical = Arrangement.Top,
+    valueIndex: Int,
+    groupIndex: Int,
+    unitValues: List<StringBuilder>,
+    is24hourFormat: Boolean,
+    isAm: Boolean,
+    onGroupClick: (Int) -> Unit,
+    onAm: (Boolean) -> Unit,
+) {
+
+    Column(
+        modifier = modifier,
+        horizontalAlignment = Alignment.Start,
+        verticalArrangement = verticalArrangement,
+    ) {
+
+        val labels = listOf("Hours", "Minutes", "Seconds")
+
+        Column(
+            modifier = Modifier
+                .wrapContentWidth(),
+            verticalArrangement = Arrangement.Center
+        ) {
+
+            unitValues.forEachIndexed { currentGroupIndex, value ->
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+
+                    val textStyle =
+                        MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+
+                    Text(
+                        modifier = Modifier
+                            .wrapContentSize()
+                            .clip(MaterialTheme.shapes.medium)
+                            .background(if (currentGroupIndex == groupIndex) MaterialTheme.colorScheme.secondaryContainer else Color.Transparent)
+                            .clickable { onGroupClick.invoke(currentGroupIndex) }
+                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
+                        text = buildAnnotatedString {
+                            val values = value.toString().toCharArray()
+                            val selectedStyle = SpanStyle(
+                                color = MaterialTheme.colorScheme.primary,
+                            )
+                            values.forEachIndexed { currentValueIndex, value ->
+                                val selected = currentGroupIndex == groupIndex
+                                        && currentValueIndex == valueIndex
+                                if (selected) withStyle(selectedStyle) { append(value) }
+                                else append(value)
+                            }
+                        },
+                        style = textStyle
+                    )
+                    Spacer(modifier = Modifier.width(dimensionResource(RC.dimen.scd_small_150)))
+
+                    Text(
+                        text = labels[currentGroupIndex],
+                        style = MaterialTheme.typography.labelSmall,
+                    )
+
+
+                }
+            }
+        }
+        if (!is24hourFormat) {
+            Row(
+                Modifier
+                    .padding(top = dimensionResource(RC.dimen.scd_small_100)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 TimeTypeItemComponent(

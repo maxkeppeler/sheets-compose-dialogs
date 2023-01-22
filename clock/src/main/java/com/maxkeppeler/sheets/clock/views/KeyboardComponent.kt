@@ -16,17 +16,13 @@
 package com.maxkeppeler.sheets.clock.views
 
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.views.Grid
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.utils.Constants
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The keyboard component that is used to input the clock time.
@@ -39,31 +35,32 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun KeyboardComponent(
+    modifier: Modifier,
     config: ClockConfig,
     keys: List<String>,
+    orientation: Orientation = Orientation.Vertical,
     disabledKeys: List<String>,
     onEnterValue: (Int) -> Unit,
     onPrevAction: () -> Unit,
     onNextAction: () -> Unit
 ) {
-    LazyVerticalGrid(
-        modifier = Modifier
-            .fillMaxWidth(),
-        columns = GridCells.Fixed(Constants.KEYBOARD_COLUMNS),
-        userScrollEnabled = false,
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
-    ) {
-        items(keys) { key ->
+    Grid(
+        modifier = modifier,
+        items = keys,
+        columns = Constants.KEYBOARD_COLUMNS,
+        rowSpacing = 8.dp,
+        columnSpacing = 8.dp,
+        itemView = { key ->
             val disabled = disabledKeys.contains(key)
             KeyItemComponent(
                 config = config,
                 key = key,
+                orientation = orientation,
                 disabled = disabled,
                 onNextAction = onNextAction,
                 onPrevAction = onPrevAction,
                 onEnterValue = onEnterValue
             )
         }
-    }
+    )
 }
