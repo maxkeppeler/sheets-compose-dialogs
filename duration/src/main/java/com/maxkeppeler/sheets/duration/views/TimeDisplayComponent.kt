@@ -15,33 +15,41 @@
  */
 package com.maxkeppeler.sheets.duration.views
 
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import com.maxkeppeler.sheets.duration.utils.Label
 
 /**
  * The main component that includes the time view and an info view,
  * when the selected time is out of the bounds of the configuration.
  * @param indexOfFirstValue The index of the first valid value.
- * @param valuePairs The list of value pairs that will be displayed.
+ * @param values The list of value pairs that will be displayed.
  * @param minTimeValue The minimum valid time.
  * @param maxTimeValue The maximum valid time.
  */
 @Composable
 internal fun TimeDisplayComponent(
+    modifier: Modifier,
+    orientation: Orientation = Orientation.Vertical,
     indexOfFirstValue: Int?,
-    valuePairs: List<Pair<String, String>>,
+    values: List<Pair<String, Label>>,
     minTimeValue: Long?,
     maxTimeValue: Long?
 ) {
-
     TimeValueComponent(
+        orientation = orientation,
+        modifier = modifier,
         indexOfFirstValue = indexOfFirstValue,
-        valuePairs = valuePairs,
-        valid = minTimeValue == null && maxTimeValue == null
-    )
-
-    TimeInfoComponent(
-        minTimeValue = minTimeValue,
-        maxTimeValue = maxTimeValue
+        values = values,
+        valid = minTimeValue == null && maxTimeValue == null,
+        hintView = {
+            TimeHintComponent(
+                orientation = orientation,
+                minTime = minTimeValue,
+                maxTime = maxTimeValue
+            )
+        }
     )
 }
 

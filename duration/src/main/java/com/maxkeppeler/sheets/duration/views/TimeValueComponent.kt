@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.duration.views
 
+import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -22,73 +23,144 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.maxkeppeler.sheets.duration.utils.Label
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The value component that reflects one unit and its value.
- * @param valuePairs The list of value pairs that will be displayed.
+ * @param values The list of value pairs that will be displayed.
  * @param valid If the current value is valid.
  * @param indexOfFirstValue The index of the first valid value.
- * @param hintView If the current component will be displays as a small hint or not.
+ * @param isHintView If the current component will be displays as a small hint or not.
  */
 @Composable
 internal fun TimeValueComponent(
-    valuePairs: List<Pair<String, String>>,
+    modifier: Modifier = Modifier,
+    orientation: Orientation = Orientation.Vertical,
+    values: List<Pair<String, Label>>,
     valid: Boolean = true,
     indexOfFirstValue: Int? = null,
-    hintView: Boolean = false
+    hintValue: String? = null,
+    hintView: (@Composable () -> Unit)? = null,
 ) {
 
-    val containerModifier = if (!hintView) Modifier
-        .fillMaxWidth()
-        .padding(bottom = if (valid) dimensionResource(RC.dimen.scd_normal_100) else 0.dp)
-    else Modifier.wrapContentWidth()
+    val isHintView = hintValue != null
+    val valueContent = @Composable {
 
-    Row(
-        modifier = containerModifier,
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.Bottom
-    ) {
+        values.forEachIndexed { index, valuePair ->
 
-        valuePairs.forEachIndexed { index, valuePair ->
-
-            val valeTextStyle = when (hintView) {
-                true -> MaterialTheme.typography.titleLarge.copy(
-                    fontWeight = FontWeight.Bold
-                )
-                false -> MaterialTheme.typography.displaySmall.copy(
-                    fontWeight = FontWeight.Bold
-                )
+            val valueStyle = when (orientation) {
+                Orientation.Vertical -> when (isHintView) {
+                    true -> MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    false -> MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+                }
+                Orientation.Horizontal -> when (isHintView) {
+                    true -> MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
+                    false -> MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
+                }
             }
 
-            val labelTextStyle = when (hintView) {
-                true -> MaterialTheme.typography.labelMedium
-                false -> MaterialTheme.typography.labelLarge
+            val labelStyle = when (orientation) {
+                Orientation.Vertical -> when (isHintView) {
+                    true -> MaterialTheme.typography.labelMedium
+                    false -> MaterialTheme.typography.labelLarge
+                }
+                Orientation.Horizontal -> when (isHintView) {
+                    true -> MaterialTheme.typography.labelSmall
+                    false -> MaterialTheme.typography.labelSmall
+                }
             }
 
-            val spanStyle = labelTextStyle.toSpanStyle().copy()
-            val hasValue = indexOfFirstValue?.let { index >= it } ?: false
 
-            Text(
-                modifier = Modifier
-                    .wrapContentSize()
-                    .padding(horizontal = dimensionResource(RC.dimen.scd_small_75)),
-                text = buildAnnotatedString {
-                    append(valuePair.first)
-                    withStyle(spanStyle) {
-                        append(" ")
-                        append(valuePair.second)
+            Row(
+                modifier = Modifier.wrapContentSize(),
+                verticalAlignment = when {
+                    orientation == Orientation.Horizontal && !isHintView -> Alignment.CenterVertically
+                    else -> Alignment.Bottom
+                }
+            ) {
+
+                hintValue?.let {
+                    Text(
+                        modifier = Modifier.alignByBaseline(),
+                        text = hintValue,
+                        style = labelStyle
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                }
+
+                val hasValue = indexOfFirstValue?.let { index >= it } ?: false
+                val valueColor =
+                    if (hasValue) MaterialTheme.colorScheme.primary else valueStyle.color
+                Text(
+                    modifier = if (orientation == Orientation.Horizontal) Modifier else Modifier.alignByBaseline(),
+                    text = buildAnnotatedString {
+                        withStyle(valueStyle.copy(valueColor).toSpanStyle()) {
+                            append(valuePair.first)
+                        }
+                    },
+                    style = valueStyle
+                )
+
+                Spacer(
+                    modifier = Modifier.width(
+                        when {
+                            orientation == Orientation.Horizontal && !isHintView ->
+                                dimensionResource(RC.dimen.scd_small_150)
+                            else -> dimensionResource(RC.dimen.scd_small_50)
+                        }
+                    )
+                )
+
+                Text(
+                    modifier = if (orientation == Orientation.Horizontal) Modifier else Modifier.alignByBaseline(),
+                    text = when {
+                        orientation == Orientation.Horizontal && !isHintView ->
+                            stringResource(valuePair.second.long)
+                        else -> stringResource(valuePair.second.short)
+                    },
+                    style = labelStyle,
+                )
+                if (!isHintView && index != values.lastIndex) {
+                    Spacer(modifier = Modifier.width(dimensionResource(RC.dimen.scd_small_75)))
+                }
+            }
+        }
+    }
+
+    when (orientation) {
+        Orientation.Vertical -> {
+            Row(
+                modifier = modifier,
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Bottom,
+                content = {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Row { valueContent() }
+                        if (valid) Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_100)))
+                        hintView?.invoke()
                     }
-                },
-                style = valeTextStyle.copy(
-                    color = if (hasValue) MaterialTheme.colorScheme.primary else valeTextStyle.color
-                )
+                }
+            )
+
+        }
+        Orientation.Horizontal -> {
+            Column(
+                modifier = modifier,
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center,
+                content = {
+                    valueContent()
+//                    Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_normal_100)))
+                    hintView?.invoke()
+                }
             )
         }
-
     }
+
 }

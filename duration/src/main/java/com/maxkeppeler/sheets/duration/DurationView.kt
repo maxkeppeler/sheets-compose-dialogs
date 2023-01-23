@@ -18,8 +18,14 @@
 package com.maxkeppeler.sheets.duration
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.gestures.Orientation
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
@@ -52,12 +58,35 @@ fun DurationView(
         header = header,
         content = {
             TimeDisplayComponent(
+                orientation = Orientation.Vertical,
+                modifier = Modifier.fillMaxWidth(),
                 indexOfFirstValue = durationState.indexOfFirstValue,
-                valuePairs = durationState.valuePairs,
+                values = durationState.values,
                 minTimeValue = durationState.timeInfoInSeconds.second,
                 maxTimeValue = durationState.timeInfoInSeconds.third
             )
             KeyboardComponent(
+                modifier = Modifier.weight(1f, false),
+                config = config,
+                keys = durationState.keys,
+                onEnterValue = durationState::onEnterValue,
+                onBackspaceAction = durationState::onBackspaceAction,
+                onEmptyAction = durationState::onEmptyAction
+            )
+        },
+        contentLandscape = {
+            TimeDisplayComponent(
+                modifier = Modifier.weight(1f, true),
+                orientation = Orientation.Horizontal,
+                indexOfFirstValue = durationState.indexOfFirstValue,
+                values = durationState.values,
+                minTimeValue = durationState.timeInfoInSeconds.second,
+                maxTimeValue = durationState.timeInfoInSeconds.third
+            )
+            Spacer(modifier = Modifier.width(16.dp))
+            KeyboardComponent(
+                modifier = Modifier.weight(1f, true),
+                orientation = Orientation.Horizontal,
                 config = config,
                 keys = durationState.keys,
                 onEnterValue = durationState::onEnterValue,
