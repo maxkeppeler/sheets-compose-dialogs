@@ -55,8 +55,6 @@ fun FrameBase(
     val layoutDirection = LocalLayoutDirection.current
     val configuration = LocalConfiguration.current
 
-
-
     Column(
         modifier = Modifier.wrapContentHeight()
     ) {

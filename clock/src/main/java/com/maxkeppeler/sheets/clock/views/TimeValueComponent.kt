@@ -147,7 +147,11 @@ internal fun LandscapeTimeValueComponent(
         verticalArrangement = verticalArrangement,
     ) {
 
-        val labels = listOf("Hours", "Minutes", "Seconds")
+        val labelRes = listOf(
+            R.string.scd_clock_dialog_hours,
+            R.string.scd_clock_dialog_minutes,
+            R.string.scd_clock_dialog_seconds,
+        )
 
         Column(
             modifier = Modifier
@@ -188,10 +192,9 @@ internal fun LandscapeTimeValueComponent(
                     Spacer(modifier = Modifier.width(dimensionResource(RC.dimen.scd_small_150)))
 
                     Text(
-                        text = labels[currentGroupIndex],
+                        text = stringResource(labelRes[currentGroupIndex]),
                         style = MaterialTheme.typography.labelSmall,
                     )
-
 
                 }
             }

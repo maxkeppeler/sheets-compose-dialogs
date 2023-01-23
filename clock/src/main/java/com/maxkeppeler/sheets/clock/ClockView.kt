@@ -71,7 +71,6 @@ fun ClockView(
                 onGroupClick = clockState::onValueGroupClick,
                 onAm = clockState::onChange12HourFormatValue,
             )
-
             KeyboardComponent(
                 modifier = Modifier.weight(1f, false),
                 config = config,

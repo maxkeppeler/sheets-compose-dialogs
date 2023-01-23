@@ -10,5 +10,7 @@
     <string name="scd_clock_dialog_pm" translatable="true">PM</string>
     <string name="scd_clock_dialog_next_value" translatable="true">Next value</string>
     <string name="scd_clock_dialog_previous_value" translatable="true">Previous value</string>
-
+    <string name="scd_clock_dialog_hours">Hours</string>
+    <string name="scd_clock_dialog_minutes">Minutes</string>
+    <string name="scd_clock_dialog_seconds">Seconds</string>
 </resources>
