@@ -105,6 +105,7 @@ internal fun CalendarTopComponent(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier
                         .size(dimensionResource(RC.dimen.scd_size_200)),
+                    enabled = !navigationDisabled && !prevDisabled,
                     onClick = onPrev
                 ) {
                     Icon(
@@ -191,6 +192,7 @@ internal fun CalendarTopComponent(
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_200)),
+                    enabled = !navigationDisabled && !nextDisabled,
                     onClick = onNext
                 ) {
                     Icon(
