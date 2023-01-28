@@ -50,6 +50,37 @@ internal class CalendarState(
     var calendarData by mutableStateOf(getInitCalendarData())
     var valid by mutableStateOf(isValid())
 
+    init {
+        checkSetup()
+    }
+
+    private fun checkSetup() {
+        val selection = mutableListOf<LocalDate>()
+        when (this.selection) {
+            is CalendarSelection.Date -> date.value?.let { selection.add(it) }
+            is CalendarSelection.Dates -> selection.addAll(dates)
+            is CalendarSelection.Period -> {
+                range.startValue?.let { selection.add(it) }
+                range.endValue?.let { selection.add(it) }
+            }
+        }
+        val overlapDate = selection.firstOrNull { config.disabledDates?.contains(it) == true }
+        overlapDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with a provided disabled date. $it") }
+
+        val today = LocalDate.now()
+        when (config.disabledTimeline) {
+            CalendarTimeline.PAST -> {
+                val overlapTimelineDate = selection.firstOrNull { it.isBefore(today) }
+                overlapTimelineDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with the disabled timeline. ${config.disabledTimeline}") }
+            }
+            CalendarTimeline.FUTURE -> {
+                val overlapTimelineDate = selection.firstOrNull { it.isAfter(today) }
+                overlapTimelineDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with the disabled timeline. ${config.disabledTimeline}") }
+            }
+            null -> Unit
+        }
+    }
+
     private fun getInitYearsRange(): IntRange =
         IntRange(config.minYear, config.maxYear.plus(1))
 
