@@ -255,7 +255,7 @@ internal fun calcCalendarDateData(
         }
     }
 
-    val otherMonth = config.disabledTimeline?.let { timeline ->
+    val disabledTimeline = config.disabledTimeline?.let { timeline ->
         when (timeline) {
             CalendarTimeline.PAST -> date.isBefore(today)
             CalendarTimeline.FUTURE -> date.isAfter(today)
@@ -266,11 +266,11 @@ internal fun calcCalendarDateData(
     return CalendarDateData(
         date = date,
         disabled = disabled,
+        disabledTimeline = disabledTimeline,
         selected = selected,
         selectedBetween = selectedBetween,
         selectedStart = selectedStartInit,
         selectedEnd = selectedEnd,
-        otherMonth = otherMonth
     )
 }
 
