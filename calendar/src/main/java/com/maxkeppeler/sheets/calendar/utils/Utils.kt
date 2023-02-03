@@ -241,10 +241,12 @@ internal fun calcMonthData(
     }
 
     // Check that months are within the boundary
-    val boundaryFilteredMonths = timelineFilteredMonths.filter {
-        val cameraDateWithMonth = cameraDate.withMonth(it.value)
-        cameraDateWithMonth.withDayOfMonth(config.boundary.start.dayOfMonth) in config.boundary
-                || cameraDateWithMonth.withDayOfMonth(config.boundary.endInclusive.dayOfMonth) in config.boundary
+    val boundaryFilteredMonths = timelineFilteredMonths.filter { month ->
+        val maxDayOfMonth = month.length(cameraDate.isLeapYear)
+        val startDay = minOf(config.boundary.start.dayOfMonth, maxDayOfMonth)
+        val endDay = minOf(config.boundary.endInclusive.dayOfMonth, maxDayOfMonth)
+        val cameraDateWithMonth = cameraDate.withMonth(month.value).withDayOfMonth(startDay)
+        cameraDateWithMonth in config.boundary || cameraDateWithMonth.withDayOfMonth(endDay) in config.boundary
     }
 
     return CalendarMonthData(

@@ -79,14 +79,16 @@ fun CalendarView(
             CalendarTopComponent(
                 config = config,
                 mode = calendarState.mode,
-                navigationDisabled = calendarState.monthsData == null || calendarState.mode != CalendarDisplayMode.CALENDAR,
+                navigationDisabled = calendarState.mode != CalendarDisplayMode.CALENDAR,
                 prevDisabled = calendarState.isPrevDisabled,
                 nextDisabled = calendarState.isNextDisabled,
                 cameraDate = calendarState.cameraDate,
                 onPrev = calendarState::onPrevious,
                 onNext = calendarState::onNext,
-                onMonthClick = { calendarState.onMonthSelectionClick() },
-                onYearClick = { calendarState.onYearSelectionClick() },
+                monthSelectionEnabled = calendarState.isMonthSelectionEnabled,
+                onMonthClick = calendarState::onMonthSelectionClick,
+                yearSelectionEnabled = calendarState.isYearSelectionEnabled,
+                onYearClick = calendarState::onYearSelectionClick,
             )
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),

@@ -65,6 +65,8 @@ internal fun CalendarTopComponent(
     cameraDate: LocalDate,
     onPrev: () -> Unit,
     onNext: () -> Unit,
+    monthSelectionEnabled: Boolean,
+    yearSelectionEnabled: Boolean,
     onMonthClick: () -> Unit,
     onYearClick: () -> Unit,
 ) {
@@ -131,7 +133,7 @@ internal fun CalendarTopComponent(
         ) {
             Row(
                 modifier = selectableContainerModifier
-                    .clickable(config.monthSelection) {
+                    .clickable(config.monthSelection && monthSelectionEnabled) {
                         if (config.monthSelection) {
                             chevronMonthAtEnd = !chevronMonthAtEnd
                         }
@@ -145,7 +147,7 @@ internal fun CalendarTopComponent(
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
-                if (config.monthSelection) {
+                if (config.monthSelection && monthSelectionEnabled) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         painter = rememberAnimatedVectorPainter(chevronAVD, chevronMonthAtEnd),
@@ -157,7 +159,7 @@ internal fun CalendarTopComponent(
 
             Row(
                 modifier = selectableContainerModifier
-                    .clickable(config.yearSelection) {
+                    .clickable(config.yearSelection && yearSelectionEnabled) {
                         if (config.yearSelection) {
                             chevronYearAtEnd = !chevronYearAtEnd
                         }
@@ -171,7 +173,7 @@ internal fun CalendarTopComponent(
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
-                if (config.yearSelection) {
+                if (config.yearSelection && yearSelectionEnabled) {
                     Icon(
                         modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_150)),
                         painter = rememberAnimatedVectorPainter(chevronAVD, chevronYearAtEnd),

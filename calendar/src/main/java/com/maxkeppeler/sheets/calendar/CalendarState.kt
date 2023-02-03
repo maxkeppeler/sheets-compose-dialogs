@@ -18,7 +18,6 @@ package com.maxkeppeler.sheets.calendar
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.core.util.toRange
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
@@ -26,7 +25,6 @@ import java.io.Serializable
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
-import java.time.Period
 
 /**
  * Handles the calendar state.
@@ -81,13 +79,6 @@ internal class CalendarState(
             }
             null -> Unit
         }
-        val invalidRange = Period.between(
-            config.boundary.toRange().lower,
-            config.boundary.toRange().upper
-        ).years < 1
-        if (invalidRange) {
-            throw IllegalStateException("Please correct your setup. Your boundary is too small. ${config.boundary}")
-        }
     }
 
     private fun getInitYearsRange(): ClosedRange<Int> =
@@ -123,7 +114,8 @@ internal class CalendarState(
             val isPastDisabled = config.disabledTimeline == CalendarTimeline.PAST
             return when (config.style) {
                 CalendarStyle.MONTH -> {
-                    val isPrevOutOfBoundary = prevCameraDate.isBefore(config.boundary.start.startOfMonth)
+                    val isPrevOutOfBoundary =
+                        prevCameraDate.isBefore(config.boundary.start.startOfMonth)
                     val isInPast = cameraDate.year <= today.year
                             && cameraDate.monthValue <= today.monthValue
                     (isInPast && isPastDisabled) || isPrevOutOfBoundary
@@ -144,7 +136,8 @@ internal class CalendarState(
             val isFutureDisabled = config.disabledTimeline == CalendarTimeline.FUTURE
             return when (config.style) {
                 CalendarStyle.MONTH -> {
-                    val isNextOutOfBoundary = nextCameraDate.isAfter(config.boundary.endInclusive.endOfMonth)
+                    val isNextOutOfBoundary =
+                        nextCameraDate.isAfter(config.boundary.endInclusive.endOfMonth)
                     val isInFuture = cameraDate.year >= today.year
                             && cameraDate.monthValue >= today.monthValue
                     (isInFuture && isFutureDisabled) || isNextOutOfBoundary
@@ -157,6 +150,15 @@ internal class CalendarState(
                     (isInFuture && isFutureDisabled) || isNextOutOfBoundary
                 }
             }
+        }
+
+    val isMonthSelectionEnabled: Boolean
+        get() = monthsData.disabled.size < 11 // At least 2 months
+
+    val isYearSelectionEnabled: Boolean
+        get() {
+            val years = yearsRange.endInclusive.minus(yearsRange.start).plus(1)
+            return years > 1 // at least 2 years
         }
 
     val cells: Int

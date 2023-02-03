@@ -76,6 +76,7 @@ internal fun MonthItemComponent(
 
     Column(
         modifier = when {
+            disabled -> normalModifier
             selected -> selectedModifier
             thisMonth -> baseModifier
             else -> normalModifier

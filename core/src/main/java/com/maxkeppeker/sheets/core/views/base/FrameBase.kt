@@ -26,8 +26,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.BaseValues
+import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.core.R as RC
 
