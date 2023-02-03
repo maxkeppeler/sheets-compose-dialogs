@@ -20,6 +20,7 @@ import com.maxkeppeler.sheets.calendar.models.*
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
 import java.util.*
 
@@ -62,6 +63,24 @@ internal val LocalDate.startOfWeekOrMonth: LocalDate
         }
         return result
     }
+
+/**
+ * Extension function that jumps to the first day of the month.
+ *
+ * @return [LocalDate] representing the first day of the month
+ */
+internal val LocalDate.startOfMonth: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = withDayOfMonth(1)
+
+/**
+
+Extension function that jumps to the last day of the month.
+@return [LocalDate] representing the last day of the month
+ */
+internal val LocalDate.endOfMonth: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = with(TemporalAdjusters.lastDayOfMonth())
 
 /**
  * Get the first day of the previous week from the current date.

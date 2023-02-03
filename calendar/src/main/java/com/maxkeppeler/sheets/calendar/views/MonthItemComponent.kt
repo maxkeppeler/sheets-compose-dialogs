@@ -49,7 +49,7 @@ internal fun MonthItemComponent(
     thisMonth: Boolean = false,
     disabled: Boolean = false,
     selected: Boolean = false,
-    onMonthClick: (Month) -> Unit
+    onMonthClick: () -> Unit
 ) {
     val textStyle =
         when {
@@ -61,10 +61,10 @@ internal fun MonthItemComponent(
     val baseModifier = Modifier
         .wrapContentWidth()
         .padding(dimensionResource(RC.dimen.scd_small_50))
+        .clickable(!disabled) { onMonthClick() }
 
     val normalModifier = baseModifier
         .clip(MaterialTheme.shapes.small)
-        .clickable(!disabled) { onMonthClick(month) }
 
     val selectedModifier = normalModifier
         .background(MaterialTheme.colorScheme.primary)
@@ -76,8 +76,8 @@ internal fun MonthItemComponent(
 
     Column(
         modifier = when {
-            thisMonth -> baseModifier
             selected -> selectedModifier
+            thisMonth -> baseModifier
             else -> normalModifier
         },
         verticalArrangement = Arrangement.Center,

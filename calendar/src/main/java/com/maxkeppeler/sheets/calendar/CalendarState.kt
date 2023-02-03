@@ -123,7 +123,7 @@ internal class CalendarState(
             val isPastDisabled = config.disabledTimeline == CalendarTimeline.PAST
             return when (config.style) {
                 CalendarStyle.MONTH -> {
-                    val isPrevOutOfBoundary = prevCameraDate.isBefore(config.boundary.start)
+                    val isPrevOutOfBoundary = prevCameraDate.isBefore(config.boundary.start.startOfMonth)
                     val isInPast = cameraDate.year <= today.year
                             && cameraDate.monthValue <= today.monthValue
                     (isInPast && isPastDisabled) || isPrevOutOfBoundary
@@ -144,7 +144,7 @@ internal class CalendarState(
             val isFutureDisabled = config.disabledTimeline == CalendarTimeline.FUTURE
             return when (config.style) {
                 CalendarStyle.MONTH -> {
-                    val isNextOutOfBoundary = nextCameraDate.isAfter(config.boundary.endInclusive)
+                    val isNextOutOfBoundary = nextCameraDate.isAfter(config.boundary.endInclusive.endOfMonth)
                     val isInFuture = cameraDate.year >= today.year
                             && cameraDate.monthValue >= today.monthValue
                     (isInFuture && isFutureDisabled) || isNextOutOfBoundary
@@ -196,7 +196,7 @@ internal class CalendarState(
     }
 
     fun onMonthClick(month: Month) {
-        cameraDate = cameraDate.withMonth(month.value).startOfWeek
+        cameraDate = cameraDate.withMonth(month.value).startOfWeekOrMonth
         mode = CalendarDisplayMode.CALENDAR
         refreshData()
     }
