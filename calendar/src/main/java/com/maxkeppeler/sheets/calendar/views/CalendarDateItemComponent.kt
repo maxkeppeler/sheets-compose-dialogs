@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
@@ -95,7 +96,10 @@ internal fun CalendarDateItemComponent(
             data.selectedBetween || data.selected -> MaterialTheme.typography.bodySmall.copy(
                 MaterialTheme.colorScheme.onPrimary
             )
-            today -> MaterialTheme.typography.labelMedium.copy(MaterialTheme.colorScheme.primary)
+            today -> MaterialTheme.typography.labelMedium.copy(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold
+            )
             else -> MaterialTheme.typography.bodySmall
         }
 
@@ -106,14 +110,14 @@ internal fun CalendarDateItemComponent(
     }
 
     val cellModifier = when {
-        data.otherMonth || data.disabledTimeline -> otherMonthModifier
+        data.otherMonth || data.disabledPassively -> otherMonthModifier
         data.disabled -> disabledModifier
         data.selected -> selectedModifier
         else -> normalModifier
     }
 
     val textAlpha = when {
-        data.disabledTimeline -> Constants.DATE_ITEM_DISABLED_TIMELINE_OPACITY
+        data.disabledPassively -> Constants.DATE_ITEM_DISABLED_TIMELINE_OPACITY
         else -> Constants.DATE_ITEM_OPACITY
     }
 

@@ -25,12 +25,12 @@ import java.time.LocalDate
  * @param onYearClick The listener that is invoked when a year is selected.
  */
 internal fun LazyListScope.setupYearSelectionView(
-    yearsRange: IntRange,
+    yearsRange: ClosedRange<Int>,
     selectedYear: Int,
     onYearClick: (Int) -> Unit
 ) {
-    items(yearsRange.last.minus(yearsRange.first)) {
-        val year = yearsRange.first + it
+    items(yearsRange.endInclusive.minus(yearsRange.start).plus(1)) {
+        val year = yearsRange.start + it
         val selected = selectedYear == year
         val thisYear = year == LocalDate.now().year
         YearItemComponent(

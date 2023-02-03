@@ -24,77 +24,121 @@ import java.time.temporal.WeekFields
 import java.util.*
 
 /**
- * Get week in year.
+ * Returns the week of the week-based-year for this [LocalDate].
+ *
+ * The week of the week-based-year is defined using the [Locale.getDefault] locale's [WeekFields].
+ *
+ * @return an `Int` representing the week of the week-based-year for this [LocalDate].
  */
 internal val LocalDate.weekOfWeekBasedYear: Int
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() = get(WeekFields.of(Locale.getDefault()).weekOfWeekBasedYear())
 
 /**
- * Get first day of this week.
+ * Returns the date for the first day of the week (Monday) for this [LocalDate].
  */
-internal val LocalDate.beginOfWeek: LocalDate
+internal val LocalDate.startOfWeek: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = minusDays(dayOfWeek.value - 1L)
+
+/**
+ * Returns the date for the last day of the week (Sunday) for this [LocalDate].
+ */
+internal val LocalDate.endOfWeek: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = plusDays(7L - dayOfWeek.value)
+
+/**
+ * Extension function that jumps to the first day of the same week (Monday) or the first day of the month, whichever comes first.
+ *
+ * @return [LocalDate] representing the first day of the week or the month, whichever is earliest
+ */
+internal val LocalDate.startOfWeekOrMonth: LocalDate
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
     get() {
-        var dateNew = this
-        while (dateNew.dayOfWeek != DayOfWeek.MONDAY) {
-            dateNew = dateNew.minusDays(1)
+        var result = this
+        while (result.dayOfMonth > 1 && result.dayOfWeek != DayOfWeek.MONDAY) {
+            result = result.minusDays(1)
         }
-        return dateNew
+        return result
     }
 
 /**
- * Get first day of previous week.
+ * Get the first day of the previous week from the current date.
+ *
+ * Skips in current week to previous month's Monday if day is the first day of the month and not Monday.
+ * Skips to previous week if the current day of the month is greater than or equal to 7 or is the first day of the month and is Monday.
+ * Skips to the first day of the previous month otherwise.
+ * @return The first day of the previous week as a `LocalDate` object.
  */
 internal val LocalDate.previousWeek: LocalDate
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() {
-        val dateNew = when {
-            dayOfMonth == Constants.FIRST_DAY_IN_MONTH && dayOfWeek != DayOfWeek.MONDAY -> {
-                // Skips in current week to previous month's monday
-                with(DayOfWeek.MONDAY)
-            }
-            dayOfMonth >= Constants.DAYS_IN_WEEK || dayOfMonth == Constants.FIRST_DAY_IN_MONTH
-                    && dayOfWeek == DayOfWeek.MONDAY -> {
-                // Skip to previous week
-                minusWeeks(1)
-            }
-            else -> {
-                // Skip to first day of the month
-                withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
-            }
-        }
-        return dateNew
+    get() = when {
+        dayOfMonth == Constants.FIRST_DAY_IN_MONTH
+                && dayOfWeek != DayOfWeek.MONDAY -> with(DayOfWeek.MONDAY)
+        dayOfMonth >= Constants.DAYS_IN_WEEK ||
+                dayOfMonth == Constants.FIRST_DAY_IN_MONTH
+                && dayOfWeek == DayOfWeek.MONDAY -> minusWeeks(1)
+        else -> withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
     }
 
+
 /**
- * Get first day of next week.
+ * Get the date of the next week from the current date.
+ *
+ * The next week is determined based on the current day of the month and the remaining days in the month.
+ * If the current day of the month is the first day of the month, it skips to the next Monday.
+ * If there are less than 7 days remaining in the current month, it skips to the first day of the next month.
+ * @return The first day of the next week as a `LocalDate` object.
  */
 internal val LocalDate.nextWeek: LocalDate
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() {
-        val daysInMonth = lengthOfMonth()
-        val daysInMonthLeft = daysInMonth - dayOfMonth
-        val daysUntilNextMonday = (Constants.DAYS_IN_WEEK - dayOfWeek.value).plus(1).toLong()
-        val dateNew = when {
-            dayOfMonth == Constants.FIRST_DAY_IN_MONTH -> {
-                // Skip to next monday
-                plusDays(daysUntilNextMonday)
-            }
-            daysInMonthLeft >= Constants.DAYS_IN_WEEK -> {
-                // Skip to next week
-                plusWeeks(1)
-            }
-            else -> {
-                // Last day in month or less than a week of days left in month, skip to begin next month
-                plusMonths(1).withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
-            }
-        }
-        return dateNew
+    get() = when {
+        dayOfMonth == Constants.FIRST_DAY_IN_MONTH -> plusDays((7 - dayOfWeek.value) + 1L)
+        lengthOfMonth() - dayOfMonth >= Constants.DAYS_IN_WEEK -> plusWeeks(1)
+        else -> plusMonths(1).withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
     }
 
 /**
- * Get initial camera date of the selection.
+ * Returns a new `LocalDate` instance representing the previous date based on the `CalendarConfig` passed.
+ *
+ * If `CalendarConfig.style` is set to `CalendarStyle.MONTH`, the function returns the first day of the previous month.
+ * If `CalendarConfig.style` is set to `CalendarStyle.WEEK`, the function returns the first day (Monday) of the previous week.
+ *
+ * @param config The `CalendarConfig` to determine the jump step.
+ * @return A new `LocalDate` instance representing the previous date based on the `CalendarConfig`.
+ */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun LocalDate.jumpPrev(config: CalendarConfig): LocalDate = when (config.style) {
+    CalendarStyle.MONTH -> this.minusMonths(1).withDayOfMonth(1)
+    CalendarStyle.WEEK -> this.previousWeek
+}
+
+/**
+ * Returns a new `LocalDate` instance representing the next date based on the `CalendarConfig` passed.
+ *
+ * If `CalendarConfig.style` is set to `CalendarStyle.MONTH`, the function returns the first day of the next month.
+ * If `CalendarConfig.style` is set to `CalendarStyle.WEEK`, the function returns the first day (Monday) of the next week.
+ *
+ * @param config The `CalendarConfig` to determine the jump step.
+ * @return A new `LocalDate` instance representing the next date based on the `CalendarConfig`.
+ */
+@RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+fun LocalDate.jumpNext(config: CalendarConfig): LocalDate = when (config.style) {
+    CalendarStyle.MONTH -> this.plusMonths(1).withDayOfMonth(1)
+    CalendarStyle.WEEK -> this.nextWeek
+}
+
+/**
+ * Returns the initial date to be displayed on the CalendarView based on the selection mode.
+ *
+ * The initial camera date is calculated based on the selected mode. If the mode is [CalendarSelection.Date],
+ * the selected date is returned. If the mode is [CalendarSelection.Dates], the first selected date is returned.
+ * If the mode is [CalendarSelection.Period], the lower range of the selected period is returned.
+ *
+ * If the selected mode doesn't have a date, the current date will be returned as the initial camera date.
+ *
+ * @return The initial camera date.
  */
 internal val CalendarSelection.initialCameraDate: LocalDate
     @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
@@ -104,7 +148,7 @@ internal val CalendarSelection.initialCameraDate: LocalDate
             is CalendarSelection.Dates -> selectedDates?.firstOrNull()
             is CalendarSelection.Period -> selectedRange?.lower
         } ?: LocalDate.now()
-        return cameraDateBasedOnMode
+        return cameraDateBasedOnMode.startOfWeekOrMonth
     }
 
 /**
@@ -156,22 +200,20 @@ internal val List<LocalDate?>.endValue: LocalDate?
 internal fun calcMonthData(
     config: CalendarConfig,
     cameraDate: LocalDate,
-    today: LocalDate
-): IntRange? {
+    today: LocalDate = LocalDate.now()
+): CalendarMonthData {
     val months = Month.values().toMutableList()
-    val newMonths = when (config.disabledTimeline) {
+    val timelineFilteredMonths = when (config.disabledTimeline) {
         CalendarTimeline.PAST -> months.filter {
             cameraDate.withMonth(it.value).let { date ->
-                date.year >= config.minYear
-                        || date.isAfter(today)
+                date.isAfter(today)
                         || cameraDate.month == date.month
                         || today.month == date.month
             }
         }
         CalendarTimeline.FUTURE -> months.filter {
             cameraDate.withMonth(it.value).let { date ->
-                date.year <= config.minYear
-                        || date.isBefore(today)
+                date.isBefore(today)
                         || cameraDate.month == date.month
                         || today.month == date.month
             }
@@ -179,10 +221,18 @@ internal fun calcMonthData(
         else -> months
     }
 
-    return if (newMonths.isNotEmpty()) IntRange(
-        newMonths.first().ordinal,
-        newMonths.last().value
-    ) else null
+    // Check that months are within the boundary
+    val boundaryFilteredMonths = timelineFilteredMonths.filter {
+        val cameraDateWithMonth = cameraDate.withMonth(it.value)
+        cameraDateWithMonth.withDayOfMonth(config.boundary.start.dayOfMonth) in config.boundary
+                || cameraDateWithMonth.withDayOfMonth(config.boundary.endInclusive.dayOfMonth) in config.boundary
+    }
+
+    return CalendarMonthData(
+        selected = cameraDate.month,
+        thisMonth = today.month,
+        disabled = months.minus(boundaryFilteredMonths.toSet()),
+    )
 }
 
 /**
@@ -254,19 +304,19 @@ internal fun calcCalendarDateData(
             selectedBetween || selectedStart || selectedEnd
         }
     }
-
+    val outOfBoundary = date !in config.boundary
     val disabledTimeline = config.disabledTimeline?.let { timeline ->
         when (timeline) {
             CalendarTimeline.PAST -> date.isBefore(today)
             CalendarTimeline.FUTURE -> date.isAfter(today)
         }
     } ?: false
-    val disabled = config.disabledDates?.contains(date) ?: false
+    val disabledDate = config.disabledDates?.contains(date) ?: false
 
     return CalendarDateData(
         date = date,
-        disabled = disabled,
-        disabledTimeline = disabledTimeline,
+        disabled = disabledDate,
+        disabledPassively = disabledTimeline || outOfBoundary,
         selected = selected,
         selectedBetween = selectedBetween,
         selectedStart = selectedStartInit,

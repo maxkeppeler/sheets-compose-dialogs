@@ -79,7 +79,7 @@ fun CalendarView(
             CalendarTopComponent(
                 config = config,
                 mode = calendarState.mode,
-                navigationDisabled = calendarState.monthRange == null || calendarState.mode != CalendarDisplayMode.CALENDAR,
+                navigationDisabled = calendarState.monthsData == null || calendarState.mode != CalendarDisplayMode.CALENDAR,
                 prevDisabled = calendarState.isPrevDisabled,
                 nextDisabled = calendarState.isNextDisabled,
                 cameraDate = calendarState.cameraDate,
@@ -111,8 +111,7 @@ fun CalendarView(
                 },
                 onMonthView = {
                     setupMonthSelectionView(
-                        monthRange = calendarState.monthRange!!,
-                        selectedMonth = calendarState.cameraDate.month,
+                        monthsData = calendarState.monthsData,
                         onMonthClick = calendarState::onMonthClick
                     )
                 },

@@ -18,6 +18,7 @@ package com.maxkeppeler.sheets.calendar
 import androidx.compose.runtime.*
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.core.util.toRange
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.calendar.models.*
 import com.maxkeppeler.sheets.calendar.utils.*
@@ -25,6 +26,7 @@ import java.io.Serializable
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.Period
 
 /**
  * Handles the calendar state.
@@ -46,7 +48,7 @@ internal class CalendarState(
     var range = mutableStateListOf(*(stateData?.range ?: selection.rangeValue))
     var isRangeSelectionStart by mutableStateOf(stateData?.rangeSelectionStart ?: true)
     var yearsRange by mutableStateOf(getInitYearsRange())
-    var monthRange by mutableStateOf(getInitMonthsRange())
+    var monthsData by mutableStateOf(getInitMonthsData())
     var calendarData by mutableStateOf(getInitCalendarData())
     var valid by mutableStateOf(isValid())
 
@@ -79,15 +81,20 @@ internal class CalendarState(
             }
             null -> Unit
         }
+        val invalidRange = Period.between(
+            config.boundary.toRange().lower,
+            config.boundary.toRange().upper
+        ).years < 1
+        if (invalidRange) {
+            throw IllegalStateException("Please correct your setup. Your boundary is too small. ${config.boundary}")
+        }
     }
 
-    private fun getInitYearsRange(): IntRange =
-        IntRange(config.minYear, config.maxYear.plus(1))
+    private fun getInitYearsRange(): ClosedRange<Int> =
+        config.boundary.start.year..config.boundary.endInclusive.year
 
-    private fun getInitMonthsRange(): IntRange? {
-        val today = LocalDate.now()
-        return calcMonthData(config, cameraDate, today)
-    }
+    private fun getInitMonthsData(): CalendarMonthData =
+        calcMonthData(config, cameraDate)
 
     private fun getInitCalendarData(): CalendarData {
         return calcCalendarData(config, cameraDate)
@@ -99,7 +106,7 @@ internal class CalendarState(
 
     private fun refreshData() {
         yearsRange = getInitYearsRange()
-        monthRange = getInitMonthsRange()
+        monthsData = getInitMonthsData()
         calendarData = getInitCalendarData()
     }
 
@@ -112,23 +119,44 @@ internal class CalendarState(
     val isPrevDisabled: Boolean
         get() {
             val today = LocalDate.now()
+            val prevCameraDate = cameraDate.jumpPrev(config)
+            val isPastDisabled = config.disabledTimeline == CalendarTimeline.PAST
             return when (config.style) {
-                CalendarStyle.MONTH -> (cameraDate.year <= today.year && cameraDate.monthValue <= today.monthValue)
-                        && config.disabledTimeline == CalendarTimeline.PAST
-                CalendarStyle.WEEK -> (cameraDate.year <= today.year
-                        && cameraDate.weekOfWeekBasedYear <= today.weekOfWeekBasedYear)
-                        && config.disabledTimeline == CalendarTimeline.PAST
+                CalendarStyle.MONTH -> {
+                    val isPrevOutOfBoundary = prevCameraDate.isBefore(config.boundary.start)
+                    val isInPast = cameraDate.year <= today.year
+                            && cameraDate.monthValue <= today.monthValue
+                    (isInPast && isPastDisabled) || isPrevOutOfBoundary
+                }
+                CalendarStyle.WEEK -> {
+                    val isPrevOutOfBoundary =
+                        prevCameraDate.isBefore(config.boundary.start.startOfWeek)
+                    val isInPast = cameraDate.year <= today.year
+                            && cameraDate.weekOfWeekBasedYear <= today.weekOfWeekBasedYear
+                    (isInPast && isPastDisabled) || isPrevOutOfBoundary
+                }
             }
         }
 
     val isNextDisabled: Boolean
-        get() = when (config.style) {
-            CalendarStyle.MONTH -> (cameraDate.year >= today.year
-                    && cameraDate.monthValue >= today.monthValue)
-                    && config.disabledTimeline == CalendarTimeline.FUTURE
-            CalendarStyle.WEEK -> (cameraDate.year >= today.year
-                    && cameraDate.weekOfWeekBasedYear >= today.weekOfWeekBasedYear)
-                    && config.disabledTimeline == CalendarTimeline.FUTURE
+        get() {
+            val nextCameraDate = cameraDate.jumpNext(config)
+            val isFutureDisabled = config.disabledTimeline == CalendarTimeline.FUTURE
+            return when (config.style) {
+                CalendarStyle.MONTH -> {
+                    val isNextOutOfBoundary = nextCameraDate.isAfter(config.boundary.endInclusive)
+                    val isInFuture = cameraDate.year >= today.year
+                            && cameraDate.monthValue >= today.monthValue
+                    (isInFuture && isFutureDisabled) || isNextOutOfBoundary
+                }
+                CalendarStyle.WEEK -> {
+                    val isNextOutOfBoundary =
+                        nextCameraDate.isAfter(config.boundary.endInclusive.endOfWeek)
+                    val isInFuture = cameraDate.year >= today.year
+                            && cameraDate.weekOfWeekBasedYear >= today.weekOfWeekBasedYear
+                    (isInFuture && isFutureDisabled) || isNextOutOfBoundary
+                }
+            }
         }
 
     val cells: Int
@@ -139,21 +167,15 @@ internal class CalendarState(
         }
 
     val yearIndex: Int
-        get() = cameraDate.year.minus(yearsRange.first)
+        get() = cameraDate.year.minus(yearsRange.start)
 
     fun onPrevious() {
-        cameraDate = when (config.style) {
-            CalendarStyle.MONTH -> cameraDate.minusMonths(1)
-            CalendarStyle.WEEK -> cameraDate.previousWeek
-        }
+        cameraDate = cameraDate.jumpPrev(config)
         refreshData()
     }
 
     fun onNext() {
-        cameraDate = when (config.style) {
-            CalendarStyle.MONTH -> cameraDate.plusMonths(1)
-            CalendarStyle.WEEK -> cameraDate.nextWeek
-        }
+        cameraDate = cameraDate.jumpNext(config)
         refreshData()
     }
 
@@ -174,13 +196,24 @@ internal class CalendarState(
     }
 
     fun onMonthClick(month: Month) {
-        cameraDate = cameraDate.withMonth(month.value).beginOfWeek
+        cameraDate = cameraDate.withMonth(month.value).startOfWeek
         mode = CalendarDisplayMode.CALENDAR
         refreshData()
     }
 
     fun onYearClick(year: Int) {
-        cameraDate = cameraDate.withYear(year).beginOfWeek
+        var newDate = cameraDate.withYear(year)
+        // Check if current new date would be within the boundary otherwise reset to month within boundary
+        newDate = when {
+            newDate.isBefore(config.boundary.start) ->
+                newDate.withMonth(config.boundary.start.monthValue)
+                    .withDayOfMonth(config.boundary.start.dayOfMonth)
+            newDate.isAfter(config.boundary.endInclusive) ->
+                newDate.withMonth(config.boundary.endInclusive.monthValue)
+                    .withDayOfMonth(config.boundary.endInclusive.dayOfMonth)
+            else -> newDate
+        }
+        cameraDate = newDate.startOfWeek
         mode = CalendarDisplayMode.CALENDAR
         refreshData()
     }

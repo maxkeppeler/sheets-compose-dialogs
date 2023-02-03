@@ -21,7 +21,7 @@ import java.time.LocalDate
  * Defines all calculated information for a specific date.
  * @param date The current date that the view represents.
  * @param disabled Whenever the date is disabled.
- * @param disabledTimeline Whenever the date is falling into a disabled time line.
+ * @param disabledPassively Whenever the date is falling into a disabled time line.
  * @param selected Whenever the date is selected in a single or multiple date selection.
  * @param selectedBetween Whenever the date is within a range selection.
  * @param selectedStart Whenever the date is the start of a range selection.
@@ -31,7 +31,7 @@ import java.time.LocalDate
 internal data class CalendarDateData(
     val date: LocalDate? = null,
     val disabled: Boolean = false,
-    val disabledTimeline: Boolean = false,
+    val disabledPassively: Boolean = false,
     val selected: Boolean = false,
     val selectedBetween: Boolean = false,
     val selectedStart: Boolean = false,
