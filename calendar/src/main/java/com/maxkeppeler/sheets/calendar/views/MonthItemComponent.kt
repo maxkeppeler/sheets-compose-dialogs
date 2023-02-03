@@ -26,9 +26,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
 import java.time.Month
 import java.time.format.DateTimeFormatter
@@ -43,10 +45,11 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun MonthItemComponent(
-    month: Month? = null,
+    month: Month,
     thisMonth: Boolean = false,
+    disabled: Boolean = false,
     selected: Boolean = false,
-    onMonthClick: ((Month) -> Unit)? = null
+    onMonthClick: (Month) -> Unit
 ) {
     val textStyle =
         when {
@@ -61,14 +64,19 @@ internal fun MonthItemComponent(
 
     val normalModifier = baseModifier
         .clip(MaterialTheme.shapes.small)
-        .clickable { onMonthClick?.invoke(month!!) }
+        .clickable(!disabled) { onMonthClick(month) }
 
     val selectedModifier = normalModifier
         .background(MaterialTheme.colorScheme.primary)
 
+    val textAlpha = when {
+        disabled -> Constants.DATE_ITEM_DISABLED_TIMELINE_OPACITY
+        else -> Constants.DATE_ITEM_OPACITY
+    }
+
     Column(
         modifier = when {
-            month == null -> baseModifier
+            thisMonth -> baseModifier
             selected -> selectedModifier
             else -> normalModifier
         },
@@ -77,12 +85,11 @@ internal fun MonthItemComponent(
     ) {
         Text(
             modifier = Modifier
+                .alpha(textAlpha)
                 .padding(horizontal = dimensionResource(RC.dimen.scd_small_150))
                 .padding(vertical = dimensionResource(RC.dimen.scd_small_100)),
-            text = month?.let {
-                LocalDate.now().withMonth(month.value)
-                    .format(DateTimeFormatter.ofPattern("MMM"))
-            } ?: "",
+            text = LocalDate.now().withMonth(month.value)
+                .format(DateTimeFormatter.ofPattern("MMM")),
             style = textStyle,
             textAlign = TextAlign.Center,
             maxLines = 1,

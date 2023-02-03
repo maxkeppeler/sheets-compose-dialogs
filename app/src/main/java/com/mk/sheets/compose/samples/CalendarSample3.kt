@@ -35,14 +35,14 @@ import java.time.LocalDate
 internal fun CalendarSample3(closeSelection: SheetState.() -> Unit) {
 
     val selectedDateRange = remember {
-        val value = Range(LocalDate.now().minusDays(5), LocalDate.now())
+        val value = Range(LocalDate.now().minusDays(20), LocalDate.now().minusDays(10))
         mutableStateOf(value)
     }
 
     CalendarDialog(
         state = rememberSheetState(visible = true, true, onCloseRequest = closeSelection),
         config = CalendarConfig(
-            disabledTimeline = CalendarTimeline.PAST,
+            disabledTimeline = CalendarTimeline.FUTURE,
             style = CalendarStyle.MONTH,
         ),
         selection = CalendarSelection.Period(

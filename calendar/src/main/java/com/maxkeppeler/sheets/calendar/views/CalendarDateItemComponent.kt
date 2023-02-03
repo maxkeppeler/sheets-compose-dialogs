@@ -25,12 +25,15 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import com.maxkeppeler.sheets.core.R as RC
@@ -93,7 +96,10 @@ internal fun CalendarDateItemComponent(
             data.selectedBetween || data.selected -> MaterialTheme.typography.bodySmall.copy(
                 MaterialTheme.colorScheme.onPrimary
             )
-            today -> MaterialTheme.typography.labelMedium.copy(MaterialTheme.colorScheme.primary)
+            today -> MaterialTheme.typography.labelMedium.copy(
+                color = MaterialTheme.colorScheme.primary,
+                fontWeight = FontWeight.Bold
+            )
             else -> MaterialTheme.typography.bodySmall
         }
 
@@ -104,10 +110,15 @@ internal fun CalendarDateItemComponent(
     }
 
     val cellModifier = when {
-        data.otherMonth -> otherMonthModifier
+        data.otherMonth || data.disabledPassively -> otherMonthModifier
         data.disabled -> disabledModifier
         data.selected -> selectedModifier
         else -> normalModifier
+    }
+
+    val textAlpha = when {
+        data.disabledPassively -> Constants.DATE_ITEM_DISABLED_TIMELINE_OPACITY
+        else -> Constants.DATE_ITEM_OPACITY
     }
 
     Column(modifier = parentModifier) {
@@ -117,7 +128,9 @@ internal fun CalendarDateItemComponent(
             horizontalArrangement = Arrangement.Center
         ) {
             Text(
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .alpha(textAlpha),
                 text = data.date?.format(DateTimeFormatter.ofPattern("d"))
                     ?.takeUnless { data.otherMonth } ?: "",
                 style = textStyle,
