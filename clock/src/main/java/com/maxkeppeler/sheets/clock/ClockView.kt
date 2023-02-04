@@ -28,6 +28,7 @@ import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.views.KeyboardComponent
+import com.maxkeppeler.sheets.clock.views.TimeHintComponent
 import com.maxkeppeler.sheets.clock.views.TimeValueComponent
 
 /**
@@ -61,6 +62,10 @@ fun ClockView(
                 onGroupClick = clockState::onValueGroupClick,
                 onAm = clockState::onChange12HourFormatValue,
             )
+            TimeHintComponent(
+                valid = clockState.valid,
+                boundary = config.boundary,
+            )
             KeyboardComponent(
                 config = config,
                 keys = clockState.keys,
@@ -75,6 +80,7 @@ fun ClockView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = clockState::onFinish,
+            onPositiveValid = clockState.valid,
             onClose = sheetState::finish
         )
     }

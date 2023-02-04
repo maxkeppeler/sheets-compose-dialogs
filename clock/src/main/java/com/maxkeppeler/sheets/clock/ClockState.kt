@@ -53,6 +53,9 @@ internal class ClockState(
     var timeTextValues by mutableStateOf(getTimeInTextValues())
     val keys by mutableStateOf(getInputKeys())
     var disabledKeys by mutableStateOf(getCurrentDisabledKeys())
+    var valid by mutableStateOf(isValid())
+
+    private fun isValid(): Boolean = config.boundary?.let { time in it } ?: true
 
     private fun isInit24HourFormat(): Boolean {
         return config.is24HourFormat ?: DateFormat.is24HourFormat(context)
@@ -93,6 +96,11 @@ internal class ClockState(
 
     private fun refreshTimeValue() {
         time = getTimeOfTextValues()
+        checkValid()
+    }
+
+    private fun checkValid() {
+        valid = isValid()
     }
 
     fun onChange12HourFormatValue(newIsAm: Boolean) {

@@ -23,11 +23,13 @@ import java.time.LocalTime
 /**
  * The general configuration for the clock dialog.
  * @param defaultTime The default time.
+ * @param boundary Optional [ClosedRange] of [LocalTime] representing the time boundary
  * @param is24HourFormat If the 24HourFormat is enabled.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 data class ClockConfig(
     val defaultTime: LocalTime? = null,
+    val boundary: ClosedRange<LocalTime>? = null,
     val is24HourFormat: Boolean? = null,
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()
