@@ -52,23 +52,24 @@ fun FrameBase(
     contentHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
     contentLandscapeVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalContentPadding: PaddingValues = BaseValues.CONTENT_DEFAULT_PADDING,
-    content: @Composable ColumnScope.() -> Unit,
+    content: @Composable ColumnScope.(LibOrientation) -> Unit,
     contentLandscape: @Composable (RowScope.() -> Unit)? = null,
     buttonsVisible: Boolean = true,
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
-    val shouldUseLandscape = shouldUseLandscape()
+    val shouldUseLandscapeLayout = shouldUseLandscape()
+    val currentOrientation = LocalConfiguration.current.orientation
+    val isDeviceLandscape = currentOrientation == Configuration.ORIENTATION_LANDSCAPE
+    val deviceOrientation = if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
     val orientation = when (config?.orientation) {
         null -> {
-            val currentOrientation = LocalConfiguration.current.orientation
-            val isAutoLandscape = currentOrientation == Configuration.ORIENTATION_LANDSCAPE
             when {
                 // Only if auto orientation is currently landscape, content for landscape exists
                 // and the device screen is not larger than a typical phone.
-                isAutoLandscape
+                isDeviceLandscape
                         && contentLandscape != null
-                        && shouldUseLandscape -> LibOrientation.LANDSCAPE
+                        && shouldUseLandscapeLayout -> LibOrientation.LANDSCAPE
                 else -> LibOrientation.PORTRAIT
             }
         }
@@ -118,7 +119,7 @@ fun FrameBase(
                 Column(
                     modifier = contentModifier,
                     horizontalAlignment = contentHorizontalAlignment,
-                    content = content
+                    content = { content(deviceOrientation) }
                 )
             }
             LibOrientation.LANDSCAPE -> {
