@@ -15,24 +15,16 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
-import androidx.compose.ui.unit.dp
-import com.maxkeppeker.sheets.core.icons.LibIcons
-import com.maxkeppeker.sheets.core.models.base.LibOrientation
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
+
+private const val TABLET_THRESHOLD = 800
 
 /**
- * Defines module-wide constants.
+ * Determines whether the current screen should use landscape mode.
+ *
+ * @return `true` if the screen height is less than the [TABLET_THRESHOLD] in landscape mode, `false` otherwise.
  */
-object BaseConstants {
-
-    // Behaviours
-
-    const val SUCCESS_DISMISS_DELAY = 600L
-
-    val DEFAULT_ICON_STYLE = LibIcons.Rounded
-    val DEFAULT_LIB_LAYOUT: LibOrientation? = null // Auto orientation
-
-    val KEYBOARD_HEIGHT_MAX = 300.dp
-    const val KEYBOARD_RATIO = 0.8f
-
-    val DYNAMIC_SIZE_MAX = 200.dp
-}
+@Composable
+fun shouldUseLandscape(): Boolean =
+    LocalConfiguration.current.screenHeightDp < TABLET_THRESHOLD

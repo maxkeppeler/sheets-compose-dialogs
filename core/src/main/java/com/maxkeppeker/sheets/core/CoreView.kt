@@ -45,7 +45,7 @@ fun CoreView(
 
     FrameBase(
         header = header,
-        content = { body() },
+        layout = { body() },
         buttonsVisible = selection.withButtonView
     ) {
         ButtonsComponent(

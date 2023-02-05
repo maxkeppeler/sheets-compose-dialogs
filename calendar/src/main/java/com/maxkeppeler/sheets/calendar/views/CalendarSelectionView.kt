@@ -22,6 +22,7 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.models.*
@@ -45,6 +46,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 internal fun LazyGridScope.setupCalendarSelectionView(
     cells: Int,
+    orientation: LibOrientation,
     config: CalendarConfig,
     selection: CalendarSelection,
     data: CalendarData,
@@ -58,8 +60,9 @@ internal fun LazyGridScope.setupCalendarSelectionView(
     item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
     items(data.offsetStart) {
         CalendarDateItemComponent(
+            data = CalendarDateData(otherMonth = true),
             selection = selection,
-            data = CalendarDateData(otherMonth = true)
+            orientation = orientation
         )
     }
     items(data.days) { dayIndex ->
@@ -85,6 +88,7 @@ internal fun LazyGridScope.setupCalendarSelectionView(
                 TestTags.CALENDAR_DATE_SELECTION,
                 date.format(DateTimeFormatter.ISO_DATE)
             ),
+            orientation = orientation,
             data = dateData,
             selection = selection,
             onDateClick = onSelect

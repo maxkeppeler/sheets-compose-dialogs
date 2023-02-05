@@ -16,7 +16,6 @@
 package com.maxkeppeler.sheets.color.views
 
 
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -24,12 +23,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
 import androidx.core.graphics.alpha
 import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testSequenceTagOf
+import com.maxkeppeker.sheets.core.views.Grid
 import com.maxkeppeler.sheets.color.R
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.core.R as RC
@@ -43,6 +45,7 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 internal fun ColorCustomControlComponent(
     config: ColorConfig,
+    orientation: LibOrientation,
     color: Int,
     onColorChange: (Int) -> Unit
 ) {
@@ -65,30 +68,49 @@ internal fun ColorCustomControlComponent(
     val colorValueLabelWidth = remember { mutableStateOf<Int?>(null) }
 
     val colorItems = mutableListOf(
-        stringResource(R.string.scd_color_dialog_alpha) to alphaValue,
+        if (config.allowCustomColorAlphaValues) stringResource(R.string.scd_color_dialog_alpha) to alphaValue else null,
         stringResource(R.string.scd_color_dialog_red) to redValue,
         stringResource(R.string.scd_color_dialog_green) to greenValue,
         stringResource(R.string.scd_color_dialog_blue) to blueValue
-    )
+    ).filterNotNull()
 
-    Column(modifier = Modifier.padding(top = dimensionResource(RC.dimen.scd_small_150))) {
-        colorItems.forEachIndexed { index, entry ->
-            if ((config.allowCustomColorAlphaValues)
-                || (!config.allowCustomColorAlphaValues && index > 0)
-            ) {
-                ColorCustomControlItemComponent(
+    Grid(
+        modifier = Modifier.padding(
+            top = dimensionResource(RC.dimen.scd_normal_100)
+        ),
+        items = colorItems,
+        columns = when (orientation) {
+            LibOrientation.PORTRAIT -> 1
+            LibOrientation.LANDSCAPE -> 2
+        },
+        rowSpacing = 0.dp,
+        columnSpacing = 24.dp
+    ) { entry ->
+        val index = colorItems.indexOf(entry)
+        val onValueChange: (Int) -> Unit = { entry.second.value = it }
+        val sliderTestTag = testSequenceTagOf(
+            TestTags.COLOR_CUSTOM_VALUE_SLIDER,
+            index.toString()
+        )
+        when (orientation) {
+            LibOrientation.PORTRAIT ->
+                ColorCustomControlListItemComponent(
                     label = entry.first,
                     value = entry.second.value,
-                    onValueChange = { entry.second.value = it },
+                    onValueChange = onValueChange,
                     colorItemLabelWidth = colorItemLabelWidth,
                     colorValueLabelWidth = colorValueLabelWidth,
-                    sliderTestTag = testSequenceTagOf(
-                        TestTags.COLOR_CUSTOM_VALUE_SLIDER,
-                        index.toString()
-                    ),
+                    sliderTestTag = sliderTestTag,
                 )
-            }
+            LibOrientation.LANDSCAPE ->
+                ColorCustomControlGridItemComponent(
+                    label = entry.first,
+                    value = entry.second.value,
+                    onValueChange = onValueChange,
+                    sliderTestTag = sliderTestTag,
+                )
         }
-    }
 
+
+    }
 }

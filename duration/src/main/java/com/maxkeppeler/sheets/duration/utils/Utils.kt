@@ -16,6 +16,8 @@
 package com.maxkeppeler.sheets.duration.utils
 
 import androidx.annotation.RestrictTo
+import androidx.annotation.StringRes
+import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationFormat
 import java.util.concurrent.TimeUnit
@@ -94,30 +96,34 @@ internal fun parseCurrentTime(format: DurationFormat, currentTime: Long? = null)
     return filledTimeString
 }
 
+data class Label(@StringRes val short: Int, @StringRes val long: Int)
+
+val labels = listOf(
+    Label(R.string.scd_duration_dialog_hour_code, R.string.scd_duration_dialog_hours),
+    Label(R.string.scd_duration_dialog_minute_code, R.string.scd_duration_dialog_minutes),
+    Label(R.string.scd_duration_dialog_second_code, R.string.scd_duration_dialog_seconds)
+)
+
 internal fun getValuePairs(
     time: StringBuilder,
     timeConfig: DurationConfig
-): List<Pair<String, String>> {
+): List<Pair<String, Label>> {
 
-    val valuePairs = mutableListOf<Pair<String, String>>()
+    val valuePairs = mutableListOf<Pair<String, Label>>()
     val formatArray = timeConfig.timeFormat.name.split("_")
     var indexPosition = 0
     formatArray.forEachIndexed { i, formatTimeUnit ->
         val unitLabel = when {
-            formatTimeUnit.contains("H", ignoreCase = true) ->
-                "h"
-            formatTimeUnit.contains("M", ignoreCase = true) ->
-                "m"
-            formatTimeUnit.contains("S", ignoreCase = true) ->
-                "s"
-            else -> ""
+            formatTimeUnit.contains("H", ignoreCase = true) -> labels[0]
+            formatTimeUnit.contains("M", ignoreCase = true) -> labels[1]
+            formatTimeUnit.contains("S", ignoreCase = true) -> labels[2]
+            else -> throw IllegalStateException("Unit could not be mapped.")
         }
         val value = time.substring(indexPosition, indexPosition.plus(formatTimeUnit.length))
         val valueInt = runCatching { value }.getOrElse { "00" }
         valuePairs.add(valueInt to unitLabel)
         indexPosition += formatTimeUnit.length
     }
-
     return valuePairs
 }
 
@@ -162,9 +168,9 @@ internal fun getInputKeys(config: DurationConfig): List<String> {
 }
 
 
-internal fun getFormattedHintTime(timeInSeconds: Long): MutableList<Pair<String, String>> {
+internal fun getFormattedHintTime(timeInSeconds: Long): MutableList<Pair<String, Label>> {
 
-    val valuePairs = mutableListOf<Pair<String, String>>()
+    val pairs = mutableListOf<Pair<String, Label>>()
 
     if (timeInSeconds > 0) {
 
@@ -177,22 +183,11 @@ internal fun getFormattedHintTime(timeInSeconds: Long): MutableList<Pair<String,
         secondsValue -= TimeUnit.MINUTES.toSeconds(minutes.toLong())
         val seconds = TimeUnit.SECONDS.toSeconds(secondsValue).toInt()
 
-        if (days > 0) {
-            valuePairs.add(Pair(days.toString(), "d"))
-        }
+        if (hours > 0) pairs.add(Pair(hours.toString(), labels[0]))
+        if (minutes > 0) pairs.add(Pair(minutes.toString(),labels[1]))
+        if (seconds > 0) pairs.add(Pair(seconds.toString(), labels[2]))
 
-        if (hours > 0) {
-            valuePairs.add(Pair(hours.toString(), "h"))
-        }
-
-        if (minutes > 0) {
-            valuePairs.add(Pair(minutes.toString(), "m"))
-        }
-
-        if (seconds > 0) {
-            valuePairs.add(Pair(seconds.toString(), "s"))
-        }
     }
 
-    return valuePairs
+    return pairs
 }

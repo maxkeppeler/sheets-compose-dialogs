@@ -15,44 +15,41 @@
  */
 package com.maxkeppeler.sheets.duration.views
 
+
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
-import com.maxkeppeler.sheets.duration.utils.Label
+import com.maxkeppeler.sheets.duration.R
+import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
 
 /**
- * The main component that includes the time view and an info view,
- * when the selected time is out of the bounds of the configuration.
- * @param modifier The modifier that is applied to this component.
+ * The info component that will show a hint if the selected time is out of the specified bounds.
  * @param orientation The orientation of the view.
- * @param indexOfFirstValue The index of the first valid value.
- * @param values The list of value pairs that will be displayed.
- * @param minTimeValue The minimum valid time.
- * @param maxTimeValue The maximum valid time.
+ * @param minTime The minimum valid time.
+ * @param maxTime The maximum valid time.
  */
 @Composable
-internal fun TimeDisplayComponent(
-    modifier: Modifier,
+internal fun TimeHintComponent(
     orientation: LibOrientation,
-    indexOfFirstValue: Int?,
-    values: List<Pair<String, Label>>,
-    minTimeValue: Long?,
-    maxTimeValue: Long?
+    minTime: Long? = null,
+    maxTime: Long? = null,
 ) {
-    TimeValueComponent(
-        orientation = orientation,
-        modifier = modifier,
-        indexOfFirstValue = indexOfFirstValue,
-        values = values,
-        valid = minTimeValue == null && maxTimeValue == null
-    ) {
-        TimeHintComponent(
+
+    if (minTime != null || maxTime != null) {
+
+        val hintRes = if (minTime != null) R.string.scd_duration_dialog_at_least_placeholder
+        else R.string.scd_duration_dialog_at_most_placeholder
+
+        val time = minTime ?: maxTime
+        ?: throw IllegalStateException("Hint is shown but min and max time values are null.")
+        val values = getFormattedHintTime(time)
+
+        TimeValueComponent(
+            modifier = Modifier,
             orientation = orientation,
-            minTime = minTimeValue,
-            maxTime = maxTimeValue
+            values = values,
+            hintValue = stringResource(id = hintRes)
         )
     }
 }
-
-
-

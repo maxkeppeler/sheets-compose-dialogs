@@ -16,20 +16,18 @@
 package com.maxkeppeler.sheets.clock.views
 
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
+import com.maxkeppeker.sheets.core.views.Grid
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.utils.Constants
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The keyboard component that is used to input the clock time.
+ * @param modifier The modifier that is applied to this component.
+ * @param orientation The orientation of the view.
  * @param config The general configuration for the dialog view.
  * @param keys A list of keys that will be displayed.
  * @param disabledKeys A list of the keys that are displayed.
@@ -39,6 +37,8 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun KeyboardComponent(
+    modifier: Modifier,
+    orientation: LibOrientation,
     config: ClockConfig,
     keys: List<String>,
     disabledKeys: List<String>,
@@ -46,18 +46,17 @@ internal fun KeyboardComponent(
     onPrevAction: () -> Unit,
     onNextAction: () -> Unit
 ) {
-    LazyVerticalGrid(
-        modifier = Modifier
-            .fillMaxWidth(),
-        columns = GridCells.Fixed(Constants.KEYBOARD_COLUMNS),
-        userScrollEnabled = false,
-        horizontalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100)),
-        verticalArrangement = Arrangement.spacedBy(dimensionResource(RC.dimen.scd_small_100))
-    ) {
-        items(keys) { key ->
+    Grid(
+        modifier = modifier,
+        items = keys,
+        columns = Constants.KEYBOARD_COLUMNS,
+        rowSpacing = 8.dp,
+        columnSpacing = 8.dp,
+        itemView = { key ->
             val disabled = disabledKeys.contains(key)
             KeyItemComponent(
                 config = config,
+                orientation = orientation,
                 key = key,
                 disabled = disabled,
                 onNextAction = onNextAction,
@@ -65,5 +64,5 @@ internal fun KeyboardComponent(
                 onEnterValue = onEnterValue
             )
         }
-    }
+    )
 }

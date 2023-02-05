@@ -17,6 +17,7 @@ package com.maxkeppeler.sheets.color.views
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.color.models.ColorConfig
 
 /**
@@ -28,6 +29,7 @@ import com.maxkeppeler.sheets.color.models.ColorConfig
 @Composable
 internal fun ColorCustomComponent(
     config: ColorConfig,
+    orientation: LibOrientation,
     color: Int,
     onColorChange: (Int) -> Unit,
 ) {
@@ -39,6 +41,7 @@ internal fun ColorCustomComponent(
         )
         ColorCustomControlComponent(
             config = config,
+            orientation = orientation,
             color = color,
             onColorChange = onColorChange
         )

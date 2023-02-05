@@ -42,7 +42,7 @@ class FrameBaseTests {
                 header = null,
                 buttonsVisible = false,
                 buttons = {},
-                content = { contentCalled = true }
+                layout = { contentCalled = true }
             )
         }
         rule.onNodeWithTag(TestTags.FRAME_BASE_CONTENT).assertExists()
@@ -56,7 +56,7 @@ class FrameBaseTests {
                 header = null,
                 buttonsVisible = false,
                 buttons = {},
-                content = { }
+                layout = { }
             )
         }
         rule.onNodeWithTag(TestTags.FRAME_BASE_HEADER).assertDoesNotExist()
@@ -70,7 +70,7 @@ class FrameBaseTests {
                 header = Header.Custom {},
                 buttonsVisible = false,
                 buttons = {},
-                content = { }
+                layout = { }
             )
         }
         rule.onNodeWithTag(TestTags.FRAME_BASE_NO_HEADER).assertDoesNotExist()
@@ -85,7 +85,7 @@ class FrameBaseTests {
                 header = null,
                 buttonsVisible = true,
                 buttons = { buttonsCalled = true },
-                content = { }
+                layout = { }
             )
         }
         rule.onNodeWithTag(TestTags.FRAME_BASE_BUTTONS).assertExists()
@@ -101,7 +101,7 @@ class FrameBaseTests {
                 header = null,
                 buttonsVisible = false,
                 buttons = { buttonsCalled = true },
-                content = { }
+                layout = { }
             )
         }
         rule.onNodeWithTag(TestTags.FRAME_BASE_BUTTONS).assertDoesNotExist()

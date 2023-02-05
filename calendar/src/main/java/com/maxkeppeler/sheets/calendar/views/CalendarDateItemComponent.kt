@@ -31,6 +31,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.utils.Constants
@@ -48,23 +49,29 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 internal fun CalendarDateItemComponent(
     modifier: Modifier = Modifier,
+    orientation: LibOrientation,
     data: CalendarDateData,
     selection: CalendarSelection,
     onDateClick: (LocalDate) -> Unit = {},
 ) {
 
     val today = data.date == LocalDate.now()
+    val defaultShape = when (orientation) {
+        LibOrientation.PORTRAIT -> MaterialTheme.shapes.medium
+        LibOrientation.LANDSCAPE -> MaterialTheme.shapes.small
+    }
+
     val shape = when {
-        data.selectedStart -> MaterialTheme.shapes.medium.copy(
+        data.selectedStart -> defaultShape.copy(
             topEnd = CornerSize(0.dp),
             bottomEnd = CornerSize(0.dp)
         )
-        data.selectedEnd -> MaterialTheme.shapes.medium.copy(
+        data.selectedEnd -> defaultShape.copy(
             topStart = CornerSize(0.dp),
             bottomStart = CornerSize(0.dp)
         )
         data.selectedBetween -> RoundedCornerShape(0)
-        else -> MaterialTheme.shapes.medium
+        else -> defaultShape
     }
     val color = when {
         data.selectedBetween -> MaterialTheme.colorScheme.primary
@@ -73,7 +80,7 @@ internal fun CalendarDateItemComponent(
 
     val disabledModifier = Modifier
         .aspectRatio(1f, true)
-        .clip(MaterialTheme.shapes.medium)
+        .clip(defaultShape)
         .background(MaterialTheme.colorScheme.surfaceVariant)
 
     val selectedModifier = Modifier
@@ -84,7 +91,7 @@ internal fun CalendarDateItemComponent(
 
     val normalModifier = Modifier
         .aspectRatio(1f, true)
-        .clip(MaterialTheme.shapes.medium)
+        .clip(defaultShape)
         .clickable { data.date?.let { onDateClick(it) } }
 
     val otherMonthModifier = Modifier

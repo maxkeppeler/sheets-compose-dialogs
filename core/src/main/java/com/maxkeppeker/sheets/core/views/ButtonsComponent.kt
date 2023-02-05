@@ -49,7 +49,6 @@ fun ButtonsComponent(
 
     Row(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(vertical = dimensionResource(id = R.dimen.scd_small_100))
             .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
         verticalAlignment = Alignment.CenterVertically,

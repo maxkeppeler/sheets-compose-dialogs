@@ -24,10 +24,7 @@ import androidx.compose.runtime.setValue
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
-import com.maxkeppeler.sheets.duration.utils.getInputKeys
-import com.maxkeppeler.sheets.duration.utils.getValuePairs
-import com.maxkeppeler.sheets.duration.utils.parseCurrentTime
-import com.maxkeppeler.sheets.duration.utils.parseToSeconds
+import com.maxkeppeler.sheets.duration.utils.*
 import java.io.Serializable
 
 /**
@@ -44,7 +41,7 @@ internal class DurationState(
 
     var timeTextValue by mutableStateOf(stateData?.timeTextValue ?: getInitTimeTextValue())
     var timeInfoInSeconds by mutableStateOf(getInitTimeInfoInSeconds())
-    var valuePairs by mutableStateOf(getInitValuePairs())
+    var values by mutableStateOf(getInitValuePairs())
     var indexOfFirstValue by mutableStateOf(getInitIndexOfFirstValue())
     val keys by mutableStateOf(getInputKeys(config))
     var valid by mutableStateOf(isValid())
@@ -60,12 +57,12 @@ internal class DurationState(
         return Triple(value, minTime, maxTime)
     }
 
-    private fun getInitValuePairs(): List<Pair<String, String>> {
+    private fun getInitValuePairs(): List<Pair<String, Label>> {
         return getValuePairs(timeTextValue, config)
     }
 
     private fun getInitIndexOfFirstValue(): Int? {
-        return valuePairs
+        return values
             .indexOfFirst { runCatching { it.first.toInt() != 0 }.getOrNull() ?: false }
             .takeUnless { it == -1 }
     }
@@ -76,7 +73,7 @@ internal class DurationState(
 
     private fun refreshTime() {
         timeInfoInSeconds = getInitTimeInfoInSeconds()
-        valuePairs = getInitValuePairs()
+        values = getInitValuePairs()
         indexOfFirstValue = getInitIndexOfFirstValue()
         checkValid()
     }
@@ -117,7 +114,7 @@ internal class DurationState(
     override fun reset() {
         timeTextValue = getInitTimeTextValue()
         timeInfoInSeconds = getInitTimeInfoInSeconds()
-        valuePairs = getInitValuePairs()
+        values = getInitValuePairs()
         indexOfFirstValue = getInitIndexOfFirstValue()
     }
 

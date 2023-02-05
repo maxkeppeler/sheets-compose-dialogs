@@ -15,6 +15,7 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
+
 /**
  * Joins multiple test tags together into a sequence.
  * @param testTags The test tags you apply to the element.

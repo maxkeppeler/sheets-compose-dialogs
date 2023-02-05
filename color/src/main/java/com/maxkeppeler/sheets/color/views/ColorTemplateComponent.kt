@@ -18,8 +18,8 @@ package com.maxkeppeler.sheets.color.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
@@ -31,7 +31,7 @@ import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.color.models.ColorConfig
@@ -58,7 +58,9 @@ internal fun ColorTemplateComponent(
         columns = GridCells.Adaptive(Constants.COLOR_TEMPLATE_ITEM_SIZE),
         horizontalArrangement = Arrangement.SpaceEvenly,
         modifier = Modifier
-            .height(300.dp)
+            .sizeIn(
+                maxHeight = BaseConstants.DYNAMIC_SIZE_MAX,
+            )
             .fillMaxWidth()
             .graphicsLayer { alpha = 0.99F }
             .drawWithContent {

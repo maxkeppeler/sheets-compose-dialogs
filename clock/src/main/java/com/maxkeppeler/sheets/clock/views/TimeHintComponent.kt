@@ -19,8 +19,6 @@ package com.maxkeppeler.sheets.clock.views
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,7 +26,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.style.TextAlign
@@ -36,7 +33,6 @@ import com.maxkeppeler.sheets.clock.R
 import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
-import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * A component that displays a hint that the current time is out of the defined boundary, if set and invalid.
@@ -46,6 +42,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun TimeHintComponent(
+    modifier: Modifier,
     valid: Boolean,
     boundary: ClosedRange<LocalTime>? = null
 ) {
@@ -56,9 +53,7 @@ internal fun TimeHintComponent(
     val endTime = remember(boundary) { boundary.endInclusive.format(formatter) }
 
     Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(bottom = dimensionResource(RC.dimen.scd_normal_150)),
+        modifier = modifier,
         horizontalArrangement = Arrangement.Center,
         verticalAlignment = Alignment.Bottom
     ) {

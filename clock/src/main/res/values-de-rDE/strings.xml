@@ -11,4 +11,8 @@
     <string name="scd_clock_dialog_previous_value" translatable="true">Letzter Wert</string>
     <string name="scd_clock_dialog_boundary_hint" translatable="true">Muss zwischen %s und %s sein</string>
 
+    <string name="scd_clock_dialog_hours">Stunden</string>
+    <string name="scd_clock_dialog_minutes">Minuten</string>
+    <string name="scd_clock_dialog_seconds">Sekunden</string>
+
 </resources>

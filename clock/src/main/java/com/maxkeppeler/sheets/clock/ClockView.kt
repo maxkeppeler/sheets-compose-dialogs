@@ -17,19 +17,28 @@
 
 package com.maxkeppeler.sheets.clock
 
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.views.KeyboardComponent
+import com.maxkeppeler.sheets.clock.views.LandscapeTimeValueComponent
+import com.maxkeppeler.sheets.clock.views.PortraitTimeValueComponent
 import com.maxkeppeler.sheets.clock.views.TimeHintComponent
-import com.maxkeppeler.sheets.clock.views.TimeValueComponent
+import com.maxkeppeler.sheets.core.R
 
 /**
  * Clock view for the use-case to to select a clock time.
@@ -52,8 +61,13 @@ fun ClockView(
 
     FrameBase(
         header = header,
-        content = {
-            TimeValueComponent(
+        config = config,
+        layoutHorizontalAlignment = Alignment.CenterHorizontally,
+        layout = {
+            PortraitTimeValueComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(R.dimen.scd_normal_100)),
                 unitValues = clockState.timeTextValues,
                 isAm = clockState.isAm,
                 is24hourFormat = clockState.is24HourFormat,
@@ -63,10 +77,57 @@ fun ClockView(
                 onAm = clockState::onChange12HourFormatValue,
             )
             TimeHintComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(R.dimen.scd_normal_150)),
                 valid = clockState.valid,
                 boundary = config.boundary,
             )
             KeyboardComponent(
+                modifier = Modifier
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.PORTRAIT,
+                config = config,
+                keys = clockState.keys,
+                disabledKeys = clockState.disabledKeys,
+                onEnterValue = clockState::onEnterValue,
+                onPrevAction = clockState::onPrevAction,
+                onNextAction = clockState::onNextAction
+            )
+        },
+        layoutLandscape = {
+            Column(
+                Modifier
+                    .weight(1f)
+                    .weight(1f, true)
+            ) {
+                LandscapeTimeValueComponent(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    unitValues = clockState.timeTextValues,
+                    isAm = clockState.isAm,
+                    is24hourFormat = clockState.is24HourFormat,
+                    valueIndex = clockState.valueIndex.value,
+                    groupIndex = clockState.groupIndex.value,
+                    onGroupClick = clockState::onValueGroupClick,
+                    onAm = clockState::onChange12HourFormatValue,
+                )
+                TimeHintComponent(
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
+                    valid = clockState.valid,
+                    boundary = config.boundary,
+                )
+            }
+            Spacer(modifier = Modifier.width(16.dp))
+            KeyboardComponent(
+                modifier = Modifier
+                    .weight(1f, true)
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.LANDSCAPE,
                 config = config,
                 keys = clockState.keys,
                 disabledKeys = clockState.disabledKeys,
