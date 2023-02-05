@@ -45,12 +45,12 @@ fun StateView(
     FrameBase(
         header = header,
         config = config,
-        contentHorizontalAlignment = Alignment.CenterHorizontally,
+        layoutHorizontalAlignment = Alignment.CenterHorizontally,
         horizontalContentPadding = PaddingValues(
             horizontal = dimensionResource(id = RC.dimen.scd_normal_100),
             vertical = dimensionResource(id = RC.dimen.scd_normal_100)
         ),
-        content = {
+        layout = {
             StateComponent(config = config)
         },
     )

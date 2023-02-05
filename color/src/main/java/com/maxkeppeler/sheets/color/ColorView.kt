@@ -67,7 +67,7 @@ fun ColorView(
     FrameBase(
         header = header,
         config = config,
-        content = { autoOrientation ->
+        layout = { autoOrientation ->
             ColorSelectionModeComponent(
                 config = config,
                 selection = selection,

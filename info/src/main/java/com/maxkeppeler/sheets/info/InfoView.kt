@@ -44,7 +44,7 @@ fun InfoView(
 ) {
     FrameBase(
         header = header,
-        content = { BodyComponent(body) },
+        layout = { BodyComponent(body) },
         buttonsVisible = selection.withButtonView
     ) {
         ButtonsComponent(

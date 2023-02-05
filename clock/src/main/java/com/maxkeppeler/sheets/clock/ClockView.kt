@@ -62,8 +62,8 @@ fun ClockView(
     FrameBase(
         header = header,
         config = config,
-        contentHorizontalAlignment = Alignment.CenterHorizontally,
-        content = {
+        layoutHorizontalAlignment = Alignment.CenterHorizontally,
+        layout = {
             PortraitTimeValueComponent(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -96,7 +96,7 @@ fun ClockView(
                 onNextAction = clockState::onNextAction
             )
         },
-        contentLandscape = {
+        layoutLandscape = {
             Column(
                 Modifier
                     .weight(1f)

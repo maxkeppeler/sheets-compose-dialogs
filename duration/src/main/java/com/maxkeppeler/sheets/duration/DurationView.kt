@@ -60,8 +60,8 @@ fun DurationView(
     FrameBase(
         header = header,
         config = config,
-        contentHorizontalAlignment = Alignment.CenterHorizontally,
-        content = {
+        layoutHorizontalAlignment = Alignment.CenterHorizontally,
+        layout = {
             TimeDisplayComponent(
                 modifier = Modifier,
                 orientation = LibOrientation.PORTRAIT,
@@ -82,7 +82,7 @@ fun DurationView(
                 onEmptyAction = durationState::onEmptyAction
             )
         },
-        contentLandscape = {
+        layoutLandscape = {
             TimeDisplayComponent(
                 modifier = Modifier.weight(1f, true),
                 orientation = LibOrientation.LANDSCAPE,

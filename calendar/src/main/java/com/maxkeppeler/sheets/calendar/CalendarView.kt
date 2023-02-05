@@ -77,8 +77,8 @@ fun CalendarView(
     FrameBase(
         header = header,
         config = config,
-        contentHorizontalAlignment = Alignment.CenterHorizontally,
-        content = {
+        layoutHorizontalAlignment = Alignment.CenterHorizontally,
+        layout = {
             CalendarTopComponent(
                 modifier = Modifier.fillMaxWidth(),
                 config = config,
@@ -132,8 +132,8 @@ fun CalendarView(
                 }
             )
         },
-        contentLandscapeVerticalAlignment = Alignment.Top,
-        contentLandscape = when (config.style) {
+        layoutLandscapeVerticalAlignment = Alignment.Top,
+        layoutLandscape = when (config.style) {
             CalendarStyle.MONTH -> {
                 {
                     var calendarHeight by remember { mutableStateOf(0) }

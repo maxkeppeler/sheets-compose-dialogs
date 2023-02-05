@@ -91,7 +91,7 @@ fun EmojiView(
     FrameBase(
         header = header,
         config = config,
-        content = {
+        layout = {
             EmojiHeaderComponent(
                 config = config,
                 categories = emojiState.categories,

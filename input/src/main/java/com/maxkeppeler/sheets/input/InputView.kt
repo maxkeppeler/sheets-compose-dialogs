@@ -51,7 +51,7 @@ fun InputView(
     FrameBase(
         header = header,
         config = config,
-        content = {
+        layout = {
             InputComponent(
                 modifier = Modifier.dynamicContentWrapOrMaxHeight(this),
                 input = inputState.input,

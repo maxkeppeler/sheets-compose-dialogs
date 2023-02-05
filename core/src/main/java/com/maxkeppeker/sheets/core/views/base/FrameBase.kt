@@ -39,9 +39,11 @@ import com.maxkeppeler.sheets.core.R as RC
 /**
  * Base component for the content structure of a dialog.
  * @param header The content to be displayed inside the dialog that functions as the header view of the dialog.
- * @param contentHorizontalAlignment The horizontal alignment of the layout's children.
  * @param horizontalContentPadding The horizontal padding that is applied to the content.
- * @param content The content to be displayed inside the dialog between the header and the buttons.
+ * @param layout The content to be displayed inside the dialog between the header and the buttons.
+ * @param layoutHorizontalAlignment The horizontal alignment of the layout's children.
+ * @param layoutLandscape The content to be displayed inside the dialog between the header and the buttons when the device is in landscape mode.
+ * @param layoutLandscapeVerticalAlignment The vertical alignment of the layout's children in landscape mode.
  * @param buttonsVisible Display the buttons.
  * @param buttons The content to be displayed inside the dialog that functions as the buttons view of the dialog.
  */
@@ -49,11 +51,11 @@ import com.maxkeppeler.sheets.core.R as RC
 fun FrameBase(
     header: Header? = null,
     config: BaseConfigs? = null,
-    contentHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
-    contentLandscapeVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalContentPadding: PaddingValues = BaseValues.CONTENT_DEFAULT_PADDING,
-    content: @Composable ColumnScope.(LibOrientation) -> Unit,
-    contentLandscape: @Composable (RowScope.() -> Unit)? = null,
+    layout: @Composable ColumnScope.(LibOrientation) -> Unit,
+    layoutHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    layoutLandscape: @Composable (RowScope.() -> Unit)? = null,
+    layoutLandscapeVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     buttonsVisible: Boolean = true,
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
@@ -68,12 +70,12 @@ fun FrameBase(
                 // Only if auto orientation is currently landscape, content for landscape exists
                 // and the device screen is not larger than a typical phone.
                 isDeviceLandscape
-                        && contentLandscape != null
+                        && layoutLandscape != null
                         && shouldUseLandscapeLayout -> LibOrientation.LANDSCAPE
                 else -> LibOrientation.PORTRAIT
             }
         }
-        LibOrientation.LANDSCAPE -> if (contentLandscape != null) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
+        LibOrientation.LANDSCAPE -> if (layoutLandscape != null) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
         else -> config.orientation
     }
 
@@ -118,15 +120,15 @@ fun FrameBase(
             LibOrientation.PORTRAIT -> {
                 Column(
                     modifier = contentModifier,
-                    horizontalAlignment = contentHorizontalAlignment,
-                    content = { content(deviceOrientation) }
+                    horizontalAlignment = layoutHorizontalAlignment,
+                    content = { layout(deviceOrientation) }
                 )
             }
             LibOrientation.LANDSCAPE -> {
                 Row(
                     modifier = contentModifier,
-                    verticalAlignment = contentLandscapeVerticalAlignment,
-                    content = contentLandscape!!
+                    verticalAlignment = layoutLandscapeVerticalAlignment,
+                    content = layoutLandscape!!
                 )
             }
             else -> Unit

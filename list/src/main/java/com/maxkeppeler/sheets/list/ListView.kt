@@ -69,7 +69,7 @@ fun ListView(
     FrameBase(
         header = header,
         config = config,
-        content = {
+        layout = {
             ListOptionBoundsComponent(
                 selection = selection,
                 selectedOptions = listState.selectedOptions
