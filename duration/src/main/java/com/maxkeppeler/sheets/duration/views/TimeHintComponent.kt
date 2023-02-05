@@ -16,21 +16,22 @@
 package com.maxkeppeler.sheets.duration.views
 
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.duration.R
 import com.maxkeppeler.sheets.duration.utils.getFormattedHintTime
 
 /**
  * The info component that will show a hint if the selected time is out of the specified bounds.
+ * @param orientation The orientation of the view.
  * @param minTime The minimum valid time.
  * @param maxTime The maximum valid time.
  */
 @Composable
 internal fun TimeHintComponent(
-    orientation: Orientation,
+    orientation: LibOrientation,
     minTime: Long? = null,
     maxTime: Long? = null,
 ) {

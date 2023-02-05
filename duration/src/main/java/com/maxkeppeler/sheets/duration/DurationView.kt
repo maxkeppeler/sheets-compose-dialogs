@@ -18,17 +18,20 @@
 package com.maxkeppeler.sheets.duration
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.sizeIn
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.duration.models.DurationConfig
@@ -57,17 +60,21 @@ fun DurationView(
     FrameBase(
         header = header,
         config = config,
+        contentHorizontalAlignment = Alignment.CenterHorizontally,
         content = {
             TimeDisplayComponent(
-                orientation = Orientation.Vertical,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier,
+                orientation = LibOrientation.PORTRAIT,
                 indexOfFirstValue = durationState.indexOfFirstValue,
                 values = durationState.values,
                 minTimeValue = durationState.timeInfoInSeconds.second,
                 maxTimeValue = durationState.timeInfoInSeconds.third
             )
             KeyboardComponent(
-                modifier = Modifier.weight(1f, false),
+                modifier = Modifier
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.PORTRAIT,
                 config = config,
                 keys = durationState.keys,
                 onEnterValue = durationState::onEnterValue,
@@ -78,7 +85,7 @@ fun DurationView(
         contentLandscape = {
             TimeDisplayComponent(
                 modifier = Modifier.weight(1f, true),
-                orientation = Orientation.Horizontal,
+                orientation = LibOrientation.LANDSCAPE,
                 indexOfFirstValue = durationState.indexOfFirstValue,
                 values = durationState.values,
                 minTimeValue = durationState.timeInfoInSeconds.second,
@@ -86,8 +93,11 @@ fun DurationView(
             )
             Spacer(modifier = Modifier.width(16.dp))
             KeyboardComponent(
-                modifier = Modifier.weight(1f, true),
-                orientation = Orientation.Horizontal,
+                modifier = Modifier
+                    .weight(1f, true)
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.LANDSCAPE,
                 config = config,
                 keys = durationState.keys,
                 onEnterValue = durationState::onEnterValue,

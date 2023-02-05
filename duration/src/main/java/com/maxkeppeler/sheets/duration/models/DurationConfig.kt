@@ -17,7 +17,8 @@ package com.maxkeppeler.sheets.duration.models
 
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
-import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The general configuration for the duration dialog.
@@ -27,6 +28,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
  * @param maxTime Maximum time.
  * @param displayClearButton Replaces the "00" Value-Button with a button to clear all values.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
+ * @param orientation The orientation of the view or null for auto orientation.
  */
 data class DurationConfig(
     val timeFormat: DurationFormat = DurationFormat.MM_SS,
@@ -34,5 +36,6 @@ data class DurationConfig(
     val minTime: Long = 0,
     val maxTime: Long = Long.MAX_VALUE,
     val displayClearButton: Boolean = false,
-    override val icons: LibIcons = DEFAULT_ICON_STYLE,
+    override val icons: LibIcons = BaseConstants.DEFAULT_ICON_STYLE,
+    override val orientation: LibOrientation? = BaseConstants.DEFAULT_LIB_LAYOUT,
 ) : BaseConfigs()

@@ -20,7 +20,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -38,6 +37,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.duration.R
@@ -57,7 +57,7 @@ import com.maxkeppeler.sheets.core.R as RC
 internal fun KeyItemComponent(
     config: DurationConfig,
     key: String,
-    orientation: Orientation = Orientation.Vertical,
+    orientation: LibOrientation,
     onEnterValue: (String) -> Unit,
     onBackspaceAction: () -> Unit,
     onEmptyAction: () -> Unit,
@@ -102,9 +102,18 @@ internal fun KeyItemComponent(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (isActionBackspace || isActionClear) {
+            val maxSize = dimensionResource(RC.dimen.scd_size_150)
+            val minSize = dimensionResource(RC.dimen.scd_size_100)
             Icon(
                 modifier = Modifier
-                    .size(dimensionResource(RC.dimen.scd_size_175)),
+                    .padding(dimensionResource(RC.dimen.scd_small_100))
+                    .sizeIn(
+                        maxWidth = maxSize,
+                        maxHeight = maxSize,
+                        minWidth = minSize,
+                        minHeight = minSize
+                    )
+                    .fillMaxSize(),
                 imageVector = if (isActionBackspace) config.icons.Backspace else config.icons.Clear,
                 contentDescription = stringResource(
                     if (isActionBackspace) R.string.scd_duration_dialog_delete_last_input
@@ -116,13 +125,11 @@ internal fun KeyItemComponent(
             Box(contentAlignment = Alignment.Center) {
                 Text(
                     text = key,
-                    style = when(orientation) {
-                        Orientation.Vertical -> MaterialTheme.typography.headlineLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        )
-                        Orientation.Horizontal -> MaterialTheme.typography.headlineSmall.copy(
-                            fontWeight = FontWeight.Bold
-                        )
+                    style = with(MaterialTheme.typography) {
+                        when (orientation) {
+                            LibOrientation.PORTRAIT -> headlineLarge.copy(fontWeight = FontWeight.Bold)
+                            LibOrientation.LANDSCAPE -> titleMedium.copy(fontWeight = FontWeight.Bold)
+                        }
                     },
                     textAlign = TextAlign.Center,
                 )

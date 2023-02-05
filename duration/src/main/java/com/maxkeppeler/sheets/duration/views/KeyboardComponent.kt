@@ -16,10 +16,10 @@
 package com.maxkeppeler.sheets.duration.views
 
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.views.Grid
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.utils.Constants
@@ -37,7 +37,7 @@ internal fun KeyboardComponent(
     modifier: Modifier,
     config: DurationConfig,
     keys: List<String>,
-    orientation: Orientation = Orientation.Vertical,
+    orientation: LibOrientation,
     onEnterValue: (String) -> Unit,
     onBackspaceAction: () -> Unit,
     onEmptyAction: () -> Unit

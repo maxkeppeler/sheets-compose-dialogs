@@ -15,7 +15,6 @@
  */
 package com.maxkeppeler.sheets.duration.views
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -28,11 +27,14 @@ import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeler.sheets.duration.utils.Label
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The value component that reflects one unit and its value.
+ * @param modifier The modifier that is applied to this component.
+ * @param orientation The orientation of the view.
  * @param values The list of value pairs that will be displayed.
  * @param valid If the current value is valid.
  * @param indexOfFirstValue The index of the first valid value.
@@ -41,7 +43,7 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 internal fun TimeValueComponent(
     modifier: Modifier = Modifier,
-    orientation: Orientation = Orientation.Vertical,
+    orientation: LibOrientation,
     values: List<Pair<String, Label>>,
     valid: Boolean = true,
     indexOfFirstValue: Int? = null,
@@ -55,22 +57,22 @@ internal fun TimeValueComponent(
         values.forEachIndexed { index, valuePair ->
 
             val valueStyle = when (orientation) {
-                Orientation.Vertical -> when (isHintView) {
+                LibOrientation.PORTRAIT -> when (isHintView) {
                     true -> MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     false -> MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
                 }
-                Orientation.Horizontal -> when (isHintView) {
+                LibOrientation.LANDSCAPE -> when (isHintView) {
                     true -> MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold)
                     false -> MaterialTheme.typography.displaySmall.copy(fontWeight = FontWeight.Bold)
                 }
             }
 
             val labelStyle = when (orientation) {
-                Orientation.Vertical -> when (isHintView) {
+                LibOrientation.PORTRAIT -> when (isHintView) {
                     true -> MaterialTheme.typography.labelMedium
                     false -> MaterialTheme.typography.labelLarge
                 }
-                Orientation.Horizontal -> when (isHintView) {
+                LibOrientation.LANDSCAPE -> when (isHintView) {
                     true -> MaterialTheme.typography.labelSmall
                     false -> MaterialTheme.typography.labelSmall
                 }
@@ -80,7 +82,7 @@ internal fun TimeValueComponent(
             Row(
                 modifier = Modifier.wrapContentSize(),
                 verticalAlignment = when {
-                    orientation == Orientation.Horizontal && !isHintView -> Alignment.CenterVertically
+                    orientation == LibOrientation.LANDSCAPE && !isHintView -> Alignment.CenterVertically
                     else -> Alignment.Bottom
                 }
             ) {
@@ -98,7 +100,7 @@ internal fun TimeValueComponent(
                 val valueColor =
                     if (hasValue) MaterialTheme.colorScheme.primary else valueStyle.color
                 Text(
-                    modifier = if (orientation == Orientation.Horizontal) Modifier else Modifier.alignByBaseline(),
+                    modifier = if (orientation == LibOrientation.LANDSCAPE) Modifier else Modifier.alignByBaseline(),
                     text = buildAnnotatedString {
                         withStyle(valueStyle.copy(valueColor).toSpanStyle()) {
                             append(valuePair.first)
@@ -110,7 +112,7 @@ internal fun TimeValueComponent(
                 Spacer(
                     modifier = Modifier.width(
                         when {
-                            orientation == Orientation.Horizontal && !isHintView ->
+                            orientation == LibOrientation.LANDSCAPE && !isHintView ->
                                 dimensionResource(RC.dimen.scd_small_150)
                             else -> dimensionResource(RC.dimen.scd_small_50)
                         }
@@ -118,9 +120,9 @@ internal fun TimeValueComponent(
                 )
 
                 Text(
-                    modifier = if (orientation == Orientation.Horizontal) Modifier else Modifier.alignByBaseline(),
+                    modifier = if (orientation == LibOrientation.LANDSCAPE) Modifier else Modifier.alignByBaseline(),
                     text = when {
-                        orientation == Orientation.Horizontal && !isHintView ->
+                        orientation == LibOrientation.LANDSCAPE && !isHintView ->
                             stringResource(valuePair.second.long)
                         else -> stringResource(valuePair.second.short)
                     },
@@ -134,7 +136,7 @@ internal fun TimeValueComponent(
     }
 
     when (orientation) {
-        Orientation.Vertical -> {
+        LibOrientation.PORTRAIT -> {
             Row(
                 modifier = modifier,
                 horizontalArrangement = Arrangement.Center,
@@ -149,7 +151,7 @@ internal fun TimeValueComponent(
             )
 
         }
-        Orientation.Horizontal -> {
+        LibOrientation.LANDSCAPE -> {
             Column(
                 modifier = modifier,
                 horizontalAlignment = Alignment.Start,
