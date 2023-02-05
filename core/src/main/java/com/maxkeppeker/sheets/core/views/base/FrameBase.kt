@@ -63,8 +63,9 @@ fun FrameBase(
     val shouldUseLandscapeLayout = shouldUseLandscape()
     val currentOrientation = LocalConfiguration.current.orientation
     val isDeviceLandscape = currentOrientation == Configuration.ORIENTATION_LANDSCAPE
-    val deviceOrientation = if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
-    val orientation = when (config?.orientation) {
+    val deviceOrientation =
+        if (config?.orientation != LibOrientation.PORTRAIT && isDeviceLandscape) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
+    val layoutType = when (config?.orientation) {
         null -> {
             when {
                 // Only if auto orientation is currently landscape, content for landscape exists
@@ -84,7 +85,7 @@ fun FrameBase(
         horizontalAlignment = Alignment.End
     ) {
 
-        header?.let {
+        header?.takeUnless { deviceOrientation == LibOrientation.LANDSCAPE }?.let {
             // Display header
             Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_HEADER)) {
                 HeaderComponent(
@@ -116,7 +117,7 @@ fun FrameBase(
                     top = dimensionResource(RC.dimen.scd_normal_100),
                 )
             )
-        when (orientation) {
+        when (layoutType) {
             LibOrientation.PORTRAIT -> {
                 Column(
                     modifier = contentModifier,
