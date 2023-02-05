@@ -81,13 +81,13 @@ internal class CalendarState(
             }
             null -> Unit
         }
-        val invalidRange = Period.between(
-            config.boundary.toRange().lower,
-            config.boundary.toRange().upper
-        ).years < 1
-        if (invalidRange) {
-            throw IllegalStateException("Please correct your setup. Your boundary is too small. ${config.boundary}")
-        }
+//        val invalidRange = Period.between(
+//            config.boundary.toRange().lower,
+//            config.boundary.toRange().upper
+//        ).years < 1
+//        if (invalidRange) {
+//            throw IllegalStateException("Please correct your setup. Your boundary is too small. ${config.boundary}")
+//        }
     }
 
     private fun getInitYearsRange(): ClosedRange<Int> =

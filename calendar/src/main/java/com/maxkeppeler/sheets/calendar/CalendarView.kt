@@ -15,22 +15,22 @@
  */
 package com.maxkeppeler.sheets.calendar
 
-import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
-import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
-import com.maxkeppeker.sheets.core.models.base.StateHandler
+import androidx.compose.ui.layout.onGloballyPositioned
+import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.*
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.calendar.utils.endValue
 import com.maxkeppeler.sheets.calendar.utils.startValue
 import com.maxkeppeler.sheets.calendar.views.*
@@ -73,14 +73,17 @@ fun CalendarView(
         }
     }
 
+    val density = LocalDensity.current
     FrameBase(
         header = header,
         config = config,
+        contentHorizontalAlignment = Alignment.CenterHorizontally,
         content = {
             CalendarTopComponent(
+                modifier = Modifier.fillMaxWidth(),
                 config = config,
                 mode = calendarState.mode,
-                navigationDisabled = calendarState.monthsData == null || calendarState.mode != CalendarDisplayMode.CALENDAR,
+                navigationDisabled = calendarState.mode != CalendarDisplayMode.CALENDAR,
                 prevDisabled = calendarState.isPrevDisabled,
                 nextDisabled = calendarState.isNextDisabled,
                 cameraDate = calendarState.cameraDate,
@@ -91,12 +94,14 @@ fun CalendarView(
             )
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),
+                orientation = LibOrientation.PORTRAIT,
                 yearListState = yearListState,
                 mode = calendarState.mode,
                 cells = calendarState.cells,
                 onCalendarView = {
                     setupCalendarSelectionView(
                         config = config,
+                        orientation = LibOrientation.PORTRAIT,
                         cells = calendarState.cells,
                         data = calendarState.calendarData,
                         today = calendarState.today,
@@ -124,6 +129,73 @@ fun CalendarView(
                     )
                 }
             )
+        },
+        contentLandscapeVerticalAlignment = Alignment.Top,
+        contentLandscape = when (config.style) {
+            CalendarStyle.MONTH -> {
+                {
+                    var calendarHeight by remember { mutableStateOf(0) }
+                    CalendarTopLandscapeComponent(
+                        modifier = Modifier
+                            .weight(0.3f)
+                            .height(density.run { calendarHeight.toDp() }),
+                        config = config,
+                        mode = calendarState.mode,
+                        navigationDisabled = calendarState.mode != CalendarDisplayMode.CALENDAR,
+                        prevDisabled = calendarState.isPrevDisabled,
+                        nextDisabled = calendarState.isNextDisabled,
+                        cameraDate = calendarState.cameraDate,
+                        onPrev = calendarState::onPrevious,
+                        onNext = calendarState::onNext,
+                        onMonthClick = { calendarState.onMonthSelectionClick() },
+                        onYearClick = { calendarState.onYearSelectionClick() },
+                    )
+                    Spacer(modifier = Modifier.width(16.dp))
+                    CalendarBaseSelectionComponent(
+                        modifier = Modifier
+                            .weight(0.7f)
+                            .onGloballyPositioned { coordinates ->
+                                if (calendarHeight != coordinates.size.height)
+                                    calendarHeight = coordinates.size.height
+                            },
+                        orientation = LibOrientation.LANDSCAPE,
+                        yearListState = yearListState,
+                        cells = calendarState.cells,
+                        mode = calendarState.mode,
+                        onCalendarView = {
+                            setupCalendarSelectionView(
+                                config = config,
+                                orientation = LibOrientation.LANDSCAPE,
+                                cells = calendarState.cells,
+                                data = calendarState.calendarData,
+                                today = calendarState.today,
+                                selection = selection,
+                                onSelect = onSelection,
+                                selectedDate = calendarState.date.value,
+                                selectedDates = calendarState.dates,
+                                selectedRange = Pair(
+                                    calendarState.range.startValue,
+                                    calendarState.range.endValue
+                                ),
+                            )
+                        },
+                        onMonthView = {
+                            setupMonthSelectionView(
+                                monthsData = calendarState.monthsData,
+                                onMonthClick = calendarState::onMonthClick
+                            )
+                        },
+                        onYearView = {
+                            setupYearSelectionView(
+                                yearsRange = calendarState.yearsRange,
+                                selectedYear = calendarState.cameraDate.year,
+                                onYearClick = calendarState::onYearClick
+                            )
+                        },
+                    )
+                }
+            }
+            CalendarStyle.WEEK -> null
         },
         buttonsVisible = selection.withButtonView && calendarState.mode == CalendarDisplayMode.CALENDAR
     ) {
