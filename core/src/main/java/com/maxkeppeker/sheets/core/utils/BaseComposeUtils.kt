@@ -15,9 +15,16 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
+
+private const val TABLET_THRESHOLD = 800
 
 /**
- * Joins multiple test tags together into a sequence.
- * @param testTags The test tags you apply to the element.
+ * Determines whether the current screen should use landscape mode.
+ *
+ * @return `true` if the screen height is less than the [TABLET_THRESHOLD] in landscape mode, `false` otherwise.
  */
-fun testSequenceTagOf(vararg testTags: Any): String = testTags.joinToString()
+@Composable
+fun shouldUseLandscape(): Boolean =
+    LocalConfiguration.current.screenHeightDp < TABLET_THRESHOLD
