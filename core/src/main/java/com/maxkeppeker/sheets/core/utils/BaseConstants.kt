@@ -34,5 +34,5 @@ object BaseConstants {
     val KEYBOARD_HEIGHT_MAX = 300.dp
     const val KEYBOARD_RATIO = 0.8f
 
-    val DYNAMIC_SIZE_MAX = 300.dp
+    val DYNAMIC_SIZE_MAX = 200.dp
 }
