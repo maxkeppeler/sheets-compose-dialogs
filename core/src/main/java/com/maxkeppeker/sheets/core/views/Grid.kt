@@ -49,6 +49,15 @@ fun <T> Grid(
                             content = { itemView(item) }
                         )
                     }
+                    // Add a filler column if the row has less columns than the total number of columns
+                    if (rowItems.size < columns) {
+                        repeat(columns - rowItems.size) {
+                            Column(
+                                modifier = Modifier.weight(1f, true),
+                                horizontalAlignment = Alignment.CenterHorizontally
+                            ) {}
+                        }
+                    }
                 }
             }
         }
