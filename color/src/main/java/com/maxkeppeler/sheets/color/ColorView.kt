@@ -69,6 +69,7 @@ fun ColorView(
 
     FrameBase(
         header = header,
+        config = config,
         content = {
             ColorSelectionModeComponent(
                 config = config,

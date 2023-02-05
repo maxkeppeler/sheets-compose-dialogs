@@ -56,6 +56,7 @@ fun DurationView(
 
     FrameBase(
         header = header,
+        config = config,
         content = {
             TimeDisplayComponent(
                 orientation = Orientation.Vertical,

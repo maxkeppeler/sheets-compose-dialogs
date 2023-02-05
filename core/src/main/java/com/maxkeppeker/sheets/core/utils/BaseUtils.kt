@@ -15,8 +15,18 @@
  */
 package com.maxkeppeker.sheets.core.utils
 
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalConfiguration
+
+
 /**
  * Joins multiple test tags together into a sequence.
  * @param testTags The test tags you apply to the element.
  */
 fun testSequenceTagOf(vararg testTags: Any): String = testTags.joinToString()
+
+private const val TABLET_THRESHOLD = 800
+
+@Composable
+fun shouldUseLandscape(): Boolean =
+    LocalConfiguration.current.screenHeightDp < TABLET_THRESHOLD

@@ -70,6 +70,7 @@ fun OptionView(
 
     FrameBase(
         header = header,
+        config = config,
         // Override content padding, spacing is within the scrollable container for display mode GRID_HORIZONTAL
         horizontalContentPadding = PaddingValues(horizontal = 0.dp),
         content = {

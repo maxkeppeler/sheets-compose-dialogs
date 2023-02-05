@@ -58,6 +58,7 @@ fun ClockView(
 
     FrameBase(
         header = header,
+        config = config,
         content = {
             PortraitTimeValueComponent(
                 modifier = Modifier

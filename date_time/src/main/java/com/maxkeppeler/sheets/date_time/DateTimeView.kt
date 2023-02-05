@@ -62,6 +62,7 @@ fun DateTimeView(
 
     FrameBase(
         header = header,
+        config = config,
         content = {
             val datePicker = @Composable {
                 PickerComponent(

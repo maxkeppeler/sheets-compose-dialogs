@@ -27,9 +27,12 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.BaseValues
 import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.shouldUseLandscape
 import com.maxkeppeker.sheets.core.views.HeaderComponent
 import com.maxkeppeler.sheets.core.R as RC
 
@@ -45,7 +48,9 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 fun FrameBase(
     header: Header? = null,
+    config: BaseConfigs? = null,
     contentHorizontalAlignment: Alignment.Horizontal = Alignment.Start,
+    contentLandscapeVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     horizontalContentPadding: PaddingValues = BaseValues.CONTENT_DEFAULT_PADDING,
     content: @Composable ColumnScope.() -> Unit,
     contentLandscape: @Composable (RowScope.() -> Unit)? = null,
@@ -53,10 +58,27 @@ fun FrameBase(
     buttons: @Composable (ColumnScope.() -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
-    val configuration = LocalConfiguration.current
+    val shouldUseLandscape = shouldUseLandscape()
+    val orientation = when (config?.orientation) {
+        null -> {
+            val currentOrientation = LocalConfiguration.current.orientation
+            val isAutoLandscape = currentOrientation == Configuration.ORIENTATION_LANDSCAPE
+            when {
+                // Only if auto orientation is currently landscape, content for landscape exists
+                // and the device screen is not larger than a typical phone.
+                isAutoLandscape
+                        && contentLandscape != null
+                        && shouldUseLandscape -> LibOrientation.LANDSCAPE
+                else -> LibOrientation.PORTRAIT
+            }
+        }
+        LibOrientation.LANDSCAPE -> if (contentLandscape != null) LibOrientation.LANDSCAPE else LibOrientation.PORTRAIT
+        else -> config.orientation
+    }
 
     Column(
-        modifier = Modifier.wrapContentHeight()
+        modifier = Modifier.wrapContentSize(),
+        horizontalAlignment = Alignment.End
     ) {
 
         header?.let {
@@ -91,21 +113,22 @@ fun FrameBase(
                     top = dimensionResource(RC.dimen.scd_normal_100),
                 )
             )
-        when {
-            configuration.orientation == Configuration.ORIENTATION_LANDSCAPE && contentLandscape != null -> {
-                Row(
-                    modifier = contentModifier,
-                    verticalAlignment = Alignment.CenterVertically,
-                    content = contentLandscape
-                )
-            }
-            else -> {
+        when (orientation) {
+            LibOrientation.PORTRAIT -> {
                 Column(
-                    modifier = contentModifier.fillMaxWidth(),
+                    modifier = contentModifier,
                     horizontalAlignment = contentHorizontalAlignment,
                     content = content
                 )
             }
+            LibOrientation.LANDSCAPE -> {
+                Row(
+                    modifier = contentModifier,
+                    verticalAlignment = contentLandscapeVerticalAlignment,
+                    content = contentLandscape!!
+                )
+            }
+            else -> Unit
         }
 
         buttons?.let { buttons ->

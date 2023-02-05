@@ -75,6 +75,7 @@ fun CalendarView(
 
     FrameBase(
         header = header,
+        config = config,
         content = {
             CalendarTopComponent(
                 config = config,
