@@ -29,7 +29,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.color.R
@@ -91,11 +90,10 @@ internal fun ColorCustomInfoComponent(
 
         ElevatedCard(
             modifier = Modifier
-                .height(64.dp)
+                .height(Constants.COLOR_CUSTOM_ITEM_SIZE)
                 .fillMaxWidth()
                 .padding(start = dimensionResource(RC.dimen.scd_normal_100))
         ) {
-
             Row(
                 modifier = Modifier
                     .fillMaxSize()
@@ -103,7 +101,7 @@ internal fun ColorCustomInfoComponent(
                     .padding(end = dimensionResource(RC.dimen.scd_small_100)),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Column(modifier = Modifier.padding(start = 0.dp)) {
+                Column {
                     if (colorPasteError.value != null) {
                         Text(
                             modifier = Modifier.wrapContentWidth(),
@@ -113,7 +111,7 @@ internal fun ColorCustomInfoComponent(
                     } else {
                         Text(
                             text = stringResource(R.string.scd_color_dialog_argb),
-                            style = MaterialTheme.typography.titleMedium,
+                            style = MaterialTheme.typography.titleSmall,
                             maxLines = 1
                         )
                         Text(
@@ -133,7 +131,7 @@ internal fun ColorCustomInfoComponent(
                     ) {
                         Icon(
                             modifier = Modifier
-                                .size(dimensionResource(RC.dimen.scd_size_150)),
+                                .size(dimensionResource(RC.dimen.scd_size_125)),
                             imageVector = config.icons.ContentCopy,
                             contentDescription = stringResource(R.string.scd_color_dialog_copy_color),
                         )
@@ -145,7 +143,7 @@ internal fun ColorCustomInfoComponent(
                     ) {
                         Icon(
                             modifier = Modifier
-                                .size(dimensionResource(RC.dimen.scd_size_150)),
+                                .size(dimensionResource(RC.dimen.scd_size_125)),
                             imageVector = config.icons.ContentPaste,
                             contentDescription = stringResource(R.string.scd_color_dialog_paste_color),
                         )

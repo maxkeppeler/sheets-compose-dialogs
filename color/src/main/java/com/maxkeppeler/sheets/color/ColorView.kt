@@ -23,10 +23,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
-import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
-import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
-import com.maxkeppeker.sheets.core.models.base.StateHandler
+import com.maxkeppeker.sheets.core.models.base.*
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.color.models.ColorConfig
@@ -70,7 +67,7 @@ fun ColorView(
     FrameBase(
         header = header,
         config = config,
-        content = {
+        content = { autoOrientation ->
             ColorSelectionModeComponent(
                 config = config,
                 selection = selection,
@@ -93,14 +90,14 @@ fun ColorView(
                 ColorSelectionMode.CUSTOM ->
                     ColorCustomComponent(
                         config = config,
+                        orientation = autoOrientation,
                         color = colorState.color ?: Color.Gray.toArgb(),
                         onColorChange = colorState::processSelection,
                     )
             }
         },
         buttonsVisible = selection.withButtonView
-                || !selection.withButtonView
-                && config.displayMode != ColorSelectionMode.TEMPLATE
+                || config.displayMode != ColorSelectionMode.TEMPLATE
     ) {
         ButtonsComponent(
             selection = selection,

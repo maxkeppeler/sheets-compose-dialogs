@@ -23,6 +23,6 @@ import androidx.compose.ui.unit.dp
 internal object Constants {
 
     internal val COLOR_TEMPLATE_ITEM_SIZE = 48.dp
-    internal val COLOR_CUSTOM_ITEM_SIZE = 56.dp
+    internal val COLOR_CUSTOM_ITEM_SIZE = 48.dp
 
 }
