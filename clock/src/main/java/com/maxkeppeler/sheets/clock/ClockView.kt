@@ -37,6 +37,7 @@ import com.maxkeppeler.sheets.clock.models.ClockSelection
 import com.maxkeppeler.sheets.clock.views.KeyboardComponent
 import com.maxkeppeler.sheets.clock.views.LandscapeTimeValueComponent
 import com.maxkeppeler.sheets.clock.views.PortraitTimeValueComponent
+import com.maxkeppeler.sheets.clock.views.TimeHintComponent
 import com.maxkeppeler.sheets.core.R
 
 /**
@@ -75,6 +76,13 @@ fun ClockView(
                 onGroupClick = clockState::onValueGroupClick,
                 onAm = clockState::onChange12HourFormatValue,
             )
+            TimeHintComponent(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(bottom = dimensionResource(R.dimen.scd_normal_150)),
+                valid = clockState.valid,
+                boundary = config.boundary,
+            )
             KeyboardComponent(
                 modifier = Modifier
                     .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
@@ -89,19 +97,30 @@ fun ClockView(
             )
         },
         contentLandscape = {
-            LandscapeTimeValueComponent(
-                modifier = Modifier
-                    .wrapContentWidth()
-                    .weight(1f, true),
-                verticalArrangement = Arrangement.Center,
-                unitValues = clockState.timeTextValues,
-                isAm = clockState.isAm,
-                is24hourFormat = clockState.is24HourFormat,
-                valueIndex = clockState.valueIndex.value,
-                groupIndex = clockState.groupIndex.value,
-                onGroupClick = clockState::onValueGroupClick,
-                onAm = clockState::onChange12HourFormatValue,
-            )
+            Column(
+                Modifier
+                    .weight(1f)
+                    .weight(1f, true)
+            ) {
+                LandscapeTimeValueComponent(
+                    modifier = Modifier.fillMaxWidth(),
+                    verticalArrangement = Arrangement.Center,
+                    unitValues = clockState.timeTextValues,
+                    isAm = clockState.isAm,
+                    is24hourFormat = clockState.is24HourFormat,
+                    valueIndex = clockState.valueIndex.value,
+                    groupIndex = clockState.groupIndex.value,
+                    onGroupClick = clockState::onValueGroupClick,
+                    onAm = clockState::onChange12HourFormatValue,
+                )
+                TimeHintComponent(
+                    modifier = Modifier
+                        .padding(top = 16.dp)
+                        .fillMaxWidth(),
+                    valid = clockState.valid,
+                    boundary = config.boundary,
+                )
+            }
             Spacer(modifier = Modifier.width(16.dp))
             KeyboardComponent(
                 modifier = Modifier
@@ -122,6 +141,7 @@ fun ClockView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = clockState::onFinish,
+            onPositiveValid = clockState.valid,
             onClose = sheetState::finish
         )
     }

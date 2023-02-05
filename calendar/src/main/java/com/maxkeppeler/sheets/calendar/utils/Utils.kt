@@ -20,6 +20,7 @@ import com.maxkeppeler.sheets.calendar.models.*
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
 import java.util.*
 
@@ -62,6 +63,24 @@ internal val LocalDate.startOfWeekOrMonth: LocalDate
         }
         return result
     }
+
+/**
+ * Extension function that jumps to the first day of the month.
+ *
+ * @return [LocalDate] representing the first day of the month
+ */
+internal val LocalDate.startOfMonth: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = withDayOfMonth(1)
+
+/**
+
+Extension function that jumps to the last day of the month.
+@return [LocalDate] representing the last day of the month
+ */
+internal val LocalDate.endOfMonth: LocalDate
+    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
+    get() = with(TemporalAdjusters.lastDayOfMonth())
 
 /**
  * Get the first day of the previous week from the current date.
@@ -222,10 +241,12 @@ internal fun calcMonthData(
     }
 
     // Check that months are within the boundary
-    val boundaryFilteredMonths = timelineFilteredMonths.filter {
-        val cameraDateWithMonth = cameraDate.withMonth(it.value)
-        cameraDateWithMonth.withDayOfMonth(config.boundary.start.dayOfMonth) in config.boundary
-                || cameraDateWithMonth.withDayOfMonth(config.boundary.endInclusive.dayOfMonth) in config.boundary
+    val boundaryFilteredMonths = timelineFilteredMonths.filter { month ->
+        val maxDayOfMonth = month.length(cameraDate.isLeapYear)
+        val startDay = minOf(config.boundary.start.dayOfMonth, maxDayOfMonth)
+        val endDay = minOf(config.boundary.endInclusive.dayOfMonth, maxDayOfMonth)
+        val cameraDateWithMonth = cameraDate.withMonth(month.value).withDayOfMonth(startDay)
+        cameraDateWithMonth in config.boundary || cameraDateWithMonth.withDayOfMonth(endDay) in config.boundary
     }
 
     return CalendarMonthData(

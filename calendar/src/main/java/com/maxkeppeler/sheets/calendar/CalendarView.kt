@@ -89,8 +89,10 @@ fun CalendarView(
                 cameraDate = calendarState.cameraDate,
                 onPrev = calendarState::onPrevious,
                 onNext = calendarState::onNext,
-                onMonthClick = { calendarState.onMonthSelectionClick() },
-                onYearClick = { calendarState.onYearSelectionClick() },
+                monthSelectionEnabled = calendarState.isMonthSelectionEnabled,
+                onMonthClick = calendarState::onMonthSelectionClick,
+                yearSelectionEnabled = calendarState.isYearSelectionEnabled,
+                onYearClick = calendarState::onYearSelectionClick,
             )
             CalendarBaseSelectionComponent(
                 modifier = Modifier.wrapContentHeight(),
