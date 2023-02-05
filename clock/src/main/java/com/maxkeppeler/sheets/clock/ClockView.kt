@@ -17,17 +17,19 @@
 
 package com.maxkeppeler.sheets.clock
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SheetState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
@@ -59,6 +61,7 @@ fun ClockView(
     FrameBase(
         header = header,
         config = config,
+        contentHorizontalAlignment = Alignment.CenterHorizontally,
         content = {
             PortraitTimeValueComponent(
                 modifier = Modifier
@@ -73,7 +76,10 @@ fun ClockView(
                 onAm = clockState::onChange12HourFormatValue,
             )
             KeyboardComponent(
-                modifier = Modifier.weight(1f, false),
+                modifier = Modifier
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.PORTRAIT,
                 config = config,
                 keys = clockState.keys,
                 disabledKeys = clockState.disabledKeys,
@@ -98,8 +104,11 @@ fun ClockView(
             )
             Spacer(modifier = Modifier.width(16.dp))
             KeyboardComponent(
-                modifier = Modifier.weight(1f, true),
-                orientation = Orientation.Horizontal,
+                modifier = Modifier
+                    .weight(1f, true)
+                    .sizeIn(maxHeight = BaseConstants.KEYBOARD_HEIGHT_MAX)
+                    .aspectRatio(BaseConstants.KEYBOARD_RATIO),
+                orientation = LibOrientation.LANDSCAPE,
                 config = config,
                 keys = clockState.keys,
                 disabledKeys = clockState.disabledKeys,

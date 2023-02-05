@@ -16,16 +16,18 @@
 package com.maxkeppeler.sheets.clock.views
 
 
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.views.Grid
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.utils.Constants
 
 /**
  * The keyboard component that is used to input the clock time.
+ * @param modifier The modifier that is applied to this component.
+ * @param orientation The orientation of the view.
  * @param config The general configuration for the dialog view.
  * @param keys A list of keys that will be displayed.
  * @param disabledKeys A list of the keys that are displayed.
@@ -36,9 +38,9 @@ import com.maxkeppeler.sheets.clock.utils.Constants
 @Composable
 internal fun KeyboardComponent(
     modifier: Modifier,
+    orientation: LibOrientation,
     config: ClockConfig,
     keys: List<String>,
-    orientation: Orientation = Orientation.Vertical,
     disabledKeys: List<String>,
     onEnterValue: (Int) -> Unit,
     onPrevAction: () -> Unit,
@@ -54,8 +56,8 @@ internal fun KeyboardComponent(
             val disabled = disabledKeys.contains(key)
             KeyItemComponent(
                 config = config,
-                key = key,
                 orientation = orientation,
+                key = key,
                 disabled = disabled,
                 onNextAction = onNextAction,
                 onPrevAction = onPrevAction,

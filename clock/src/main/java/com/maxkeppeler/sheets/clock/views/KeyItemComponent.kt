@@ -20,7 +20,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.Orientation
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.*
@@ -39,7 +38,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.clock.R
@@ -50,6 +49,7 @@ import com.maxkeppeler.sheets.core.R as RC
 /**
  * The item component of the keyboard.
  * @param config The general configuration for the dialog view.
+ * @param orientation The orientation of the view.
  * @param key The key that the component represents.
  * @param disabled Whenever the current key is disabled.
  * @param onEnterValue The listener that is invoked when a value was clicked.
@@ -59,9 +59,9 @@ import com.maxkeppeler.sheets.core.R as RC
 @Composable
 internal fun KeyItemComponent(
     config: ClockConfig,
+    orientation: LibOrientation,
     key: String,
     disabled: Boolean = false,
-    orientation: Orientation = Orientation.Vertical,
     onEnterValue: (Int) -> Unit,
     onPrevAction: () -> Unit,
     onNextAction: () -> Unit,
@@ -87,7 +87,6 @@ internal fun KeyItemComponent(
         modifier = Modifier
             .testTags(TestTags.KEYBOARD_KEY, key)
             .aspectRatio(1f, true)
-            .sizeIn(minHeight = 35.dp, minWidth = 35.dp, maxWidth = 42.dp, maxHeight = 42.dp)
             .alpha(if (disabled) Constants.KEYBOARD_ALPHA_ITEM_DISABLED else Constants.KEYBOARD_ALPHA_ITEM_ENABLED)
             .clip(RoundedCornerShape(animatedCornerRadius.value))
             .background(
@@ -109,9 +108,18 @@ internal fun KeyItemComponent(
         verticalAlignment = Alignment.CenterVertically
     ) {
         if (isActionNext || isActionPrev) {
-            val size = dimensionResource(RC.dimen.scd_size_175)
+            val maxSize = dimensionResource(RC.dimen.scd_size_150)
+            val minSize = dimensionResource(RC.dimen.scd_size_100)
             Icon(
-                modifier = Modifier.size(size),
+                modifier = Modifier
+                    .padding(dimensionResource(RC.dimen.scd_small_100))
+                    .sizeIn(
+                        maxWidth = maxSize,
+                        maxHeight = maxSize,
+                        minWidth = minSize,
+                        minHeight = minSize
+                    )
+                    .fillMaxSize(),
                 imageVector = if (isActionNext) config.icons.ChevronRight else config.icons.ChevronLeft,
                 contentDescription = stringResource(if (isActionNext) R.string.scd_clock_dialog_next_value else R.string.scd_clock_dialog_previous_value),
                 tint = MaterialTheme.colorScheme.secondary
@@ -120,13 +128,11 @@ internal fun KeyItemComponent(
             Box(contentAlignment = Alignment.Center) {
                 Text(
                     text = key,
-                    style = when(orientation) {
-                        Orientation.Vertical -> MaterialTheme.typography.headlineLarge.copy(
-                            fontWeight = FontWeight.Bold
-                        )
-                        Orientation.Horizontal -> MaterialTheme.typography.headlineSmall.copy(
-                            fontWeight = FontWeight.Bold
-                        )
+                    style = with(MaterialTheme.typography) {
+                        when (orientation) {
+                            LibOrientation.PORTRAIT -> headlineLarge.copy(fontWeight = FontWeight.Bold)
+                            LibOrientation.LANDSCAPE -> titleMedium.copy(fontWeight = FontWeight.Bold)
+                        }
                     },
                     textAlign = TextAlign.Center,
                 )
