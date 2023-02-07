@@ -22,8 +22,8 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import com.maxkeppeker.sheets.core.views.BaseTypeState
-import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
-import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
+import com.maxkeppeler.sheets.date_time.models.*
+import com.maxkeppeler.sheets.date_time.utils.*
 import java.io.Serializable
 import java.time.LocalDate
 import java.time.LocalTime
@@ -44,6 +44,87 @@ internal class DateTimeState(
     var timeSelection by mutableStateOf<LocalTime?>(stateData?.timeSelection)
     var valid by mutableStateOf(isValid())
 
+    private var datePattern by mutableStateOf(getDatePatternValue())
+    private var timePattern by mutableStateOf(getTimePatternValue())
+
+    private var typeValues = stateData?.typeValues ?: getInitTypeValues()
+
+    var dateValues by mutableStateOf(getLocalizedValues(config, datePattern, typeValues))
+    var timeValues by mutableStateOf(getLocalizedValues(config, timePattern, typeValues))
+
+    var isDateValid by mutableStateOf(checkDateValid())
+    var isTimeValid by mutableStateOf(checkTimeValid())
+
+    private fun getInitTypeValues(): MutableMap<UnitType, UnitOptionEntry?> = mutableMapOf(
+        // Date
+        UnitType.DAY to null,
+        UnitType.MONTH to null,
+        UnitType.YEAR to null,
+        // Time
+        UnitType.SECOND to null,
+        UnitType.MINUTE to null,
+        UnitType.HOUR to null,
+        UnitType.AM_PM to getAmPmOptions().first()
+    )
+
+    fun updateValue(unit: UnitSelection, entry: UnitOptionEntry) {
+        unit.type?.let { type ->
+            typeValues[type] = entry
+            if (type.isDate) {
+                dateValues = getLocalizedValues(config, datePattern, typeValues)
+                isDateValid = checkDateValid()
+            } else {
+                timeValues = getLocalizedValues(config, timePattern, typeValues)
+                isTimeValid = checkTimeValid()
+            }
+        }
+        checkValid()
+    }
+
+    private fun checkDateValid(): Boolean {
+        if (datePattern == null) return false
+        val tmpDateValues = typeValues.values.take(3)
+        val valid = tmpDateValues.all { it != null }
+        if (valid) {
+            val date = getLocalDateOf(tmpDateValues)
+            date?.let {
+                dateSelection = it
+            } ?: run { typeValues[UnitType.DAY] = null } // Reset day field to provoke new selection
+        } else {
+            dateSelection = null
+        }
+        return valid
+    }
+
+    private fun checkTimeValid(): Boolean {
+        if (timePattern == null) return false
+        val tmpTimeValues = typeValues.values.drop(3)
+        val secondsValid = !containsSeconds(timePattern!!) || tmpTimeValues.take(3).last() != null
+        val valid = secondsValid && tmpTimeValues.take(3).drop(1).all { it != null }
+        val time = if (valid) getLocalTimeOf(
+            tmpTimeValues.lastOrNull()?.value == 0,
+            tmpTimeValues
+        ) else null
+        timeSelection = time
+        return valid
+    }
+
+    private fun getDatePatternValue(): String? = selection.dateFormatStyle?.let {
+        getLocalizedPattern(
+            isDate = true,
+            locale = selection.locale,
+            formatStyle = it
+        )
+    }
+
+    private fun getTimePatternValue(): String? = selection.timeFormatStyle?.let {
+        getLocalizedPattern(
+            isDate = false,
+            locale = selection.locale,
+            formatStyle = it
+        )
+    }
+
     private fun checkValid() {
         valid = isValid()
     }
@@ -54,15 +135,6 @@ internal class DateTimeState(
         is DateTimeSelection.DateTime -> dateSelection != null && timeSelection != null
     }
 
-    fun processSelection(date: LocalDate?) {
-        dateSelection = date
-        checkValid()
-    }
-
-    fun processSelection(time: LocalTime?) {
-        timeSelection = time
-        checkValid()
-    }
 
     fun onFinish() {
         when (selection) {
@@ -91,7 +163,13 @@ internal class DateTimeState(
             selection: DateTimeSelection,
             config: DateTimeConfig
         ): Saver<DateTimeState, *> = Saver(
-            save = { state -> DateTimeStateData(state.dateSelection, state.timeSelection) },
+            save = { state ->
+                DateTimeStateData(
+                    state.dateSelection,
+                    state.timeSelection,
+                    state.typeValues
+                )
+            },
             restore = { data -> DateTimeState(selection, config, data) }
         )
     }
@@ -102,7 +180,8 @@ internal class DateTimeState(
      */
     data class DateTimeStateData(
         val dateSelection: LocalDate?,
-        val timeSelection: LocalTime?
+        val timeSelection: LocalTime?,
+        val typeValues: MutableMap<UnitType, UnitOptionEntry?>
     ) : Serializable
 }
 

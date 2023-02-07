@@ -23,6 +23,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.core.R as RC
@@ -46,7 +47,7 @@ internal fun SelectionValueItem(
             .clickable { option?.let { onValueChange.invoke(it) } }
             .padding(vertical = dimensionResource(RC.dimen.scd_small_100))
             .padding(horizontal = dimensionResource(RC.dimen.scd_small_100)),
-        text = option?.label ?: "",
+        text = option?.labelRes?.let { stringResource(id = it) } ?: option?.label ?: "",
         textAlign = TextAlign.Center,
         style = MaterialTheme.typography.bodyLarge
     )

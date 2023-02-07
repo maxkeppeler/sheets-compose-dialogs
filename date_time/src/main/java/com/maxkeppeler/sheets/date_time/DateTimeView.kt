@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.date_time
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
@@ -60,31 +61,28 @@ fun DateTimeView(
         )
     }
 
+    LaunchedEffect(dateTimeState.isDateValid) { processSelection() }
+    LaunchedEffect(dateTimeState.isDateValid) { processSelection() }
+
     FrameBase(
         header = header,
         config = config,
         layout = {
             val datePicker = @Composable {
                 PickerComponent(
+                    isDate = true,
+                    values = dateTimeState.dateValues!!,
                     config = config,
-                    locale = selection.locale,
-                    formatStyle = selection.dateFormatStyle!!,
-                    onDateValueChange = { date ->
-                        dateTimeState.processSelection(date)
-                        processSelection()
-                    }
+                    onValueChange = dateTimeState::updateValue,
                 )
             }
 
             val timePicker = @Composable {
                 PickerComponent(
+                    isDate = false,
+                    values = dateTimeState.timeValues!!,
                     config = config,
-                    locale = selection.locale,
-                    formatStyle = selection.timeFormatStyle!!,
-                    onTimeValueChange = { time ->
-                        dateTimeState.processSelection(time)
-                        processSelection()
-                    }
+                    onValueChange = dateTimeState::updateValue,
                 )
             }
 

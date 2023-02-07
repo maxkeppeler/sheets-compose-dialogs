@@ -18,6 +18,16 @@ package com.maxkeppeler.sheets.date_time.models
 import androidx.annotation.StringRes
 import com.maxkeppeler.sheets.date_time.R
 
+enum class UnitType(val isDate: Boolean) {
+    DAY(true),
+    MONTH(true),
+    YEAR(true),
+    HOUR(false),
+    MINUTE(false),
+    SECOND(false),
+    AM_PM(false)
+}
+
 /**
  * A representation of a unit with a placeholder, the options that can be selected and the current value.
  * @param placeholderRes The resource of a text that will be used as placeholder text.
@@ -27,21 +37,19 @@ import com.maxkeppeler.sheets.date_time.R
 internal sealed class UnitSelection(
     @StringRes open val placeholderRes: Int? = null,
     open val options: List<UnitOptionEntry> = listOf(),
-    open val value: UnitOptionEntry? = null
+    open val value: UnitOptionEntry? = null,
+    open val type: UnitType? = null
 ) {
 
     /**
      * Representation of the selection between am and pm for the 12HourFormat.
-     * @param options The list of of options that can be selected.
-     * @param value The current selected value.
      */
     data class AmPm(
-        override val options: List<UnitOptionEntry> = listOf(
-            UnitOptionEntry(value = 0, labelRes = R.string.sheets_compose_dialogs_date_time_am),
-            UnitOptionEntry(value = 1, labelRes = R.string.sheets_compose_dialogs_date_time_pm),
-        ),
-        override val value: UnitOptionEntry? = options.first(),
-    ) : UnitSelection()
+        override val value: UnitOptionEntry? = null,
+        override val options: List<UnitOptionEntry>,
+    ) : UnitSelection(
+        type = UnitType.AM_PM
+    )
 
     /**
      * Representation of the hours selection.
@@ -53,6 +61,7 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>,
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_hour,
+        type = UnitType.HOUR
     )
 
     /**
@@ -65,6 +74,7 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>,
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_minutes,
+        type = UnitType.MINUTE
     )
 
     /**
@@ -77,6 +87,7 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>,
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_seconds,
+        type = UnitType.SECOND
     )
 
     /**
@@ -89,6 +100,7 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_day,
+        type = UnitType.DAY
     )
 
     /**
@@ -101,6 +113,7 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>,
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_month,
+        type = UnitType.MONTH
     )
 
     /**
@@ -113,5 +126,6 @@ internal sealed class UnitSelection(
         override val options: List<UnitOptionEntry>
     ) : UnitSelection(
         placeholderRes = R.string.sheets_compose_dialogs_date_time_year,
+        type = UnitType.YEAR
     )
 }

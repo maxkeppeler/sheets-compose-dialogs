@@ -15,9 +15,11 @@
  */
 package com.maxkeppeler.sheets.date_time.utils
 
+import com.maxkeppeler.sheets.date_time.R
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
+import com.maxkeppeler.sheets.date_time.models.UnitType
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.Month
@@ -31,44 +33,50 @@ internal fun detectUnit(
     config: DateTimeConfig,
     pattern: String,
     segment: String,
-    sec: UnitOptionEntry?,
-    min: UnitOptionEntry?,
-    hour: UnitOptionEntry?,
-    day: UnitOptionEntry?,
-    month: UnitOptionEntry?,
-    year: UnitOptionEntry?,
+    unitValues: MutableMap<UnitType, UnitOptionEntry?>,
 ): UnitSelection? {
     val now = LocalDate.now()
-    val date = LocalDate.of(year?.value ?: now.year, month?.value ?: now.monthValue, 1)
+    val month = unitValues[UnitType.MONTH]
+    val date = LocalDate.of(
+        /* year = */ unitValues[UnitType.YEAR]?.value ?: now.year,
+        /* month = */ month?.value ?: now.monthValue,
+        /* dayOfMonth = */ 1
+    )
     return when {
         segment.contains(Constants.SYMBOL_SECONDS) ->
             UnitSelection.Second(
-                value = sec,
+                value = unitValues[UnitType.SECOND],
                 options = getMinutesSecondsOptions()
             )
         segment.contains(Constants.SYMBOL_MINUTES) ->
             UnitSelection.Minute(
-                value = min,
+                value = unitValues[UnitType.MINUTE],
                 options = getMinutesSecondsOptions()
             )
         segment.contains(Constants.SYMBOL_HOUR, ignoreCase = true) ->
             UnitSelection.Hour(
-                value = hour,
+                value = unitValues[UnitType.HOUR],
                 options = getHoursOptions(pattern)
             )
         segment.contains(Constants.SYMBOL_DAY) ->
             UnitSelection.Day(
-                value = day,
+                value = unitValues[UnitType.DAY],
                 options = getDayOptions(date, month)
             )
         segment.contains(Constants.SYMBOL_MONTH) ->
             UnitSelection.Month(
-                value = month,
+                value = unitValues[UnitType.MONTH],
                 options = getMonthOptions(segment)
             )
+        segment.contains(Constants.SYMBOL_24_HOUR_FORMAT) -> {
+            UnitSelection.AmPm(
+                value = unitValues[UnitType.AM_PM],
+                options = getAmPmOptions()
+            )
+        }
         segment.contains(Constants.SYMBOL_YEAR, ignoreCase = true) ->
             UnitSelection.Year(
-                value = year,
+                value = unitValues[UnitType.YEAR],
                 options = getYearOptions(config)
             )
 
@@ -78,14 +86,12 @@ internal fun detectUnit(
 
 internal fun getLocalTimeOf(
     isAm: Boolean?,
-    sec: UnitOptionEntry?,
-    min: UnitOptionEntry?,
-    hour: UnitOptionEntry?
+    values: List<UnitOptionEntry?>,
 ) = runCatching {
 
-    val hourValue = hour!!.value
-    val minValue = min!!.value
-    val secValue = sec?.value ?: 0
+    val hourValue = values[2]!!.value
+    val minValue = values[1]!!.value
+    val secValue = values[0]?.value ?: 0
     var actualHourValue = hourValue
 
     isAm?.let {
@@ -103,14 +109,12 @@ internal fun getLocalTimeOf(
 }.getOrNull()
 
 internal fun getLocalDateOf(
-    day: UnitOptionEntry?,
-    month: UnitOptionEntry?,
-    year: UnitOptionEntry?
+    values: List<UnitOptionEntry?>,
 ) = runCatching {
     LocalDate.of(
-        year!!.value,
-        month!!.value,
-        day!!.value
+        values[2]!!.value,
+        values[1]!!.value,
+        values[0]!!.value
     )
 }.getOrNull()
 
@@ -123,18 +127,41 @@ internal fun getLocalizedPattern(
     if (!isDate) formatStyle else null, Chronology.ofLocale(locale), locale
 ).toString()
 
-internal fun getLocalizedValues(pattern: String): Array<String> =
-    pattern.split(" ", ".", ":").filter { !containsAmPm(it) }.toTypedArray()
+internal fun getLocalizedValues(
+    config: DateTimeConfig,
+    pattern: String?,
+    unitValues: MutableMap<UnitType, UnitOptionEntry?>
+): List<List<Any?>>? {
+    val values = pattern?.split(" ", ".", ":", "-")?.toTypedArray()
+    return values?.map { value ->
+        val segments = getLocalizedValueSegments(value)
+        segments.map { segment ->
+            if (!config.hideDateCharacters && segment.isEmpty()) segment
+            else detectUnit(
+                config = config,
+                pattern = pattern,
+                segment = segment,
+                unitValues = unitValues
+            )
+        }
+    }
+}
 
 internal fun getLocalizedValueSegments(segment: String): List<String> =
     segment.split(",", ".").dropLastWhile { it.isEmpty() }
 
-internal fun is24HourFormat(pattern: String): Boolean = !containsAmPm(pattern)
+internal fun is24HourFormat(pattern: String): Boolean =
+    !containsAmPm(pattern)
 
 private fun containsAmPm(pattern: String): Boolean =
     pattern.contains(Constants.SYMBOL_24_HOUR_FORMAT)
 
 internal fun containsSeconds(pattern: String): Boolean = pattern.contains(Constants.SYMBOL_SECONDS)
+
+fun getAmPmOptions() = listOf(
+    UnitOptionEntry(value = 0, labelRes = R.string.sheets_compose_dialogs_date_time_am),
+    UnitOptionEntry(value = 1, labelRes = R.string.sheets_compose_dialogs_date_time_pm),
+)
 
 private fun getMinutesSecondsOptions(): List<UnitOptionEntry> {
     return (0..59).map {

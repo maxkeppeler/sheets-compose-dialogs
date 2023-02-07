@@ -24,7 +24,7 @@ import java.io.Serializable
  * @param label The textual representation of the value.
  * @param labelRes The textual representation of the value by resource.
  */
-internal data class UnitOptionEntry(
+data class UnitOptionEntry(
     val value: Int,
     val label: String? = null,
     @StringRes val labelRes: Int? = null

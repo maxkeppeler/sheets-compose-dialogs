@@ -18,97 +18,39 @@ package com.maxkeppeler.sheets.date_time.views
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.res.dimensionResource
+import com.maxkeppeler.sheets.core.R
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.UnitOptionEntry
 import com.maxkeppeler.sheets.date_time.models.UnitSelection
-import com.maxkeppeler.sheets.date_time.utils.*
-import java.time.LocalDate
-import java.time.LocalTime
-import java.time.format.FormatStyle
-import java.util.*
-import com.maxkeppeler.sheets.core.R as RC
+
 
 /**
  * A picker component that will build up a date or time selection.
  * @param config The general configuration for the dialog.
- * @param locale The locale that is used for the date and time format.
- * @param formatStyle The style of the date or time format.
- * @param onDateValueChange The listener that returns the selected date.
- * @param onTimeValueChange The listener that returns the selected time.
+ * @param isDate If the current picker is used for a date.
+ * @param values
+ * @param onValueChange The listener that is invoked when a value was selected.
  */
 @Composable
 internal fun PickerComponent(
     config: DateTimeConfig,
-    locale: Locale = Locale.getDefault(),
-    formatStyle: FormatStyle,
-    onDateValueChange: ((LocalDate?) -> Unit)? = null,
-    onTimeValueChange: ((LocalTime?) -> Unit)? = null
+    isDate: Boolean,
+    values: List<List<Any?>>,
+    onValueChange: (UnitSelection, UnitOptionEntry) -> Unit,
 ) {
-
-    val isDate = onDateValueChange != null
     val height = remember { mutableStateOf(0) }
-
-    val pattern by remember {
-        val value = getLocalizedPattern(isDate, formatStyle, locale)
-        mutableStateOf(value)
-    }
-
-    val values = remember(pattern) {
-        val values = getLocalizedValues(pattern)
-        mutableStateListOf(*values)
-    }
-
-    var day by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-    var month by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-    var year by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-
-    var sec by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-    var min by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-    var hour by rememberSaveable { mutableStateOf<UnitOptionEntry?>(null) }
-    var isAm by rememberSaveable { mutableStateOf(if (is24HourFormat(pattern)) null else true) }
-
-    if (isDate) {
-        LaunchedEffect(day, month, year) {
-            val valid = day != null && month != null && year != null
-            if (valid) {
-                val date = getLocalDateOf(day, month, year)
-                date?.let { onDateValueChange?.invoke(date) }
-                    ?: run { day = null } // Reset day field to provoke new selection
-            } else onDateValueChange?.invoke(null)
-        }
-    } else {
-        LaunchedEffect(sec, min, hour) {
-            val secondsValid = !containsSeconds(pattern) || sec != null
-            val valid = secondsValid && min != null && hour != null
-            val time = if (valid) getLocalTimeOf(isAm, sec, min, hour) else null
-            onTimeValueChange?.invoke(time)
-        }
-    }
-
-    val onValueSelection: (UnitSelection, UnitOptionEntry) -> Unit = { unit, entry ->
-        when (unit) {
-            is UnitSelection.Day -> day = entry
-            is UnitSelection.Month -> month = entry
-            is UnitSelection.Year -> year = entry
-            is UnitSelection.Hour -> hour = entry
-            is UnitSelection.Minute -> min = entry
-            is UnitSelection.Second -> sec = entry
-            else -> Unit
-        }
-    }
-
     Column(
         modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
         Row(
             modifier = Modifier
                 .wrapContentWidth()
@@ -119,53 +61,35 @@ internal fun PickerComponent(
                 },
             verticalAlignment = Alignment.Bottom
         ) {
-            values.forEachIndexed { index, textPart ->
-                val segments = getLocalizedValueSegments(textPart)
+            values.forEachIndexed { index, segments ->
                 segments.forEach { segment ->
-                    if (!config.hideDateCharacters && segment.isEmpty()) {
-                        PickerDateCharacterComponent(text = ",")
-                    } else {
-                        val unitSelection by remember(day, month, year, sec, min, hour) {
-                            val unitValue = detectUnit(
-                                config = config, pattern = pattern, segment = segment,
-                                sec = sec, min = min, hour = hour,
-                                day = day, month = month, year = year
-                            )
-                            mutableStateOf(unitValue)
-                        }
-                        unitSelection?.let { unit ->
+                    when (segment) {
+                        is String -> PickerDateCharacterComponent(text = ",")
+                        is UnitSelection -> {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 UnitContainerComponent(
                                     config = config,
-                                    unit = unit,
+                                    unit = segment,
                                     height = height,
-                                    onValueChange = { onValueSelection(unit, it) },
+                                    onValueChange = { onValueChange(segment, it) },
                                 )
-                                if (!config.hideTimeCharacters && !isDate
+                                if (!config.hideTimeCharacters
+                                    && !isDate
                                     && index < values.lastIndex
                                 ) {
                                     Text(
                                         modifier = Modifier
                                             .clip(MaterialTheme.shapes.extraSmall)
-                                            .padding(horizontal = dimensionResource(RC.dimen.scd_small_75))
-                                            .padding(top = dimensionResource(RC.dimen.scd_normal_150)),
+                                            .padding(horizontal = dimensionResource(R.dimen.scd_small_75))
+                                            .padding(top = dimensionResource(R.dimen.scd_normal_150)),
                                         text = ":"
                                     )
                                 }
                             }
+
                         }
                     }
                 }
-            }
-            isAm?.let {
-                UnitContainerComponent(
-                    config = config,
-                    unit = UnitSelection.AmPm(),
-                    height = height,
-                    onValueChange = {
-                        isAm = it.value == 0
-                    }
-                )
             }
         }
     }
