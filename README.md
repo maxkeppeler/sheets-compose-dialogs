@@ -318,7 +318,7 @@ Check out some apps which are using this library.<br/>
 
 ## License
 
-    Copyright 2022 Maximilian Keppeler https://maxkeppeler.com
+    Copyright 2022-2023 Maximilian Keppeler https://maxkeppeler.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
