@@ -18,8 +18,9 @@
 package com.maxkeppeler.sheets.option.models
 
 import androidx.annotation.IntRange
-import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
+import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the list dialog.
@@ -45,9 +46,9 @@ sealed class OptionSelection(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val onSelectOption: (index: Int, option: Option) -> Unit
     ) : OptionSelection()
 
@@ -71,9 +72,9 @@ sealed class OptionSelection(
         val maxChoicesStrict: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val onSelectOptions: (selectedIndices: List<Int>, selectedOptions: List<Option>) -> Unit
     ) : OptionSelection()
 }

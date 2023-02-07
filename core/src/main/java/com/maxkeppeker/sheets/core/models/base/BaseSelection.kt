@@ -15,6 +15,8 @@
  */
 package com.maxkeppeker.sheets.core.models.base
 
+import com.maxkeppeker.sheets.core.utils.BaseConstants
+
 /**
  * Base selection for dialog-specific selections.
  */
@@ -22,7 +24,7 @@ abstract class BaseSelection {
     open val withButtonView: Boolean = true
     open val extraButton: SelectionButton? = null
     open val onExtraButtonClick: (() -> Unit)? = null
-    open val negativeButton: SelectionButton? = null
+    open val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON
     open val onNegativeClick: (() -> Unit)? = null
-    open val positiveButton: SelectionButton? = null
+    open val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON
 }

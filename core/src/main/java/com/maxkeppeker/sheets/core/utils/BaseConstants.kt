@@ -17,7 +17,9 @@ package com.maxkeppeker.sheets.core.utils
 
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.icons.LibIcons
+import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
+import com.maxkeppeker.sheets.core.models.base.SelectionButton
 
 /**
  * Defines module-wide constants.
@@ -35,4 +37,15 @@ object BaseConstants {
     const val KEYBOARD_RATIO = 0.8f
 
     val DYNAMIC_SIZE_MAX = 200.dp
+
+    val DEFAULT_NEGATIVE_BUTTON = SelectionButton(
+        textRes = android.R.string.cancel,
+        type = ButtonStyle.TEXT
+    )
+
+    val DEFAULT_POSITIVE_BUTTON =
+        SelectionButton(
+            textRes = android.R.string.ok,
+            type = ButtonStyle.TEXT
+        )
 }

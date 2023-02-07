@@ -20,6 +20,7 @@ package com.maxkeppeler.sheets.calendar.models
 import android.util.Range
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import java.time.LocalDate
 
 /**
@@ -42,9 +43,9 @@ sealed class CalendarSelection : BaseSelection() {
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val selectedDate: LocalDate? = null,
         val onSelectDate: (date: LocalDate) -> Unit
     ) : CalendarSelection()
@@ -62,9 +63,9 @@ sealed class CalendarSelection : BaseSelection() {
     class Dates(
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val selectedDates: List<LocalDate>? = null,
         val onSelectDates: (dates: List<LocalDate>) -> Unit
     ) : CalendarSelection()
@@ -84,9 +85,9 @@ sealed class CalendarSelection : BaseSelection() {
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val selectedRange: Range<LocalDate>? = null,
         val onSelectRange: (startDate: LocalDate, endDate: LocalDate) -> Unit
     ) : CalendarSelection()

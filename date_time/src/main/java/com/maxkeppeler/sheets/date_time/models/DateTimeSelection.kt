@@ -17,6 +17,7 @@ package com.maxkeppeler.sheets.date_time.models
 
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 import java.time.LocalDate
 import java.time.LocalDateTime
 import java.time.LocalTime
@@ -51,9 +52,9 @@ sealed class DateTimeSelection(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         override val locale: Locale = Locale.getDefault(),
         override val dateFormatStyle: FormatStyle = FormatStyle.MEDIUM,
         val onPositiveClick: (LocalDate) -> Unit,
@@ -76,9 +77,9 @@ sealed class DateTimeSelection(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         override val locale: Locale = Locale.getDefault(),
         override val timeFormatStyle: FormatStyle = FormatStyle.SHORT,
         val onPositiveClick: (LocalTime) -> Unit,
@@ -102,9 +103,9 @@ sealed class DateTimeSelection(
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         override val locale: Locale = Locale.getDefault(),
         override val dateFormatStyle: FormatStyle = FormatStyle.MEDIUM,
         override val timeFormatStyle: FormatStyle = FormatStyle.SHORT,

@@ -55,26 +55,28 @@ fun ButtonsComponent(
         horizontalArrangement = Arrangement.End
     ) {
 
-        selection.extraButton?.let {
+        selection.extraButton?.let { extraButton ->
             SelectionButtonComponent(
                 modifier = Modifier
                     .wrapContentWidth(),
-                button = selection.extraButton,
+                button = extraButton,
                 onClick = { selection.onExtraButtonClick?.invoke() },
                 testTag = TestTags.BUTTON_EXTRA,
             )
-            Spacer(modifier = Modifier.weight(1f))
         }
 
-        SelectionButtonComponent(
-            modifier = Modifier
-                .wrapContentWidth()
-                .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
-            button = selection.negativeButton,
-            onClick = { onNegative(); onClose() },
-            defaultText = stringResource(id = R.string.cancel),
-            testTag = TestTags.BUTTON_NEGATIVE,
-        )
+        Spacer(modifier = Modifier.weight(1f))
+
+        selection.negativeButton?.let { negativeButton ->
+            SelectionButtonComponent(
+                modifier = Modifier
+                    .wrapContentWidth()
+                    .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
+                button = negativeButton,
+                onClick = { onNegative(); onClose() },
+                testTag = TestTags.BUTTON_NEGATIVE,
+            )
+        }
 
         SelectionButtonComponent(
             modifier = Modifier
@@ -82,32 +84,29 @@ fun ButtonsComponent(
             button = selection.positiveButton,
             onClick = { onPositive(); onClose() },
             enabled = onPositiveValid,
-            defaultText = stringResource(id = R.string.ok),
             testTag = TestTags.BUTTON_POSITIVE,
         )
     }
 }
 
 /**
- * A helper component to setup the right button.
+ * A helper component to setup a button.
  * @param modifier The modifier that is applied to the button.
  * @param button The data that is used to build this button.
  * @param onClick Listener that is invoked when the button is clicked.
  * @param enabled Controls the enabled state of this button. When false, this component will not respond to user input, and it will appear visually disabled and disabled to accessibility services.
- * @param defaultText The text that is used by default in the button data does not contain a text.
  * @param testTag The text that is used for the test tag.
  */
 @Composable
 private fun SelectionButtonComponent(
     modifier: Modifier,
-    button: SelectionButton?,
+    button: SelectionButton,
     onClick: () -> Unit,
     enabled: Boolean = true,
-    defaultText: String = "",
     testTag: String
 ) {
     val buttonContent: @Composable RowScope.() -> Unit = {
-        button?.icon?.let { icon ->
+        button.icon?.let { icon ->
             IconComponent(
                 modifier = Modifier
                     .testTags(testTag, TestTags.BUTTON_ICON)
@@ -116,42 +115,44 @@ private fun SelectionButtonComponent(
             )
             Spacer(modifier = Modifier.width(dimensionResource(id = R.dimen.scd_small_100)))
         }
-        Text(text = button?.text ?: defaultText)
+
+        when {
+            button.text != null -> Text(text = button.text)
+            button.textRes != null -> Text(text = stringResource(button.textRes))
+            button.annotatedString != null -> Text(text = button.annotatedString)
+            else -> throw IllegalStateException("Please correct your setup. The text is missing for a button.")
+        }
     }
 
-    when {
-        button == null || button.type == ButtonStyle.TEXT -> {
+    when (button.type) {
+        ButtonStyle.TEXT ->
             TextButton(
                 modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
             )
-        }
-        button.type == ButtonStyle.FILLED -> {
+        ButtonStyle.FILLED ->
             Button(
                 modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
             )
-        }
-        button.type == ButtonStyle.ELEVATED -> {
+        ButtonStyle.ELEVATED ->
             ElevatedButton(
                 modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
             )
-        }
-        button.type == ButtonStyle.OUTLINED -> {
+        ButtonStyle.OUTLINED ->
             OutlinedButton(
                 modifier = modifier.testTag(testTag),
                 onClick = onClick,
                 enabled = enabled,
                 content = buttonContent
             )
-        }
     }
 
 }

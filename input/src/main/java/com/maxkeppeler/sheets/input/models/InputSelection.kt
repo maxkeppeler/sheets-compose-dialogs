@@ -20,6 +20,7 @@ package com.maxkeppeler.sheets.input.models
 import android.os.Bundle
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the info dialog.
@@ -34,8 +35,8 @@ class InputSelection(
     val input: List<Input>,
     override val extraButton: SelectionButton? = null,
     override val onExtraButtonClick: (() -> Unit)? = null,
-    override val negativeButton: SelectionButton? = null,
+    override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
     override val onNegativeClick: (() -> Unit)? = null,
-    override val positiveButton: SelectionButton? = null,
+    override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
     val onPositiveClick: ((result: Bundle) -> Unit)? = null,
 ) : BaseSelection()

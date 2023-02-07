@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.emoji.models
 
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the emoji dialog.
@@ -39,9 +40,9 @@ sealed class EmojiSelection : BaseSelection() {
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val onPositiveClick: (String) -> Unit,
     ) : EmojiSelection()
 
@@ -59,9 +60,9 @@ sealed class EmojiSelection : BaseSelection() {
         override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
-        override val negativeButton: SelectionButton? = null,
+        override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
         override val onNegativeClick: (() -> Unit)? = null,
-        override val positiveButton: SelectionButton? = null,
+        override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
         val onPositiveClick: (com.vanniktech.emoji.Emoji) -> Unit
     ) : EmojiSelection()
 
