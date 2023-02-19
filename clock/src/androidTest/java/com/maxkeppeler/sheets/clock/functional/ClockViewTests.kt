@@ -27,9 +27,12 @@ import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.clock.ClockView
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
+import com.maxkeppeler.sheets.clock.utils.Constants
 import com.maxkeppeler.sheets.test.utils.onNodeWithTags
 import com.maxkeppeler.sheets.test.utils.onPositiveButton
 import com.maxkeppeler.sheets.test.utils.setContentAndWaitForIdle
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -55,13 +58,16 @@ class ClockViewTests {
             )
         }
         listOf(1, 0, 3, 0).forEach {
-            rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
         }
         rule.onPositiveButton().performClick()
         assert(selectedTime == testTime)
     }
 
-//    @Test
+    @Test
     fun clockView12HourFormatAmSelectionSuccess() {
         val testTime = LocalTime.of(10, 30)
         var selectedTime: LocalTime? = null
@@ -75,14 +81,20 @@ class ClockViewTests {
             )
         }
         listOf(1, 0, 3, 0).forEach {
-            rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
         }
-        rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
         rule.onPositiveButton().performClick()
         assert(selectedTime == testTime)
     }
 
-//    @Test
+    @Test
     fun clockView12HourFormatPmSelectionSuccess() {
         val testTime = LocalTime.of(20, 30)
         var selectedTime: LocalTime? = null
@@ -96,9 +108,15 @@ class ClockViewTests {
             )
         }
         listOf(0, 8, 3, 0).forEach {
-            rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
         }
-        rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 1).performClick()
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 1).performClick()
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
         rule.onPositiveButton().performClick()
         assert(selectedTime == testTime)
     }

@@ -6,8 +6,8 @@ object App {
     const val MIN_SDK = 21
     const val TARGET_SDK = 33
 
-    const val VERSION_CODE = 4
-    const val VERSION_NAME = "1.0.4"
+    const val VERSION_CODE = 10
+    const val VERSION_NAME = "1.1.0"
 
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 }
