@@ -102,3 +102,14 @@ jobs:
         with:
           name: sample.apk
           path: app/sample.apk
+
+    - name: Configure Git
+        run: |
+          git config --global user.email "github-actions@executed.com"
+          git config --global user.name "GitHub Actions"
+
+    - name: Commit and push changes
+        run: |
+          git add app/sample.apk
+          git commit -m "(General) Update sample APK"
+          git push
