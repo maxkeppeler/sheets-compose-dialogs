@@ -23,6 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import com.maxkeppeker.sheets.core.models.base.Debouncer
 import com.maxkeppeker.sheets.core.views.BaseTypeState
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
@@ -54,6 +55,8 @@ internal class ClockState(
     val keys by mutableStateOf(getInputKeys())
     var disabledKeys by mutableStateOf(getCurrentDisabledKeys())
     var valid by mutableStateOf(isValid())
+
+    private val debouncer = Debouncer(Constants.DEBOUNCE_KEY_CLICK_DURATION)
 
     private fun isValid(): Boolean = config.boundary?.let { time in it } ?: true
 
@@ -110,16 +113,18 @@ internal class ClockState(
     }
 
     fun onEnterValue(value: Int) {
-        timeTextValues = inputValue(
-            timeValues = timeTextValues,
-            is24hourFormat = is24HourFormat,
-            currentIndex = valueIndex,
-            groupIndex = groupIndex,
-            newValue = value,
-            onNextIndex = this::onNextAction
-        )
-        refreshDisabledKeys()
-        refreshTimeValue()
+        debouncer.debounce { // https://github.com/maxkeppeler/sheets-compose-dialogs/issues/28
+            timeTextValues = inputValue(
+                timeValues = timeTextValues,
+                is24hourFormat = is24HourFormat,
+                currentIndex = valueIndex,
+                groupIndex = groupIndex,
+                newValue = value,
+                onNextIndex = this::onNextAction
+            )
+            refreshDisabledKeys()
+            refreshTimeValue()
+        }
     }
 
     fun onPrevAction() {

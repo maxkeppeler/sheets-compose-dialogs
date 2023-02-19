@@ -35,4 +35,6 @@ internal object Constants {
     const val KEYBOARD_ALPHA_ITEM_DISABLED = 0.3f
 
     const val KEYBOARD_ACTION_BACKGROUND_SURFACE_ALPHA = 0.3f
+
+    const val DEBOUNCE_KEY_CLICK_DURATION = 100L
 }
