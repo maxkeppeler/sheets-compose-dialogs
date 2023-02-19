@@ -68,15 +68,13 @@ internal fun CalendarBaseSelectionComponent(
     onYearView: LazyListScope.() -> Unit
 ) {
 
-    val baseModifier = modifier
-        .sizeIn(
-            maxHeight = BaseConstants.DYNAMIC_SIZE_MAX,
-            maxWidth = BaseConstants.DYNAMIC_SIZE_MAX
-        )
-        .then(
+    val baseModifier = modifier.then(
             when (orientation) {
                 LibOrientation.PORTRAIT -> Modifier.padding(top = dimensionResource(RC.dimen.scd_normal_100))
-                LibOrientation.LANDSCAPE -> Modifier
+                LibOrientation.LANDSCAPE -> Modifier.sizeIn(
+                    maxHeight = BaseConstants.DYNAMIC_SIZE_MAX,
+                    maxWidth = BaseConstants.DYNAMIC_SIZE_MAX
+                )
             }
         )
 

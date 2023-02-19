@@ -262,9 +262,11 @@ internal class CalendarState(
     }
 
     override fun reset() {
-        date.value = null
+        date.value = selection.dateValue
         dates.clear()
+        dates.addAll(selection.datesValue)
         range.clear()
+        range.addAll(selection.rangeValue)
     }
 
     companion object {
