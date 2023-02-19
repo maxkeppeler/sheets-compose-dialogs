@@ -91,20 +91,14 @@ jobs:
           java-version: 11
 
       - name: Build APK
-        run: bash ./gradlew assembleDebug --stacktrace
+          run: ./gradlew assembleDebug --stacktrace
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v3.1.2
-        with:
-          name: sample.apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+      - name: Rename & Move APK
+          run: |
+            mv app/build/outputs/apk/debug/app-debug.apk app/sample.apk
 
-      - name: Download APK
-        uses: actions/download-artifact@v3
-        with:
-          name: sample.apk
-          path: app/sample/
-
-      - name: Display structure of downloaded files
-        run: ls -R
-        working-directory: app/sample/
+      - name: Upload artifact
+          uses: actions/upload-artifact@v2
+          with:
+            name: sample.apk
+            path: app/sample.apk
