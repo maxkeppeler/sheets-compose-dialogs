@@ -18,10 +18,7 @@
 package com.maxkeppeler.sheets.duration
 
 import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.sizeIn
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -63,7 +60,8 @@ fun DurationView(
         layoutHorizontalAlignment = Alignment.CenterHorizontally,
         layout = {
             TimeDisplayComponent(
-                modifier = Modifier,
+                modifier = Modifier
+                    .fillMaxWidth(),
                 orientation = LibOrientation.PORTRAIT,
                 indexOfFirstValue = durationState.indexOfFirstValue,
                 values = durationState.values,
