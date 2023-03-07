@@ -103,8 +103,9 @@ fun DurationView(
                 onEmptyAction = durationState::onEmptyAction
             )
         }
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             onPositiveValid = durationState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },

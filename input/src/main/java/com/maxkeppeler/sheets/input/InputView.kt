@@ -60,8 +60,9 @@ fun InputView(
             )
         },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             selection = selection,
             onPositiveValid = inputState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },

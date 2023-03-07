@@ -98,8 +98,9 @@ fun ColorView(
         },
         buttonsVisible = selection.withButtonView
                 || config.displayMode != ColorSelectionMode.TEMPLATE
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             selection = selection,
             onPositiveValid = colorState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },

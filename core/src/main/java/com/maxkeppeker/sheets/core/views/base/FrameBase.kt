@@ -57,7 +57,7 @@ fun FrameBase(
     layoutLandscape: @Composable (RowScope.() -> Unit)? = null,
     layoutLandscapeVerticalAlignment: Alignment.Vertical = Alignment.CenterVertically,
     buttonsVisible: Boolean = true,
-    buttons: @Composable (ColumnScope.() -> Unit)? = null,
+    buttons: @Composable (ColumnScope.(LibOrientation) -> Unit)? = null,
 ) {
     val layoutDirection = LocalLayoutDirection.current
     val shouldUseLandscapeLayout = shouldUseLandscape()
@@ -82,7 +82,7 @@ fun FrameBase(
 
     Column(
         modifier = Modifier.wrapContentSize(),
-        horizontalAlignment = Alignment.End
+        horizontalAlignment = Alignment.Start
     ) {
 
         header?.takeUnless { deviceOrientation == LibOrientation.LANDSCAPE }?.let {
@@ -138,7 +138,7 @@ fun FrameBase(
         buttons?.let { buttons ->
             if (buttonsVisible) {
                 Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_BUTTONS)) {
-                    buttons.invoke(this)
+                    buttons.invoke(this, deviceOrientation)
                 }
             } else Spacer(
                 modifier = Modifier

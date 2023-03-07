@@ -25,6 +25,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -49,6 +50,7 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
@@ -70,6 +72,7 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
@@ -91,6 +94,7 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
@@ -112,6 +116,7 @@ class ButtonsComponentTests {
         var extraCalled = false
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton("Test button")
                     override val onExtraButtonClick = { extraCalled = true }
@@ -134,6 +139,7 @@ class ButtonsComponentTests {
         val text = "test-text-positive"
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val positiveButton = SelectionButton(text)
                 },
@@ -154,6 +160,7 @@ class ButtonsComponentTests {
         val text = "test-text-negative"
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val negativeButton = SelectionButton(text)
                 },
@@ -174,6 +181,7 @@ class ButtonsComponentTests {
         val text = "test-text-extra"
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton(text)
                 },
@@ -194,6 +202,7 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val positiveButton = SelectionButton("", icon)
                 },
@@ -217,6 +226,7 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val negativeButton = SelectionButton("", icon)
                 },
@@ -240,6 +250,7 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton("", icon)
                 },

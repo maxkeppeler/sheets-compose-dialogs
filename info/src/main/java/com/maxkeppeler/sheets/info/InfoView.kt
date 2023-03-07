@@ -46,8 +46,9 @@ fun InfoView(
         header = header,
         layout = { BodyComponent(body) },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) {orientation ->
         ButtonsComponent(
+            orientation = orientation,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = selection.onPositiveClick::invoke,

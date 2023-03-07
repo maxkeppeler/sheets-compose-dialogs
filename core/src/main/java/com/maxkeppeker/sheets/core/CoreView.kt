@@ -47,8 +47,9 @@ fun CoreView(
         header = header,
         layout = { body() },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) {orientation ->
         ButtonsComponent(
+            orientation = orientation,
             onPositiveValid = onPositiveValid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },

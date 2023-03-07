@@ -136,8 +136,9 @@ fun ClockView(
                 onNextAction = clockState::onNextAction
             )
         }
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = clockState::onFinish,

@@ -87,8 +87,9 @@ fun OptionView(
             )
         },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) {orientation ->
         ButtonsComponent(
+            orientation = orientation,
             onPositiveValid = optionState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },

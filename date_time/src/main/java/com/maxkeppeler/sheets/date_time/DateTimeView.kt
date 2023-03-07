@@ -101,8 +101,9 @@ fun DateTimeView(
             }
         },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             onPositiveValid = dateTimeState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },

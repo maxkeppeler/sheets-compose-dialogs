@@ -200,8 +200,9 @@ fun CalendarView(
             CalendarStyle.WEEK -> null
         },
         buttonsVisible = selection.withButtonView && calendarState.mode == CalendarDisplayMode.CALENDAR
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             selection = selection,
             onPositiveValid = calendarState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },

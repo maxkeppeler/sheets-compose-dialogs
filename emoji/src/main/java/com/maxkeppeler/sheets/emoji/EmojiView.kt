@@ -122,8 +122,9 @@ fun EmojiView(
             }
         },
         buttonsVisible = selection.withButtonView
-    ) {
+    ) { orientation ->
         ButtonsComponent(
+            orientation = orientation,
             onPositiveValid = emojiState.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },

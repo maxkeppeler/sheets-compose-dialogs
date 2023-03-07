@@ -25,6 +25,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
+import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
@@ -32,6 +33,7 @@ import com.maxkeppeler.sheets.core.R
 
 /**
  * Header component of the dialog.
+ * @param orientation The orientation configuration for the dialog.
  * @param selection The selection configuration for the dialog.
  * @param onPositive Listener that is invoked when the positive button is clicked.
  * @param onNegative Listener that is invoked when the negative button is clicked.
@@ -40,6 +42,7 @@ import com.maxkeppeler.sheets.core.R
 @ExperimentalMaterial3Api
 @Composable
 fun ButtonsComponent(
+    orientation: LibOrientation,
     selection: BaseSelection,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
@@ -47,10 +50,19 @@ fun ButtonsComponent(
     onPositiveValid: Boolean = true,
 ) {
 
+    val buttonPadding = when (orientation) {
+        LibOrientation.PORTRAIT -> Modifier
+            .padding(top = dimensionResource(id = R.dimen.scd_normal_150))
+            .padding(bottom = dimensionResource(id = R.dimen.scd_normal_150))
+            .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_150))
+        LibOrientation.LANDSCAPE -> Modifier
+            .padding(top = dimensionResource(id = R.dimen.scd_small_100))
+            .padding(bottom = dimensionResource(id = R.dimen.scd_small_100))
+            .padding(horizontal = dimensionResource(id = R.dimen.scd_small_100))
+    }
+
     Row(
-        modifier = Modifier
-            .padding(vertical = dimensionResource(id = R.dimen.scd_small_100))
-            .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
+        modifier = buttonPadding,
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.End
     ) {
