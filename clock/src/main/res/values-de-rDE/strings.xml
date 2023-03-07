@@ -9,7 +9,7 @@
     <string name="scd_clock_dialog_pm" translatable="true">PM</string>
     <string name="scd_clock_dialog_next_value" translatable="true">Nächster Wert</string>
     <string name="scd_clock_dialog_previous_value" translatable="true">Letzter Wert</string>
-    <string name="scd_clock_dialog_boundary_hint" translatable="true">Muss zwischen %s und %s sein</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Muss zwischen %1$s und %2$s sein</string>
 
     <string name="scd_clock_dialog_hours">Stunden</string>
     <string name="scd_clock_dialog_minutes">Minuten</string>

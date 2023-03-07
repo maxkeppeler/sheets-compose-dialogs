@@ -37,6 +37,7 @@ internal fun ClockSample1(closeSelection: () -> Unit) {
             selectedTime.value = LocalTime.of(hours, minutes, 0)
         },
         config = ClockConfig(
+            boundary = LocalTime.of(0, 0, 0)..LocalTime.of(12, 59, 0),
             defaultTime = selectedTime.value,
             is24HourFormat = true
         ),
