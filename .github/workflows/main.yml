@@ -106,8 +106,8 @@ jobs:
       - name: Get version information
         id: version
         run: |
-          VERSION_CODE=$(cat app/build.gradle | grep -oP 'versionCode\s+\K\d+')
-          VERSION_NAME=$(cat app/build.gradle | grep -oP 'versionName\s+"\K[0-9a-zA-Z\.\-]*"')
+          VERSION_CODE=$(cat buildSrc/src/main/java/App.kt | grep -oP 'VERSION_CODE\s+=\s+\K\d+')
+          VERSION_NAME=$(cat buildSrc/src/main/java/App.kt | grep -oP 'VERSION_NAME\s+=\s+"\K[0-9a-zA-Z\.\-]*"')
           echo "::set-output name=version_code::$VERSION_CODE"
           echo "::set-output name=version_name::$VERSION_NAME"
 
