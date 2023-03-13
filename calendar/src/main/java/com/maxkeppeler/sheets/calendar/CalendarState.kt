@@ -67,17 +67,8 @@ internal class CalendarState(
         val overlapDate = selection.firstOrNull { config.disabledDates?.contains(it) == true }
         overlapDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with a provided disabled date. $it") }
 
-        val today = LocalDate.now()
-        when (config.disabledTimeline) {
-            CalendarTimeline.PAST -> {
-                val overlapTimelineDate = selection.firstOrNull { it.isBefore(today) }
-                overlapTimelineDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with the disabled timeline. ${config.disabledTimeline}") }
-            }
-            CalendarTimeline.FUTURE -> {
-                val overlapTimelineDate = selection.firstOrNull { it.isAfter(today) }
-                overlapTimelineDate?.let { throw IllegalStateException("Please correct your setup. Your selection overlaps with the disabled timeline. ${config.disabledTimeline}") }
-            }
-            null -> Unit
+        if (selection.any { it !in config.boundary }) {
+            throw IllegalStateException("Please correct your setup. Your selection is out of the provided boundary. Selection: $selection, Boundary: ${config.boundary}")
         }
     }
 
@@ -111,21 +102,16 @@ internal class CalendarState(
         get() {
             val today = LocalDate.now()
             val prevCameraDate = cameraDate.jumpPrev(config)
-            val isPastDisabled = config.disabledTimeline == CalendarTimeline.PAST
             return when (config.style) {
                 CalendarStyle.MONTH -> {
                     val isPrevOutOfBoundary =
                         prevCameraDate.isBefore(config.boundary.start.startOfMonth)
-                    val isInPast = cameraDate.year <= today.year
-                            && cameraDate.monthValue <= today.monthValue
-                    (isInPast && isPastDisabled) || isPrevOutOfBoundary
+                    isPrevOutOfBoundary
                 }
                 CalendarStyle.WEEK -> {
                     val isPrevOutOfBoundary =
                         prevCameraDate.isBefore(config.boundary.start.startOfWeek)
-                    val isInPast = cameraDate.year <= today.year
-                            && cameraDate.weekOfWeekBasedYear <= today.weekOfWeekBasedYear
-                    (isInPast && isPastDisabled) || isPrevOutOfBoundary
+                    isPrevOutOfBoundary
                 }
             }
         }
@@ -133,21 +119,16 @@ internal class CalendarState(
     val isNextDisabled: Boolean
         get() {
             val nextCameraDate = cameraDate.jumpNext(config)
-            val isFutureDisabled = config.disabledTimeline == CalendarTimeline.FUTURE
             return when (config.style) {
                 CalendarStyle.MONTH -> {
                     val isNextOutOfBoundary =
                         nextCameraDate.isAfter(config.boundary.endInclusive.endOfMonth)
-                    val isInFuture = cameraDate.year >= today.year
-                            && cameraDate.monthValue >= today.monthValue
-                    (isInFuture && isFutureDisabled) || isNextOutOfBoundary
+                    isNextOutOfBoundary
                 }
                 CalendarStyle.WEEK -> {
                     val isNextOutOfBoundary =
                         nextCameraDate.isAfter(config.boundary.endInclusive.endOfWeek)
-                    val isInFuture = cameraDate.year >= today.year
-                            && cameraDate.weekOfWeekBasedYear >= today.weekOfWeekBasedYear
-                    (isInFuture && isFutureDisabled) || isNextOutOfBoundary
+                    isNextOutOfBoundary
                 }
             }
         }

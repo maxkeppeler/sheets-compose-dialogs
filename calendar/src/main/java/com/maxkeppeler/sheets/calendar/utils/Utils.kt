@@ -222,26 +222,9 @@ internal fun calcMonthData(
     today: LocalDate = LocalDate.now()
 ): CalendarMonthData {
     val months = Month.values().toMutableList()
-    val timelineFilteredMonths = when (config.disabledTimeline) {
-        CalendarTimeline.PAST -> months.filter {
-            cameraDate.withMonth(it.value).let { date ->
-                date.isAfter(today)
-                        || cameraDate.month == date.month
-                        || today.month == date.month
-            }
-        }
-        CalendarTimeline.FUTURE -> months.filter {
-            cameraDate.withMonth(it.value).let { date ->
-                date.isBefore(today)
-                        || cameraDate.month == date.month
-                        || today.month == date.month
-            }
-        }
-        else -> months
-    }
 
     // Check that months are within the boundary
-    val boundaryFilteredMonths = timelineFilteredMonths.filter { month ->
+    val boundaryFilteredMonths = months.filter { month ->
         val maxDayOfMonth = month.length(cameraDate.isLeapYear)
         val startDay = minOf(config.boundary.start.dayOfMonth, maxDayOfMonth)
         val endDay = minOf(config.boundary.endInclusive.dayOfMonth, maxDayOfMonth)
@@ -326,18 +309,12 @@ internal fun calcCalendarDateData(
         }
     }
     val outOfBoundary = date !in config.boundary
-    val disabledTimeline = config.disabledTimeline?.let { timeline ->
-        when (timeline) {
-            CalendarTimeline.PAST -> date.isBefore(today)
-            CalendarTimeline.FUTURE -> date.isAfter(today)
-        }
-    } ?: false
     val disabledDate = config.disabledDates?.contains(date) ?: false
 
     return CalendarDateData(
         date = date,
         disabled = disabledDate,
-        disabledPassively = disabledTimeline || outOfBoundary,
+        disabledPassively = outOfBoundary,
         selected = selected,
         selectedBetween = selectedBetween,
         selectedStart = selectedStartInit,

@@ -76,7 +76,7 @@ enum class Sample(
         "Select period",
         "Default selected period",
         "Month-style",
-        "Disabled past timeline"
+        "Disabled future with boundary"
     ),
 
     CLOCK_SAMPLE_1(

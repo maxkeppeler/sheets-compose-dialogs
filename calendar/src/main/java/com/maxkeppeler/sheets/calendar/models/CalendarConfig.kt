@@ -30,7 +30,6 @@ import java.util.*
  * @param yearSelection Allow the direct selection of a year.
  * @param boundary The range of dates that are displayed.
  * @param disabledDates A list of dates that will be marked as disabled and can not be selected.
- * @param disabledTimeline The timeline you want to disable and which dates can not be selected.
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 class CalendarConfig(
@@ -40,6 +39,5 @@ class CalendarConfig(
     val yearSelection: Boolean = Constants.DEFAULT_YEAR_SELECTION,
     val boundary: ClosedRange<LocalDate> = Constants.DEFAULT_RANGE,
     val disabledDates: List<LocalDate>? = null,
-    val disabledTimeline: CalendarTimeline? = null,
     override val icons: LibIcons = DEFAULT_ICON_STYLE,
 ) : BaseConfigs()

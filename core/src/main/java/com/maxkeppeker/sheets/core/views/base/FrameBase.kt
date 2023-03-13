@@ -81,7 +81,11 @@ fun FrameBase(
     }
 
     Column(
-        modifier = Modifier.wrapContentSize(),
+        modifier = when (deviceOrientation) {
+            LibOrientation.PORTRAIT -> Modifier.wrapContentSize()
+            LibOrientation.LANDSCAPE -> Modifier
+                .wrapContentWidth()
+        },
         horizontalAlignment = Alignment.Start
     ) {
 

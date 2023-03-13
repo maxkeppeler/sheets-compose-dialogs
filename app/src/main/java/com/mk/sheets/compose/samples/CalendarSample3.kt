@@ -22,33 +22,36 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.core.util.toRange
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarDialog
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import com.maxkeppeler.sheets.calendar.models.CalendarTimeline
 import java.time.LocalDate
 
 @Composable
 internal fun CalendarSample3(closeSelection: UseCaseState.() -> Unit) {
 
-    val selectedDateRange = remember {
-        val value = Range(LocalDate.now().minusDays(20), LocalDate.now().minusDays(10))
-        mutableStateOf(value)
+    val timeBoundary = LocalDate.now().let { now -> now.minusYears(2)..now }
+    val selectedRange = remember {
+        val default = LocalDate.now().minusYears(2).let { time -> time.plusDays(5)..time.plusDays(8) }
+        mutableStateOf(default.toRange())
     }
 
     CalendarDialog(
         state = rememberUseCaseState(visible = true, true, onCloseRequest = closeSelection),
         config = CalendarConfig(
-            disabledTimeline = CalendarTimeline.FUTURE,
+            yearSelection = true,
+            monthSelection = true,
+            boundary = timeBoundary,
             style = CalendarStyle.MONTH,
         ),
         selection = CalendarSelection.Period(
-            selectedRange = selectedDateRange.value
+            selectedRange = selectedRange.value
         ) { startDate, endDate ->
-            selectedDateRange.value = Range(startDate, endDate)
+            selectedRange.value = Range(startDate, endDate)
         },
     )
 }
