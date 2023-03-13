@@ -19,7 +19,7 @@ package com.mk.sheets.compose.samples
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.state.StateDialog
 import com.maxkeppeler.sheets.state.models.ProgressIndicator
 import com.maxkeppeler.sheets.state.models.State
@@ -33,7 +33,7 @@ internal fun StateSample5(closeSelection: () -> Unit) {
         ProgressIndicator.Circular()
     )
     StateDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         config = StateConfig(state = state)
     )
 }

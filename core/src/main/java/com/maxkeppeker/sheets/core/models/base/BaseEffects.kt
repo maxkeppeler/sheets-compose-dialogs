@@ -21,13 +21,13 @@ import com.maxkeppeker.sheets.core.views.BaseTypeState
 
 @Composable
 fun StateHandler(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     baseState: BaseTypeState,
 ) {
-    DisposableEffect(sheetState.reset) {
-        if (sheetState.reset) {
+    DisposableEffect(useCaseState.reset) {
+        if (useCaseState.reset) {
             baseState.reset()
-            sheetState.clearReset()
+            useCaseState.clearReset()
         }
         onDispose {}
     }

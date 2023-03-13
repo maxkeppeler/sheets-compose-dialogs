@@ -25,7 +25,7 @@ import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.option.models.Option
@@ -65,7 +65,7 @@ internal fun OptionItemComponent(
         .clickable(!inputDisabled && !option.disabled) { onClick(option) }
         .then(if (option.disabled || option.selected) Modifier.background(backgroundColor) else Modifier)
 
-    val detailDialogState = rememberSheetState(false)
+    val detailDialogState = rememberUseCaseState(false)
     option.details?.let {
         OptionDetailsDialog(
             state = detailDialogState,

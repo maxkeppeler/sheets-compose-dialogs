@@ -24,7 +24,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.list.views.ListOptionComponent
 
 /**
  * List view for the use-case to display a list of options.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -45,14 +45,14 @@ import com.maxkeppeler.sheets.list.views.ListOptionComponent
 @ExperimentalMaterial3Api
 @Composable
 fun ListView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: ListSelection,
     config: ListConfig = ListConfig(),
     header: Header? = null,
 ) {
     val coroutine = rememberCoroutineScope()
     val listState = rememberListState(selection, config)
-    StateHandler(sheetState, listState)
+    StateHandler(useCaseState, listState)
 
     val processSelection: (ListOption) -> Unit = { option ->
         listState.processSelection(option)
@@ -61,7 +61,7 @@ fun ListView(
             condition = listState.valid,
             coroutine = coroutine,
             onSelection = listState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = listState::disableInput
         )
     }
@@ -90,7 +90,7 @@ fun ListView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = listState::onFinish,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

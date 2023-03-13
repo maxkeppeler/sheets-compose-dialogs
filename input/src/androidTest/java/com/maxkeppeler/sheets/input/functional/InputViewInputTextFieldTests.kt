@@ -26,7 +26,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTextInput
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.maxkeppeker.sheets.core.models.base.IconSource
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.input.InputView
 import com.maxkeppeler.sheets.input.models.*
@@ -53,7 +53,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -66,7 +66,7 @@ class InputViewInputTextFieldTests {
         val testInputs = listOf(InputTextField())
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -80,7 +80,7 @@ class InputViewInputTextFieldTests {
         val testInputs = listOf(InputTextField(type = testTextFieldType))
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -94,7 +94,7 @@ class InputViewInputTextFieldTests {
         val testInputs = listOf(InputTextField(type = testTextFieldType))
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -113,7 +113,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -142,7 +142,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -178,7 +178,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -212,7 +212,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -245,7 +245,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -272,7 +272,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -288,7 +288,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -306,7 +306,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -328,7 +328,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -350,7 +350,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -371,7 +371,7 @@ class InputViewInputTextFieldTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }

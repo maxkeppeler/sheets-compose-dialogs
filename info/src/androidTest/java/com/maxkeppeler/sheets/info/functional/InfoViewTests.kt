@@ -23,7 +23,7 @@ import androidx.compose.ui.test.assertTextEquals
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.info.InfoView
 import com.maxkeppeler.sheets.info.models.InfoBody
@@ -44,7 +44,7 @@ class InfoViewTests {
         rule.setContent {
             InfoView(
                 selection = InfoSelection {},
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 body = InfoBody.Default(text),
             )
         }
@@ -57,7 +57,7 @@ class InfoViewTests {
         rule.setContent {
             InfoView(
                 selection = InfoSelection {},
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 body = InfoBody.Default(text),
             )
         }
@@ -73,7 +73,7 @@ class InfoViewTests {
         rule.setContent {
             InfoView(
                 selection = InfoSelection {},
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 body = InfoBody.Custom { customBodyCalled = true },
             )
         }

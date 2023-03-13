@@ -27,7 +27,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarView
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -41,14 +41,14 @@ fun BottomSheetSample(
 ) {
     val coroutine = rememberCoroutineScope()
     val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
-    val dialogSheetState =
-        rememberSheetState(visible = true, onCloseRequest = { hideBottomSheet(); })
+    val useCaseState =
+        rememberUseCaseState(visible = true, onCloseRequest = { hideBottomSheet(); })
 
     LaunchedEffect(state.currentValue) {
         when (state.currentValue) {
             ModalBottomSheetValue.Hidden,
             ModalBottomSheetValue.Expanded -> {
-                dialogSheetState.invokeReset() // Manually reset internal state if required
+                useCaseState.invokeReset() // Manually reset internal state if required
             }
             ModalBottomSheetValue.HalfExpanded -> Unit
 
@@ -63,7 +63,7 @@ fun BottomSheetSample(
                 color = MaterialTheme.colorScheme.surface,
             ) {
                 CalendarView(
-                    sheetState = dialogSheetState,
+                    useCaseState = useCaseState,
                     config = CalendarConfig(
                         style = CalendarStyle.WEEK
                     ),

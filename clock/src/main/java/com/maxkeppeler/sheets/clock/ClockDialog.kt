@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.clock.models.ClockSelection
 @ExperimentalMaterial3Api
 @Composable
 fun ClockDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: ClockSelection,
     config: ClockConfig = ClockConfig(),
     header: Header? = null,
@@ -49,7 +49,7 @@ fun ClockDialog(
         properties = properties,
     ) {
         ClockView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.info.InfoDialog
 import com.maxkeppeler.sheets.info.models.InfoBody
 import com.maxkeppeler.sheets.info.models.InfoSelection
@@ -30,7 +30,7 @@ import com.maxkeppeler.sheets.info.models.InfoSelection
 internal fun InfoSample1(closeSelection: () -> Unit) {
 
     InfoDialog(
-        state = rememberSheetState(
+        state = rememberUseCaseState(
             visible = true,
             onCloseRequest = { closeSelection() }),
         body = InfoBody.Default(

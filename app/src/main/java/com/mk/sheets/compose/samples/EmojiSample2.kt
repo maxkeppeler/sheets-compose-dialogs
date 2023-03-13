@@ -19,7 +19,7 @@ package com.mk.sheets.compose.samples
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.emoji.EmojiDialog
 import com.maxkeppeler.sheets.emoji.models.EmojiCategoryAppearance
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
@@ -30,7 +30,7 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 internal fun EmojiSample2(closeSelection: () -> Unit) {
 
     EmojiDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         selection = EmojiSelection.Unicode(
             onPositiveClick = { emojiUnicode ->
                 // Handle selection

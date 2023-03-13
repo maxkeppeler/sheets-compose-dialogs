@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.color.models.ColorSelection
 @ExperimentalMaterial3Api
 @Composable
 fun ColorDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: ColorSelection,
     config: ColorConfig = ColorConfig(),
     header: Header? = null,
@@ -49,7 +49,7 @@ fun ColorDialog(
         properties = properties,
     ) {
         ColorView(
-            sheetState = state,
+            useCaseState = state,
             config = config,
             selection = selection,
             header = header,

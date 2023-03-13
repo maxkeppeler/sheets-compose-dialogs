@@ -28,7 +28,7 @@ import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.unit.dp
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import org.junit.Rule
@@ -44,7 +44,7 @@ class DialogBaseTests {
     @Test
     fun dialogVisibleDisplaysContent() {
         var contentCalled = false
-        val state = SheetState(visible = true)
+        val state = UseCaseState(visible = true)
         rule.setContent {
             DialogBase(
                 state = state,
@@ -60,7 +60,7 @@ class DialogBaseTests {
     @Test
     fun dialogNotVisibleDisplaysNoContent() {
         var contentCalled = false
-        val state = SheetState(visible = false)
+        val state = UseCaseState(visible = false)
         rule.setContent {
             DialogBase(
                 state = state,
@@ -76,7 +76,7 @@ class DialogBaseTests {
     @Test
     fun dialogVisibleAllowsInteraction() {
         var contentClicked = false
-        val state = SheetState(visible = true)
+        val state = UseCaseState(visible = true)
         rule.setContent {
             DialogBase(
                 state = state,
@@ -95,7 +95,7 @@ class DialogBaseTests {
     @Test
     fun dialogNotVisibleAllowsNoInteraction() {
         var contentClicked = false
-        val state = SheetState(visible = false)
+        val state = UseCaseState(visible = false)
         rule.setContent {
             DialogBase(
                 state = state,
@@ -114,7 +114,7 @@ class DialogBaseTests {
         var dismissCall = false
         rule.setContent {
             DialogBase(
-                state = SheetState(
+                state = UseCaseState(
                     visible = true,
                     onDismissRequest = { dismissCall = true }
                 ),

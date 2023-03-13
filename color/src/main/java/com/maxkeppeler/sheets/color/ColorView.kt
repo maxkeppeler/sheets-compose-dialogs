@@ -35,7 +35,7 @@ import com.maxkeppeler.sheets.color.views.ColorTemplateComponent
 
 /**
  * Color view for the use-case to to select a color.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -43,14 +43,14 @@ import com.maxkeppeler.sheets.color.views.ColorTemplateComponent
 @ExperimentalMaterial3Api
 @Composable
 fun ColorView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: ColorSelection,
     config: ColorConfig = ColorConfig(),
     header: Header? = null,
 ) {
     val context = LocalContext.current
     val colorState = rememberColorState(context, selection, config)
-    StateHandler(sheetState, colorState)
+    StateHandler(useCaseState, colorState)
 
     val coroutine = rememberCoroutineScope()
     val onSelection: (Int) -> Unit = {
@@ -59,7 +59,7 @@ fun ColorView(
             selection = selection,
             coroutine = coroutine,
             onSelection = colorState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = colorState::disableInput
         )
     }
@@ -75,7 +75,7 @@ fun ColorView(
                 onModeChange = { colorState.displayMode = it },
                 onNoColorClick = {
                     selection.onSelectNone?.invoke()
-                    sheetState.finish()
+                    useCaseState.finish()
                 }
             )
             when (colorState.displayMode) {
@@ -105,7 +105,7 @@ fun ColorView(
             onPositiveValid = colorState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = colorState::onFinish,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

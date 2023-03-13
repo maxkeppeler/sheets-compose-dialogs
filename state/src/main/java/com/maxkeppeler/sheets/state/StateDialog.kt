@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.state.models.StateConfig
 import com.maxkeppeler.sheets.state.models.StateSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.state.models.StateSelection
 @ExperimentalMaterial3Api
 @Composable
 fun StateDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: StateSelection? = null,
     config: StateConfig,
     header: Header? = null,

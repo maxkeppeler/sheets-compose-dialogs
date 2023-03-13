@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.emoji.models.EmojiConfig
 import com.maxkeppeler.sheets.emoji.models.EmojiSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.emoji.models.EmojiSelection
 @ExperimentalMaterial3Api
 @Composable
 fun EmojiDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: EmojiSelection,
     config: EmojiConfig = EmojiConfig(),
     header: Header? = null,
@@ -49,7 +49,7 @@ fun EmojiDialog(
         properties = properties,
     ) {
         EmojiView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

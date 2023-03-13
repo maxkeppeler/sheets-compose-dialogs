@@ -31,8 +31,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
-import com.maxkeppeker.sheets.core.models.base.SheetState
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 
 /**
@@ -44,7 +44,7 @@ import com.maxkeppeker.sheets.core.utils.TestTags
  */
 @Composable
 fun DialogBase(
-    state: SheetState = rememberSheetState(true),
+    state: UseCaseState = rememberUseCaseState(true),
     properties: DialogProperties = DialogProperties(),
     onDialogClick: (() -> Unit)? = null,
     content: @Composable () -> Unit,

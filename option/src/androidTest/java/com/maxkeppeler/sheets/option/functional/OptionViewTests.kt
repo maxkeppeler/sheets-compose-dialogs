@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.option.OptionView
 import com.maxkeppeler.sheets.option.models.DisplayMode
@@ -56,7 +56,7 @@ class OptionViewTests {
         var selectedOption: Option? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Single(
                     options = testOptions,
                     onSelectOption = { index, option ->
@@ -93,7 +93,7 @@ class OptionViewTests {
         var selectedOptions: List<Option>? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Multiple(
                     options = testOptions,
                     onSelectOptions = { index, option ->
@@ -129,7 +129,7 @@ class OptionViewTests {
         var selectedOption: Option? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Single(
                     options = testOptions,
                     onSelectOption = { index, option ->
@@ -166,7 +166,7 @@ class OptionViewTests {
         var selectedOptions: List<Option>? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Multiple(
                     options = testOptions,
                     onSelectOptions = { index, option ->
@@ -202,7 +202,7 @@ class OptionViewTests {
         var selectedOption: Option? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Single(
                     options = testOptions,
                     onSelectOption = { index, option ->
@@ -239,7 +239,7 @@ class OptionViewTests {
         var selectedOptions: List<Option>? = null
         rule.setContentAndWaitForIdle {
             OptionView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = OptionSelection.Multiple(
                     options = testOptions,
                     onSelectOptions = { index, option ->

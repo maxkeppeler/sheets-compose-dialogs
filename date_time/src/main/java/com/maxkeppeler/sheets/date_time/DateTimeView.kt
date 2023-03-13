@@ -23,7 +23,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
@@ -33,7 +33,7 @@ import com.maxkeppeler.sheets.date_time.views.PickerComponent
 
 /**
  * Date Time dialog for the use-case to select a date, time or both in a quick way.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -41,14 +41,14 @@ import com.maxkeppeler.sheets.date_time.views.PickerComponent
 @ExperimentalMaterial3Api
 @Composable
 fun DateTimeView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: DateTimeSelection,
     config: DateTimeConfig = DateTimeConfig(),
     header: Header? = null,
 ) {
     val coroutine = rememberCoroutineScope()
     val dateTimeState = rememberDateTimeState(selection, config)
-    StateHandler(sheetState, dateTimeState)
+    StateHandler(useCaseState, dateTimeState)
 
     val processSelection: () -> Unit = {
         BaseBehaviors.autoFinish(
@@ -56,7 +56,7 @@ fun DateTimeView(
             condition = dateTimeState.valid,
             coroutine = coroutine,
             onSelection = dateTimeState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = dateTimeState::disableInput
         )
     }
@@ -108,7 +108,7 @@ fun DateTimeView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = dateTimeState::onFinish,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

@@ -19,7 +19,7 @@ package com.mk.sheets.compose.samples
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.input.InputDialog
 import com.maxkeppeler.sheets.input.models.InputCheckbox
 import com.maxkeppeler.sheets.input.models.InputConfig
@@ -38,7 +38,7 @@ internal fun InputSample3(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         config = InputConfig(columns = 2),
         selection = InputSelection(
             input = inputOptions,

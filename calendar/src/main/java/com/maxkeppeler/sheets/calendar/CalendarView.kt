@@ -39,7 +39,7 @@ import java.time.LocalDate
 
 /**
  * Calendar dialog for the use-case to select a date or period in a typical calendar-view.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -47,13 +47,13 @@ import java.time.LocalDate
 @ExperimentalMaterial3Api
 @Composable
 fun CalendarView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: CalendarSelection,
     config: CalendarConfig = CalendarConfig(),
     header: Header? = null,
 ) {
     val calendarState = rememberCalendarState(selection, config)
-    StateHandler(sheetState, calendarState)
+    StateHandler(useCaseState, calendarState)
 
     val coroutine = rememberCoroutineScope()
     val onSelection: (LocalDate) -> Unit = {
@@ -62,7 +62,7 @@ fun CalendarView(
             selection = selection,
             coroutine = coroutine,
             onSelection = calendarState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = calendarState::disableInput
         )
     }
@@ -212,7 +212,7 @@ fun CalendarView(
             onPositiveValid = calendarState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = calendarState::onFinish,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

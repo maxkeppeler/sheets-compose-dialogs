@@ -22,7 +22,7 @@ import androidx.compose.material.icons.filled.EmojiPeople
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.IconSource
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.input.InputDialog
 import com.maxkeppeler.sheets.input.models.InputHeader
 import com.maxkeppeler.sheets.input.models.InputSelection
@@ -46,7 +46,7 @@ internal fun InputSample4(closeSelection: () -> Unit) {
     )
 
     InputDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         selection = InputSelection(
             input = inputOptions,
             onPositiveClick = { result ->

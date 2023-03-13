@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.input.models.InputConfig
 import com.maxkeppeler.sheets.input.models.InputSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.input.models.InputSelection
 @ExperimentalMaterial3Api
 @Composable
 fun InputDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: InputSelection,
     config: InputConfig = InputConfig(),
     header: Header? = null,
@@ -49,7 +49,7 @@ fun InputDialog(
         properties = properties,
     ) {
         InputView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

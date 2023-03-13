@@ -23,7 +23,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.color.ColorDialog
 import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
@@ -36,7 +36,7 @@ internal fun ColorSample3(closeSelection: () -> Unit) {
     val color = remember { mutableStateOf(Color.Red.toArgb()) }
 
     ColorDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ColorSelection(
             selectedColor = SingleColor(color.value),
             onSelectColor = { color.value = it },

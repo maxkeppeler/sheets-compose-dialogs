@@ -33,7 +33,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.mk.sheets.compose.models.Sample
 import com.mk.sheets.compose.models.UseCaseType
 import com.mk.sheets.compose.samples.*
@@ -43,7 +43,7 @@ fun ShowcaseDialogSamplesScreen() {
 
     val currentSample = rememberSaveable { mutableStateOf<Sample?>(null) }
     val onReset = { currentSample.value = null }
-    val onResetSheet: SheetState.() -> Unit = { currentSample.value = null }
+    val onResetSheet: UseCaseState.() -> Unit = { currentSample.value = null }
 
     ShowcaseSamples(
         modifier = Modifier.alpha(if (currentSample.value != null) 0f else 1f),

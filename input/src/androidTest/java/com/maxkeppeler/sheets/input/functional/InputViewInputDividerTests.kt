@@ -20,7 +20,7 @@ package com.maxkeppeler.sheets.input.functional
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.input.InputView
 import com.maxkeppeler.sheets.input.models.InputDivider
@@ -41,7 +41,7 @@ class InputViewInputDividerTests {
         val testInputs = listOf(InputDivider())
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }

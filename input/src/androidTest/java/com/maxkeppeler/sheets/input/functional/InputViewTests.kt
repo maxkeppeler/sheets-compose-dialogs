@@ -22,7 +22,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.input.InputView
 import com.maxkeppeler.sheets.input.models.*
@@ -56,7 +56,7 @@ class InputViewTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -105,7 +105,7 @@ class InputViewTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(
                     input = testInputs,
                     onPositiveClick = {
@@ -178,7 +178,7 @@ class InputViewTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(
                     input = testInputs,
                     onPositiveClick = {

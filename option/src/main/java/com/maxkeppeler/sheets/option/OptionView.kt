@@ -25,7 +25,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -38,7 +38,7 @@ import com.maxkeppeler.sheets.option.views.OptionComponent
 
 /**
  * Option view for the use-case to display a list or grid of options.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -46,7 +46,7 @@ import com.maxkeppeler.sheets.option.views.OptionComponent
 @ExperimentalMaterial3Api
 @Composable
 fun OptionView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: OptionSelection,
     config: OptionConfig = OptionConfig(),
     header: Header? = null,
@@ -54,7 +54,7 @@ fun OptionView(
 
     val coroutine = rememberCoroutineScope()
     val optionState = rememberOptionState(selection, config)
-    StateHandler(sheetState, optionState)
+    StateHandler(useCaseState, optionState)
 
     val processSelection: (Option) -> Unit = { option ->
         optionState.processSelection(option)
@@ -63,7 +63,7 @@ fun OptionView(
             condition = optionState.valid,
             coroutine = coroutine,
             onSelection = optionState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = optionState::disableInput
         )
     }
@@ -94,7 +94,7 @@ fun OptionView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = optionState::onFinish,
-            onClose = sheetState::finish,
+            onClose = useCaseState::finish,
         )
     }
 }

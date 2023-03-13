@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.list.models.ListConfig
 import com.maxkeppeler.sheets.list.models.ListSelection
@@ -37,7 +37,7 @@ import com.maxkeppeler.sheets.list.models.ListSelection
 @ExperimentalMaterial3Api
 @Composable
 fun ListDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: ListSelection,
     config: ListConfig = ListConfig(),
     header: Header? = null,
@@ -49,7 +49,7 @@ fun ListDialog(
         properties = properties,
     ) {
         ListView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

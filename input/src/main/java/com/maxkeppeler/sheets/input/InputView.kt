@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -32,7 +32,7 @@ import com.maxkeppeler.sheets.input.views.InputComponent
 
 /**
  * Info view for the use-case to display simple information.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -40,13 +40,13 @@ import com.maxkeppeler.sheets.input.views.InputComponent
 @ExperimentalMaterial3Api
 @Composable
 fun InputView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: InputSelection,
     config: InputConfig = InputConfig(),
     header: Header? = null,
 ) {
     val inputState = rememberInputState(selection)
-    StateHandler(sheetState, inputState)
+    StateHandler(useCaseState, inputState)
 
     FrameBase(
         header = header,
@@ -67,7 +67,7 @@ fun InputView(
             onPositiveValid = inputState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = inputState::onFinish,
-            onClose = sheetState::finish,
+            onClose = useCaseState::finish,
         )
     }
 }

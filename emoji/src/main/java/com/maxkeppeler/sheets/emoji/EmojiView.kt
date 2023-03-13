@@ -34,7 +34,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseModifiers.dynamicContentWrapOrMaxHeight
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -50,7 +50,7 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * Emoji view for the use-case to to select any emoji or a variant, if available.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -58,7 +58,7 @@ import com.maxkeppeler.sheets.core.R as RC
 @ExperimentalMaterial3Api
 @Composable
 fun EmojiView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: EmojiSelection,
     config: EmojiConfig = EmojiConfig(),
     header: Header? = null,
@@ -70,7 +70,7 @@ fun EmojiView(
 
     val coroutine = rememberCoroutineScope()
     val emojiState = rememberEmojiState(selection, config)
-    StateHandler(sheetState, emojiState)
+    StateHandler(useCaseState, emojiState)
 
     val processSelection: (Emoji) -> Unit = { emoji ->
         emojiState.processSelection(emoji)
@@ -78,7 +78,7 @@ fun EmojiView(
             selection = selection,
             coroutine = coroutine,
             onSelection = emojiState::onFinish,
-            onFinished = sheetState::finish,
+            onFinished = useCaseState::finish,
             onDisableInput = emojiState::disableInput
         )
     }
@@ -129,7 +129,7 @@ fun EmojiView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = emojiState::onFinish,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

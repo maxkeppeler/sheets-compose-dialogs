@@ -31,7 +31,7 @@ import androidx.core.graphics.blue
 import androidx.core.graphics.green
 import androidx.core.graphics.red
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.color.ColorView
 import com.maxkeppeler.sheets.color.models.*
@@ -58,7 +58,7 @@ class ColorViewTests {
         var selectedColor: Int? = null
         rule.setContentAndWaitForIdle {
             ColorView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ColorSelection { selectedColor = it },
                 config = ColorConfig(
                     templateColors = MultipleColors.ColorsInt(testColors),
@@ -78,7 +78,7 @@ class ColorViewTests {
     fun colorViewSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             ColorView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ColorSelection { },
                 config = ColorConfig(defaultDisplayMode = ColorSelectionMode.TEMPLATE)
             )
@@ -92,7 +92,7 @@ class ColorViewTests {
         var selectedColor: Int? = null
         rule.setContentAndWaitForIdle {
             ColorView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ColorSelection(selectedColor = SingleColor(testColor)) {
                     selectedColor = it
                 },
@@ -126,7 +126,7 @@ class ColorViewTests {
     fun colorViewCustomColorAlwaysValid() {
         rule.setContentAndWaitForIdle {
             ColorView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ColorSelection { },
                 config = ColorConfig(defaultDisplayMode = ColorSelectionMode.CUSTOM)
             )

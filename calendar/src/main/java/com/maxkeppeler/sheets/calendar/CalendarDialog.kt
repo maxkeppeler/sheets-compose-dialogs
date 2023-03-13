@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -36,7 +36,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 @ExperimentalMaterial3Api
 @Composable
 fun CalendarDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: CalendarSelection,
     config: CalendarConfig = CalendarConfig(),
     header: Header? = null,
@@ -48,7 +48,7 @@ fun CalendarDialog(
         properties = properties,
     ) {
         CalendarView(
-            sheetState = state,
+            useCaseState = state,
             config = config,
             header = header,
             selection = selection,

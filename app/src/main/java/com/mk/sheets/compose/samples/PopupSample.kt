@@ -28,7 +28,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Popup
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.calendar.CalendarView
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
@@ -54,7 +54,7 @@ internal fun PopupSample(visible: Boolean, onHide: () -> Unit) {
                 shadowElevation = 4.dp,
             ) {
                 CalendarView(
-                    sheetState = rememberSheetState(visible = true,
+                    useCaseState = rememberUseCaseState(visible = true,
                         onCloseRequest = { onHide() },
                     ),
                     config = CalendarConfig(

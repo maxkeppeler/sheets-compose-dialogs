@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
 import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
@@ -36,7 +36,7 @@ import com.maxkeppeler.sheets.date_time.models.DateTimeSelection
  */
 @Composable
 fun DateTimeDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: DateTimeSelection,
     config: DateTimeConfig = DateTimeConfig(),
     header: Header? = null,
@@ -48,7 +48,7 @@ fun DateTimeDialog(
         properties = properties,
     ) {
         DateTimeView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

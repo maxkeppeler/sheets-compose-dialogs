@@ -24,19 +24,19 @@ import androidx.compose.runtime.setValue
 import java.io.Serializable
 
 /**
- * Handles the base behavior of any use-case view and the dialog, if dialog is used.
- * @param visible If the dialog is initially visible.
+ * Handles the base behavior of any use-case view.
+ * @param visible If the container view is initially visible.
  * @param embedded If the view is embedded (in a Dialog, PopUp, BottomSheet or another container that has its own state).
  * @param onCloseRequest The listener that is invoked when the dialog was closed through any cause.
  * @param onFinishedRequest The listener that is invoked when the dialog's use-case was finished by the user accordingly (negative, positive, selection).
  * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
  */
-class SheetState(
+class UseCaseState(
     visible: Boolean = false,
     embedded: Boolean = true,
-    internal val onFinishedRequest: (SheetState.() -> Unit)? = null,
-    internal val onDismissRequest: (SheetState.() -> Unit)? = null,
-    internal val onCloseRequest: (SheetState.() -> Unit)? = null,
+    internal val onFinishedRequest: (UseCaseState.() -> Unit)? = null,
+    internal val onDismissRequest: (UseCaseState.() -> Unit)? = null,
+    internal val onCloseRequest: (UseCaseState.() -> Unit)? = null,
 ) {
     internal var visible by mutableStateOf(visible)
     internal var embedded by mutableStateOf(embedded)
@@ -98,24 +98,24 @@ class SheetState(
 
         /**
          * [Saver] implementation.
-         * Lambda functions need to be passed to new sheet state as they can not be serialized.
+         * Lambda functions need to be passed to new use-case state as they can not be serialized.
          * @param onCloseRequest The listener that is invoked when the dialog was closed through any cause.
          * @param onFinishedRequest The listener that is invoked when the dialog's use-case was finished by the user accordingly (negative, positive, selection).
          * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
-         */
+        */
         fun Saver(
-            onCloseRequest: (SheetState.() -> Unit)?,
-            onFinishedRequest: (SheetState.() -> Unit)?,
-            onDismissRequest: (SheetState.() -> Unit)?
-        ): Saver<SheetState, *> = Saver(
+            onCloseRequest: (UseCaseState.() -> Unit)?,
+            onFinishedRequest: (UseCaseState.() -> Unit)?,
+            onDismissRequest: (UseCaseState.() -> Unit)?
+        ): Saver<UseCaseState, *> = Saver(
             save = { state ->
-                SheetStateData(
+                UseCaseStateData(
                     visible = state.visible,
                     embedded = state.embedded,
                 )
             },
             restore = { data ->
-                SheetState(
+                UseCaseState(
                     visible = data.visible,
                     embedded = data.embedded,
                     onCloseRequest = onCloseRequest,
@@ -130,14 +130,14 @@ class SheetState(
      * Data class that stores the important information of the current state
      * and can be used by the [Saver] to save and restore the state.
      */
-    data class SheetStateData(
+    data class UseCaseStateData(
         val visible: Boolean,
         val embedded: Boolean,
     ) : Serializable
 }
 
 /**
- * Create a SheetState and remember it.
+ * Creates and remembers a [UseCaseState].
  * @param visible The initial visibility.
  * @param embedded if the use-case is embedded in a container (dialog, bottomSheet, popup, ...)
  * @param onCloseRequest The listener that is invoked when the dialog was closed through any cause.
@@ -145,20 +145,20 @@ class SheetState(
  * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
  */
 @Composable
-fun rememberSheetState(
+fun rememberUseCaseState(
     visible: Boolean = false,
     embedded: Boolean = true,
-    onCloseRequest: (SheetState.() -> Unit)? = null,
-    onFinishedRequest: (SheetState.() -> Unit)? = null,
-    onDismissRequest: (SheetState.() -> Unit)? = null,
-): SheetState = rememberSaveable(
-    saver = SheetState.Saver(
+    onCloseRequest: (UseCaseState.() -> Unit)? = null,
+    onFinishedRequest: (UseCaseState.() -> Unit)? = null,
+    onDismissRequest: (UseCaseState.() -> Unit)? = null,
+): UseCaseState = rememberSaveable(
+    saver = UseCaseState.Saver(
         onCloseRequest = onCloseRequest,
         onFinishedRequest = onFinishedRequest,
         onDismissRequest = onDismissRequest
     ),
     init = {
-        SheetState(
+        UseCaseState(
             visible = visible,
             embedded = embedded,
             onCloseRequest = onCloseRequest,

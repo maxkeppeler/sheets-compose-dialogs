@@ -24,7 +24,7 @@ import androidx.compose.ui.test.performClick
 import androidx.compose.ui.test.performTouchInput
 import androidx.compose.ui.test.swipeRight
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.emoji.EmojiView
 import com.maxkeppeler.sheets.emoji.models.EmojiCategoryAppearance
@@ -49,7 +49,7 @@ class EmojiViewTests {
         var selectedEmoji: String? = null
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Unicode { selectedEmoji = it },
                 config = EmojiConfig()
             )
@@ -65,7 +65,7 @@ class EmojiViewTests {
         var selectedEmoji: String? = null
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Emoji { selectedEmoji = it.unicode },
                 config = EmojiConfig()
             )
@@ -79,7 +79,7 @@ class EmojiViewTests {
     fun emojiViewDisplaysTextCategories() {
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Unicode { },
                 config = EmojiConfig(categoryAppearance = EmojiCategoryAppearance.TEXT)
             )
@@ -95,7 +95,7 @@ class EmojiViewTests {
     fun emojiViewDisplaysSymbolCategories() {
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Unicode { },
                 config = EmojiConfig(categoryAppearance = EmojiCategoryAppearance.SYMBOL)
             )
@@ -111,7 +111,7 @@ class EmojiViewTests {
     fun emojiViewSwitchTextTabs() {
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Unicode { },
                 config = EmojiConfig(categoryAppearance = EmojiCategoryAppearance.TEXT)
             )
@@ -128,7 +128,7 @@ class EmojiViewTests {
     fun emojiViewSwitchSymbolTabs() {
         rule.setContentAndWaitForIdle {
             EmojiView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = EmojiSelection.Unicode { },
                 config = EmojiConfig(categoryAppearance = EmojiCategoryAppearance.SYMBOL)
             )

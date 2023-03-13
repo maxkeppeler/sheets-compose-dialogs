@@ -22,7 +22,7 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.calendar.CalendarView
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
@@ -51,7 +51,7 @@ class CalendarViewTests {
         var selectedDate: LocalDate? = null
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Date { selectedDate = it },
             )
         }
@@ -67,7 +67,7 @@ class CalendarViewTests {
     fun calendarViewDateSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Date { },
             )
         }
@@ -86,7 +86,7 @@ class CalendarViewTests {
         var selectedDates = listOf<LocalDate>()
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Dates { selectedDates = it },
             )
         }
@@ -106,7 +106,7 @@ class CalendarViewTests {
     fun calendarViewDatesSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Dates { },
             )
         }
@@ -122,7 +122,7 @@ class CalendarViewTests {
         var endDate: LocalDate? = null
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Period { start, end ->
                     startDate = start
                     endDate = end
@@ -149,7 +149,7 @@ class CalendarViewTests {
     fun calendarViewPeriodSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Period { _, _ -> },
             )
         }
@@ -162,7 +162,7 @@ class CalendarViewTests {
         val testEndDate = LocalDate.now().withDayOfMonth(2)
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Period { _, _ -> },
             )
         }
@@ -184,7 +184,7 @@ class CalendarViewTests {
     fun calendarViewDisplaysCalendarStyleWeek() {
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Date { },
                 config = CalendarConfig(style = CalendarStyle.WEEK)
             )
@@ -196,7 +196,7 @@ class CalendarViewTests {
     fun calendarViewDisplaysCalendarStyleMonth() {
         rule.setContentAndWaitForIdle {
             CalendarView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CalendarSelection.Date { },
                 config = CalendarConfig(style = CalendarStyle.MONTH)
             )

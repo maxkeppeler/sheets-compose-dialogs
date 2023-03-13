@@ -27,7 +27,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.IconComponent
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.option.models.Option
@@ -43,7 +43,7 @@ import com.maxkeppeler.sheets.core.R as RC
  */
 @Composable
 internal fun OptionDetailsDialog(
-    state: SheetState,
+    state: UseCaseState,
     option: Option,
     backgroundColor: Color,
     iconColor: Color,

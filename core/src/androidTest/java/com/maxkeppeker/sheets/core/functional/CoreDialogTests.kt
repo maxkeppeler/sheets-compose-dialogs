@@ -25,7 +25,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.maxkeppeker.sheets.core.CoreDialog
 import com.maxkeppeker.sheets.core.models.CoreSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeler.sheets.test.utils.*
 import org.junit.Rule
 import org.junit.Test
@@ -41,7 +41,7 @@ class CoreDialogTests {
     fun coreDialogVisible() {
         rule.setContentAndWaitForIdle {
             CoreDialog(
-                state = SheetState(visible = true),
+                state = UseCaseState(visible = true),
                 selection = CoreSelection(),
                 body = { },
             )
@@ -54,7 +54,7 @@ class CoreDialogTests {
     fun coreDialogNotVisible() {
         rule.setContentAndWaitForIdle {
             CoreDialog(
-                state = SheetState(visible = false),
+                state = UseCaseState(visible = false),
                 selection = CoreSelection(),
                 body = { },
             )
@@ -67,7 +67,7 @@ class CoreDialogTests {
         var positiveCalled = false
         rule.setContent {
             CoreDialog(
-                state = SheetState(visible = true),
+                state = UseCaseState(visible = true),
                 selection = CoreSelection(
                     onPositiveClick = { positiveCalled = true },
                 ),
@@ -84,7 +84,7 @@ class CoreDialogTests {
         var negativeCalled = false
         rule.setContent {
             CoreDialog(
-                state = SheetState(visible = true),
+                state = UseCaseState(visible = true),
                 selection = CoreSelection(
                     onNegativeClick = { negativeCalled = true },
                 ),
@@ -101,7 +101,7 @@ class CoreDialogTests {
         var extraCalled = false
         rule.setContent {
             CoreDialog(
-                state = SheetState(visible = true),
+                state = UseCaseState(visible = true),
                 selection = CoreSelection(
                     extraButton = SelectionButton("test"),
                     onExtraButtonClick = { extraCalled = true },
@@ -120,7 +120,7 @@ class CoreDialogTests {
         rule.setContent {
             CoreDialog(
                 selection = CoreSelection(),
-                state = SheetState(visible = true),
+                state = UseCaseState(visible = true),
                 body = { bodyCalled = true },
             )
         }

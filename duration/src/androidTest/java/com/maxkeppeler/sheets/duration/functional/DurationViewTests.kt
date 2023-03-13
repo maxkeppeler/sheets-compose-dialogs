@@ -22,7 +22,7 @@ import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.duration.DurationView
 import com.maxkeppeler.sheets.duration.models.DurationConfig
@@ -49,7 +49,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -69,7 +69,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -89,7 +89,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -109,7 +109,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -129,7 +129,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -149,7 +149,7 @@ class DurationViewTests {
         var selectedTime: Long? = null
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection { time ->
                     selectedTime = time
                 },
@@ -167,7 +167,7 @@ class DurationViewTests {
     fun durationViewBackspace() {
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection {},
                 config = DurationConfig(timeFormat = DurationFormat.SS)
             )
@@ -182,7 +182,7 @@ class DurationViewTests {
     fun durationViewClear() {
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection {},
                 config = DurationConfig(timeFormat = DurationFormat.SS, displayClearButton = true)
             )
@@ -197,7 +197,7 @@ class DurationViewTests {
     fun durationViewLeadingZerosAreIgnored() {
         rule.setContentAndWaitForIdle {
             DurationView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = DurationSelection {},
                 config = DurationConfig(timeFormat = DurationFormat.SS)
             )

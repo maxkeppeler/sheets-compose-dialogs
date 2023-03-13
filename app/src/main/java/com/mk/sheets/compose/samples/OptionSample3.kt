@@ -20,7 +20,7 @@ package com.mk.sheets.compose.samples
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import com.maxkeppeker.sheets.core.models.base.IconSource
-import com.maxkeppeker.sheets.core.models.base.rememberSheetState
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.option.OptionDialog
 import com.maxkeppeler.sheets.option.models.*
 import com.mk.sheets.compose.R
@@ -61,7 +61,7 @@ internal fun OptionSample3(closeSelection: () -> Unit) {
     )
 
     OptionDialog(
-        state = rememberSheetState(visible = true, onCloseRequest = { closeSelection() }),
+        state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         selection = OptionSelection.Multiple(
             minChoices = 2,
             maxChoices = 3,

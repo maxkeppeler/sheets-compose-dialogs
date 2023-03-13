@@ -21,7 +21,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.list.ListView
 import com.maxkeppeler.sheets.list.models.ListOption
@@ -54,7 +54,7 @@ class ListViewTests {
         var selectedOption: ListOption? = null
         rule.setContentAndWaitForIdle {
             ListView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ListSelection.Single(
                     options = testOptions,
                     onSelectOption = { index, option ->
@@ -90,7 +90,7 @@ class ListViewTests {
         var selectedOptions: List<ListOption>? = null
         rule.setContentAndWaitForIdle {
             ListView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ListSelection.Multiple(
                     options = testOptions,
                     onSelectOptions = { index, option ->

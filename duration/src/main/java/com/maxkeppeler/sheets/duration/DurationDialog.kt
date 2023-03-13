@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 import com.maxkeppeler.sheets.duration.models.DurationConfig
 import com.maxkeppeler.sheets.duration.models.DurationSelection
@@ -38,7 +38,7 @@ import com.maxkeppeler.sheets.duration.models.DurationSelection
 @ExperimentalMaterial3Api
 @Composable
 fun DurationDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: DurationSelection,
     config: DurationConfig = DurationConfig(),
     header: Header? = null,
@@ -50,7 +50,7 @@ fun DurationDialog(
         properties = properties,
     ) {
         DurationView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             config = config,
             header = header,

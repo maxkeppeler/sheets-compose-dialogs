@@ -24,7 +24,7 @@ import androidx.compose.ui.test.assertTextContains
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.maxkeppeker.sheets.core.models.base.IconSource
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.input.InputView
 import com.maxkeppeler.sheets.input.models.InputHeader
@@ -53,7 +53,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -75,7 +75,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -95,7 +95,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -119,7 +119,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -143,7 +143,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }
@@ -166,7 +166,7 @@ class InputViewInputTextTests {
         )
         rule.setContent {
             InputView(
-                sheetState = SheetState(true),
+                useCaseState = UseCaseState(true),
                 selection = InputSelection(testInputs),
             )
         }

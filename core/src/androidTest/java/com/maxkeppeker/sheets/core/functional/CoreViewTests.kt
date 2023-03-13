@@ -25,7 +25,7 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.maxkeppeker.sheets.core.CoreView
 import com.maxkeppeker.sheets.core.models.CoreSelection
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeler.sheets.test.utils.*
 import org.junit.Rule
 import org.junit.Test
@@ -41,7 +41,7 @@ class CoreViewTests {
     fun coreViewVisible() {
         rule.setContentAndWaitForIdle {
             CoreView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CoreSelection(),
                 body = { },
             )
@@ -54,7 +54,7 @@ class CoreViewTests {
     fun coreViewNotVisible() {
         rule.setContentAndWaitForIdle {
             CoreView(
-                sheetState = SheetState(visible = false),
+                useCaseState = UseCaseState(visible = false),
                 selection = CoreSelection(),
                 body = { },
             )
@@ -68,7 +68,7 @@ class CoreViewTests {
         var positiveCalled = false
         rule.setContent {
             CoreView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CoreSelection(
                     onPositiveClick = { positiveCalled = true },
                 ),
@@ -85,7 +85,7 @@ class CoreViewTests {
         var negativeCalled = false
         rule.setContent {
             CoreView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CoreSelection(
                     onNegativeClick = { negativeCalled = true },
                 ),
@@ -102,7 +102,7 @@ class CoreViewTests {
         var extraCalled = false
         rule.setContent {
             CoreView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = CoreSelection(
                     extraButton = SelectionButton("test"),
                     onExtraButtonClick = { extraCalled = true },
@@ -121,7 +121,7 @@ class CoreViewTests {
         rule.setContent {
             CoreView(
                 selection = CoreSelection(),
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 body = { bodyCalled = true },
             )
         }

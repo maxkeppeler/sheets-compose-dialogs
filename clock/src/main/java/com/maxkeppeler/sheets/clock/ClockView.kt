@@ -27,7 +27,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -42,7 +42,7 @@ import com.maxkeppeler.sheets.core.R
 
 /**
  * Clock view for the use-case to to select a clock time.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -50,14 +50,14 @@ import com.maxkeppeler.sheets.core.R
 @ExperimentalMaterial3Api
 @Composable
 fun ClockView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: ClockSelection,
     config: ClockConfig = ClockConfig(),
     header: Header? = null,
 ) {
     val context = LocalContext.current
     val clockState = rememberClockState(context, selection, config)
-    StateHandler(sheetState, clockState)
+    StateHandler(useCaseState, clockState)
 
     FrameBase(
         header = header,
@@ -143,7 +143,7 @@ fun ClockView(
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = clockState::onFinish,
             onPositiveValid = clockState.valid,
-            onClose = sheetState::finish
+            onClose = useCaseState::finish
         )
     }
 }

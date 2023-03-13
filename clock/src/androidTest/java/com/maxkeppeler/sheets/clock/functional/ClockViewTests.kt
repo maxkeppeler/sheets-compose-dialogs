@@ -22,7 +22,7 @@ import androidx.compose.ui.test.assertIsEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeler.sheets.clock.ClockView
 import com.maxkeppeler.sheets.clock.models.ClockConfig
@@ -50,7 +50,7 @@ class ClockViewTests {
         var selectedTime: LocalTime? = null
         rule.setContentAndWaitForIdle {
             ClockView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ClockSelection.HoursMinutes { hours, minutes ->
                     selectedTime = LocalTime.of(hours, minutes)
                 },
@@ -73,7 +73,7 @@ class ClockViewTests {
         var selectedTime: LocalTime? = null
         rule.setContentAndWaitForIdle {
             ClockView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ClockSelection.HoursMinutes { hours, minutes ->
                     selectedTime = LocalTime.of(hours, minutes)
                 },
@@ -100,7 +100,7 @@ class ClockViewTests {
         var selectedTime: LocalTime? = null
         rule.setContentAndWaitForIdle {
             ClockView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ClockSelection.HoursMinutes { hours, minutes ->
                     selectedTime = LocalTime.of(hours, minutes)
                 },
@@ -125,7 +125,7 @@ class ClockViewTests {
     fun clockViewSelectionAlwaysValid() {
         rule.setContentAndWaitForIdle {
             ClockView(
-                sheetState = SheetState(visible = true),
+                useCaseState = UseCaseState(visible = true),
                 selection = ClockSelection.HoursMinutes { _, _ -> },
             )
         }

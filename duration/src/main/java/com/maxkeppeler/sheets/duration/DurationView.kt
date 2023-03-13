@@ -26,7 +26,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
 import com.maxkeppeker.sheets.core.utils.BaseConstants
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
@@ -38,7 +38,7 @@ import com.maxkeppeler.sheets.duration.views.TimeDisplayComponent
 
 /**
  * Duration view for the use-case to to select a duration time.
- * @param sheetState The state of the sheet.
+ * @param useCaseState The state of the sheet.
  * @param selection The selection configuration for the dialog view.
  * @param config The general configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
@@ -46,13 +46,13 @@ import com.maxkeppeler.sheets.duration.views.TimeDisplayComponent
 @ExperimentalMaterial3Api
 @Composable
 fun DurationView(
-    sheetState: SheetState,
+    useCaseState: UseCaseState,
     selection: DurationSelection,
     config: DurationConfig = DurationConfig(),
     header: Header? = null,
 ) {
     val durationState = rememberDurationState(selection, config)
-    StateHandler(sheetState, durationState)
+    StateHandler(useCaseState, durationState)
 
     FrameBase(
         header = header,
@@ -110,7 +110,7 @@ fun DurationView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = durationState::onFinish,
-            onClose = sheetState::finish,
+            onClose = useCaseState::finish,
         )
     }
 }

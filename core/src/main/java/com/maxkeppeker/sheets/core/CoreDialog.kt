@@ -22,7 +22,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.CoreSelection
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.SheetState
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.base.DialogBase
 
 /**
@@ -37,7 +37,7 @@ import com.maxkeppeker.sheets.core.views.base.DialogBase
 @ExperimentalMaterial3Api
 @Composable
 fun CoreDialog(
-    state: SheetState,
+    state: UseCaseState,
     selection: CoreSelection,
     header: Header? = null,
     body: @Composable () -> Unit,
@@ -50,7 +50,7 @@ fun CoreDialog(
         properties = properties,
     ) {
         CoreView(
-            sheetState = state,
+            useCaseState = state,
             selection = selection,
             header = header,
             body = body,
