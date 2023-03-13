@@ -34,6 +34,7 @@ import com.maxkeppeler.sheets.core.R as RC
 
 /**
  * The view that displays all relevant calendar information.
+ * @param dayOfWeekLabels The labels for the days of the week.
  * @param cells The amount of cells / columns that are used for the calendar grid view.
  * @param config The general configuration for the dialog view.
  * @param selection The selection configuration for the dialog.
@@ -45,6 +46,7 @@ import com.maxkeppeler.sheets.core.R as RC
  * @param selectedRange The range that is currently selected.
  */
 internal fun LazyGridScope.setupCalendarSelectionView(
+    dayOfWeekLabels: Map<DayOfWeek, String>,
     cells: Int,
     orientation: LibOrientation,
     config: CalendarConfig,
@@ -54,9 +56,9 @@ internal fun LazyGridScope.setupCalendarSelectionView(
     onSelect: (LocalDate) -> Unit,
     selectedDate: LocalDate?,
     selectedDates: List<LocalDate>?,
-    selectedRange: Pair<LocalDate?, LocalDate?>
+    selectedRange: Pair<LocalDate?, LocalDate?>,
 ) {
-    items(DayOfWeek.values()) { CalendarHeaderItemComponent(data.cameraDate.with(it)) }
+    items(dayOfWeekLabels.values.toList()) { dayOfWeekLabel -> CalendarHeaderItemComponent(dayOfWeekLabel) }
     item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
     items(data.offsetStart) {
         CalendarDateItemComponent(

@@ -32,6 +32,7 @@ import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.calendar.utils.endValue
+import com.maxkeppeler.sheets.calendar.utils.getDayOfWeekLabels
 import com.maxkeppeler.sheets.calendar.utils.startValue
 import com.maxkeppeler.sheets.calendar.views.*
 import java.time.LocalDate
@@ -73,6 +74,8 @@ fun CalendarView(
         }
     }
 
+    val weekdays = remember { getDayOfWeekLabels(config.locale) }
+
     val density = LocalDensity.current
     FrameBase(
         header = header,
@@ -103,6 +106,7 @@ fun CalendarView(
                 onCalendarView = {
                     setupCalendarSelectionView(
                         config = config,
+                        dayOfWeekLabels = weekdays,
                         orientation = LibOrientation.PORTRAIT,
                         cells = calendarState.cells,
                         data = calendarState.calendarData,
@@ -166,12 +170,13 @@ fun CalendarView(
                         mode = calendarState.mode,
                         onCalendarView = {
                             setupCalendarSelectionView(
-                                config = config,
-                                orientation = LibOrientation.LANDSCAPE,
                                 cells = calendarState.cells,
+                                dayOfWeekLabels = weekdays,
+                                orientation = LibOrientation.LANDSCAPE,
+                                config = config,
+                                selection = selection,
                                 data = calendarState.calendarData,
                                 today = calendarState.today,
-                                selection = selection,
                                 onSelect = onSelection,
                                 selectedDate = calendarState.date.value,
                                 selectedDates = calendarState.dates,

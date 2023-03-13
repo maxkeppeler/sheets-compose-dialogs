@@ -27,16 +27,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
-import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
- * The header component within the calendar view.
- * @param date The day of the date that the header represents.
+ * Composable function that represents a calendar header item with the given [label].
+ *
+ * @param label The label to display in the header item.
  */
 @Composable
-internal fun CalendarHeaderItemComponent(date: LocalDate) {
+internal fun CalendarHeaderItemComponent(label: String) {
     Row(
         modifier = Modifier
             .aspectRatio(1f, true)
@@ -46,10 +45,10 @@ internal fun CalendarHeaderItemComponent(date: LocalDate) {
         horizontalArrangement = Arrangement.Center
     ) {
         Text(
-            modifier = Modifier.weight(1f),
-            text = date.format(DateTimeFormatter.ofPattern("E")),
-            style = MaterialTheme.typography.labelSmall,
-            textAlign = TextAlign.Center
+            text = label,
+            style = MaterialTheme.typography.bodySmall,
+            textAlign = TextAlign.Center,
+            color = MaterialTheme.colorScheme.onSurface
         )
     }
 }
