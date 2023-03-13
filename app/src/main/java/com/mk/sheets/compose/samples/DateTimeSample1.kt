@@ -13,11 +13,9 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalMaterial3Api::class)
 
 package com.mk.sheets.compose.samples
 
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -29,10 +27,16 @@ import java.time.LocalDateTime
 @Composable
 internal fun DateTimeSample1(closeSelection: () -> Unit) {
 
-    val selectedDateTime = remember { mutableStateOf<LocalDateTime?>(null) }
+    val selectedDateTime = remember { mutableStateOf<LocalDateTime?>(
+        LocalDateTime.now().plusDays(1)
+    ) }
+
     DateTimeDialog(
         state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
-        selection = DateTimeSelection.DateTime { newDateTime ->
+        selection = DateTimeSelection.DateTime(
+//            selectedDate = selectedDateTime.value!!.toLocalDate(),
+            selectedTime = selectedDateTime.value!!.toLocalTime(),
+        ) { newDateTime ->
             selectedDateTime.value = newDateTime
         },
     )

@@ -40,14 +40,25 @@ internal class DateTimeState(
     stateData: DateTimeStateData? = null
 ) : BaseTypeState() {
 
-    var dateSelection by mutableStateOf<LocalDate?>(stateData?.dateSelection)
-    var timeSelection by mutableStateOf<LocalTime?>(stateData?.timeSelection)
+    var dateSelection by mutableStateOf<LocalDate?>(
+        stateData?.dateSelection ?: getInitDateSelection()
+    )
+    var timeSelection by mutableStateOf<LocalTime?>(
+        stateData?.timeSelection ?: getInitTimeSelection()
+    )
     var valid by mutableStateOf(isValid())
 
     private var datePattern by mutableStateOf(getDatePatternValue())
     private var timePattern by mutableStateOf(getTimePatternValue())
 
-    private var typeValues = stateData?.typeValues ?: getInitTypeValues()
+    var firstSkipped by mutableStateOf(stateData?.firstSkipped ?: false)
+
+    private var typeValues = stateData?.typeValues ?: getInitTypeValues(
+        dateSelection,
+        timeSelection,
+        datePattern,
+        timePattern
+    )
 
     var dateValues by mutableStateOf(getLocalizedValues(config, datePattern, typeValues))
     var timeValues by mutableStateOf(getLocalizedValues(config, timePattern, typeValues))
@@ -55,17 +66,22 @@ internal class DateTimeState(
     var isDateValid by mutableStateOf(checkDateValid())
     var isTimeValid by mutableStateOf(checkTimeValid())
 
-    private fun getInitTypeValues(): MutableMap<UnitType, UnitOptionEntry?> = mutableMapOf(
-        // Date
-        UnitType.DAY to null,
-        UnitType.MONTH to null,
-        UnitType.YEAR to null,
-        // Time
-        UnitType.SECOND to null,
-        UnitType.MINUTE to null,
-        UnitType.HOUR to null,
-        UnitType.AM_PM to getAmPmOptions().first()
-    )
+    internal fun skipSelection() {
+        firstSkipped = !firstSkipped
+        checkValid()
+    }
+
+    private fun getInitDateSelection(): LocalDate? = when (selection) {
+        is DateTimeSelection.Date -> selection.selectedDate
+        is DateTimeSelection.DateTime -> selection.selectedDate
+        is DateTimeSelection.Time -> null
+    }
+
+    private fun getInitTimeSelection(): LocalTime? = when (selection) {
+        is DateTimeSelection.Date -> null
+        is DateTimeSelection.DateTime -> selection.selectedTime
+        is DateTimeSelection.Time -> selection.selectedTime
+    }
 
     fun updateValue(unit: UnitSelection, entry: UnitOptionEntry) {
         unit.type?.let { type ->
@@ -112,7 +128,7 @@ internal class DateTimeState(
     private fun getDatePatternValue(): String? = selection.dateFormatStyle?.let {
         getLocalizedPattern(
             isDate = true,
-            locale = selection.locale,
+            locale = config.locale,
             formatStyle = it
         )
     }
@@ -120,7 +136,7 @@ internal class DateTimeState(
     private fun getTimePatternValue(): String? = selection.timeFormatStyle?.let {
         getLocalizedPattern(
             isDate = false,
-            locale = selection.locale,
+            locale = config.locale,
             formatStyle = it
         )
     }
@@ -165,6 +181,7 @@ internal class DateTimeState(
         ): Saver<DateTimeState, *> = Saver(
             save = { state ->
                 DateTimeStateData(
+                    state.firstSkipped,
                     state.dateSelection,
                     state.timeSelection,
                     state.typeValues
@@ -179,6 +196,7 @@ internal class DateTimeState(
      * and can be used by the [Saver] to save and restore the state.
      */
     data class DateTimeStateData(
+        val firstSkipped : Boolean,
         val dateSelection: LocalDate?,
         val timeSelection: LocalTime?,
         val typeValues: MutableMap<UnitType, UnitOptionEntry?>

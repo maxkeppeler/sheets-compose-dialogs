@@ -29,6 +29,19 @@ import java.time.format.DateTimeFormatterBuilder
 import java.time.format.FormatStyle
 import java.util.*
 
+internal fun getMapOptions(
+    datePattern: String?,
+    timePattern: String?
+): Map<UnitType, List<UnitOptionEntry>> = mapOf(
+    UnitType.SECOND to getMinutesSecondsOptions(),
+    UnitType.MINUTE to getMinutesSecondsOptions(),
+    UnitType.HOUR to getHoursOptions(timePattern ?: ""),
+    UnitType.DAY to getDayOptions(LocalDate.now(), null),
+    UnitType.MONTH to getMonthOptions(datePattern ?: ""),
+    UnitType.YEAR to getYearOptions(DateTimeConfig()),
+    UnitType.AM_PM to getAmPmOptions()
+)
+
 internal fun detectUnit(
     config: DateTimeConfig,
     pattern: String,
@@ -82,6 +95,47 @@ internal fun detectUnit(
 
         else -> null
     }
+}
+
+internal fun getInitTypeValues(
+    dateSelection: LocalDate?,
+    timeSelection: LocalTime?,
+    datePattern: String?,
+    timePattern: String?
+): MutableMap<UnitType, UnitOptionEntry?> {
+    val options = getMapOptions(datePattern, timePattern)
+    val second = timeSelection?.let { options[UnitType.SECOND]?.getOrNull(it.second) }
+    val minute = timeSelection?.let { options[UnitType.MINUTE]?.getOrNull(it.minute) }
+
+    val is24HourFormat = is24HourFormat(timePattern)
+
+    val amPm = timeSelection?.let {
+        val item = if (is24HourFormat) 0 else 1
+        options[UnitType.AM_PM]?.getOrNull(item)
+    }
+
+    val hour = timeSelection?.let {
+        // 0-23 = 24h format, 1-12 = 12h format (minus 1 because of 0 index)
+        val hour = if (is24HourFormat) it.hour else (it.hour % 12) - 1
+        options[UnitType.HOUR]?.getOrNull(hour)
+    }
+
+    val year =
+        dateSelection?.let { date -> options[UnitType.YEAR]?.let { it.firstOrNull { it.value == date.year } } }
+    val month = dateSelection?.let { options[UnitType.MONTH]?.getOrNull(it.monthValue) }
+    val day = dateSelection?.let { options[UnitType.DAY]?.getOrNull(it.dayOfMonth) }
+
+    return mutableMapOf(
+        // Date
+        UnitType.DAY to day,
+        UnitType.MONTH to month,
+        UnitType.YEAR to year,
+        // Time
+        UnitType.SECOND to second,
+        UnitType.MINUTE to minute,
+        UnitType.HOUR to hour,
+        UnitType.AM_PM to amPm
+    )
 }
 
 internal fun getLocalTimeOf(
@@ -150,20 +204,20 @@ internal fun getLocalizedValues(
 internal fun getLocalizedValueSegments(segment: String): List<String> =
     segment.split(",", ".").dropLastWhile { it.isEmpty() }
 
-internal fun is24HourFormat(pattern: String): Boolean =
+internal fun is24HourFormat(pattern: String?): Boolean =
     !containsAmPm(pattern)
 
-private fun containsAmPm(pattern: String): Boolean =
-    pattern.contains(Constants.SYMBOL_24_HOUR_FORMAT)
+private fun containsAmPm(pattern: String?): Boolean =
+    pattern?.contains(Constants.SYMBOL_24_HOUR_FORMAT) == true
 
 internal fun containsSeconds(pattern: String): Boolean = pattern.contains(Constants.SYMBOL_SECONDS)
 
-fun getAmPmOptions() = listOf(
+internal fun getAmPmOptions() = listOf(
     UnitOptionEntry(value = 0, labelRes = R.string.sheets_compose_dialogs_date_time_am),
     UnitOptionEntry(value = 1, labelRes = R.string.sheets_compose_dialogs_date_time_pm),
 )
 
-private fun getMinutesSecondsOptions(): List<UnitOptionEntry> {
+internal fun getMinutesSecondsOptions(): List<UnitOptionEntry> {
     return (0..59).map {
         UnitOptionEntry(
             it,
@@ -172,7 +226,7 @@ private fun getMinutesSecondsOptions(): List<UnitOptionEntry> {
     }.toList()
 }
 
-private fun getHoursOptions(pattern: String): List<UnitOptionEntry> =
+internal fun getHoursOptions(pattern: String): List<UnitOptionEntry> =
     if (is24HourFormat(pattern)) {
         (0..23).map { value ->
             UnitOptionEntry(
@@ -189,7 +243,7 @@ private fun getHoursOptions(pattern: String): List<UnitOptionEntry> =
         }.toList()
     }
 
-private fun getDayOptions(date: LocalDate, month: UnitOptionEntry?): List<UnitOptionEntry> {
+internal fun getDayOptions(date: LocalDate, month: UnitOptionEntry?): List<UnitOptionEntry> {
     val daysInMonth = date.lengthOfMonth()
     return (1..(if (month?.value != null) 31 else daysInMonth)).map {
         UnitOptionEntry(
@@ -199,14 +253,15 @@ private fun getDayOptions(date: LocalDate, month: UnitOptionEntry?): List<UnitOp
     }
 }
 
-private fun getMonthOptions(pattern: String): List<UnitOptionEntry> {
-    val occurrences = pattern.count { it.equals('m', ignoreCase = true) }
+internal fun getMonthOptions(pattern: String): List<UnitOptionEntry> {
+    val actualMonthPattern = pattern.filter { it == 'M' }
+    val occurrences = actualMonthPattern.count { it == 'M' }
     return when {
         occurrences >= 3 -> {
             Month.values().map { month ->
                 UnitOptionEntry(
                     month.value, LocalDate.now().withMonth(month.value)
-                        .format(DateTimeFormatter.ofPattern(pattern))
+                        .format(DateTimeFormatter.ofPattern(actualMonthPattern))
                 )
             }
         }
@@ -216,7 +271,7 @@ private fun getMonthOptions(pattern: String): List<UnitOptionEntry> {
     }
 }
 
-private fun getYearOptions(config: DateTimeConfig): List<UnitOptionEntry> =
+internal fun getYearOptions(config: DateTimeConfig): List<UnitOptionEntry> =
     IntRange(config.minYear, config.maxYear.plus(1)).map { value ->
         UnitOptionEntry(
             value = value,

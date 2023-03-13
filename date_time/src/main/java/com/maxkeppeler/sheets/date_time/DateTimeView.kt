@@ -17,14 +17,20 @@
 
 package com.maxkeppeler.sheets.date_time
 
-import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.animation.animateContentSize
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import com.maxkeppeker.sheets.core.models.base.BaseBehaviors
 import com.maxkeppeker.sheets.core.models.base.Header
-import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.models.base.StateHandler
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeker.sheets.core.views.base.FrameBase
 import com.maxkeppeler.sheets.date_time.models.DateTimeConfig
@@ -47,55 +53,79 @@ fun DateTimeView(
     header: Header? = null,
 ) {
     val coroutine = rememberCoroutineScope()
-    val dateTimeState = rememberDateTimeState(selection, config)
-    StateHandler(useCaseState, dateTimeState)
+    val state = rememberDateTimeState(selection, config)
+    StateHandler(useCaseState, state)
 
     val processSelection: () -> Unit = {
         BaseBehaviors.autoFinish(
             selection = selection,
-            condition = dateTimeState.valid,
+            condition = state.valid,
             coroutine = coroutine,
-            onSelection = dateTimeState::onFinish,
+            onSelection = state::onFinish,
             onFinished = useCaseState::finish,
-            onDisableInput = dateTimeState::disableInput
+            onDisableInput = state::disableInput
         )
     }
 
-    LaunchedEffect(dateTimeState.isDateValid) { processSelection() }
-    LaunchedEffect(dateTimeState.isDateValid) { processSelection() }
+    LaunchedEffect(state.isDateValid) { processSelection() }
+    LaunchedEffect(state.isDateValid) { processSelection() }
+
+    val skipButton: @Composable ColumnScope.(Int, Boolean) -> Unit = @Composable { labelRes, error ->
+        Button(
+            modifier = Modifier.align(Alignment.CenterHorizontally),
+            onClick = state::skipSelection,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = if(error) MaterialTheme.colorScheme.errorContainer else MaterialTheme.colorScheme.primaryContainer,
+                contentColor = if(error) MaterialTheme.colorScheme.onErrorContainer else MaterialTheme.colorScheme.onPrimaryContainer
+            )
+        ) {
+            Text(stringResource(labelRes))
+        }
+    }
+    val datePicker = @Composable {
+        PickerComponent(
+            isDate = true,
+            values = state.dateValues!!,
+            config = config,
+            onValueChange = state::updateValue,
+        )
+    }
+
+    val timePicker = @Composable {
+        PickerComponent(
+            isDate = false,
+            values = state.timeValues!!,
+            config = config,
+            onValueChange = state::updateValue,
+        )
+    }
 
     FrameBase(
         header = header,
         config = config,
         layout = {
-            val datePicker = @Composable {
-                PickerComponent(
-                    isDate = true,
-                    values = dateTimeState.dateValues!!,
-                    config = config,
-                    onValueChange = dateTimeState::updateValue,
-                )
-            }
-
-            val timePicker = @Composable {
-                PickerComponent(
-                    isDate = false,
-                    values = dateTimeState.timeValues!!,
-                    config = config,
-                    onValueChange = dateTimeState::updateValue,
-                )
-            }
-
-            when (selection) {
-                is DateTimeSelection.Date -> datePicker()
-                is DateTimeSelection.Time -> timePicker()
-                is DateTimeSelection.DateTime -> {
-                    if (selection.startWithTime) {
-                        if (dateTimeState.timeSelection == null) timePicker()
-                        if (dateTimeState.timeSelection != null) datePicker()
-                    } else {
-                        if (dateTimeState.dateSelection == null) datePicker()
-                        if (dateTimeState.dateSelection != null) timePicker()
+            Column(modifier = Modifier.animateContentSize()) {
+                when (selection) {
+                    is DateTimeSelection.Date -> datePicker()
+                    is DateTimeSelection.Time -> timePicker()
+                    is DateTimeSelection.DateTime -> {
+                        if (selection.startWithTime) {
+                            if (!state.firstSkipped) {
+                                timePicker()
+                                skipButton(R.string.sheets_compose_dialogs_set_date, !state.isDateValid)
+                            } else {
+                                datePicker()
+                                skipButton(R.string.sheets_compose_dialogs_set_time, !state.isTimeValid)
+                            }
+                        } else {
+                            if (!state.firstSkipped) {
+                                datePicker()
+                                skipButton(R.string.sheets_compose_dialogs_set_time, !state.isTimeValid)
+                            } else {
+                                timePicker()
+                                skipButton(R.string.sheets_compose_dialogs_set_date, !state.isDateValid)
+                            }
+                        }
                     }
                 }
             }
@@ -104,10 +134,10 @@ fun DateTimeView(
     ) { orientation ->
         ButtonsComponent(
             orientation = orientation,
-            onPositiveValid = dateTimeState.valid,
+            onPositiveValid = state.valid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
-            onPositive = dateTimeState::onFinish,
+            onPositive = state::onFinish,
             onClose = useCaseState::finish
         )
     }

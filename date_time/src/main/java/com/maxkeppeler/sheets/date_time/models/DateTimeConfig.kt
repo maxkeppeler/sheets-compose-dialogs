@@ -19,9 +19,11 @@ import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 import com.maxkeppeler.sheets.date_time.utils.Constants
+import java.util.*
 
 /**
  * The general configuration for the date time dialog.
+ * @param locale The locale that is used for the date time dialog.
  * @param hideDateCharacters Hide all characters that can appear alongside the date relevant values.
  * @param hideTimeCharacters Hide all characters that can appear alongside the time relevant values.
  * @param minYear The minimum year that is selectable.
@@ -29,6 +31,7 @@ import com.maxkeppeler.sheets.date_time.utils.Constants
  * @param icons The style of icons that are used for dialog/ view-specific icons.
  */
 class DateTimeConfig(
+    val locale: Locale = Locale.getDefault(),
     val hideDateCharacters: Boolean = false,
     val hideTimeCharacters: Boolean = false,
     val minYear: Int = Constants.DEFAULT_MIN_YEAR,

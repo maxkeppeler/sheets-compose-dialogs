@@ -8,5 +8,7 @@
     <string name="sheets_compose_dialogs_date_time_day" translatable="true">Day</string>
     <string name="sheets_compose_dialogs_date_time_month" translatable="true">Month</string>
     <string name="sheets_compose_dialogs_date_time_year" translatable="true">Year</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Set time</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Set date</string>
 
 </resources>

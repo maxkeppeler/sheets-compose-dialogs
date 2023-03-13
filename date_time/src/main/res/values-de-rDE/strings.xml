@@ -9,5 +9,7 @@
     <string name="sheets_compose_dialogs_date_time_day">Tag</string>
     <string name="sheets_compose_dialogs_date_time_month">Monat</string>
     <string name="sheets_compose_dialogs_date_time_year">Jahr</string>
+    <string name="sheets_compose_dialogs_set_time">Zeit ändern</string>
+    <string name="sheets_compose_dialogs_set_date">Datum ändern</string>
 
 </resources>
