@@ -7,7 +7,7 @@ on:
 jobs:
   apk:
     name: Generate and Deploy APK
-    needs: [ build, test ]
+    needs: [maxkeppeler/sheets-compose-dialogs/main/build, maxkeppeler/sheets-compose-dialogs/main/test]
     runs-on: ubuntu-latest
 
     steps:
