@@ -78,3 +78,76 @@ jobs:
         run: |
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
+
+  generate_and_deploy_apk:
+    name: Generate and Deploy APK
+    runs-on: ubuntu-latest
+    needs:
+      - test
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Build APK
+        run: ./gradlew assembleDebug --stacktrace
+
+      - name: Generate Hash of New APK
+        id: hash_new_apk
+        run: echo "::set-output name=hash::$(hashFiles('app/sample.apk'))"
+
+      - name: Download Hash of Previous APK
+        id: download_hash
+        uses: actions/download-artifact@v2
+        with:
+          name: previous_apk_hash
+          path: previous_apk_hash.txt
+
+      - name: Compare Hashes
+        id: compare_hashes
+        run: |
+          if [ -f "previous_apk_hash.txt" ]; then
+            PREVIOUS_HASH=$(cat previous_apk_hash.txt)
+            if [ "$PREVIOUS_HASH" = "${{ steps.hash_new_apk.outputs.hash }}" ]; then
+              echo "APK has not changed. Exiting."
+              exit 0
+            fi
+          fi
+          echo "${{ steps.hash_new_apk.outputs.hash }}" > previous_apk_hash.txt
+
+      - name: Rename and Move APK
+        run: |
+          mv app/build/outputs/apk/debug/app-debug.apk app/sample.apk
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v2
+        with:
+          name: sample.apk
+          path: app/sample.apk
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "(General) Update sample APK"
+          title: "(General) Update sample APK"
+          branch: "apk-update"
+          body: |
+            This pull request updates the sample APK.
+
+            ```
+            Version code: ${{ steps.version.outputs.version_code }}
+            Version name: ${{ steps.version.outputs.version_name }}
+            ```
+
+      - name: Clean up artifacts
+        if: ${{ always() }}
+        run: |
+          rm -f previous_apk_hash.txt
+          echo "Deleted previous_apk_hash.txt"
+          echo "Deleting sample APK..."
+          curl -X DELETE -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" "${{ github.api_url }}/repos/${{ github.repository }}/actions/artifacts/sample.apk"
