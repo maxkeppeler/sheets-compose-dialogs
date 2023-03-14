@@ -79,7 +79,7 @@ jobs:
           rm -f ~/.gradle/caches/modules-2/modules-2.lock
           rm -f ~/.gradle/caches/modules-2/gc.properties
 
-  generate_and_deploy_apk:
+  apk:
     name: Generate and Deploy APK
     runs-on: ubuntu-latest
     needs:
@@ -108,16 +108,16 @@ jobs:
         with:
           name: previous_apk_hash
           path: previous_apk_hash.txt
+        if: always()
 
       - name: Compare Hashes
         id: compare_hashes
         run: |
-          if [ -f "previous_apk_hash.txt" ]; then
-            PREVIOUS_HASH=$(cat previous_apk_hash.txt)
-            if [ "$PREVIOUS_HASH" = "${{ steps.hash_new_apk.outputs.hash }}" ]; then
-              echo "APK has not changed. Exiting."
-              exit 0
-            fi
+          if [ ! -f "previous_apk_hash.txt" ]; then
+            echo "No previous APK hash found. Continuing..."
+          elif [ "$(cat previous_apk_hash.txt)" = "${{ steps.hash_new_apk.outputs.hash }}" ]; then
+            echo "APK has not changed. Exiting."
+            exit 0
           fi
           echo "${{ steps.hash_new_apk.outputs.hash }}" > previous_apk_hash.txt
 
