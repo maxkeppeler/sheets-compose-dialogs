@@ -1,13 +1,17 @@
 name: Generate and Deploy APK
-  needs: test
-
 on:
   push:
     branches:
       - main
 
+needs:
+  - build
+  - test
+
 jobs:
-  build:
+  apk:
+    name: Generate and Deploy APK
+    needs: [ test, build ]
     runs-on: ubuntu-latest
 
     steps:
