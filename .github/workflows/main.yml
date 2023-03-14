@@ -98,7 +98,9 @@ jobs:
 
       - name: Generate Hash of New APK
         id: hash_new_apk
-        run: echo "::set-output name=hash::$(hashFiles('app/sample.apk'))"
+        run: |
+          apk_hash=$(sha256sum app/sample.apk | awk '{print $1}')
+          echo "::set-output name=hash::$apk_hash"
 
       - name: Download Hash of Previous APK
         id: download_hash
