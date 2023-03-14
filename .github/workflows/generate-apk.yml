@@ -4,14 +4,10 @@ on:
     branches:
       - main
 
-needs:
-  - build
-  - test
-
 jobs:
   apk:
     name: Generate and Deploy APK
-    needs: [ test, build ]
+    needs: [ build, test ]
     runs-on: ubuntu-latest
 
     steps:
