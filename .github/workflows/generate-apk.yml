@@ -69,3 +69,14 @@ jobs:
             Version code: ${{ steps.version.outputs.version_code }}
             Version name: ${{ steps.version.outputs.version_name }}
             ```
+
+  cleanup:
+    name: Clean up artifacts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Remove previous APK hash file
+        run: rm -f previous_apk_hash.txt
+      - name: Delete APK artifact
+        uses: actions/delete-artifact@v2
+        with:
+          name: sample.apk
