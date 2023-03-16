@@ -19,13 +19,13 @@ object Versions {
 
     // Misc
 
-    const val GRADLE = "7.3.0"
+    const val GRADLE = "7.4.2"
     const val DESUGAR = "1.1.5"
     const val MAVEN_PUBLISH = "0.21.0"
 
     const val SNAPPER = "0.3.0"
 
-    const val DOKKA = "1.6.0"
+    const val DOKKA = "1.8.10"
     const val KT_LINT = "0.47.1"
 
     // Test
