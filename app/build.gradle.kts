@@ -53,7 +53,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = Versions.COMPOSE
+        kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
     }
     packagingOptions {
         resources {
@@ -108,6 +108,7 @@ dependencies {
     // Compose libs
 
     implementations(
+        platform(Dependencies.Compose.BOM),
         Dependencies.Compose.UI,
         Dependencies.Compose.UI_TOOLING,
         Dependencies.Compose.ANIMATION,
@@ -122,7 +123,7 @@ dependencies {
     androidTestImplementations(
         Dependencies.AndroidX.Test.JUNIT,
         Dependencies.AndroidX.Test.ESPRESSO_CORE,
-        Dependencies.Compose.Test.JUNIT
+        Dependencies.Compose.Test.JUNIT,
     )
     debugImplementations(
         Dependencies.Compose.Test.TOOLING,

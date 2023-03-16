@@ -107,7 +107,7 @@ fun com.android.build.gradle.BaseExtension.baselibraryConfig() {
     }
 
     buildFeatures.compose = true
-    composeOptions.kotlinCompilerExtensionVersion = Versions.COMPOSE
+    composeOptions.kotlinCompilerExtensionVersion = Versions.COMPOSE_COMPILER
 
     packagingOptions.resources.excludes += listOf(
         "META-INF/DEPENDENCIES.txt",

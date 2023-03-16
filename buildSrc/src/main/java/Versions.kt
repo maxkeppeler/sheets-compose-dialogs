@@ -2,12 +2,13 @@ object Versions {
 
     // Kotlin
 
-    const val KOTLIN = "1.7.10"
+    const val KOTLIN = "1.8.10"
 
     // Compose
 
-    const val COMPOSE = "1.3.0"
-    const val COMPOSE_MD3 = "1.0.0"
+    const val COMPOSE_BOM = "2023.01.00"
+    const val COMPOSE = "1.3.3"
+    const val COMPOSE_COMPILER = "1.4.3"
 
     // AndroidX
 
