@@ -90,8 +90,7 @@ internal class OptionState(
     private fun isValid(): Boolean = when (selection) {
         is OptionSelection.Single -> selectedOptions.isNotEmpty()
         is OptionSelection.Multiple -> {
-            selectedOptions.isNotEmpty()
-                    && (selection.minChoices?.let { selectedOptions.size >= it } ?: true)
+            (selection.minChoices?.let { selectedOptions.size >= it } ?: true)
                     && (selection.maxChoices?.let { selectedOptions.size <= it } ?: true)
         }
     }
