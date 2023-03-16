@@ -90,8 +90,7 @@ internal class ListState(
     private fun isValid(): Boolean = when (selection) {
         is ListSelection.Single -> selectedOptions.isNotEmpty()
         is ListSelection.Multiple -> {
-            selectedOptions.isNotEmpty()
-                    && (selection.minChoices?.let { selectedOptions.size >= it }
+                (selection.minChoices?.let { selectedOptions.size >= it }
                 ?: true)
                     && (selection.maxChoices?.let { selectedOptions.size <= it }
                 ?: true)
