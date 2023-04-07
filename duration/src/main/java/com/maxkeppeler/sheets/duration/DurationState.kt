@@ -78,7 +78,7 @@ internal class DurationState(
         checkValid()
     }
 
-    private fun isValid(): Boolean = timeInfoInSeconds.first > 0
+    private fun isValid(): Boolean = timeInfoInSeconds.first in config.minTime..config.maxTime
             && timeInfoInSeconds.second == null
             && timeInfoInSeconds.third == null
 

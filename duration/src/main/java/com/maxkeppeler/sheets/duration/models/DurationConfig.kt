@@ -15,6 +15,7 @@
  */
 package com.maxkeppeler.sheets.duration.models
 
+import androidx.annotation.IntRange
 import com.maxkeppeker.sheets.core.icons.LibIcons
 import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
@@ -33,8 +34,8 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 data class DurationConfig(
     val timeFormat: DurationFormat = DurationFormat.MM_SS,
     val currentTime: Long? = null,
-    val minTime: Long = 0,
-    val maxTime: Long = Long.MAX_VALUE,
+    @IntRange(from = 0) val minTime: Long = 0,
+    @IntRange(from = 1) val maxTime: Long = Long.MAX_VALUE,
     val displayClearButton: Boolean = false,
     override val icons: LibIcons = BaseConstants.DEFAULT_ICON_STYLE,
     override val orientation: LibOrientation? = BaseConstants.DEFAULT_LIB_LAYOUT,
