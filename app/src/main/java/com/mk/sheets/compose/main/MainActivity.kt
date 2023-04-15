@@ -40,7 +40,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.mk.sheets.compose.R
 import com.mk.sheets.compose.models.Screen
-import com.mk.sheets.compose.ui.theme.SheetsComposeTheme
+import com.mk.sheets.compose.ui.theme.ColorfulRandomTestTheme
 
 @ExperimentalMaterial3Api
 class MainActivity : ComponentActivity() {
@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
-            SheetsComposeTheme {
+            ColorfulRandomTestTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background

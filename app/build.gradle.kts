@@ -72,8 +72,8 @@ dependencies {
 
     // Dependencies of sheets-compose-dialogs
 //
-//    val sheetsVersion = "0.0.1"
-//
+//    val sheetsVersion = "1.1.1"
+////
 //    implementation("com.maxkeppeler.sheets-compose-dialogs:core:$sheetsVersion")
 //    implementation("com.maxkeppeler.sheets-compose-dialogs:info:$sheetsVersion")
 //    implementation("com.maxkeppeler.sheets-compose-dialogs:color:$sheetsVersion")
@@ -121,9 +121,12 @@ dependencies {
     // Test libs
 
     androidTestImplementations(
+        Dependencies.AndroidX.Test.TEST_CORE,
+        Dependencies.AndroidX.Test.TEST_RUNNER,
         Dependencies.AndroidX.Test.JUNIT,
         Dependencies.AndroidX.Test.ESPRESSO_CORE,
         Dependencies.Compose.Test.JUNIT,
+        project(":test")
     )
     debugImplementations(
         Dependencies.Compose.Test.TOOLING,

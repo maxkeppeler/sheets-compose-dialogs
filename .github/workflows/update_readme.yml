@@ -1,0 +1,68 @@
+name: Update README.md with generated image grids
+
+on:
+  push:
+    branches:
+      - update-readme
+
+jobs:
+  generate_image_grids:
+    runs-on: macOS-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        api-level: [29]
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Install ADB
+        run: brew install android-platform-tools
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: Run CaptureDialogSamples Test
+        uses: ReactiveCircus/android-emulator-runner@v2.28.0
+        with:
+          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
+          api-level: ${{ matrix.api-level }}
+          script: |
+            mkdir -p sheets/test/dark/
+            ls -la 
+            adb root
+            ./gradlew app:connectedCheck -Pandroid.testInstrumentationRunnerArguments.class=com.mk.sheets.sample_images.CaptureDialogSamples
+            adb pull /sheets ./docs/res/sheets
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Pillow
+        run: pip install Pillow
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Generate image grid in README
+        run: |
+          python3 scripts/generate_image_grid.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "README Bot"
+          git config user.email "<>"
+          git add README.md
+          git add docs/res/sheets
+          git add docs/README.md
+          git commit -m "Update README.md"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

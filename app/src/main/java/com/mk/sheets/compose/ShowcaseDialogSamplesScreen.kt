@@ -50,7 +50,20 @@ fun ShowcaseDialogSamplesScreen() {
         onSelectSample = { currentSample.value = it }
     )
 
-    when (currentSample.value) {
+    ShowcaseDialogSamples(
+        currentSample = currentSample.value,
+        onReset = onReset,
+        onResetSheet = onResetSheet
+    )
+}
+
+@Composable
+fun ShowcaseDialogSamples(
+    currentSample: Sample?,
+    onReset: () -> Unit = {},
+    onResetSheet: UseCaseState.() -> Unit = {}
+) {
+    when (currentSample) {
 
         Sample.CORE_SAMPLE_1 -> CoreSample1(onReset)
         Sample.INFO_SAMPLE_1 -> InfoSample1(onReset)
