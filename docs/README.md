@@ -2,7 +2,7 @@
 
 <p>
 
-  <img src="docs/res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
+  <img src="res/ic_library.png" width="96px" height="96px" alt="Sheets Library" align="left" style="margin-right: 24px; margin-bottom: 24px">
 
   <p>
 
@@ -40,7 +40,7 @@ An Android library that offers dialogs & views for various use cases - build wit
   <img style="margin-right: 4px; margin-bottom: 8px" alt="Follow Maximilian Keppeler on Twitter" src="https://img.shields.io/twitter/follow/max_keppeler?label=Follow&style=social">
 </a>
 
-<img src="docs/res/showcase.png" alt="sheets Library">
+<img src="res/showcase.png" alt="sheets Library">
 
 # Get started
 The library contains various use-cases. Each module represents one use-case and contains a `*Dialog` and `*View`. You can use the `*Dialog` directly while you can use the `*View` for bottom sheets, popups and other non-scrollable elements.
@@ -92,7 +92,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 <!-- AUTO-GENERATED-SAMPLES-CONTENT:START -->
 <h2>Calendar</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -111,7 +111,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Clock</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -126,7 +126,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Color</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -145,7 +145,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Core</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -156,7 +156,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Date_time</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -175,7 +175,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Duration</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -190,7 +190,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Emoji</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -205,7 +205,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Info</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -216,7 +216,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Input</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -239,7 +239,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>List</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -262,7 +262,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>Option</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
@@ -281,7 +281,7 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </tr>
 </table>
 </br></br><h2>State</h2>
-<table style="border: none;" width="75%">
+<table style="border: none;" width="65%">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>

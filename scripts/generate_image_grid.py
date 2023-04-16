@@ -33,7 +33,7 @@ def generate_image_grid(image_directory):
         type_folder = image_directory / category
         logging.info(f"Processing category {category} from {type_folder}")
         output.append(f"<h2>{type_folder.name}</h2>\n")
-        output.append("<table style=\"border: none;\" width=\"75%\">\n")
+        output.append("<table style=\"border: none;\" width=\"65%\">\n")
         output.append("<tr>\n")
         output.append("<th style=\"text-align: center;\">Light</th>\n")
         output.append("<th style=\"text-align: center;\">Dark</th>\n")
@@ -84,7 +84,7 @@ def copy_readme_to_docs_res(root_folder: Path):
     destination = root_folder / "docs" / "README.md"
     with source.open() as f:
         readme_text = f.read()
-    readme_text = readme_text.replace("docs/res/sheets", "res/sheets")
+    readme_text = readme_text.replace("docs/res", "res")
     with destination.open("w") as f:
         f.write(readme_text)
 
