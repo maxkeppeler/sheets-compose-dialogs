@@ -92,7 +92,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 <!-- AUTO-GENERATED-SAMPLES-CONTENT:START -->
 <h2>Calendar</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/calendar/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -101,20 +102,20 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/calendar/light/CALENDAR_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample1.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/light/CALENDAR_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample1.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/calendar/light/CALENDAR_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample2.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/light/CALENDAR_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample2.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/calendar/light/CALENDAR_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample3.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/light/CALENDAR_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Calendar Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample3.kt" title="Code">Code</a></p> <img src="res/sheets/calendar/dark/CALENDAR_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -123,7 +124,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Clock</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/clock/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -132,14 +134,14 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/clock/light/CLOCK_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/clock/dark/CLOCK_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Clock Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ClockSample1.kt" title="Code">Code</a></p> <img src="res/sheets/clock/light/CLOCK_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Clock Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ClockSample1.kt" title="Code">Code</a></p> <img src="res/sheets/clock/dark/CLOCK_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/clock/light/CLOCK_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/clock/dark/CLOCK_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Clock Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ClockSample2.kt" title="Code">Code</a></p> <img src="res/sheets/clock/light/CLOCK_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Clock Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ClockSample2.kt" title="Code">Code</a></p> <img src="res/sheets/clock/dark/CLOCK_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -148,7 +150,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Color</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/color/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -157,20 +160,20 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/color/light/COLOR_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/color/dark/COLOR_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample1.kt" title="Code">Code</a></p> <img src="res/sheets/color/light/COLOR_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample1.kt" title="Code">Code</a></p> <img src="res/sheets/color/dark/COLOR_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/color/light/COLOR_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/color/dark/COLOR_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample2.kt" title="Code">Code</a></p> <img src="res/sheets/color/light/COLOR_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample2.kt" title="Code">Code</a></p> <img src="res/sheets/color/dark/COLOR_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/color/light/COLOR_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/color/dark/COLOR_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample3.kt" title="Code">Code</a></p> <img src="res/sheets/color/light/COLOR_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Color Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ColorSample3.kt" title="Code">Code</a></p> <img src="res/sheets/color/dark/COLOR_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -179,7 +182,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Core</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/core/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -188,8 +192,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/core/light/CORE_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/core/dark/CORE_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Core Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CoreSample1.kt" title="Code">Code</a></p> <img src="res/sheets/core/light/CORE_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Core Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CoreSample1.kt" title="Code">Code</a></p> <img src="res/sheets/core/dark/CORE_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -198,7 +202,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Date-Time</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/date_time/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -207,20 +212,20 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample1.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample1.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample2.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample2.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample3.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/light/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Date Time Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DateTimeSample3.kt" title="Code">Code</a></p> <img src="res/sheets/date_time/dark/DATE_TIME_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -229,7 +234,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Duration</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/duration/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -238,14 +244,14 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/duration/light/DURATION_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/duration/dark/DURATION_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Duration Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DurationSample1.kt" title="Code">Code</a></p> <img src="res/sheets/duration/light/DURATION_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Duration Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DurationSample1.kt" title="Code">Code</a></p> <img src="res/sheets/duration/dark/DURATION_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/duration/light/DURATION_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/duration/dark/DURATION_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Duration Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DurationSample2.kt" title="Code">Code</a></p> <img src="res/sheets/duration/light/DURATION_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Duration Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/DurationSample2.kt" title="Code">Code</a></p> <img src="res/sheets/duration/dark/DURATION_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -254,7 +260,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Emoji</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/emoji/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -263,14 +270,14 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/emoji/light/emoji_sample_1.png" /></td>
-<td width="25%"><img src="res/sheets/emoji/dark/emoji_sample_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Emoji Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/EmojiSample1.kt" title="Code">Code</a></p> <img src="res/sheets/emoji/light/emoji_sample_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Emoji Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/EmojiSample1.kt" title="Code">Code</a></p> <img src="res/sheets/emoji/dark/emoji_sample_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/emoji/light/emoji_sample_2.png" /></td>
-<td width="25%"><img src="res/sheets/emoji/dark/emoji_sample_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Emoji Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/EmojiSample2.kt" title="Code">Code</a></p> <img src="res/sheets/emoji/light/emoji_sample_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Emoji Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/EmojiSample2.kt" title="Code">Code</a></p> <img src="res/sheets/emoji/dark/emoji_sample_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -279,7 +286,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Info</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/info/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -288,8 +296,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/info/light/INFO_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/info/dark/INFO_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Info Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InfoSample1.kt" title="Code">Code</a></p> <img src="res/sheets/info/light/INFO_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Info Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InfoSample1.kt" title="Code">Code</a></p> <img src="res/sheets/info/dark/INFO_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -298,7 +306,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Input</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/input/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -307,26 +316,26 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/input/light/INPUT_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/input/dark/INPUT_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample1.kt" title="Code">Code</a></p> <img src="res/sheets/input/light/INPUT_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample1.kt" title="Code">Code</a></p> <img src="res/sheets/input/dark/INPUT_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/input/light/INPUT_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/input/dark/INPUT_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample2.kt" title="Code">Code</a></p> <img src="res/sheets/input/light/INPUT_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample2.kt" title="Code">Code</a></p> <img src="res/sheets/input/dark/INPUT_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/input/light/INPUT_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/input/dark/INPUT_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample3.kt" title="Code">Code</a></p> <img src="res/sheets/input/light/INPUT_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample3.kt" title="Code">Code</a></p> <img src="res/sheets/input/dark/INPUT_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/input/light/INPUT_SAMPLE_4.png" /></td>
-<td width="25%"><img src="res/sheets/input/dark/INPUT_SAMPLE_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample4.kt" title="Code">Code</a></p> <img src="res/sheets/input/light/INPUT_SAMPLE_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">Input Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/InputSample4.kt" title="Code">Code</a></p> <img src="res/sheets/input/dark/INPUT_SAMPLE_4.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -335,7 +344,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>List</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/list/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -344,26 +354,26 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/list/light/LIST_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/list/dark/LIST_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample1.kt" title="Code">Code</a></p> <img src="res/sheets/list/light/LIST_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample1.kt" title="Code">Code</a></p> <img src="res/sheets/list/dark/LIST_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/list/light/LIST_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/list/dark/LIST_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample2.kt" title="Code">Code</a></p> <img src="res/sheets/list/light/LIST_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample2.kt" title="Code">Code</a></p> <img src="res/sheets/list/dark/LIST_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/list/light/LIST_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/list/dark/LIST_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample3.kt" title="Code">Code</a></p> <img src="res/sheets/list/light/LIST_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample3.kt" title="Code">Code</a></p> <img src="res/sheets/list/dark/LIST_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/list/light/LIST_SAMPLE_4.png" /></td>
-<td width="25%"><img src="res/sheets/list/dark/LIST_SAMPLE_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample4.kt" title="Code">Code</a></p> <img src="res/sheets/list/light/LIST_SAMPLE_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">List Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/ListSample4.kt" title="Code">Code</a></p> <img src="res/sheets/list/dark/LIST_SAMPLE_4.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -372,7 +382,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>Option</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/option/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -381,20 +392,20 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/option/light/OPTION_SAMPLE_1.png" /></td>
-<td width="25%"><img src="res/sheets/option/dark/OPTION_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample1.kt" title="Code">Code</a></p> <img src="res/sheets/option/light/OPTION_SAMPLE_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample1.kt" title="Code">Code</a></p> <img src="res/sheets/option/dark/OPTION_SAMPLE_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/option/light/OPTION_SAMPLE_2.png" /></td>
-<td width="25%"><img src="res/sheets/option/dark/OPTION_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample2.kt" title="Code">Code</a></p> <img src="res/sheets/option/light/OPTION_SAMPLE_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample2.kt" title="Code">Code</a></p> <img src="res/sheets/option/dark/OPTION_SAMPLE_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/option/light/OPTION_SAMPLE_3.png" /></td>
-<td width="25%"><img src="res/sheets/option/dark/OPTION_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample3.kt" title="Code">Code</a></p> <img src="res/sheets/option/light/OPTION_SAMPLE_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">Option Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/OptionSample3.kt" title="Code">Code</a></p> <img src="res/sheets/option/dark/OPTION_SAMPLE_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
@@ -403,7 +414,8 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 
 <h2>State</h2>
-<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/state/index.html" title="Module Documentation">Module Documentation</a>
+</br>
 <table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
@@ -412,44 +424,44 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 <th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_1.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample1.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_1.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 1 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample1.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_1.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_2.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample2.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_2.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 2 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample2.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_2.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_3.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample3.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_3.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 3 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample3.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_3.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_4.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample4.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_4.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 4 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample4.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_4.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_5.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_5.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 5 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample5.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_5.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 5 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample5.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_5.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_6.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_6.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 6 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample6.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_6.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 6 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample6.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_6.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
 <tr>
-<td width="25%"><img src="res/sheets/state/light/state_sample_7.png" /></td>
-<td width="25%"><img src="res/sheets/state/dark/state_sample_7.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 7 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample7.kt" title="Code">Code</a></p> <img src="res/sheets/state/light/state_sample_7.png" /></td>
+<td width="25%"> <p style="text-align: center;">State Sample 7 <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/StateSample7.kt" title="Code">Code</a></p> <img src="res/sheets/state/dark/state_sample_7.png" /></td>
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>

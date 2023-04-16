@@ -1,18 +1,13 @@
-name: Update README.md with generated image grids
+name: Update README.md with images
 
-#on:
-#  push:
-#    branches:
-#      - update-readme
+on:
+  push:
+    branches:
+      - update-readme
 
 jobs:
   generate_image_grids:
     runs-on: macOS-latest
-
-    strategy:
-      fail-fast: false
-      matrix:
-        api-level: [29]
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK
@@ -26,15 +21,51 @@ jobs:
       - name: Gradle cache
         uses: gradle/gradle-build-action@v2
 
-      - name: Run CaptureDialogSamples Test
-        uses: ReactiveCircus/android-emulator-runner@v2.28.0
-        with:
-          emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
-          api-level: ${{ matrix.api-level }}
-          script: |
-            ./gradlew app:connectedCheck -Pandroid.testInstrumentationRunnerArguments.class=com.mk.sheets.sample_images.CaptureDialogSamples
-            adb pull /sdcard/Download/sheets ./docs/res/sheets
+      - name: Create Debug Keystore
+        run: |
+          keytool -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
 
+      - name: Move Debug Keystore to .android directory
+        run: |
+          mkdir -p ~/.android
+          mv debug.keystore ~/.android/debug.keystore
+
+      - name: Set Debug Keystore Environment Variables
+        run: |
+          echo "android.debug.keystore=$HOME/.android/debug.keystore" >> $GITHUB_ENV
+          echo "android.debug.keystore.password=android" >> $GITHUB_ENV
+          echo "android.debug.keyAlias=androiddebugkey" >> $GITHUB_ENV
+          echo "android.debug.keyAlias.password=android" >> $GITHUB_ENV
+
+      - name: Create AVD
+        run: |
+          echo 'yes' | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
+          $ANDROID_SDK_ROOT/emulator/emulator -version
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --update
+          $ANDROID_SDK_ROOT/emulator/emulator -version
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "emulator"
+          echo no | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd --name Pixel_5_API_30 --device "Nexus 6" --package "system-images;android-30;google_apis;x86_64" --abi "google_apis/x86_64" --force --sdcard 1024M
+
+      - name: Start Emulator
+        run: |
+          $ANDROID_SDK_ROOT/emulator/emulator -avd Pixel_5_API_30 -no-window -no-audio -no-snapshot -no-boot-anim &
+          ./android-wait-for-emulator.sh
+          adb devices
+        shell: /bin/bash -e {0}
+        env:
+          JAVA_HOME_11.0.18_x64: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          JAVA_HOME: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          JAVA_HOME_11_0_18_X64: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+          GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+
+      - name: Run CaptureDialogSamples Test
+        run: |
+          adb shell input keyevent 82 &
+          ./gradlew connectedCheck --debug -Pandroid.testInstrumentationRunnerArguments.class=com.mk.sheets.sample_images.CaptureDialogSamples
+          adb pull /sdcard/Download/sheets ./docs/res
+          
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
