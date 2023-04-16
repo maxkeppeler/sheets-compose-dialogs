@@ -92,272 +92,366 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 
 <!-- AUTO-GENERATED-SAMPLES-CONTENT:START -->
 <h2>Calendar</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/calendar/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/light/CALENDAR_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/calendar/dark/CALENDAR_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Clock</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/clock/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/clock/light/CLOCK_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/clock/dark/CLOCK_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/clock/light/CLOCK_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/clock/dark/CLOCK_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/clock/light/CLOCK_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/clock/dark/CLOCK_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/clock/light/CLOCK_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/clock/dark/CLOCK_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Color</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/color/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/light/COLOR_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/color/dark/COLOR_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Core</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/core/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/core/light/CORE_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/core/dark/CORE_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/core/light/CORE_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/core/dark/CORE_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Date-Time</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/date_time/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/light/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/date_time/dark/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Duration</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/duration/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/duration/light/DURATION_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/duration/dark/DURATION_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/duration/light/DURATION_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/duration/dark/DURATION_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/duration/light/DURATION_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/duration/dark/DURATION_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/duration/light/DURATION_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/duration/dark/DURATION_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Emoji</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/emoji/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/emoji/light/emoji_sample_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/emoji/dark/emoji_sample_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/emoji/light/emoji_sample_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/emoji/dark/emoji_sample_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/emoji/light/emoji_sample_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/emoji/dark/emoji_sample_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/emoji/light/emoji_sample_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/emoji/dark/emoji_sample_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Info</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/info/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/info/light/INFO_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/info/dark/INFO_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/info/light/INFO_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/info/dark/INFO_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Input</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/input/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_4.png" /></td>
-<td width="50%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/light/INPUT_SAMPLE_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/input/dark/INPUT_SAMPLE_4.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>List</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/list/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_4.png" /></td>
-<td width="50%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/light/LIST_SAMPLE_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/list/dark/LIST_SAMPLE_4.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>Option</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/option/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/light/OPTION_SAMPLE_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/option/dark/OPTION_SAMPLE_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>
 
 
 <h2>State</h2>
-[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/state/index.html)
-<table style="border: none;" width="65%">
+<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>
+<table style="border: none;">
 <tr>
 <th style="text-align: center;">Light</th>
 <th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_1.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_1.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_2.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_2.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_3.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_3.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_4.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_4.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_4.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_5.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_5.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_5.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_5.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_6.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_6.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_6.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_6.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 <tr>
-<td width="50%"><img src="docs/res/sheets/state/light/state_sample_7.png" /></td>
-<td width="50%"><img src="docs/res/sheets/state/dark/state_sample_7.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/light/state_sample_7.png" /></td>
+<td width="25%"><img src="docs/res/sheets/state/dark/state_sample_7.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
 </tr>
 </table>
 </br>

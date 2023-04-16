@@ -36,11 +36,13 @@ def generate_image_grid(image_directory):
 
         logging.info(f"Processing category {categoryName} from {type_folder}")
         output.append(f"<h2>{categoryName}</h2>\n")
-        output.append(f'[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html)\n')
-        output.append("<table style=\"border: none;\" width=\"65%\">\n")
+        output.append('<a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html" title="Module Documentation">Module Documentation</a>\n')
+        output.append("<table style=\"border: none;\">\n")
         output.append("<tr>\n")
         output.append("<th style=\"text-align: center;\">Light</th>\n")
         output.append("<th style=\"text-align: center;\">Dark</th>\n")
+        output.append("<th style=\"text-align: center;\"></th>\n")
+        output.append("<th style=\"text-align: center;\"></th>\n")
         output.append("</tr>\n")
 
         lightImagePath = type_folder / "light"
@@ -52,8 +54,10 @@ def generate_image_grid(image_directory):
         logging.info(f"Found {len(light_images)} light images and {len(dark_images)} dark images")
         for light_image, dark_image in zip(light_images, dark_images):
             output.append("<tr>\n")
-            output.append(f'<td width="50%"><img src="{lightImagePath / light_image.name}" /></td>\n')
-            output.append(f'<td width="50%"><img src="{darkImagePath / dark_image.name}" /></td>\n')
+            output.append(f'<td width="25%"><img src="{lightImagePath / light_image.name}" /></td>\n')
+            output.append(f'<td width="25%"><img src="{darkImagePath / dark_image.name}" /></td>\n')
+            output.append(f'<td width="25%"> </td>\n')
+            output.append(f'<td width="25%"> </td>\n')
             output.append("</tr>\n")
 
         output.append("</table>\n</br>\n\n\n")
