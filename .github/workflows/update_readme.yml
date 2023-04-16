@@ -1,9 +1,9 @@
 name: Update README.md with generated image grids
 
-on:
-  push:
-    branches:
-      - update-readme
+#on:
+#  push:
+#    branches:
+#      - update-readme
 
 jobs:
   generate_image_grids:
