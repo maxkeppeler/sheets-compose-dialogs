@@ -1,6 +1,7 @@
 package com.mk.sheets
 
 import android.graphics.Bitmap
+import android.os.Environment
 import android.util.Log
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.test.SemanticsNodeInteraction
@@ -21,8 +22,10 @@ internal fun saveScreenshotToFile(
     val bitmap: Bitmap = node.captureToImage().asAndroidBitmap()
 
     // Get the Downloads folder
-    val actualPath = "/sheets${path?.let { "/$it" }}"
-    val sheetsFolder = File(actualPath)
+    val downloadsFolder =
+        Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
+    val actualPath = "sheets${path?.let { "/$it" }}"
+    val sheetsFolder = File(downloadsFolder, actualPath)
 
     // Create the sheets directory if it doesn't exist
     if (!sheetsFolder.exists()) {

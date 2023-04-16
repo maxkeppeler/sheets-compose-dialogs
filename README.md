@@ -91,7 +91,231 @@ Check out some of the use-cases as dialogs. All of them can be displayed within 
 </br>
 
 <!-- AUTO-GENERATED-SAMPLES-CONTENT:START -->
-<!-- AUTO-GENERATED-SAMPLES-CONTENT:END -->
+<h2>Calendar</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Calendar/light/CALENDAR_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Calendar/dark/CALENDAR_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Calendar/light/CALENDAR_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Calendar/dark/CALENDAR_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Calendar/light/CALENDAR_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Calendar/dark/CALENDAR_SAMPLE_3.png" /></td>
+</tr>
+</table>
+</br></br><h2>Clock</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Clock/light/CLOCK_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Clock/dark/CLOCK_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Clock/light/CLOCK_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Clock/dark/CLOCK_SAMPLE_2.png" /></td>
+</tr>
+</table>
+</br></br><h2>Color</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Color/light/COLOR_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Color/dark/COLOR_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Color/light/COLOR_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Color/dark/COLOR_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Color/light/COLOR_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Color/dark/COLOR_SAMPLE_3.png" /></td>
+</tr>
+</table>
+</br></br><h2>Core</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Core/light/CORE_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Core/dark/CORE_SAMPLE_1.png" /></td>
+</tr>
+</table>
+</br></br><h2>Date_time</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Date_time/light/DATE_TIME_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Date_time/dark/DATE_TIME_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Date_time/light/DATE_TIME_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Date_time/dark/DATE_TIME_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Date_time/light/DATE_TIME_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Date_time/dark/DATE_TIME_SAMPLE_3.png" /></td>
+</tr>
+</table>
+</br></br><h2>Duration</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Duration/light/DURATION_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Duration/dark/DURATION_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Duration/light/DURATION_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Duration/dark/DURATION_SAMPLE_2.png" /></td>
+</tr>
+</table>
+</br></br><h2>Emoji</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Emoji/light/emoji_sample_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Emoji/dark/emoji_sample_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Emoji/light/emoji_sample_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Emoji/dark/emoji_sample_2.png" /></td>
+</tr>
+</table>
+</br></br><h2>Info</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Info/light/INFO_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Info/dark/INFO_SAMPLE_1.png" /></td>
+</tr>
+</table>
+</br></br><h2>Input</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Input/light/INPUT_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Input/dark/INPUT_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Input/light/INPUT_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Input/dark/INPUT_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Input/light/INPUT_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Input/dark/INPUT_SAMPLE_3.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Input/light/INPUT_SAMPLE_4.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Input/dark/INPUT_SAMPLE_4.png" /></td>
+</tr>
+</table>
+</br></br><h2>List</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/List/light/LIST_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/List/dark/LIST_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/List/light/LIST_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/List/dark/LIST_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/List/light/LIST_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/List/dark/LIST_SAMPLE_3.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/List/light/LIST_SAMPLE_4.png" /></td>
+<td width="50%"><img src="docs/res/sheets/List/dark/LIST_SAMPLE_4.png" /></td>
+</tr>
+</table>
+</br></br><h2>Option</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Option/light/OPTION_SAMPLE_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Option/dark/OPTION_SAMPLE_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Option/light/OPTION_SAMPLE_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Option/dark/OPTION_SAMPLE_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/Option/light/OPTION_SAMPLE_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/Option/dark/OPTION_SAMPLE_3.png" /></td>
+</tr>
+</table>
+</br></br><h2>State</h2>
+<table style="border: none;" width="75%">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_1.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_1.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_2.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_2.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_3.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_3.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_4.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_4.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_5.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_5.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_6.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_6.png" /></td>
+</tr>
+<tr>
+<td width="50%"><img src="docs/res/sheets/State/light/state_sample_7.png" /></td>
+<td width="50%"><img src="docs/res/sheets/State/dark/state_sample_7.png" /></td>
+</tr>
+</table>
+</br></br><!-- AUTO-GENERATED-SAMPLES-CONTENT:END -->
 
 ## Donate
 

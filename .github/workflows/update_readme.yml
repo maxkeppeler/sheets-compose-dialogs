@@ -32,11 +32,8 @@ jobs:
           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim -skin 500x833
           api-level: ${{ matrix.api-level }}
           script: |
-            mkdir -p sheets/test/dark/
-            ls -la 
-            adb root
             ./gradlew app:connectedCheck -Pandroid.testInstrumentationRunnerArguments.class=com.mk.sheets.sample_images.CaptureDialogSamples
-            adb pull /sheets ./docs/res/sheets
+            adb pull /sdcard/Download/sheets ./docs/res/sheets
 
       - name: Set up Python
         uses: actions/setup-python@v2

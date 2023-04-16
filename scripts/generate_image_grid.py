@@ -1,4 +1,6 @@
 import os
+import logging
+from pathlib import Path
 from pathlib import Path
 import re
 import shutil
@@ -11,11 +13,11 @@ def get_image_categories(image_directory):
     :param image_directory: The directory containing the image categories.
     :return: A list of image category names.
     """
-    return [
-        category
-        for category in os.listdir(image_directory)
-        if os.path.isdir(os.path.join(image_directory, category)) and not category.startswith("_")
-    ]
+    categories = []
+    for folder in sorted(image_directory.glob("*")):
+        if folder.is_dir() and not folder.name.startswith((".", "_")):
+            categories.append(folder.name.capitalize())
+    return categories
 
 def generate_image_grid(image_directory):
     """
@@ -24,19 +26,33 @@ def generate_image_grid(image_directory):
     :return: A list of strings, each representing a line in the image grid.
     """
     categories = get_image_categories(image_directory)
+    logging.info(f"Found {len(categories)} image categories: {categories}")
     output = []
 
     for category in categories:
         type_folder = image_directory / category
-        output.append(f"## {type_folder.name}\n")
-        output.append("| Light | Dark |\n")
-        output.append("| --- | --- |\n")
+        logging.info(f"Processing category {category} from {type_folder}")
+        output.append(f"<h2>{type_folder.name}</h2>\n")
+        output.append("<table style=\"border: none;\" width=\"75%\">\n")
+        output.append("<tr>\n")
+        output.append("<th style=\"text-align: center;\">Light</th>\n")
+        output.append("<th style=\"text-align: center;\">Dark</th>\n")
+        output.append("</tr>\n")
 
-        light_images = sorted((type_folder / "light").glob("*.png"))
-        dark_images = sorted((type_folder / "dark").glob("*.png"))
+        lightImagePath = type_folder / "light"
+        darkImagePath = type_folder / "dark"
 
+        light_images = sorted(lightImagePath.glob("*.png"))
+        dark_images = sorted(darkImagePath.glob("*.png"))
+
+        logging.info(f"Found {len(light_images)} light images and {len(dark_images)} dark images")
         for light_image, dark_image in zip(light_images, dark_images):
-            output.append(f"| ![Light]({light_image}) | ![Dark]({dark_image}) |\n")
+            output.append("<tr>\n")
+            output.append(f'<td width="50%"><img src="{lightImagePath / light_image.name}" /></td>\n')
+            output.append(f'<td width="50%"><img src="{darkImagePath / dark_image.name}" /></td>\n')
+            output.append("</tr>\n")
+
+        output.append("</table>\n</br></br>")
 
     return output
 
@@ -65,11 +81,16 @@ def copy_readme_to_docs_res(root_folder: Path):
     :param root_folder: The root folder containing the README.md file.
     """
     source = root_folder / "README.md"
-    destination = root_folder / ".." / "docs" / "res" / "README.md"
-    shutil.copy2(source, destination)
+    destination = root_folder / "docs" / "README.md"
+    with source.open() as f:
+        readme_text = f.read()
+    readme_text = readme_text.replace("docs/res/sheets", "res/sheets")
+    with destination.open("w") as f:
+        f.write(readme_text)
 
 if __name__ == "__main__":
     root_folder = Path("")
-    image_grids = "".join(generate_image_grid(root_folder))
+    image_folder = root_folder / "docs" / "res" / "sheets"
+    image_grids = "".join(generate_image_grid(image_folder))
     update_readme(root_folder, image_grids)
     copy_readme_to_docs_res(root_folder)
