@@ -16,7 +16,7 @@ def get_image_categories(image_directory):
     categories = []
     for folder in sorted(image_directory.glob("*")):
         if folder.is_dir() and not folder.name.startswith((".", "_")):
-            categories.append(folder.name.capitalize())
+            categories.append(folder.name)
     return categories
 
 def generate_image_grid(image_directory):
@@ -31,8 +31,12 @@ def generate_image_grid(image_directory):
 
     for category in categories:
         type_folder = image_directory / category
-        logging.info(f"Processing category {category} from {type_folder}")
-        output.append(f"<h2>{type_folder.name}</h2>\n")
+
+        categoryName = category.replace('_', '-').title()
+
+        logging.info(f"Processing category {categoryName} from {type_folder}")
+        output.append(f"<h2>{categoryName}</h2>\n")
+        output.append(f'[Module Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/{category}/index.html)\n')
         output.append("<table style=\"border: none;\" width=\"65%\">\n")
         output.append("<tr>\n")
         output.append("<th style=\"text-align: center;\">Light</th>\n")
@@ -52,7 +56,7 @@ def generate_image_grid(image_directory):
             output.append(f'<td width="50%"><img src="{darkImagePath / dark_image.name}" /></td>\n')
             output.append("</tr>\n")
 
-        output.append("</table>\n</br></br>")
+        output.append("</table>\n</br>\n\n\n")
 
     return output
 
