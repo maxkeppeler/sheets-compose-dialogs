@@ -46,6 +46,17 @@ internal class DurationState(
     val keys by mutableStateOf(getInputKeys(config))
     var valid by mutableStateOf(isValid())
 
+    init {
+        checkSetup()
+    }
+
+    private fun checkSetup() {
+        if((config.currentTime ?: 0) < 0L) throw IllegalStateException("Please correct your setup. The current time must be greater than or equals 0.")
+        if(config.minTime < 0L) throw IllegalStateException("Please correct your setup. The min time must be greater than or equals 0.")
+        if(config.maxTime < 0L) throw IllegalStateException("Please correct your setup. The max time must be greater than or equals 0.")
+        if(config.minTime > config.maxTime) throw IllegalStateException("Please correct your setup. The min time must be less than or equals the max time.")
+    }
+
     private fun getInitTimeTextValue(): StringBuilder {
         return parseCurrentTime(config.timeFormat, config.currentTime)
     }
