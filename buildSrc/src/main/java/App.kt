@@ -10,4 +10,5 @@ object App {
     const val VERSION_NAME = "1.1.1"
 
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
+
 }

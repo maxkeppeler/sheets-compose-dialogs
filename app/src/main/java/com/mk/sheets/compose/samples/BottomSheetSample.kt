@@ -18,21 +18,10 @@
 package com.mk.sheets.compose.samples
 
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetLayout
 import androidx.compose.material.ModalBottomSheetState
-import androidx.compose.material.ModalBottomSheetValue
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
-import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
-import com.maxkeppeler.sheets.calendar.CalendarView
-import com.maxkeppeler.sheets.calendar.models.CalendarConfig
-import com.maxkeppeler.sheets.calendar.models.CalendarSelection
-import com.maxkeppeler.sheets.calendar.models.CalendarStyle
-import kotlinx.coroutines.launch
 
 @Composable
 fun BottomSheetSample(
@@ -40,36 +29,36 @@ fun BottomSheetSample(
     screenContent: @Composable () -> Unit,
 ) {
     val coroutine = rememberCoroutineScope()
-    val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
-    val useCaseState =
-        rememberUseCaseState(visible = true, onCloseRequest = { hideBottomSheet(); })
+//    val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
+//    val useCaseState =
+//        rememberUseCaseState(visible = true, onCloseRequest = { hideBottomSheet(); })
 
-    LaunchedEffect(state.currentValue) {
-        when (state.currentValue) {
-            ModalBottomSheetValue.Hidden,
-            ModalBottomSheetValue.Expanded -> {
-                useCaseState.invokeReset() // Manually reset internal state if required
-            }
-            ModalBottomSheetValue.HalfExpanded -> Unit
+//    LaunchedEffect(state.currentValue) {
+//        when (state.currentValue) {
+//            ModalBottomSheetValue.Hidden,
+//            ModalBottomSheetValue.Expanded -> {
+////                useCaseState.invokeReset() // Manually reset internal state if required
+//            }
+//            ModalBottomSheetValue.HalfExpanded -> Unit
+//
+//        }
+//    }
 
-        }
-    }
-
-    ModalBottomSheetLayout(
-        content = screenContent,
-        sheetState = state,
-        sheetContent = {
-            Surface(
-                color = MaterialTheme.colorScheme.surface,
-            ) {
-                CalendarView(
-                    useCaseState = useCaseState,
-                    config = CalendarConfig(
-                        style = CalendarStyle.WEEK
-                    ),
-                    selection = CalendarSelection.Dates {},
-                )
-            }
-        }
-    )
+//    ModalBottomSheetLayout(
+//        content = screenContent,
+//        sheetState = state,
+//        sheetContent = {
+//            Surface(
+//                color = MaterialTheme.colorScheme.surface,
+//            ) {
+//                CalendarView(
+//                    useCaseState = useCaseState,
+//                    config = CalendarConfig(
+//                        style = CalendarStyle.WEEK
+//                    ),
+//                    selection = CalendarSelection.Dates {},
+//                )
+//            }
+//        }
+//    )
 }

@@ -1,0 +1,97 @@
+name: Update README.md with images
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate_image_grids:
+    runs-on: macOS-latest
+    if: false # Disabled as workflow does not work yet, screenshot test & python script is executed locally to update README with images.
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up JDK
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
+      - name: Install ADB
+        run: brew install android-platform-tools
+
+      - name: Gradle cache
+        uses: gradle/gradle-build-action@v2
+
+      - name: Create Debug Keystore
+        run: |
+          keytool -genkeypair -alias androiddebugkey -keypass android -keystore debug.keystore -storepass android -dname "CN=Android Debug,O=Android,C=US" -keyalg RSA -keysize 2048 -validity 10000
+
+      - name: Move Debug Keystore to .android directory
+        run: |
+          mkdir -p ~/.android
+          mv debug.keystore ~/.android/debug.keystore
+
+      - name: Set Debug Keystore Environment Variables
+        run: |
+          echo "android.debug.keystore=$HOME/.android/debug.keystore" >> $GITHUB_ENV
+          echo "android.debug.keystore.password=android" >> $GITHUB_ENV
+          echo "android.debug.keyAlias=androiddebugkey" >> $GITHUB_ENV
+          echo "android.debug.keyAlias.password=android" >> $GITHUB_ENV
+
+      - name: Create AVD
+        run: |
+          echo 'yes' | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "system-images;android-30;google_apis;x86_64"
+          $ANDROID_SDK_ROOT/emulator/emulator -version
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager --update
+          $ANDROID_SDK_ROOT/emulator/emulator -version
+          $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager "emulator"
+          echo no | $ANDROID_SDK_ROOT/cmdline-tools/latest/bin/avdmanager create avd --name Pixel_5_API_30 --device "Nexus 6" --package "system-images;android-30;google_apis;x86_64" --abi "google_apis/x86_64" --force --sdcard 1024M
+
+      - name: Start Emulator
+        run: |
+          $ANDROID_SDK_ROOT/emulator/emulator -avd Pixel_5_API_30 -no-window -no-audio -no-snapshot -no-boot-anim &
+          ./scripts/android-wait-for-emulator.sh
+          adb devices
+        shell: /bin/bash -e {0}
+        env:
+          JAVA_HOME_11.0.18_x64: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          JAVA_HOME: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          JAVA_HOME_11_0_18_X64: /Users/runner/hostedtoolcache/jdk/11.0.18/x64
+          GRADLE_BUILD_ACTION_SETUP_COMPLETED: true
+          GRADLE_BUILD_ACTION_CACHE_RESTORED: true
+
+      - name: Run CaptureDialogSamples Test
+        run: |
+          adb shell input keyevent 82 &
+          ./gradlew connectedCheck --debug -Pandroid.testInstrumentationRunnerArguments.class=com.mk.sheets.sample_images.CaptureDialogSamples
+          adb pull /sdcard/Download/sheets ./docs/res
+          
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.x
+
+      - name: Install Pillow
+        run: pip install Pillow
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Generate image grid in README
+        run: |
+          python3 scripts/generate_image_grid.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config user.name "README Bot"
+          git config user.email "<>"
+          git add README.md
+          git add docs/res/sheets
+          git add docs/README.md
+          git commit -m "Update README.md"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -6,8 +6,8 @@ object Versions {
 
     // Compose
 
-    const val COMPOSE_BOM = "2023.01.00"
-    const val COMPOSE = "1.3.3"
+    const val COMPOSE_BOM = "2023.04.00"
+    const val COMPOSE = "1.4.1"
     const val COMPOSE_COMPILER = "1.4.3"
 
     // AndroidX
@@ -32,4 +32,6 @@ object Versions {
 
     const val JUNIT = "4.13.2"
     const val ESPRESSO_CORE = "3.4.0"
+    const val TEST_CORE = "1.5.0"
+    const val TEST_RUNNER = "1.5.2"
 }
