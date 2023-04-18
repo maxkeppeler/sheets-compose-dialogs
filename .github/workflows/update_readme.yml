@@ -3,11 +3,12 @@ name: Update README.md with images
 on:
   push:
     branches:
-      - update-readme
+      - main
 
 jobs:
   generate_image_grids:
     runs-on: macOS-latest
+    if: false # Disabled as workflow does not work yet, screenshot test & python script is executed locally to update README with images.
     steps:
       - uses: actions/checkout@v2
       - name: set up JDK
@@ -50,7 +51,7 @@ jobs:
       - name: Start Emulator
         run: |
           $ANDROID_SDK_ROOT/emulator/emulator -avd Pixel_5_API_30 -no-window -no-audio -no-snapshot -no-boot-anim &
-          ./android-wait-for-emulator.sh
+          ./scripts/android-wait-for-emulator.sh
           adb devices
         shell: /bin/bash -e {0}
         env:
