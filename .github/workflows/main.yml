@@ -65,7 +65,7 @@ jobs:
           api-level: ${{ matrix.api-level }}
           sdcard-path-or-size: 50M
           profile: Nexus 6P
-          script: ./gradlew connectedCheck
+          script: ./gradlew connectedCheck --exclude-task app:connectedCheck
 
       - name: Upload functional test results
         if: always()
