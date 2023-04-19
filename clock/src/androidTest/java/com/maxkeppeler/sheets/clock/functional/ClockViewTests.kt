@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.clock.functional
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.assertIsEnabled
+import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -45,30 +46,7 @@ class ClockViewTests {
     val rule = createComposeRule()
 
     @Test
-    fun clockView24HourFormatSelectionSuccess() {
-        val testTime = LocalTime.of(10, 30)
-        var selectedTime: LocalTime? = null
-        rule.setContentAndWaitForIdle {
-            ClockView(
-                useCaseState = UseCaseState(visible = true),
-                selection = ClockSelection.HoursMinutes { hours, minutes ->
-                    selectedTime = LocalTime.of(hours, minutes)
-                },
-                config = ClockConfig(is24HourFormat = true)
-            )
-        }
-        listOf(1, 0, 3, 0).forEach {
-            runBlocking {
-                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
-                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
-            }
-        }
-        rule.onPositiveButton().performClick()
-        assert(selectedTime == testTime)
-    }
-
-    @Test
-    fun clockView12HourFormatAmSelectionSuccess() {
+    fun clockView_12HourFormat_amSelection_success() {
         val testTime = LocalTime.of(10, 30)
         var selectedTime: LocalTime? = null
         rule.setContentAndWaitForIdle {
@@ -95,7 +73,7 @@ class ClockViewTests {
     }
 
     @Test
-    fun clockView12HourFormatPmSelectionSuccess() {
+    fun clockView_12HourFormat_pmSelection_success() {
         val testTime = LocalTime.of(20, 30)
         var selectedTime: LocalTime? = null
         rule.setContentAndWaitForIdle {
@@ -122,7 +100,7 @@ class ClockViewTests {
     }
 
     @Test
-    fun clockViewSelectionAlwaysValid() {
+    fun clockView_12HourFormat_selectionAlwaysValid() {
         rule.setContentAndWaitForIdle {
             ClockView(
                 useCaseState = UseCaseState(visible = true),
@@ -130,5 +108,281 @@ class ClockViewTests {
             )
         }
         rule.onPositiveButton().assertIsEnabled()
+    }
+
+    @Test
+    fun clockView_12HourFormat_boundaries_within() {
+        val testTime = LocalTime.of(10, 30)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(
+                    boundary = LocalTime.of(9, 0)..LocalTime.of(11, 0),
+                    is24HourFormat = false
+                )
+            )
+        }
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            listOf(1, 0, 3, 0).forEach {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().assertIsEnabled()
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == testTime)
+    }
+
+    @Test
+    fun clockView_12HourFormat_boundaries_outside() {
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes -> },
+                config = ClockConfig(
+                    boundary = LocalTime.of(1, 0)..LocalTime.of(11, 0),
+                    is24HourFormat = false
+                )
+            )
+        }
+
+        runBlocking {
+            listOf(1, 2, 0, 0).forEach {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
+        rule.onPositiveButton().assertIsNotEnabled()
+    }
+
+    @Test
+    fun clockView_12HourFormat_defaultTime_setCorrectly() {
+        val defaultTime = LocalTime.of(10, 30)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(
+                    defaultTime = defaultTime,
+                    is24HourFormat = false
+                )
+            )
+        }
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == defaultTime)
+    }
+
+    @Test
+    fun clockView_12HourFormat_defaultTime_notInBoundary_throwsException() {
+        val defaultTime = LocalTime.of(10, 30)
+        val boundary = LocalTime.of(11, 0)..LocalTime.of(12, 0)
+        val result = runCatching {
+            rule.setContentAndWaitForIdle {
+                ClockView(
+                    useCaseState = UseCaseState(visible = true),
+                    selection = ClockSelection.HoursMinutes { _, _ -> },
+                    config = ClockConfig(
+                        defaultTime = defaultTime,
+                        boundary = boundary,
+                        is24HourFormat = false
+                    )
+                )
+            }
+        }
+        assert(result.isFailure)
+    }
+
+    @Test
+    fun clockView_12HourFormat_boundary_inverted_throwsException() {
+        val result = runCatching {
+            rule.setContentAndWaitForIdle {
+                ClockView(
+                    useCaseState = UseCaseState(visible = true),
+                    selection = ClockSelection.HoursMinutes { _, _ -> },
+                    config = ClockConfig(
+                        boundary = LocalTime.of(10, 0)..LocalTime.of(5, 0),
+                        is24HourFormat = false
+                    ),
+                )
+            }
+        }
+        assert(result.isFailure)
+    }
+
+    @Test
+    fun clockView_12HourFormat_boundary_startBoundaryInclusive() {
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                },
+                config = ClockConfig(
+                    boundary = LocalTime.of(5, 30)..LocalTime.of(6, 0),
+                    is24HourFormat = false
+                ),
+            )
+        }
+        listOf(5, 3, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+            runBlocking {
+                rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().assertIsEnabled()
+    }
+
+    @Test
+    fun clockView_12HourFormat_boundary_endBoundaryInclusive() {
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                },
+                config = ClockConfig(
+                    boundary = LocalTime.of(5, 30)..LocalTime.of(6, 0),
+                    is24HourFormat = false
+                ),
+            )
+        }
+        listOf(6, 0, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick()
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
+        rule.onPositiveButton().assertIsEnabled()
+    }
+
+    @Test
+    fun clockView_24HourFormat_selection_success() {
+        val testTime = LocalTime.of(10, 30)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(is24HourFormat = true)
+            )
+        }
+        listOf(1, 0, 3, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == testTime)
+    }
+
+    @Test
+    fun clockView_24HourFormat_unsupportedConfigurations_throwsException() {
+        val result = runCatching {
+            rule.setContentAndWaitForIdle {
+                ClockView(
+                    useCaseState = UseCaseState(visible = true),
+                    selection = ClockSelection.HoursMinutes { _, _ -> },
+                    config = ClockConfig(
+                        defaultTime = LocalTime.of(4, 0),
+                        boundary = LocalTime.of(5, 0)..LocalTime.of(10, 0),
+                        is24HourFormat = true,
+                    ),
+                )
+            }
+        }
+        assert(result.isFailure)
+    }
+
+    @Test
+    fun clockView_24HourFormat_boundaries_within() {
+        val testTime = LocalTime.of(10, 30)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(
+                    boundary = LocalTime.of(9, 0)..LocalTime.of(11, 0),
+                    is24HourFormat = true
+                )
+            )
+        }
+        listOf(1, 0, 3, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().assertIsEnabled()
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == testTime)
+    }
+
+    @Test
+    fun clockView_24HourFormat_boundary_singleValue() {
+        val testTime = LocalTime.of(8, 0)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(
+                    is24HourFormat = true,
+                    boundary = LocalTime.of(8, 0)..LocalTime.of(8, 0),
+                ),
+            )
+        }
+        listOf(8, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == testTime)
+    }
+
+    @Test
+    fun clockView_24HourFormat_boundary_correctlyLimitsSelection() {
+        val boundary = LocalTime.of(11, 0)..LocalTime.of(12, 0)
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                },
+                config = ClockConfig(boundary = boundary, is24HourFormat = true)
+            )
+        }
+        listOf(1, 0, 0, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        rule.onPositiveButton().assertIsNotEnabled()
     }
 }
