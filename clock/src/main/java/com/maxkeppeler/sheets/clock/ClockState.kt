@@ -56,6 +56,17 @@ internal class ClockState(
     var disabledKeys by mutableStateOf(getCurrentDisabledKeys())
     var valid by mutableStateOf(isValid())
 
+    init {
+        checkSetup()
+    }
+
+    private fun checkSetup() {
+        if (config.defaultTime != null && config.boundary != null && (config.defaultTime !in config.boundary))
+            throw IllegalStateException("Please correct your setup. The default time must be in the boundary.")
+        if(config.boundary != null && config.boundary.start > config.boundary.endInclusive)
+            throw IllegalStateException("Please correct your setup. The start time must be before the end time.")
+    }
+
     private val debouncer = Debouncer(Constants.DEBOUNCE_KEY_CLICK_DURATION)
 
     private fun isValid(): Boolean = config.boundary?.let { time in it } ?: true
