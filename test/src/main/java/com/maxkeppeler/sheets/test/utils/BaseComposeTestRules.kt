@@ -28,6 +28,8 @@ fun ComposeContentTestRule.setContentAndWaitForIdle(content: @Composable () -> U
 
 fun ComposeTestRule.onDialog() = onNodeWithTag(TestTags.DIALOG_BASE_CONTENT)
 
+fun ComposeTestRule.onPopup() = onNodeWithTag(TestTags.POPUP_BASE_CONTENT)
+
 fun ComposeTestRule.onView() = onNodeWithTag(TestTags.FRAME_BASE_CONTENT)
 
 fun ComposeTestRule.onExtraButton() = onNodeWithTag(TestTags.BUTTON_EXTRA)

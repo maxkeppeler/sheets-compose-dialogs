@@ -24,6 +24,9 @@ object TestTags {
      *  Test tags for CoreView
      */
 
+    const val POPUP_BASE_CONTAINER = "popup_base_container"
+    const val POPUP_BASE_CONTENT = "popup_base_content"
+
     const val DIALOG_BASE_CONTAINER = "dialog_base_container"
     const val DIALOG_BASE_CONTENT = "dialog_base_content"
 

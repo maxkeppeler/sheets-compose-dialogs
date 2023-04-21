@@ -20,17 +20,17 @@ package com.mk.sheets.compose
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.mk.sheets.compose.samples.PopupSample
 
 @Composable
 internal fun ShowcasePopupScreen() {
 
-    var showPopup by rememberSaveable { mutableStateOf(false) }
+    val popupState = rememberUseCaseState(false)
     Column(
         Modifier.fillMaxSize(),
         verticalArrangement = Arrangement.Center,
@@ -38,7 +38,7 @@ internal fun ShowcasePopupScreen() {
     ) {
 
         ElevatedButton(
-            onClick = { showPopup = true }
+            onClick = { popupState.show() }
         ) {
             Text(text = "Show PopUp")
         }
@@ -50,10 +50,7 @@ internal fun ShowcasePopupScreen() {
             textAlign = TextAlign.Center
         )
 
-        PopupSample(
-            visible = showPopup,
-            onHide = { showPopup = false }
-        )
+        PopupSample(popupState)
     }
 }
 
