@@ -15,7 +15,6 @@
  */
 plugins {
     id(Plugins.CUSTOM_LIBRARY_MODULE.id)
-    id("maven-publish")
 }
 
 android {

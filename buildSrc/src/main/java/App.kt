@@ -7,7 +7,7 @@ object App {
     const val TARGET_SDK = 33
 
     const val VERSION_CODE = 11
-    const val VERSION_NAME = "1.1.2"
+    const val VERSION_NAME = "1.1.1"
 
     const val TEST_INSTRUMENTATION_RUNNER = "androidx.test.runner.AndroidJUnitRunner"
 
