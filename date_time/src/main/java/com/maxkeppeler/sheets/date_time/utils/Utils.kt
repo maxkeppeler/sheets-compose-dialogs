@@ -120,10 +120,9 @@ internal fun getInitTypeValues(
         options[UnitType.HOUR]?.getOrNull(hour)
     }
 
-    val year =
-        dateSelection?.let { date -> options[UnitType.YEAR]?.let { it.firstOrNull { it.value == date.year } } }
-    val month = dateSelection?.let { options[UnitType.MONTH]?.getOrNull(it.monthValue) }
-    val day = dateSelection?.let { options[UnitType.DAY]?.getOrNull(it.dayOfMonth) }
+    val year = dateSelection?.let { date -> options[UnitType.YEAR]?.let { it.firstOrNull { it.value == date.year } } }
+    val month = dateSelection?.let { options[UnitType.MONTH]?.getOrNull(it.monthValue.minus(1)) }
+    val day = dateSelection?.let { options[UnitType.DAY]?.getOrNull(it.dayOfMonth.minus(1)) }
 
     return mutableMapOf(
         // Date
