@@ -15,16 +15,42 @@
  */
 package com.maxkeppeler.sheets.calendar
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.maxkeppeker.sheets.core.views.BaseTypeState
-import com.maxkeppeler.sheets.calendar.models.*
-import com.maxkeppeler.sheets.calendar.utils.*
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarData
+import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
+import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.utils.Constants
+import com.maxkeppeler.sheets.calendar.utils.calcCalendarData
+import com.maxkeppeler.sheets.calendar.utils.calcMonthData
+import com.maxkeppeler.sheets.calendar.utils.dateValue
+import com.maxkeppeler.sheets.calendar.utils.datesValue
+import com.maxkeppeler.sheets.calendar.utils.endOfMonth
+import com.maxkeppeler.sheets.calendar.utils.endOfWeek
+import com.maxkeppeler.sheets.calendar.utils.endValue
+import com.maxkeppeler.sheets.calendar.utils.initialCameraDate
+import com.maxkeppeler.sheets.calendar.utils.jumpNext
+import com.maxkeppeler.sheets.calendar.utils.jumpPrev
+import com.maxkeppeler.sheets.calendar.utils.rangeValue
+import com.maxkeppeler.sheets.calendar.utils.startOfMonth
+import com.maxkeppeler.sheets.calendar.utils.startOfWeek
+import com.maxkeppeler.sheets.calendar.utils.startOfWeekOrMonth
+import com.maxkeppeler.sheets.calendar.utils.startValue
 import java.io.Serializable
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.util.Locale
+
 
 /**
  * Handles the calendar state.
@@ -185,7 +211,12 @@ internal class CalendarState(
     }
 
     fun onYearClick(year: Int) {
-        var newDate = cameraDate.withYear(year)
+        var newDate = if (config.locale.language == Locale("th").language) {
+            cameraDate.withYear(year - 543)
+        } else {
+            cameraDate.withYear(year)
+        }
+
         // Check if current new date would be within the boundary otherwise reset to month within boundary
         newDate = when {
             newDate.isBefore(config.boundary.start) ->

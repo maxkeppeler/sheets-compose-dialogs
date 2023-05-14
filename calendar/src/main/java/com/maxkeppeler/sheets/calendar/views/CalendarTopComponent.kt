@@ -39,7 +39,9 @@ import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import java.time.LocalDate
+import java.time.chrono.ThaiBuddhistChronology
 import java.time.format.DateTimeFormatter
+import java.util.Locale
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -170,9 +172,20 @@ internal fun CalendarTopComponent(
                     },
                 verticalAlignment = Alignment.CenterVertically
             ) {
+                val cameraDateFormatter = remember(config.locale) {
+                    if (config.locale.language == Locale("th").language) {
+                        DateTimeFormatter
+                            .ofPattern("yyyy")
+                            .withLocale(Locale("th"))
+                            .withChronology(ThaiBuddhistChronology.INSTANCE)
+                    } else {
+                        DateTimeFormatter.ofPattern("yyyy")
+                    }
+                }
+
                 Text(
                     modifier = selectableItemModifier,
-                    text = cameraDate.format(DateTimeFormatter.ofPattern("yyyy")),
+                    text = cameraDate.format(cameraDateFormatter),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
                 )
