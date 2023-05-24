@@ -52,8 +52,9 @@ internal fun OptionItemComponent(
     val backgroundColor = if (option.selected) MaterialTheme.colorScheme.secondaryContainer
     else MaterialTheme.colorScheme.surfaceVariant
 
-    val iconColor = if (option.selected) MaterialTheme.colorScheme.primary
-    else MaterialTheme.colorScheme.onSurface
+    val iconColor = if (option.selected) option.icon?.selectedTint ?: option.icon?.tint
+    ?: MaterialTheme.colorScheme.primary
+    else option.icon?.tint ?: MaterialTheme.colorScheme.onSurface
 
     val textColor = if (option.selected) MaterialTheme.colorScheme.primary
     else MaterialTheme.colorScheme.onSurface
