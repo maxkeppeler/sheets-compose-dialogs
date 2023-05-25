@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scd_calendar_dialog_select_month">选择月份</string>
+    <string name="scd_calendar_dialog_next_month">下个月</string>
+    <string name="scd_calendar_dialog_prev_month">上个月</string>
+    <string name="scd_calendar_dialog_next_week">下周</string>
+    <string name="scd_calendar_dialog_prev_week">上周</string>
+    <string name="scd_calendar_dialog_select_year">选择年份</string>
+</resources>
