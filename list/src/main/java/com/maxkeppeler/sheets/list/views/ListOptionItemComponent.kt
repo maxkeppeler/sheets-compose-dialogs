@@ -18,7 +18,12 @@ package com.maxkeppeler.sheets.list.views
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -58,8 +63,9 @@ internal fun ListOptionItemComponent(
         if (!showSelectionView && option.selected) MaterialTheme.colorScheme.secondaryContainer
         else MaterialTheme.colorScheme.surfaceVariant
 
-    val iconColor = if (!showSelectionView && option.selected) MaterialTheme.colorScheme.primary
-    else MaterialTheme.colorScheme.onSurface
+    val iconColor = if (option.selected) option.icon?.selectedTint ?: option.icon?.tint
+    ?: MaterialTheme.colorScheme.primary
+    else option.icon?.tint ?: MaterialTheme.colorScheme.onSurface
 
     val textColor = if (!showSelectionView && option.selected) MaterialTheme.colorScheme.primary
     else MaterialTheme.colorScheme.onSurface

@@ -6,7 +6,7 @@ object Versions {
 
     // Compose
 
-    const val COMPOSE_BOM = "2023.04.00"
+    const val COMPOSE_BOM = "2023.04.01"
     const val COMPOSE = "1.4.1"
     const val COMPOSE_COMPILER = "1.4.3"
 
