@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="scd_calendar_dialog_select_month">Выбрать месяц</string>
+    <string name="scd_calendar_dialog_next_month">Следующий месяц</string>
+    <string name="scd_calendar_dialog_prev_month">Предыдущий месяц</string>
+    <string name="scd_calendar_dialog_next_week">Следующая неделя</string>
+    <string name="scd_calendar_dialog_prev_week">Предыдущая неделя</string>
+    <string name="scd_calendar_dialog_select_year">Выбрать год</string>
+</resources>
