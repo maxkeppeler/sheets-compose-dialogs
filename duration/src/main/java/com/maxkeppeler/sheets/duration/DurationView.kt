@@ -110,7 +110,7 @@ fun DurationView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = durationState::onFinish,
-            onClose = useCaseState::finish,
+            state = useCaseState,
         )
     }
 }

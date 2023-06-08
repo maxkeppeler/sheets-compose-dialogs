@@ -27,7 +27,7 @@ import com.maxkeppeker.sheets.core.views.base.FrameBase
 
 /**
  * Core view that functions as the base of a custom use-case.
- * @param useCaseState The state of the sheet.
+ * @param useCaseState The use-case state.
  * @param selection The selection configuration for the dialog view.
  * @param header The header to be displayed at the top of the dialog view.
  * @param body The body content to be displayed inside the dialog view.
@@ -48,13 +48,14 @@ fun CoreView(
         layout = { body() },
         buttonsVisible = selection.withButtonView
     ) {orientation ->
+
         ButtonsComponent(
+            state = useCaseState,
             orientation = orientation,
             onPositiveValid = onPositiveValid,
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = { selection.onPositiveClick?.invoke() },
-            onClose = useCaseState::finish
         )
     }
 }

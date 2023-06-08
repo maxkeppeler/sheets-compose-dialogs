@@ -94,7 +94,7 @@ fun OptionView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = optionState::onFinish,
-            onClose = useCaseState::finish,
+            state = useCaseState,
         )
     }
 }

@@ -23,6 +23,13 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the core dialog.
+ * @param withButtonView Whether the button view should be shown or not.
+ * @param extraButton An extra button that can be used for a custom action.
+ * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
+ * @param negativeButton The button that will be used as a negative button.
+ * @param onNegativeClick The listener that is invoked when the negative button is clicked.
+ * @param positiveButton The button that will be used as a positive button.
+ * @param onPositiveClick The listener that is invoked when the positive button is clicked.
  */
 class CoreSelection(
     override val withButtonView: Boolean = true,

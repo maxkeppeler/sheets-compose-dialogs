@@ -90,7 +90,7 @@ fun ListView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = listState::onFinish,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

@@ -24,6 +24,8 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the info dialog.
+ * @param input The list of inputs that will be displayed.
+ * @param withButtonView If `true` the dialog will have a button view.
  * @param extraButton An extra button that can be used for a custom action.
  * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
  * @param negativeButton The button that will be used as a negative button.
@@ -33,6 +35,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  */
 class InputSelection(
     val input: List<Input>,
+    override val withButtonView: Boolean = true,
     override val extraButton: SelectionButton? = null,
     override val onExtraButtonClick: (() -> Unit)? = null,
     override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,

@@ -138,7 +138,7 @@ fun DateTimeView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = state::onFinish,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

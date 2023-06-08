@@ -15,8 +15,19 @@
  */
 package com.maxkeppeker.sheets.core.views
 
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.Button
+import androidx.compose.material3.ElevatedButton
+import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -27,34 +38,54 @@ import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.ButtonStyle
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R
 
 /**
- * Header component of the dialog.
+ * Buttons component.
+ * @param state The use-case state.
  * @param orientation The orientation configuration for the dialog.
  * @param selection The selection configuration for the dialog.
  * @param onPositive Listener that is invoked when the positive button is clicked.
  * @param onNegative Listener that is invoked when the negative button is clicked.
  * @param onPositiveValid If the positive button is valid and therefore enabled.
  */
-@ExperimentalMaterial3Api
 @Composable
 fun ButtonsComponent(
+    state: UseCaseState,
     orientation: LibOrientation,
     selection: BaseSelection,
     onPositive: () -> Unit,
     onNegative: () -> Unit,
-    onClose: () -> Unit,
     onPositiveValid: Boolean = true,
 ) {
+
+    val positiveAction = {
+        if (onPositiveValid) {
+            onPositive()
+            state.finish()
+            true
+        } else false
+    }
+
+    val negativeAction = {
+        onNegative()
+        state.finish()
+    }
+
+    state.setManualActions(
+        positiveAction = positiveAction,
+        negativeAction = negativeAction
+    )
 
     val buttonPadding = when (orientation) {
         LibOrientation.PORTRAIT -> Modifier
             .padding(top = dimensionResource(id = R.dimen.scd_normal_150))
             .padding(bottom = dimensionResource(id = R.dimen.scd_normal_150))
             .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_150))
+
         LibOrientation.LANDSCAPE -> Modifier
             .padding(top = dimensionResource(id = R.dimen.scd_small_100))
             .padding(bottom = dimensionResource(id = R.dimen.scd_small_100))
@@ -85,7 +116,7 @@ fun ButtonsComponent(
                     .wrapContentWidth()
                     .padding(horizontal = dimensionResource(id = R.dimen.scd_normal_100)),
                 button = negativeButton,
-                onClick = { onNegative(); onClose() },
+                onClick = negativeAction,
                 testTag = TestTags.BUTTON_NEGATIVE,
             )
         }
@@ -94,7 +125,7 @@ fun ButtonsComponent(
             modifier = Modifier
                 .wrapContentWidth(),
             button = selection.positiveButton,
-            onClick = { onPositive(); onClose() },
+            onClick = { positiveAction() },
             enabled = onPositiveValid,
             testTag = TestTags.BUTTON_POSITIVE,
         )
@@ -144,6 +175,7 @@ private fun SelectionButtonComponent(
                 enabled = enabled,
                 content = buttonContent
             )
+
         ButtonStyle.FILLED ->
             Button(
                 modifier = modifier.testTag(testTag),
@@ -151,6 +183,7 @@ private fun SelectionButtonComponent(
                 enabled = enabled,
                 content = buttonContent
             )
+
         ButtonStyle.ELEVATED ->
             ElevatedButton(
                 modifier = modifier.testTag(testTag),
@@ -158,6 +191,7 @@ private fun SelectionButtonComponent(
                 enabled = enabled,
                 content = buttonContent
             )
+
         ButtonStyle.OUTLINED ->
             OutlinedButton(
                 modifier = modifier.testTag(testTag),

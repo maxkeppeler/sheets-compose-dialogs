@@ -60,6 +60,7 @@ sealed class ListSelection(
      * @param showCheckBoxes Show the options with check boxes.
      * @param minChoices The minimum amount of choices that are allowed.
      * @param maxChoices The maximum amount of choices that are allowed.
+     * @param withButtonView Show the dialog with the buttons view.
      * @param extraButton An extra button that can be used for a custom action.
      * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
      * @param negativeButton The button that will be used as a negative button.
@@ -72,6 +73,7 @@ sealed class ListSelection(
         val showCheckBoxes: Boolean = false,
         @IntRange(from = 1L, to = 90L) val minChoices: Int? = null,
         @IntRange(from = 3L, to = 90L) val maxChoices: Int? = null,
+        override val withButtonView: Boolean = true,
         override val extraButton: SelectionButton? = null,
         override val onExtraButtonClick: (() -> Unit)? = null,
         override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,

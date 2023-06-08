@@ -105,7 +105,7 @@ fun ColorView(
             onPositiveValid = colorState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = colorState::onFinish,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

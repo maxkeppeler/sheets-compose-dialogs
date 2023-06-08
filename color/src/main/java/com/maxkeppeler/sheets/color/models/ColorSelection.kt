@@ -24,6 +24,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 /**
  * The selection configuration for the color dialog.
  * @param selectedColor A color that is selected by default.
+ * @param withButtonView If true, the dialog will show a button view.
  * @param extraButton An extra button that can be used for a custom action.
  * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
  * @param negativeButton The button that will be used as a negative button.

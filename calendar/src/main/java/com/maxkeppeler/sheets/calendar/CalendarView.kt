@@ -212,7 +212,7 @@ fun CalendarView(
             onPositiveValid = calendarState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = calendarState::onFinish,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

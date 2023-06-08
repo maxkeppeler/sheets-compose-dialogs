@@ -129,7 +129,7 @@ fun EmojiView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = emojiState::onFinish,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

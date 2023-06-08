@@ -42,6 +42,9 @@ class UseCaseState(
     internal var embedded by mutableStateOf(embedded)
     internal var reset by mutableStateOf(false)
 
+    private lateinit var positiveAction: (() -> Boolean)
+    private lateinit var negativeAction: (() -> Unit)
+
     /**
      * Display the dialog / view.
      */
@@ -57,6 +60,27 @@ class UseCaseState(
         onDismissRequest?.invoke(this)
         onCloseRequest?.invoke(this)
     }
+
+    fun setManualActions(
+        positiveAction: (() -> Boolean),
+        negativeAction: (() -> Unit),
+    ) {
+        this.positiveAction = positiveAction
+        this.negativeAction = negativeAction
+    }
+
+    /**
+     * Manually invoke the positive action.
+     * This is useful if you hid the buttons in the view.
+     * @return True if the action was successful.
+     */
+    fun invokePositiveAction() = positiveAction.invoke()
+
+    /**
+     * Manually invoke the negative action.
+     * This is useful if you hid the buttons in the view.
+     */
+    fun invokeNegativeAction() = negativeAction.invoke()
 
     internal fun clearReset() {
         reset = false
@@ -102,7 +126,7 @@ class UseCaseState(
          * @param onCloseRequest The listener that is invoked when the dialog was closed through any cause.
          * @param onFinishedRequest The listener that is invoked when the dialog's use-case was finished by the user accordingly (negative, positive, selection).
          * @param onDismissRequest The listener that is invoked when the dialog was dismissed.
-        */
+         */
         fun Saver(
             onCloseRequest: (UseCaseState.() -> Unit)?,
             onFinishedRequest: (UseCaseState.() -> Unit)?,

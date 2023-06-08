@@ -143,7 +143,7 @@ fun ClockView(
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = clockState::onFinish,
             onPositiveValid = clockState.valid,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

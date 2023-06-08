@@ -27,6 +27,7 @@ import com.maxkeppeker.sheets.core.models.base.BaseSelection
 import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
 import com.maxkeppeker.sheets.core.models.base.SelectionButton
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.maxkeppeker.sheets.core.utils.TestTags
 import com.maxkeppeker.sheets.core.views.ButtonsComponent
 import com.maxkeppeler.sheets.test.utils.onExtraButton
@@ -50,11 +51,13 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(
+                    onFinishedRequest = { closeCalled = true }
+                ),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
-                onClose = { closeCalled = true },
                 onPositiveValid = true,
             )
         }
@@ -72,11 +75,13 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(
+                    onFinishedRequest = { closeCalled = true }
+                ),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
-                onClose = { closeCalled = true },
                 onPositiveValid = false,
             )
         }
@@ -94,11 +99,13 @@ class ButtonsComponentTests {
         var closeCalled = false
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(
+                    onFinishedRequest = { closeCalled = true }
+                ),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {},
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
-                onClose = { closeCalled = true },
                 onPositiveValid = false,
             )
         }
@@ -116,6 +123,9 @@ class ButtonsComponentTests {
         var extraCalled = false
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(
+                    onFinishedRequest = { closeCalled = true }
+                ),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton("Test button")
@@ -123,7 +133,6 @@ class ButtonsComponentTests {
                 },
                 onPositive = { positiveCalled = true },
                 onNegative = { negativeCalled = true },
-                onClose = { closeCalled = true },
                 onPositiveValid = false,
             )
         }
@@ -139,13 +148,13 @@ class ButtonsComponentTests {
         val text = "test-text-positive"
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val positiveButton = SelectionButton(text)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = false,
             )
         }
@@ -160,13 +169,13 @@ class ButtonsComponentTests {
         val text = "test-text-negative"
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val negativeButton = SelectionButton(text)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = false,
             )
         }
@@ -181,13 +190,13 @@ class ButtonsComponentTests {
         val text = "test-text-extra"
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton(text)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = false,
             )
         }
@@ -202,13 +211,13 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val positiveButton = SelectionButton("", icon)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = false,
             )
         }
@@ -226,23 +235,23 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val negativeButton = SelectionButton("", icon)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = false,
             )
         }
-       rule.onNodeWithTags(
+        rule.onNodeWithTags(
             TestTags.BUTTON_NEGATIVE,
             TestTags.BUTTON_ICON
         ).apply {
-           assertExists()
-           assertIsDisplayed()
-       }
+            assertExists()
+            assertIsDisplayed()
+        }
     }
 
     @Test
@@ -250,13 +259,13 @@ class ButtonsComponentTests {
         val icon = IconSource(Icons.Rounded.Face)
         rule.setContent {
             ButtonsComponent(
+                state = UseCaseState(),
                 orientation = LibOrientation.PORTRAIT,
                 selection = object : BaseSelection() {
                     override val extraButton = SelectionButton("", icon)
                 },
                 onPositive = { },
                 onNegative = { },
-                onClose = { },
                 onPositiveValid = true,
             )
         }

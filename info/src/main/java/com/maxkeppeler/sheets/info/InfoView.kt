@@ -52,7 +52,7 @@ fun InfoView(
             selection = selection,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = selection.onPositiveClick::invoke,
-            onClose = useCaseState::finish
+            state = useCaseState,
         )
     }
 }

@@ -23,6 +23,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
 
 /**
  * The selection configuration for the duration dialog.
+ * @param withButtonView Defines if the button view should be shown.
  * @param extraButton An extra button that can be used for a custom action.
  * @param onExtraButtonClick The listener that is invoked when the extra button is clicked.
  * @param negativeButton The button that will be used as a negative button.
@@ -31,6 +32,7 @@ import com.maxkeppeker.sheets.core.utils.BaseConstants
  * @param onPositiveClick The listener that returns the selected duration time in seconds.
  */
 class DurationSelection(
+    override val withButtonView: Boolean = true,
     override val extraButton: SelectionButton? = null,
     override val onExtraButtonClick: (() -> Unit)? = null,
     override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,

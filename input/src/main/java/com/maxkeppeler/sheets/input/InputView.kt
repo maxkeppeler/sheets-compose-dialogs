@@ -67,7 +67,7 @@ fun InputView(
             onPositiveValid = inputState.valid,
             onNegative = { selection.onNegativeClick?.invoke() },
             onPositive = inputState::onFinish,
-            onClose = useCaseState::finish,
+            state = useCaseState,
         )
     }
 }
