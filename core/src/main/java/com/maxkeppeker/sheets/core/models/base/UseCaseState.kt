@@ -41,12 +41,16 @@ class UseCaseState(
     internal var visible by mutableStateOf(visible)
     internal var embedded by mutableStateOf(embedded)
     internal var reset by mutableStateOf(false)
-
+    
+    private var showListener: (() -> Unit)? = null
+    private var finishListener: (() -> Unit)? = null
+    
     /**
      * Display the dialog / view.
      */
     fun show() {
         visible = true
+        showListener?.invoke()
     }
 
     /**
@@ -56,6 +60,7 @@ class UseCaseState(
         visible = false
         onDismissRequest?.invoke(this)
         onCloseRequest?.invoke(this)
+        finishListener?.invoke()
     }
 
     internal fun clearReset() {
@@ -88,10 +93,19 @@ class UseCaseState(
         if (!embedded) visible = false
         onFinishedRequest?.invoke(this)
         onCloseRequest?.invoke(this)
+        finishListener?.invoke()
     }
 
     internal fun markAsEmbedded() {
         embedded = false
+    }
+
+    internal fun setShowListener(listener: (() -> Unit)?) {
+        showListener = listener
+    }
+
+    internal fun setFinishListener(listener: (() -> Unit)?) {
+        finishListener = listener
     }
 
     companion object {

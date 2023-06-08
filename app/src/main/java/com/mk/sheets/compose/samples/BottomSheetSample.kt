@@ -18,47 +18,49 @@
 package com.mk.sheets.compose.samples
 
 import androidx.compose.material.ExperimentalMaterialApi
-import androidx.compose.material.ModalBottomSheetState
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.rememberCoroutineScope
+import com.maxkeppeker.sheets.core.models.base.IconSource
+import com.maxkeppeker.sheets.core.models.base.UseCaseState
+import com.maxkeppeler.sheets.option.OptionBottomSheet
+import com.maxkeppeler.sheets.option.models.DisplayMode
+import com.maxkeppeler.sheets.option.models.Option
+import com.maxkeppeler.sheets.option.models.OptionConfig
+import com.maxkeppeler.sheets.option.models.OptionDetails
+import com.maxkeppeler.sheets.option.models.OptionSelection
+import com.mk.sheets.compose.R
 
 @Composable
 fun BottomSheetSample(
-    state: ModalBottomSheetState,
-    screenContent: @Composable () -> Unit,
+    state: UseCaseState,
 ) {
-    val coroutine = rememberCoroutineScope()
-//    val hideBottomSheet = { coroutine.launch { state.animateTo(ModalBottomSheetValue.Hidden) } }
-//    val useCaseState =
-//        rememberUseCaseState(visible = true, onCloseRequest = { hideBottomSheet(); })
 
-//    LaunchedEffect(state.currentValue) {
-//        when (state.currentValue) {
-//            ModalBottomSheetValue.Hidden,
-//            ModalBottomSheetValue.Expanded -> {
-////                useCaseState.invokeReset() // Manually reset internal state if required
-//            }
-//            ModalBottomSheetValue.HalfExpanded -> Unit
-//
-//        }
-//    }
+    val options = listOf(
+        Option(
+            IconSource(R.drawable.ic_fruit_watermelon),
+            titleText = "Watermelon",
+            disabled = true
+        ),
+        Option(
+            IconSource(R.drawable.ic_fruit_grapes),
+            titleText = "Grapes",
+            selected = true
+        ),
+        Option(
+            IconSource(R.drawable.ic_fruit_pineapple),
+            titleText = "Pineapple",
+            details = OptionDetails(
+                "Ananas comosus",
+                "The pineapple is a tropical plant with an edible fruit; it is the most economically significant plant in the family Bromeliaceae."
+            )
+        ),
+    )
 
-//    ModalBottomSheetLayout(
-//        content = screenContent,
-//        sheetState = state,
-//        sheetContent = {
-//            Surface(
-//                color = MaterialTheme.colorScheme.surface,
-//            ) {
-//                CalendarView(
-//                    useCaseState = useCaseState,
-//                    config = CalendarConfig(
-//                        style = CalendarStyle.WEEK
-//                    ),
-//                    selection = CalendarSelection.Dates {},
-//                )
-//            }
-//        }
-//    )
+    OptionBottomSheet(
+        state = state,
+        selection = OptionSelection.Single(options) { index, option ->
+            // Handle selection
+        },
+        config = OptionConfig(mode = DisplayMode.LIST)
+    )
 }

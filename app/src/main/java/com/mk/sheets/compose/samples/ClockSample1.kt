@@ -21,10 +21,14 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.graphics.Color
+import com.maxkeppeker.sheets.core.models.base.Header
+import com.maxkeppeker.sheets.core.models.base.IconSource
 import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
 import com.maxkeppeler.sheets.clock.ClockDialog
 import com.maxkeppeler.sheets.clock.models.ClockConfig
 import com.maxkeppeler.sheets.clock.models.ClockSelection
+import com.mk.sheets.compose.R
 import java.time.LocalTime
 
 @Composable
@@ -32,6 +36,13 @@ internal fun ClockSample1(closeSelection: () -> Unit) {
 
     val selectedTime = remember { mutableStateOf(LocalTime.of(8, 20, 0)) }
     ClockDialog(
+        header = Header.Default(
+            "Select time",
+            icon = IconSource(
+                R.drawable.ic_fruit_apple,
+                tint = Color.Unspecified
+            )
+        ),
         state = rememberUseCaseState(visible = true, onCloseRequest = { closeSelection() }),
         selection = ClockSelection.HoursMinutes { hours, minutes ->
             selectedTime.value = LocalTime.of(hours, minutes, 0)

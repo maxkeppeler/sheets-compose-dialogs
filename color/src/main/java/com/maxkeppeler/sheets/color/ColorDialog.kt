@@ -27,7 +27,7 @@ import com.maxkeppeler.sheets.color.models.ColorConfig
 import com.maxkeppeler.sheets.color.models.ColorSelection
 
 /**
- * Color view for the use-case to to select a color.
+ * Color dialog for the use-case to to select a color.
  * @param state The state of the sheet.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.

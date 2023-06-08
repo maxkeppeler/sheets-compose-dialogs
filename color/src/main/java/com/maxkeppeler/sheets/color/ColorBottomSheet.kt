@@ -13,46 +13,44 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-@file:OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
+@file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.maxkeppeler.sheets.duration
+package com.maxkeppeler.sheets.color
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.ExperimentalComposeUiApi
-import androidx.compose.ui.window.DialogProperties
 import com.maxkeppeker.sheets.core.models.base.Header
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
-import com.maxkeppeker.sheets.core.views.base.DialogBase
-import com.maxkeppeler.sheets.duration.models.DurationConfig
-import com.maxkeppeler.sheets.duration.models.DurationSelection
+import com.maxkeppeker.sheets.core.views.base.BottomSheetBase
+import com.maxkeppeler.sheets.color.models.ColorConfig
+import com.maxkeppeler.sheets.color.models.ColorSelection
 
 /**
- * Duration dialog for the use-case to to select a duration time.
+ * Color bottom sheet for the use-case to to select a color.
  * @param state The state of the sheet.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
  * @param header The header to be displayed at the top of the dialog.
- * @param properties DialogProperties for further customization of this dialog's behavior.
- */
+ * @param allowDismiss Allow the bottom sheet to be dismissed.
+*/
 @ExperimentalMaterial3Api
 @Composable
-fun DurationDialog(
+fun ClockBottomSheet(
     state: UseCaseState,
-    selection: DurationSelection,
-    config: DurationConfig = DurationConfig(),
+    selection: ColorSelection,
+    config: ColorConfig = ColorConfig(),
     header: Header? = null,
-    properties: DialogProperties = DialogProperties(),
+    allowDismiss: Boolean = true,
 ) {
 
-    DialogBase(
+    BottomSheetBase(
         state = state,
-        properties = properties,
+        allowDismiss = allowDismiss,
     ) {
-        DurationView(
+        ColorView(
             useCaseState = state,
-            selection = selection,
             config = config,
+            selection = selection,
             header = header,
         )
     }

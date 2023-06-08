@@ -30,6 +30,9 @@ object TestTags {
     const val DIALOG_BASE_CONTAINER = "dialog_base_container"
     const val DIALOG_BASE_CONTENT = "dialog_base_content"
 
+    const val SHEET_BASE_CONTAINER = "sheet_base_container"
+    const val SHEET_BASE_CONTENT = "sheet_base_content"
+
     const val FRAME_BASE_CONTENT = "frame_base_content"
     const val FRAME_BASE_HEADER = "frame_base_header"
     const val FRAME_BASE_NO_HEADER = "frame_base_no_header"

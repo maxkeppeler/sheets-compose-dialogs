@@ -27,7 +27,7 @@ import com.maxkeppeler.sheets.input.models.InputConfig
 import com.maxkeppeler.sheets.input.models.InputSelection
 
 /**
- * Info dialog for the use-case to display simple information.
+ * Input dialog for the use-case to display simple information.
  * @param state The state of the sheet.
  * @param selection The selection configuration for the dialog.
  * @param config The general configuration for the dialog.
