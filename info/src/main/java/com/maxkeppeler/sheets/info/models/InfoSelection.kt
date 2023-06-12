@@ -38,5 +38,5 @@ class InfoSelection(
     override val negativeButton: SelectionButton? = BaseConstants.DEFAULT_NEGATIVE_BUTTON,
     override val onNegativeClick: (() -> Unit)? = null,
     override val positiveButton: SelectionButton = BaseConstants.DEFAULT_POSITIVE_BUTTON,
-    val onPositiveClick: () -> Unit,
+    val onPositiveClick: (() -> Unit) ?= null
 ) : BaseSelection()
