@@ -131,7 +131,8 @@ fun CalendarView(
                     setupYearSelectionView(
                         yearsRange = calendarState.yearsRange,
                         selectedYear = calendarState.cameraDate.year,
-                        onYearClick = calendarState::onYearClick
+                        onYearClick = calendarState::onYearClick,
+                        config = config
                     )
                 }
             )
@@ -196,7 +197,8 @@ fun CalendarView(
                             setupYearSelectionView(
                                 yearsRange = calendarState.yearsRange,
                                 selectedYear = calendarState.cameraDate.year,
-                                onYearClick = calendarState::onYearClick
+                                onYearClick = calendarState::onYearClick,
+                                config = config
                             )
                         },
                     )

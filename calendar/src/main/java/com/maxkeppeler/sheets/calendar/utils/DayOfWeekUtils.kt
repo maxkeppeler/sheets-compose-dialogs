@@ -28,6 +28,7 @@ import java.util.*
 internal fun getDayOfWeekLabels(locale: Locale): Map<DayOfWeek, String> = when {
     Locale.SIMPLIFIED_CHINESE.let { locale.language == it.language && locale.country == it.country } -> getSimplifiedChineseDayOfWeekLabels()
     Locale.JAPANESE.let { locale.language == it.language } -> getJapaneseDayOfWeekLabels()
+    Locale("th").let { locale.language == it.language } -> getThaiDayOfWeekLabels()
     else -> getDefaultDayOfWeekLabels(locale)
 }
 
@@ -69,4 +70,14 @@ private fun getJapaneseDayOfWeekLabels(): Map<DayOfWeek, String> = mapOf(
     DayOfWeek.FRIDAY to "\u91d1",
     DayOfWeek.SATURDAY to "\u571f",
     DayOfWeek.SUNDAY to "\u65e5",
+)
+
+private fun getThaiDayOfWeekLabels(): Map<DayOfWeek, String> = mapOf(
+    DayOfWeek.MONDAY to "จ",
+    DayOfWeek.TUESDAY to "อ",
+    DayOfWeek.WEDNESDAY to "พ",
+    DayOfWeek.THURSDAY to "พฤ",
+    DayOfWeek.FRIDAY to "ศ",
+    DayOfWeek.SATURDAY to "ส",
+    DayOfWeek.SUNDAY to "อา"
 )

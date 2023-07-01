@@ -16,7 +16,9 @@
 package com.maxkeppeler.sheets.calendar.views
 
 import androidx.compose.foundation.lazy.LazyListScope
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import java.time.LocalDate
+import java.util.Locale
 
 /**
  * The view that displays all relevant year information.
@@ -27,10 +29,16 @@ import java.time.LocalDate
 internal fun LazyListScope.setupYearSelectionView(
     yearsRange: ClosedRange<Int>,
     selectedYear: Int,
-    onYearClick: (Int) -> Unit
+    onYearClick: (Int) -> Unit,
+    config: CalendarConfig
 ) {
     items(yearsRange.endInclusive.minus(yearsRange.start).plus(1)) {
-        val year = yearsRange.start + it
+        val year = if (config.locale.language == Locale("th").language) {
+            (yearsRange.start + it) + 543
+        } else {
+            yearsRange.start + it
+        }
+
         val selected = selectedYear == year
         val thisYear = year == LocalDate.now().year
         YearItemComponent(
