@@ -15,12 +15,36 @@
  */
 package com.maxkeppeler.sheets.calendar
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import com.maxkeppeker.sheets.core.views.BaseTypeState
-import com.maxkeppeler.sheets.calendar.models.*
-import com.maxkeppeler.sheets.calendar.utils.*
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarData
+import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
+import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.utils.Constants
+import com.maxkeppeler.sheets.calendar.utils.calcCalendarData
+import com.maxkeppeler.sheets.calendar.utils.calcMonthData
+import com.maxkeppeler.sheets.calendar.utils.dateValue
+import com.maxkeppeler.sheets.calendar.utils.datesValue
+import com.maxkeppeler.sheets.calendar.utils.endOfMonth
+import com.maxkeppeler.sheets.calendar.utils.endOfWeek
+import com.maxkeppeler.sheets.calendar.utils.endValue
+import com.maxkeppeler.sheets.calendar.utils.getInitialCameraDate
+import com.maxkeppeler.sheets.calendar.utils.jumpNext
+import com.maxkeppeler.sheets.calendar.utils.jumpPrev
+import com.maxkeppeler.sheets.calendar.utils.rangeValue
+import com.maxkeppeler.sheets.calendar.utils.startOfMonth
+import com.maxkeppeler.sheets.calendar.utils.startOfWeek
+import com.maxkeppeler.sheets.calendar.utils.startOfWeekOrMonth
+import com.maxkeppeler.sheets.calendar.utils.startValue
 import java.io.Serializable
 import java.time.DayOfWeek
 import java.time.LocalDate
@@ -40,7 +64,9 @@ internal class CalendarState(
 
     val today by mutableStateOf(LocalDate.now())
     var mode by mutableStateOf(stateData?.mode ?: CalendarDisplayMode.CALENDAR)
-    var cameraDate by mutableStateOf(stateData?.cameraDate ?: selection.initialCameraDate)
+    var cameraDate by mutableStateOf(
+        stateData?.cameraDate ?: selection.getInitialCameraDate(config.boundary)
+    )
     var date = mutableStateOf(stateData?.date ?: selection.dateValue)
     var dates = mutableStateListOf(*(stateData?.dates ?: selection.datesValue))
     var range = mutableStateListOf(*(stateData?.range ?: selection.rangeValue))
@@ -100,7 +126,6 @@ internal class CalendarState(
 
     val isPrevDisabled: Boolean
         get() {
-            val today = LocalDate.now()
             val prevCameraDate = cameraDate.jumpPrev(config)
             return when (config.style) {
                 CalendarStyle.MONTH -> {
@@ -108,6 +133,7 @@ internal class CalendarState(
                         prevCameraDate.isBefore(config.boundary.start.startOfMonth)
                     isPrevOutOfBoundary
                 }
+
                 CalendarStyle.WEEK -> {
                     val isPrevOutOfBoundary =
                         prevCameraDate.isBefore(config.boundary.start.startOfWeek)
@@ -125,6 +151,7 @@ internal class CalendarState(
                         nextCameraDate.isAfter(config.boundary.endInclusive.endOfMonth)
                     isNextOutOfBoundary
                 }
+
                 CalendarStyle.WEEK -> {
                     val isNextOutOfBoundary =
                         nextCameraDate.isAfter(config.boundary.endInclusive.endOfWeek)
@@ -191,9 +218,11 @@ internal class CalendarState(
             newDate.isBefore(config.boundary.start) ->
                 newDate.withMonth(config.boundary.start.monthValue)
                     .withDayOfMonth(config.boundary.start.dayOfMonth)
+
             newDate.isAfter(config.boundary.endInclusive) ->
                 newDate.withMonth(config.boundary.endInclusive.monthValue)
                     .withDayOfMonth(config.boundary.endInclusive.dayOfMonth)
+
             else -> newDate
         }
         cameraDate = newDate.startOfWeek
@@ -206,6 +235,7 @@ internal class CalendarState(
             is CalendarSelection.Date -> {
                 date.value = newDate
             }
+
             is CalendarSelection.Dates -> {
                 if (dates.contains(newDate)) {
                     dates.remove(newDate)
@@ -213,6 +243,7 @@ internal class CalendarState(
                     dates.add(newDate)
                 }
             }
+
             is CalendarSelection.Period -> {
                 val beforeStart =
                     range.startValue?.let { newDate.isBefore(it) } ?: false

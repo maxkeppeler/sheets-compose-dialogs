@@ -159,16 +159,17 @@ fun LocalDate.jumpNext(config: CalendarConfig): LocalDate = when (config.style) 
  *
  * @return The initial camera date.
  */
-internal val CalendarSelection.initialCameraDate: LocalDate
-    @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
-    get() {
-        val cameraDateBasedOnMode = when (this) {
-            is CalendarSelection.Date -> selectedDate
-            is CalendarSelection.Dates -> selectedDates?.firstOrNull()
-            is CalendarSelection.Period -> selectedRange?.lower
-        } ?: LocalDate.now()
-        return cameraDateBasedOnMode.startOfWeekOrMonth
+internal fun CalendarSelection.getInitialCameraDate(boundary: ClosedRange<LocalDate>): LocalDate {
+    val cameraDateBasedOnMode = when (this) {
+        is CalendarSelection.Date -> selectedDate
+        is CalendarSelection.Dates -> selectedDates?.firstOrNull()
+        is CalendarSelection.Period -> selectedRange?.lower
+    } ?: kotlin.run {
+        val now = LocalDate.now()
+        if (now in boundary) now else boundary.endInclusive
     }
+    return cameraDateBasedOnMode.startOfWeekOrMonth
+}
 
 /**
  * Get selection value of date.
