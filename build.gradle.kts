@@ -81,7 +81,7 @@ fun PluginContainer.applyBaseConfig(project: Project) {
                 project.extensions
                     .getByType<LibraryExtension>()
                     .apply {
-                        baselibraryConfig()
+                        baseLibraryConfig()
                     }
             }
         }
@@ -91,7 +91,7 @@ fun PluginContainer.applyBaseConfig(project: Project) {
 /**
  * Apply base library configurations to the subprojects that include the plugin [LibraryModulePlugin].
  */
-fun com.android.build.gradle.BaseExtension.baselibraryConfig() {
+fun com.android.build.gradle.BaseExtension.baseLibraryConfig() {
 
     compileSdkVersion(App.COMPILE_SDK)
 
@@ -99,6 +99,12 @@ fun com.android.build.gradle.BaseExtension.baselibraryConfig() {
         minSdk = App.MIN_SDK
         targetSdk = App.TARGET_SDK
         testInstrumentationRunner = App.TEST_INSTRUMENTATION_RUNNER
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf("module" to "${App.ID}-$name")
+            }
+        }
     }
 
     compileOptions.apply {
