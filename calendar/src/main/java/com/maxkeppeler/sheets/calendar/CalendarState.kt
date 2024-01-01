@@ -245,16 +245,29 @@ internal class CalendarState(
             }
 
             is CalendarSelection.Period -> {
-                val beforeStart =
-                    range.startValue?.let { newDate.isBefore(it) } ?: false
-                val containsDisabledDate = range.endValue?.let { startDate ->
-                    config.disabledDates?.any { it.isAfter(startDate) && it.isBefore(newDate) }
+                // Check if the selected range includes any disabled dates
+                val includesDisabledDate = range.startValue?.let { startDate ->
+                    config.disabledDates?.any { disabledDate ->
+                        disabledDate.isAfter(startDate) && disabledDate.isBefore(newDate) || disabledDate == newDate
+                    }
                 } ?: false
-                if (isRangeSelectionStart || beforeStart || containsDisabledDate) {
+
+                // Reset the range if the selection includes a disabled date
+                if (includesDisabledDate) {
+                    range[Constants.RANGE_START] = newDate
+                    range[Constants.RANGE_END] = null
+                    return
+                }
+
+                // Check if the selection is the start or the date is before the start
+                val beforeStart = range.startValue?.let { newDate.isBefore(it) } ?: false
+                if (isRangeSelectionStart || beforeStart) {
+                    // Reset the range if the selection includes a disabled date
                     range[Constants.RANGE_START] = newDate
                     range[Constants.RANGE_END] = null
                     isRangeSelectionStart = false
                 } else {
+                    // Check if the selection is the end or the date is after the end
                     range[Constants.RANGE_END] = newDate
                     isRangeSelectionStart = true
                 }
