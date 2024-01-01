@@ -385,4 +385,107 @@ class ClockViewTests {
         }
         rule.onPositiveButton().assertIsNotEnabled()
     }
+
+    @Test
+    fun clockView_12HourFormat_midnightSelection_returnsMidnight() {
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(is24HourFormat = false)
+            )
+        }
+
+        listOf(1, 2, 0, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 0).performClick() // Select AM
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
+        rule.onPositiveButton().performClick()
+
+        assert(selectedTime == LocalTime.MIDNIGHT)
+    }
+
+    @Test
+    fun clockView_12HourFormat_noonSelection_returnsNoon() {
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(is24HourFormat = false)
+            )
+        }
+
+        listOf(1, 2, 0, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 1).performClick() // Select PM
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == LocalTime.NOON)
+    }
+
+    @Test
+    fun clockView_12HourFormat_amPmIndicatorMisalignment_returnsCorrectTime() {
+        var selectedTime: LocalTime? = null
+        val testTime = LocalTime.of(10, 30)
+
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(is24HourFormat = false)
+            )
+        }
+        listOf(1, 0, 3, 0).forEach {
+            runBlocking {
+                rule.onNodeWithTags(TestTags.KEYBOARD_KEY, it).performClick()
+                delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+            }
+        }
+        // Change AM/PM without adjusting time again
+        runBlocking {
+            rule.onNodeWithTags(TestTags.CLOCK_12_HOUR_FORMAT, 1).performClick() // Change to PM
+            delay(Constants.DEBOUNCE_KEY_CLICK_DURATION)
+        }
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == testTime.plusHours(12))
+    }
+
+    @Test
+    fun clockView_12HourFormat_defaultTimeSelection_returnsDefaultTime() {
+        val defaultTime = LocalTime.of(10, 30, 0)
+        var selectedTime: LocalTime? = null
+        rule.setContentAndWaitForIdle {
+            ClockView(
+                useCaseState = UseCaseState(visible = true),
+                selection = ClockSelection.HoursMinutes { hours, minutes ->
+                    selectedTime = LocalTime.of(hours, minutes)
+                },
+                config = ClockConfig(is24HourFormat = false, defaultTime = defaultTime)
+            )
+        }
+
+        rule.onPositiveButton().performClick()
+        assert(selectedTime == defaultTime)
+    }
+
 }

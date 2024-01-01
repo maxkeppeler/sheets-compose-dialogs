@@ -65,10 +65,13 @@ internal fun convertTimeTextValuesIntoTime(
     var actualHour = hour
 
     if (!is24HourFormat) {
-        if (isAm && actualHour >= 12 && min > 0) actualHour -= 12
-        else if (!isAm && ((actualHour < 12 && min >= 0) || (actualHour == 12 && min == 0))) actualHour += 12
+        actualHour = when {
+            isAm && hour == 12 -> 0 // 12 AM should be converted to 0
+            !isAm && hour != 12 -> hour + 12 // PM times (except for 12 PM) should be converted to 24-hour format by adding 12
+            !isAm && hour == 12 -> hour // 12 PM should stay as 12
+            else -> hour // AM times (except for 12 AM) should remain the same
+        }
     }
-    if (actualHour == 24) actualHour = 0
 
     return LocalTime.of(actualHour, min, sec)
 }
