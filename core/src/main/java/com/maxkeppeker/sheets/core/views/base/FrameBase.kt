@@ -91,12 +91,13 @@ fun FrameBase(
 
         header?.takeUnless { deviceOrientation == LibOrientation.LANDSCAPE }?.let {
             // Display header
+            val headerPadding = BaseValues.CONTENT_DEFAULT_PADDING
             Column(modifier = Modifier.testTag(TestTags.FRAME_BASE_HEADER)) {
                 HeaderComponent(
                     header = header,
                     contentHorizontalPadding = PaddingValues(
-                        start = horizontalContentPadding.calculateStartPadding(layoutDirection),
-                        end = horizontalContentPadding.calculateEndPadding(layoutDirection),
+                        start = headerPadding.calculateStartPadding(layoutDirection),
+                        end = headerPadding.calculateEndPadding(layoutDirection),
                     )
                 )
             }
