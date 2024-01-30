@@ -38,7 +38,7 @@ internal class RatingState(
     stateData: RatingStateData? = null,
 ) : BaseTypeState() {
 
-    var rating by mutableStateOf(stateData?.rating)
+    var rating: Int? by mutableStateOf(stateData?.rating ?: 4)
     var feedback by mutableStateOf(stateData?.feedback)
 
     var ratingValid by mutableStateOf(isRatingValid())

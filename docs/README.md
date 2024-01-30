@@ -529,6 +529,61 @@ Module <code>option</code> ‎‎ | ‎‎ <a href="https://maxkeppeler.github.i
 </br>
 
 
+<h2>Rating</h2>
+Module <code>rating</code> ‎‎ | ‎‎ <a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/rating/index.html" title="Module Documentation">API Documentation</a>
+</br>
+</br>
+<table style="border: none;">
+<tr>
+<th style="text-align: center;">Light</th>
+<th style="text-align: center;">Dark</th>
+<th style="text-align: center;"></th>
+<th style="text-align: center;"></th>
+</tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample1.kt" title="Code">RatingSample1</a>
+ </br>
+ <img src="res/sheets/rating/light/rating_sample_1.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample1.kt" title="Code">RatingSample1</a>
+ </br>
+<img src="res/sheets/rating/dark/rating_sample_1.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample2.kt" title="Code">RatingSample2</a>
+ </br>
+ <img src="res/sheets/rating/light/rating_sample_2.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample2.kt" title="Code">RatingSample2</a>
+ </br>
+<img src="res/sheets/rating/dark/rating_sample_2.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample3.kt" title="Code">RatingSample3</a>
+ </br>
+ <img src="res/sheets/rating/light/rating_sample_3.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample3.kt" title="Code">RatingSample3</a>
+ </br>
+<img src="res/sheets/rating/dark/rating_sample_3.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample4.kt" title="Code">RatingSample4</a>
+ </br>
+ <img src="res/sheets/rating/light/rating_sample_4.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/RatingSample4.kt" title="Code">RatingSample4</a>
+ </br>
+<img src="res/sheets/rating/dark/rating_sample_4.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
+</table>
+</br>
+
+
 <h2>State</h2>
 Module <code>state</code> ‎‎ | ‎‎ <a href="https://maxkeppeler.github.io/sheets-compose-dialogs/api/state/index.html" title="Module Documentation">API Documentation</a>
 </br>
