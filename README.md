@@ -70,7 +70,7 @@ Replace `<version>` with the (latest or preferred) version of the library.
 </br>
 Replace `<module>` with the module you want to use.
 </br>
-Modules: `core` | `info` | `color` | `calendar` | `clock` | `duration` | `date-time` | `option` | `list` | `input` | `emoji` | `state`  
+Modules: `core` | `info` | `color` | `calendar` | `rating` | `clock` | `duration` | `date-time` | `option` | `list` | `input` | `emoji` | `state`  
 </br>
 📖 Get a better insight into the API ‏‏‎ ‎‣‏‏‎ ‎ 
 [API Documentation](https://maxkeppeler.github.io/sheets-compose-dialogs/api/)
