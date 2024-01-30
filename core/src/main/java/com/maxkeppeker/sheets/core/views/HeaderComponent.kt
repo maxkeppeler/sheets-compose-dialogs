@@ -15,7 +15,11 @@
  */
 package com.maxkeppeker.sheets.core.views
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -41,7 +45,7 @@ fun HeaderComponent(
     contentHorizontalPadding: PaddingValues,
 ) {
     when (header) {
-        is Header.Custom -> header.header.invoke()
+        is Header.Custom -> header.header.invoke(contentHorizontalPadding)
         is Header.Default -> DefaultHeaderComponent(header, contentHorizontalPadding)
     }
 }

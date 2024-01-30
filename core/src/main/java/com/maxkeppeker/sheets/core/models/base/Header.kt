@@ -15,6 +15,7 @@
  */
 package com.maxkeppeker.sheets.core.models.base
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
 
 /**
@@ -24,8 +25,8 @@ abstract class Header {
 
     /**
      * Standard implementation of a header.
-     * @param icon The icon that is displayed above the title..
-     * @param title The text that will be set as title.
+     * @param title The title of the header.
+     * @param icon The icon of the header.
      */
     data class Default(
         val title: String,
@@ -34,8 +35,9 @@ abstract class Header {
 
     /**
      * Custom implementation of a header.
+     * @param header The custom header implementation with the horizontal padding values of the default header.
      */
     data class Custom(
-        val header: @Composable () -> Unit
+        val header: @Composable (paddingValues: PaddingValues) -> Unit
     ) : Header()
 }
