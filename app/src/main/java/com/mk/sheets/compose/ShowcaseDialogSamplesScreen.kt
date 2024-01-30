@@ -17,7 +17,14 @@
 
 package com.mk.sheets.compose
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.GridItemSpan
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -25,7 +32,11 @@ import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Circle
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material3.*
+import androidx.compose.material3.ElevatedCard
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -36,7 +47,45 @@ import androidx.compose.ui.unit.dp
 import com.maxkeppeker.sheets.core.models.base.UseCaseState
 import com.mk.sheets.compose.models.Sample
 import com.mk.sheets.compose.models.UseCaseType
-import com.mk.sheets.compose.samples.*
+import com.mk.sheets.compose.samples.CalendarSample1
+import com.mk.sheets.compose.samples.CalendarSample2
+import com.mk.sheets.compose.samples.CalendarSample3
+import com.mk.sheets.compose.samples.ClockSample1
+import com.mk.sheets.compose.samples.ClockSample2
+import com.mk.sheets.compose.samples.ColorSample1
+import com.mk.sheets.compose.samples.ColorSample2
+import com.mk.sheets.compose.samples.ColorSample3
+import com.mk.sheets.compose.samples.CoreSample1
+import com.mk.sheets.compose.samples.DateTimeSample1
+import com.mk.sheets.compose.samples.DateTimeSample2
+import com.mk.sheets.compose.samples.DateTimeSample3
+import com.mk.sheets.compose.samples.DurationSample1
+import com.mk.sheets.compose.samples.DurationSample2
+import com.mk.sheets.compose.samples.EmojiSample1
+import com.mk.sheets.compose.samples.EmojiSample2
+import com.mk.sheets.compose.samples.InfoSample1
+import com.mk.sheets.compose.samples.InputSample1
+import com.mk.sheets.compose.samples.InputSample2
+import com.mk.sheets.compose.samples.InputSample3
+import com.mk.sheets.compose.samples.InputSample4
+import com.mk.sheets.compose.samples.ListSample1
+import com.mk.sheets.compose.samples.ListSample2
+import com.mk.sheets.compose.samples.ListSample3
+import com.mk.sheets.compose.samples.ListSample4
+import com.mk.sheets.compose.samples.OptionSample1
+import com.mk.sheets.compose.samples.OptionSample2
+import com.mk.sheets.compose.samples.OptionSample3
+import com.mk.sheets.compose.samples.RatingSample1
+import com.mk.sheets.compose.samples.RatingSample2
+import com.mk.sheets.compose.samples.RatingSample3
+import com.mk.sheets.compose.samples.RatingSample4
+import com.mk.sheets.compose.samples.StateSample1
+import com.mk.sheets.compose.samples.StateSample2
+import com.mk.sheets.compose.samples.StateSample3
+import com.mk.sheets.compose.samples.StateSample4
+import com.mk.sheets.compose.samples.StateSample5
+import com.mk.sheets.compose.samples.StateSample6
+import com.mk.sheets.compose.samples.StateSample7
 
 @Composable
 fun ShowcaseDialogSamplesScreen() {
@@ -67,6 +116,11 @@ fun ShowcaseDialogSamples(
 
         Sample.CORE_SAMPLE_1 -> CoreSample1(onReset)
         Sample.INFO_SAMPLE_1 -> InfoSample1(onReset)
+
+        Sample.RATING_SAMPLE_1 -> RatingSample1(onReset)
+        Sample.RATING_SAMPLE_2 -> RatingSample2(onReset)
+        Sample.RATING_SAMPLE_3 -> RatingSample3(onReset)
+        Sample.RATING_SAMPLE_4 -> RatingSample4(onReset)
 
         Sample.COLOR_SAMPLE_1 -> ColorSample1(onReset)
         Sample.COLOR_SAMPLE_2 -> ColorSample2(onReset)

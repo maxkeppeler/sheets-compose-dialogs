@@ -32,6 +32,33 @@ enum class Sample(
         "Standard"
     ),
 
+    RATING_SAMPLE_1(
+        UseCaseType.RATING,
+        "1-5 Stars",
+        "Alignment Center"
+
+    ),
+    RATING_SAMPLE_2(
+        UseCaseType.RATING,
+        "1-5 Stars",
+        "Alignment Start"
+    ),
+
+    RATING_SAMPLE_3(
+        UseCaseType.RATING,
+        "1-6 Stars",
+        "Alignment Center",
+        "Optional Feedback"
+    ),
+
+    RATING_SAMPLE_4(
+        UseCaseType.RATING,
+        "1-6 Stars",
+        "Alignment Center",
+        "Required Feedback",
+        "Outlined Feedback style"
+    ),
+
     COLOR_SAMPLE_1(
         UseCaseType.COLOR,
         "With template colors",

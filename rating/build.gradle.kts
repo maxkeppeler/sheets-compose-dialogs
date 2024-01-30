@@ -13,20 +13,15 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.mk.sheets.compose.models
+plugins {
+    id(Plugins.CUSTOM_LIBRARY_MODULE.id)
+}
 
-enum class UseCaseType(val title: String) {
-    CORE("⚒️  Core Dialog"),
-    INFO("ℹ️  Info Dialog"),
-    RATING("✨ Rating Dialog"),
-    COLOR("\uD83C\uDFA8  Color Dialog"),
-    CALENDAR("\uD83D\uDCC5  Calendar Dialog"),
-    CLOCK("\uD83D\uDD67  Clock Dialog"),
-    DATE_TIME("\uD83D\uDCC5\uD83D\uDD67  DateTime Dialog"),
-    DURATION("⌛  Duration Dialog"),
-    OPTION("\uD83E\uDEA7  Option Dialog"),
-    LIST("✅️  List Dialog"),
-    EMOJI("\uD83D\uDE1C  Emoji Dialog"),
-    INPUT("\uD83D\uDD8A️ Input Dialog"),
-    STATE("\uD83D\uDD03  State Dialog")
+android {
+    namespace = Modules.RATING.namespace
+}
+
+mavenPublishing {
+    publishToMavenCentral()
+    signAllPublications()
 }
