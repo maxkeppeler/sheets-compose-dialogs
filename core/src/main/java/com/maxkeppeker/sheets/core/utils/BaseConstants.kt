@@ -28,7 +28,7 @@ object BaseConstants {
 
     // Behaviours
 
-    const val SUCCESS_DISMISS_DELAY = 600L
+    const val SUCCESS_DISMISS_DELAY = 300L
 
     val DEFAULT_ICON_STYLE = LibIcons.Rounded
     val DEFAULT_LIB_LAYOUT: LibOrientation? = null // Auto orientation
