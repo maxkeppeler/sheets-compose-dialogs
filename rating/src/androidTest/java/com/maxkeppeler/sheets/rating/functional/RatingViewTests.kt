@@ -15,7 +15,7 @@
  */
 @file:OptIn(ExperimentalMaterial3Api::class)
 
-package com.maxkeppeler.sheets.info.functional
+package com.maxkeppeler.sheets.rating.functional
 
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.ui.test.assertIsDisplayed
