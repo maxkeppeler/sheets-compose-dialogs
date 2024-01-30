@@ -38,5 +38,5 @@ fun ComposeTestRule.onPositiveButton() = onNodeWithTag(TestTags.BUTTON_POSITIVE)
 
 fun ComposeTestRule.onNegativeButton() = onNodeWithTag(TestTags.BUTTON_NEGATIVE)
 
-fun ComposeTestRule.onNodeWithTags(vararg testTag: Any) = onNodeWithTag(testTag.joinToString(), true)
+fun ComposeTestRule.onNodeWithTags(vararg testTag: Any, useUnmergedTree: Boolean = true) = onNodeWithTag(testTag.joinToString(), useUnmergedTree)
 

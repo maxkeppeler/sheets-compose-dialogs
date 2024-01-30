@@ -3,6 +3,7 @@
 enum class Modules(val moduleName: String) {
 
     CORE("core"),
+    RATING("rating"),
     INFO("info"),
     STATE("state"),
     COLOR("color"),

@@ -118,6 +118,18 @@ object TestTags {
     const val STATE_VIEW_LABEL_TEXT = "state_view_label_text"
 
     /*
+     *  Test tags for RatingView
+     */
+
+    const val RATING_STAR_INPUT = "rating_star_input"
+    const val RATING_FEEDBACK_TEXT_FIELD = "rating_feedback_text_field"
+    const val RATING_FEEDBACK_TEXT_FIELD_TYPE = "rating_feedback_text_field_type"
+    const val RATING_FEEDBACK_TEXT_FIELD_ERROR_TEXT = "rating_feedback_text_field_error_text"
+    const val RATING_BODY_DEFAULT = "rating_body_default"
+    const val RATING_BODY_DEFAULT_TEXT = "rating_body_default_text"
+
+
+    /*
      *  Test tags for InputView
      */
 
