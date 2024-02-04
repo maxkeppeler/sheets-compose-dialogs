@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Stonnen</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Protokoll</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Sekonnen</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Dag</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Monat</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Johr</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Festlegen vun der Zäit</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Datum setzen</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">نمایندهٔ وزیری</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">مقدار بعدی</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">مقدار قبلی</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">باید بین %1$s و %2$s باشد</string>
+
+    <string name="scd_clock_dialog_hours">ساعات</string>
+    <string name="scd_clock_dialog_minutes">دقیقه ها</string>
+    <string name="scd_clock_dialog_seconds">ثانیه</string>
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">다음 값을</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">이전 값</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">%1$s와 %2$s 사이여야 합니다.</string>
+
+    <string name="scd_clock_dialog_hours">시간</string>
+    <string name="scd_clock_dialog_minutes">분(minutes)</string>
+    <string name="scd_clock_dialog_seconds">초</string>
+</resources>

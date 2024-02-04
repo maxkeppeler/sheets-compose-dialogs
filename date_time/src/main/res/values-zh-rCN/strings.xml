@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">上午</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">小时</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">分钟</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">秒</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Day</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">月份</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">年份</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">设置时间</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">设置日期</string>
+
+</resources>

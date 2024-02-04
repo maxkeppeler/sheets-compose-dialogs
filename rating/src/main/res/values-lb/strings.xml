@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Gitt w.e.g. e Feedback a.</string>
+    <string name="scd_rating_dialog_feedback_label">Feedback</string>
+    <string name="scd_rating_dialog_optional">Optional</string>
+    <string name="scd_rating_dialog_required">Gefuerdert</string>
+</resources>

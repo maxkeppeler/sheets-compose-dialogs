@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">کاتژمێر</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">داقاوە</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Seconds
+چرکەکان</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Ro</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">مانگ</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Sal</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">کات دابنێ
+
+(or simply \"کات دابنێ\" if used in an Android app for setting time)</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">دەستکاریکردنی بەروار</string>
+
+</resources>

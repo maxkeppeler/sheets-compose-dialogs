@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Bonvolu enmeti reagon.</string>
+    <string name="scd_rating_dialog_feedback_label">Retrokazo</string>
+    <string name="scd_rating_dialog_optional">Opcia</string>
+    <string name="scd_rating_dialog_required">Necesa.</string>
+</resources>

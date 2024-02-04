@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">上午</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">下一个值</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">原值</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">必须在%1$s和%2$s之间</string>
+
+    <string name="scd_clock_dialog_hours">小时</string>
+    <string name="scd_clock_dialog_minutes">分钟</string>
+    <string name="scd_clock_dialog_seconds">秒</string>
+</resources>

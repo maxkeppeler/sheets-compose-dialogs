@@ -1,0 +1,6 @@
+<resources>
+
+    <string name="scd_option_dialog_min_choices" translatable="true">تکایە کمێک لە %1$d هەڵبژێرە</string>
+    <string name="scd_option_dialog_max_choices" translatable="true">هەڵبژاردنی %1$d هەڵبژارد بۆ دیاربکاتەوە</string>
+
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">स</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">डी</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">अगला मान्यता</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">पिछला मान</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">%1$s और %2$s के बीच होना चाहिए।</string>
+
+    <string name="scd_clock_dialog_hours">घंटे</string>
+    <string name="scd_clock_dialog_minutes">मिनट्स</string>
+    <string name="scd_clock_dialog_seconds">सेकंड</string>
+</resources>

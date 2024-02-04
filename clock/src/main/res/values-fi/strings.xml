@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Seuraava arvo</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Edellinen arvo</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Pitäisi olla %1$s:n ja %2$s:n välissä</string>
+
+    <string name="scd_clock_dialog_hours">Tunnit</string>
+    <string name="scd_clock_dialog_minutes">Pöytäkirja</string>
+    <string name="scd_clock_dialog_seconds">Sekunnit</string>
+</resources>

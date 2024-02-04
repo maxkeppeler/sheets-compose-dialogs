@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">صبح بخیر</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">ساعات</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">دقایق</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">ثانیه</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">روز</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">ماه</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">سال</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">تنظیم زمان</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">تنظیم تاریخ</string>
+
+</resources>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">เลือกเดือน</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">เดือนหน้า</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">เดือนถัดไป</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">อาทิตย์หน้า</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">สัปดาห์ที่แล้ว</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">เลือกปี</string>
+</resources>

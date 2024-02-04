@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">OK</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Ure</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Minuti</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Sekunde</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Dan</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Mesec</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Leto</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Nastavi čas</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Nastavi datum</string>
+
+</resources>

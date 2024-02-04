@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">ຫມາຍ</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM - ຈຳນວນຜູ້ນຳເຂົ້າງານອາກອນ</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">ຄ່າຕໍ່ເນື່ອງດ້ວຍຄ່າຕໍ່ຕໍ່ໄປ</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">ຄ່າເກັບຂໍ້ມູນທີ່ເກົ່າກ່ຽວຂ້ອງ</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">ຈຳ​ໄດ້​ບໍ່​ຕ້ອງ​ມີ​ຈຳ​ນວນ​ລະ​ຫວ່າງ​ດ້ວຍ %1$s ແລະ %2$s</string>
+
+    <string name="scd_clock_dialog_hours">ຊົ່ວໂມງ</string>
+    <string name="scd_clock_dialog_minutes">ນອກຈາກມັນ</string>
+    <string name="scd_clock_dialog_seconds">ວິນາທີ</string>
+</resources>

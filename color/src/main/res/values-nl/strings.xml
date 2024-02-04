@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Rood</string>
+    <string name="scd_color_dialog_green" translatable="true">Groen</string>
+    <string name="scd_color_dialog_blue" translatable="true">Blauw</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Kleur</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Template kleuren</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Aangepaste kleur</string>
+    <string name="scd_color_dialog_no_color" translatable="true">Geen kleur</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Kopieer kleur</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Plak kleur</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Plak een geldige aRGB-code.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Niets om te plakken</string>
+
+</resources>

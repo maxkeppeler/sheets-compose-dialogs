@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Zadejte prosím zpětnou vazbu.</string>
+    <string name="scd_rating_dialog_feedback_label">Zpětná vazba</string>
+    <string name="scd_rating_dialog_optional">Volitelný</string>
+    <string name="scd_rating_dialog_required">Požadováno</string>
+</resources>

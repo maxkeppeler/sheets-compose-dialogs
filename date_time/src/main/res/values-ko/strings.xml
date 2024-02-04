@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">오전</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">오후</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">영업 시간</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">분 (Bun)</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">초</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">일</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">월</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">년</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">시간 설정하기</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">날짜 설정하기</string>
+
+</resources>

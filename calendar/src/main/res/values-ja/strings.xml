@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="scd_calendar_dialog_select_month">月を選択</string>
     <string name="scd_calendar_dialog_next_month">来月</string>

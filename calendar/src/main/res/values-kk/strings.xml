@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Айды таңдау</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Келесі ай</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Келесі ай</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Желкегі аптаның келесі қызығы.</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Өткен апта</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Жылды таңдау</string>
+</resources>

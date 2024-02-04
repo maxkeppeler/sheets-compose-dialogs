@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Пожалуйста, введите отзыв.</string>
+    <string name="scd_rating_dialog_feedback_label">Обратная связь</string>
+    <string name="scd_rating_dialog_optional">Дополнительный</string>
+    <string name="scd_rating_dialog_required">Требуется</string>
+</resources>

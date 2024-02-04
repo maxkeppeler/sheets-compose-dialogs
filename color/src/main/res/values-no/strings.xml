@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Rød</string>
+    <string name="scd_color_dialog_green" translatable="true">Grønn</string>
+    <string name="scd_color_dialog_blue" translatable="true">Blå</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Farge</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Mal farger</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Egendefinert farge</string>
+    <string name="scd_color_dialog_no_color" translatable="true">Ingen farge</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Kopier farge</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Lim inn farge</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Lim inn gyldig aRGB-kode.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Ingenting å lime inn</string>
+
+</resources>

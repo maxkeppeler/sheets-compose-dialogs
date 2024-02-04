@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Будь ласка, введіть відгук</string>
+    <string name="scd_rating_dialog_feedback_label">Зворотній зв\'язок</string>
+    <string name="scd_rating_dialog_optional">Опційний</string>
+    <string name="scd_rating_dialog_required">Обов\'язково</string>
+</resources>

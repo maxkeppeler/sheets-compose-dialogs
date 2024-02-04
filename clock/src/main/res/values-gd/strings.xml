@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">Riaghaltas</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Luach air ais</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Luach roimhe seo</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Cuiridh eadar %1$s agus %2$s</string>
+
+    <string name="scd_clock_dialog_hours">Uairean</string>
+    <string name="scd_clock_dialog_minutes">No translation needed, \"Minutes\" will remain unchanged.</string>
+    <string name="scd_clock_dialog_seconds">Geàrr-ùine</string>
+</resources>

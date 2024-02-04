@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">कृपया प्रतिक्रिया लेख्नुहोस्।</string>
+    <string name="scd_rating_dialog_feedback_label">प्रतिक्रिया</string>
+    <string name="scd_rating_dialog_optional">वैकल्पिक</string>
+    <string name="scd_rating_dialog_required">आवश्यक</string>
+</resources>

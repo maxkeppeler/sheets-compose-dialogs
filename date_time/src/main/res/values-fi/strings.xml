@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Tunnit</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Pöytäkirja</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Sekunnit</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Päivä</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Kuukausi</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Vuosi</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Aseta aika</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Aseta päivämäärä</string>
+
+</resources>

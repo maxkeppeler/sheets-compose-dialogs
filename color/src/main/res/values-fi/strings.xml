@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Punainen</string>
+    <string name="scd_color_dialog_green" translatable="true">Vihreä</string>
+    <string name="scd_color_dialog_blue" translatable="true">Sininen</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Väri</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Mallin värit</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Kustomoitu väri</string>
+    <string name="scd_color_dialog_no_color" translatable="true">Ei väriä</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Kopioi väri</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Väri liitä</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Liitä kelvollinen aRGB-koodi.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Ei mitään liitettävää</string>
+
+</resources>

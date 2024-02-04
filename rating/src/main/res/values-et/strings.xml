@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Palun sisesta tagasiside.</string>
+    <string name="scd_rating_dialog_feedback_label">Tagasiside</string>
+    <string name="scd_rating_dialog_optional">Valikuline</string>
+    <string name="scd_rating_dialog_required">Nõutud</string>
+</resources>

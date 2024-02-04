@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Επιλέξτε μήνα</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Επόμενος μήνας</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Επόμενος μήνας</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Επόμενη εβδομάδα</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Προηγούμενη εβδομάδα</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Επιλέξτε έτος</string>
+</resources>

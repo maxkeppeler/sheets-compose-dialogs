@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">นายกรัฐมนตรีท่านสำคัญ</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">ค่าถัดไป</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">ค่าก่อนหน้า</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">ต้องอยู่ระหว่าง %1$s และ %2$s</string>
+
+    <string name="scd_clock_dialog_hours">รายชั่วโมง</string>
+    <string name="scd_clock_dialog_minutes">นาที</string>
+    <string name="scd_clock_dialog_seconds">วินาที</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Prosím, zanechajte spätnú väzbu.</string>
+    <string name="scd_rating_dialog_feedback_label">Pripomienka</string>
+    <string name="scd_rating_dialog_optional">Voliteľný</string>
+    <string name="scd_rating_dialog_required">Požadované.</string>
+</resources>

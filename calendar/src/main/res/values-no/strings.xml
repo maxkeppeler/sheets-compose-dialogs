@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Velg måned</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Neste måned</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Neste måned</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Neste uke</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Forrige uke</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Velg år</string>
+</resources>

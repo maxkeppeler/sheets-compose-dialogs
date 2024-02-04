@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Izvēlieties mēnesi</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Nākamajā mēnesī</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Nākamajā mēnesī</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Nākamā nedēļa</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Iepriekšējā nedēļā.</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Izvēlieties gadu</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+
+    <string name="scd_list_dialog_min_choices" translatable="true">Valige vähemalt %1$d valikut.</string>
+    <string name="scd_list_dialog_max_choices" translatable="true">Valige maksimaalselt %1$d võimalust</string>
+
+</resources>

@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">Өкесінлерге жаза беру үшін ПМ.</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Сағаттар</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Минут</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Секундтер</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Күн</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Ай</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Жыл</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Уақытты орнату</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Күнді таңдау</string>
+
+</resources>

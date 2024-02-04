@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">OK</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">OK</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Nächste Wäert</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Fréier Wäert</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Muss tëschten %1$s an %2$s liewen.</string>
+
+    <string name="scd_clock_dialog_hours">Stonnen</string>
+    <string name="scd_clock_dialog_minutes"><![CDATA[Minutes -> Minutten]]></string>
+    <string name="scd_clock_dialog_seconds">Sekonnen</string>
+</resources>

@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Rdeča</string>
+    <string name="scd_color_dialog_green" translatable="true">Zelena</string>
+    <string name="scd_color_dialog_blue" translatable="true">Modra</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Barva</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Barve predloge</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Prilagojena barva</string>
+    <string name="scd_color_dialog_no_color" translatable="true">Brez barve</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Kopiraj barvo</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Barva vstavi</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Prilepite veljaven aRGB-kodo.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Nič za prilepiti</string>
+
+</resources>

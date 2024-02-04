@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">次の値</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">前の値</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">%1$s と %2$s の間で指定してください</string>
+
+    <string name="scd_clock_dialog_hours">営業時間</string>
+    <string name="scd_clock_dialog_minutes">Minutes (分)</string>
+    <string name="scd_clock_dialog_seconds">秒</string>
+</resources>

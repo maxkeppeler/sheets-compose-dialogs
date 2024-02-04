@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">ΚΥ</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Επόμενη τιμή</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Προηγούμενη τιμή</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Πρέπει να είναι ανάμεσα σε %1$s και %2$s</string>
+
+    <string name="scd_clock_dialog_hours">Ωρες</string>
+    <string name="scd_clock_dialog_minutes">Λεπτά</string>
+    <string name="scd_clock_dialog_seconds">Δευτερόλεπτα</string>
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">т</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">OK</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Следующее значение</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Предыдущее значение</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Должно быть между %1$s и %2$s</string>
+
+    <string name="scd_clock_dialog_hours">Часы</string>
+    <string name="scd_clock_dialog_minutes">Минуты</string>
+    <string name="scd_clock_dialog_seconds">Секунды</string>
+</resources>

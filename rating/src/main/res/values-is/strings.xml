@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">Vinsamlegast sláðu inn álit</string>
+    <string name="scd_rating_dialog_feedback_label">Álit</string>
+    <string name="scd_rating_dialog_optional">Valfrjálst</string>
+    <string name="scd_rating_dialog_required">Krafist</string>
+</resources>

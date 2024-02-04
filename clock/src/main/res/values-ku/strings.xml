@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true"><![CDATA[h -> ح]]></string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">ئ ام</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true"><![CDATA[Next value -> بۆ داهاتووری داهێنراوی داهاتووراوە]]></string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Hunandina peywendî ya berê</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">پێویستە لەنێوان %1$s و %2$s بێت</string>
+
+    <string name="scd_clock_dialog_hours">کاتژمێر</string>
+    <string name="scd_clock_dialog_minutes">Demjimêr</string>
+    <string name="scd_clock_dialog_seconds">Saniyeyan</string>
+</resources>

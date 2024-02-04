@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Vali kuu</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Järgmine kuu</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Järgmine kuu</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Järgmisel nädalal</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Eelmine nädal</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Vali aasta</string>
+</resources>

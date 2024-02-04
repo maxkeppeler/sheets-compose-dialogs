@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">OK.</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">OK</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Sledeća vrednost</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Prethodna vrednost</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Mora biti između %1$s i %2$s.</string>
+
+    <string name="scd_clock_dialog_hours">Satnici</string>
+    <string name="scd_clock_dialog_minutes">Minuti</string>
+    <string name="scd_clock_dialog_seconds">Sekunde</string>
+</resources>

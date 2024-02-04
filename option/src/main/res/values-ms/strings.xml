@@ -1,0 +1,6 @@
+<resources>
+
+    <string name="scd_option_dialog_min_choices" translatable="true">Pilih sekurang-kurangnya %1$d pilihan</string>
+    <string name="scd_option_dialog_max_choices" translatable="true">Pilih paling banyak %1$d pilihan</string>
+
+</resources>

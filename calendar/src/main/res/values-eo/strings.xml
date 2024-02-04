@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Elektu monaton</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Venonta monato.</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Venonta monato.</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">La venonta semajno</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Precedonta semajno</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Elekti jaron</string>
+</resources>

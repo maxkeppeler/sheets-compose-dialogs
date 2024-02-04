@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Valitse kuukausi</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Seuraava kuukausi</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Seuraava kuukausi</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Ensi viikko</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Edellinen viikko</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Valitse vuosi</string>
+</resources>

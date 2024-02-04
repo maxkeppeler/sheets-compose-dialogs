@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">महिना छान्नुहोस्</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">अर्को महिना</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">अगाडीको महिना</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">अर्को हप्ता</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">अघिल्लो हप्ता</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">वर्ष छान्नुहोस्</string>
+</resources>

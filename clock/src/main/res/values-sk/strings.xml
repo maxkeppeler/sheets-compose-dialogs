@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">OK</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">PM</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Ďalšia hodnota</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Predchádzajúca hodnota</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Musí byť medzi %1$s a %2$s</string>
+
+    <string name="scd_clock_dialog_hours">Hodiny</string>
+    <string name="scd_clock_dialog_minutes">Minúty</string>
+    <string name="scd_clock_dialog_seconds">Sekundy</string>
+</resources>

@@ -1,0 +1,16 @@
+<resources>
+
+    <string name="scd_clock_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_clock_dialog_minute_code" translatable="true">м</string>
+    <string name="scd_clock_dialog_second_code" translatable="true">s</string>
+    <string name="scd_clock_dialog_day_code" translatable="true">D</string>
+    <string name="scd_clock_dialog_am" translatable="true">AM</string>
+    <string name="scd_clock_dialog_pm" translatable="true">ММ</string>
+    <string name="scd_clock_dialog_next_value" translatable="true">Следваща стойност</string>
+    <string name="scd_clock_dialog_previous_value" translatable="true">Предишна стойност</string>
+    <string name="scd_clock_dialog_boundary_hint" translatable="true">Трябва да бъде между %1$s и %2$s.</string>
+
+    <string name="scd_clock_dialog_hours">Часове</string>
+    <string name="scd_clock_dialog_minutes">Минути</string>
+    <string name="scd_clock_dialog_seconds">Секунди</string>
+</resources>

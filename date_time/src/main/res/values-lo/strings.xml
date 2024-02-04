@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">ອາເມລ</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">ລົດມອນ</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">ເວລາ</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">ນະຄູນ</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">ວິນາທີ່ໃນວິນາທີ</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">ວັນ</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">ເດືອນ</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">ປີ</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">ຕັ້ງເວລາ</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">ຕັ້ງວັນທີ</string>
+
+</resources>

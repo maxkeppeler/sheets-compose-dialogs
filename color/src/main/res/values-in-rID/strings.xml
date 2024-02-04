@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">Alpha</string>
+    <string name="scd_color_dialog_red" translatable="true">Merah</string>
+    <string name="scd_color_dialog_green" translatable="true">Hijau</string>
+    <string name="scd_color_dialog_blue" translatable="true">Biru</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">Warna</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">Warna Templat</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">Warna kustom</string>
+    <string name="scd_color_dialog_no_color" translatable="true">Tidak berwarna</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">Salin warna</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">Warna tempel</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">Tempelkan kode aRGB yang valid.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">Tidak ada yang bisa ditempelkan</string>
+
+</resources>

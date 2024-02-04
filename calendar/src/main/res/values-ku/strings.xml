@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">مانگ دیاری بکه</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">مانگای داهاتەوە</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">مانگێکتە ئاگادارم</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">هەفتای داهاتووبوو</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Hefta pêşîn.</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">سال هەڵبژێرە</string>
+</resources>

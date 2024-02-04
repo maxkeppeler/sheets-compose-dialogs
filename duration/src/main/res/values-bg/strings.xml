@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="scd_duration_dialog_at_least_placeholder" translatable="true">Минимум</string>
+    <string name="scd_duration_dialog_at_most_placeholder" translatable="true">Максимум</string>
+    <string name="scd_duration_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_duration_dialog_minute_code" translatable="true">м</string>
+    <string name="scd_duration_dialog_second_code" translatable="true">s</string>
+    <string name="scd_duration_dialog_hours" translatable="true">Часове</string>
+    <string name="scd_duration_dialog_minutes" translatable="true">Минути</string>
+    <string name="scd_duration_dialog_seconds" translatable="true">Секунди</string>
+    <string name="scd_duration_dialog_delete_last_input" translatable="true">Изтриване на последния въведен елемент.</string>
+    <string name="scd_duration_dialog_clear_input" translatable="true">Изчисти входа</string>
+
+</resources>

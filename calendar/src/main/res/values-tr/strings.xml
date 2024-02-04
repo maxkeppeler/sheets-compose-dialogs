@@ -1,0 +1,8 @@
+<resources>
+    <string name="scd_calendar_dialog_select_month" translatable="true">Ay seçin</string>
+    <string name="scd_calendar_dialog_next_month" translatable="true">Gelecek ay</string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">Gelecek ay</string>
+    <string name="scd_calendar_dialog_next_week" translatable="true">Önümüzdeki hafta</string>
+    <string name="scd_calendar_dialog_prev_week" translatable="true">Geçen hafta</string>
+    <string name="scd_calendar_dialog_select_year" translatable="true">Yıl seçin.</string>
+</resources>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">โปรดใส่คำติชม</string>
+    <string name="scd_rating_dialog_feedback_label">ข้อเสนอแนะ</string>
+    <string name="scd_rating_dialog_optional">เลือกได้</string>
+    <string name="scd_rating_dialog_required">จำเป็น</string>
+</resources>

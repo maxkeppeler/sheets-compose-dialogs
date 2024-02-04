@@ -1,0 +1,17 @@
+<resources>
+
+    <string name="scd_color_dialog_alpha" translatable="true">알파</string>
+    <string name="scd_color_dialog_red" translatable="true">빨간색</string>
+    <string name="scd_color_dialog_green" translatable="true">초록색</string>
+    <string name="scd_color_dialog_blue" translatable="true">파란색</string>
+    <string name="scd_color_dialog_argb" translatable="true">ARGB</string>
+    <string name="scd_color_dialog_color" translatable="true">색깔</string>
+    <string name="scd_color_dialog_template_colors" translatable="true">템플릿 색상</string>
+    <string name="scd_color_dialog_custom_color" translatable="true">사용자 설정 색상</string>
+    <string name="scd_color_dialog_no_color" translatable="true">색 없음</string>
+    <string name="scd_color_dialog_copy_color" translatable="true">색 복사</string>
+    <string name="scd_color_dialog_paste_color" translatable="true">붙여넣기 색상</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_color_code" translatable="true">유효한 aRGB 코드를 붙여넣어주세요.</string>
+    <string name="scd_color_dialog_clipboard_paste_invalid_empty" translatable="true">붙일 것이 없습니다.</string>
+
+</resources>

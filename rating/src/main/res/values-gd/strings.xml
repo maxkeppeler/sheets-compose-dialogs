@@ -1,0 +1,7 @@
+<resources>
+    <string name="scd_rating_dialog">Please enter a feedback
+Cuir iongnadh thugainn, ma \'s e do thoil e.</string>
+    <string name="scd_rating_dialog_feedback_label">Beachdail</string>
+    <string name="scd_rating_dialog_optional">Roghailteach</string>
+    <string name="scd_rating_dialog_required">Riaghailte.</string>
+</resources>

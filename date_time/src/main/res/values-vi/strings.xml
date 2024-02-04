@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">Thủ tướng</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Giờ</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Phút</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Giây.</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Ngày</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Tháng</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Năm</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Đặt thời gian</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Đặt ngày</string>
+
+</resources>

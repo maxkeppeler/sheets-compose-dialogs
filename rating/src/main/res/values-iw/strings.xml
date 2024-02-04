@@ -1,0 +1,6 @@
+<resources>
+    <string name="scd_rating_dialog">אנא הזינו משוב</string>
+    <string name="scd_rating_dialog_feedback_label">משוב</string>
+    <string name="scd_rating_dialog_optional">אופציונלי</string>
+    <string name="scd_rating_dialog_required">נדרש</string>
+</resources>

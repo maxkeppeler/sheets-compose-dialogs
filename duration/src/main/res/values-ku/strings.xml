@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="scd_duration_dialog_at_least_placeholder" translatable="true">Minimum</string>
+    <string name="scd_duration_dialog_at_most_placeholder" translatable="true">سەرەتایی</string>
+    <string name="scd_duration_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_duration_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_duration_dialog_second_code" translatable="true">s</string>
+    <string name="scd_duration_dialog_hours" translatable="true">کاتژمێر</string>
+    <string name="scd_duration_dialog_minutes" translatable="true">دەقایەکان</string>
+    <string name="scd_duration_dialog_seconds" translatable="true">چرکەمینداڵان</string>
+    <string name="scd_duration_dialog_delete_last_input" translatable="true">تاکە لەسەرین دانە حذف بکە</string>
+    <string name="scd_duration_dialog_clear_input" translatable="true">جێگیرکردنەوەی دانەوە بەبڕوانە</string>
+
+</resources>

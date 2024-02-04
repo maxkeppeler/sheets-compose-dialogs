@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Timer</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Minutter</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Sekunder</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Dag</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Måned</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">År</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Indstil tid</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Vælg dato</string>
+
+</resources>

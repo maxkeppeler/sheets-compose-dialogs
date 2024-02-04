@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="scd_duration_dialog_at_least_placeholder" translatable="true">ຕໍ່ໄປເກີດຄວາມຮ່ວມທີ່ບໍ່ດໍາເນີນການ.</string>
+    <string name="scd_duration_dialog_at_most_placeholder" translatable="true">ສູນເສຍສໍາລັບກ່ອນນັ້ນ</string>
+    <string name="scd_duration_dialog_hour_code" translatable="true">h</string>
+    <string name="scd_duration_dialog_minute_code" translatable="true">m</string>
+    <string name="scd_duration_dialog_second_code" translatable="true">s</string>
+    <string name="scd_duration_dialog_hours" translatable="true">ຊົ່ວໂມງ</string>
+    <string name="scd_duration_dialog_minutes" translatable="true">ນາທີ</string>
+    <string name="scd_duration_dialog_seconds" translatable="true">ວິນາທີ່</string>
+    <string name="scd_duration_dialog_delete_last_input" translatable="true">ລຶບຂໍ້ມູນຂອງການປ້ອນຫຼ້າສຸດ</string>
+    <string name="scd_duration_dialog_clear_input" translatable="true">ລົບຂໍ້ມູນເຂົ້າໃຊ້ໃດໆ</string>
+
+</resources>

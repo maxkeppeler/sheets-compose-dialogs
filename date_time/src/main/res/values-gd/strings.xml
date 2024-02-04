@@ -1,0 +1,14 @@
+<resources>
+
+    <string name="sheets_compose_dialogs_date_time_am" translatable="true">AM</string>
+    <string name="sheets_compose_dialogs_date_time_pm" translatable="true">PM</string>
+    <string name="sheets_compose_dialogs_date_time_hour" translatable="true">Uairean</string>
+    <string name="sheets_compose_dialogs_date_time_minutes" translatable="true">Gach mionaid</string>
+    <string name="sheets_compose_dialogs_date_time_seconds" translatable="true">Dàrnaichean</string>
+    <string name="sheets_compose_dialogs_date_time_day" translatable="true">Latha</string>
+    <string name="sheets_compose_dialogs_date_time_month" translatable="true">Mìos</string>
+    <string name="sheets_compose_dialogs_date_time_year" translatable="true">Bliadhna</string>
+    <string name="sheets_compose_dialogs_set_time" translatable="true">Fhoirm</string>
+    <string name="sheets_compose_dialogs_set_date" translatable="true">Deasaich dàta</string>
+
+</resources>
