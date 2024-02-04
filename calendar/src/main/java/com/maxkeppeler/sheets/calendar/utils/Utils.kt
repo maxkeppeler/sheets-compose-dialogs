@@ -16,13 +16,18 @@
 package com.maxkeppeler.sheets.calendar.utils
 
 import androidx.annotation.RestrictTo
-import com.maxkeppeler.sheets.calendar.models.*
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarData
+import com.maxkeppeler.sheets.calendar.models.CalendarDateData
+import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
 import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
-import java.util.*
+import java.util.Locale
 
 /**
  * Returns the week of the week-based-year for this [LocalDate].
@@ -95,9 +100,11 @@ internal val LocalDate.previousWeek: LocalDate
     get() = when {
         dayOfMonth == Constants.FIRST_DAY_IN_MONTH
                 && dayOfWeek != DayOfWeek.MONDAY -> with(DayOfWeek.MONDAY)
+
         dayOfMonth >= Constants.DAYS_IN_WEEK ||
                 dayOfMonth == Constants.FIRST_DAY_IN_MONTH
                 && dayOfWeek == DayOfWeek.MONDAY -> minusWeeks(1)
+
         else -> withDayOfMonth(Constants.FIRST_DAY_IN_MONTH)
     }
 
@@ -150,26 +157,33 @@ fun LocalDate.jumpNext(config: CalendarConfig): LocalDate = when (config.style) 
 
 /**
  * Returns the initial date to be displayed on the CalendarView based on the selection mode.
- *
- * The initial camera date is calculated based on the selected mode. If the mode is [CalendarSelection.Date],
- * the selected date is returned. If the mode is [CalendarSelection.Dates], the first selected date is returned.
- * If the mode is [CalendarSelection.Period], the lower range of the selected period is returned.
- *
- * If the selected mode doesn't have a date, the current date will be returned as the initial camera date.
- *
- * @return The initial camera date.
+ * @param selection The selection mode.
+ * @param boundary The boundary of the calendar.
+ * @return The initial date to be displayed on the CalendarView.
  */
-internal fun CalendarSelection.getInitialCameraDate(boundary: ClosedRange<LocalDate>): LocalDate {
-    val cameraDateBasedOnMode = when (this) {
-        is CalendarSelection.Date -> selectedDate
-        is CalendarSelection.Dates -> selectedDates?.firstOrNull()
-        is CalendarSelection.Period -> selectedRange?.lower
-    } ?: kotlin.run {
+internal fun getInitialCameraDate(selection: CalendarSelection, boundary: ClosedRange<LocalDate>): LocalDate {
+    val cameraDateBasedOnMode = when (selection) {
+        is CalendarSelection.Date -> selection.selectedDate
+        is CalendarSelection.Dates -> selection.selectedDates?.firstOrNull()
+        is CalendarSelection.Period -> selection.selectedRange?.lower
+    } ?: run {
         val now = LocalDate.now()
-        if (now in boundary) now else boundary.endInclusive
+        if (now in boundary) now else boundary.start
     }
     return cameraDateBasedOnMode.startOfWeekOrMonth
 }
+
+/**
+ * Returns the custom initial date in case the camera date is within the boundary. Otherwise, it returns null.
+ *
+ * @param cameraDate The initial camera date.
+ * @param boundary The boundary of the calendar.
+ * @return The initial camera date if it's within the boundary, otherwise null.
+ */
+internal fun getInitialCustomCameraDate(
+    cameraDate: LocalDate?,
+    boundary: ClosedRange<LocalDate>
+): LocalDate? = cameraDate?.takeIf { it in boundary }?.startOfWeekOrMonth
 
 /**
  * Get selection value of date.
@@ -300,6 +314,7 @@ internal fun calcCalendarDateData(
         is CalendarSelection.Dates -> {
             selectedDates?.contains(date) ?: false
         }
+
         is CalendarSelection.Period -> {
             val selectedStart = selectedRange.first == date
             selectedStartInit = selectedStart && selectedRange.second != null

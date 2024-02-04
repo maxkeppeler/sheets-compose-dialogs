@@ -38,6 +38,7 @@ import com.maxkeppeler.sheets.calendar.utils.endOfMonth
 import com.maxkeppeler.sheets.calendar.utils.endOfWeek
 import com.maxkeppeler.sheets.calendar.utils.endValue
 import com.maxkeppeler.sheets.calendar.utils.getInitialCameraDate
+import com.maxkeppeler.sheets.calendar.utils.getInitialCustomCameraDate
 import com.maxkeppeler.sheets.calendar.utils.jumpNext
 import com.maxkeppeler.sheets.calendar.utils.jumpPrev
 import com.maxkeppeler.sheets.calendar.utils.rangeValue
@@ -65,7 +66,9 @@ internal class CalendarState(
     val today by mutableStateOf(LocalDate.now())
     var mode by mutableStateOf(stateData?.mode ?: CalendarDisplayMode.CALENDAR)
     var cameraDate by mutableStateOf(
-        stateData?.cameraDate ?: selection.getInitialCameraDate(config.boundary)
+        stateData?.cameraDate
+            ?: getInitialCustomCameraDate(config.cameraDate, config.boundary)
+            ?: getInitialCameraDate(selection, config.boundary)
     )
     var date = mutableStateOf(stateData?.date ?: selection.dateValue)
     var dates = mutableStateListOf(*(stateData?.dates ?: selection.datesValue))

@@ -20,12 +20,13 @@ import com.maxkeppeker.sheets.core.models.base.BaseConfigs
 import com.maxkeppeker.sheets.core.utils.BaseConstants.DEFAULT_ICON_STYLE
 import com.maxkeppeler.sheets.calendar.utils.Constants
 import java.time.LocalDate
-import java.util.*
+import java.util.Locale
 
 /**
  * The general configuration for the calendar dialog.
  * @param locale The locale of the calendar.
  * @param style The style of the calendar.
+ * @param cameraDate The date that is initially displayed when the calendar is opened.
  * @param monthSelection Allow the direct selection of a month.
  * @param yearSelection Allow the direct selection of a year.
  * @param boundary The range of dates that are displayed.
@@ -35,6 +36,7 @@ import java.util.*
 class CalendarConfig(
     val locale: Locale = Locale.getDefault(),
     val style: CalendarStyle = CalendarStyle.MONTH,
+    val cameraDate: LocalDate? = null,
     val monthSelection: Boolean = Constants.DEFAULT_MONTH_SELECTION,
     val yearSelection: Boolean = Constants.DEFAULT_YEAR_SELECTION,
     val boundary: ClosedRange<LocalDate> = Constants.DEFAULT_RANGE,

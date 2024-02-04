@@ -19,6 +19,7 @@ package com.maxkeppeler.sheets.calendar.functional
 
 import android.util.Range
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.assertIsNotEnabled
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.performClick
@@ -45,7 +46,7 @@ class CalendarViewTests {
     val rule = createComposeRule()
 
     @Test
-    fun calendarViewDateSelectionSuccess() {
+    fun givenCalendarView_whenDateSelected_thenDateSelectionSuccess() {
         val testDate = LocalDate.now()
             .withDayOfMonth(12)
 
@@ -65,7 +66,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDateSelectionInvalid() {
+    fun givenCalendarView_whenNoDateSelected_thenDateSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
                 useCaseState = UseCaseState(visible = true),
@@ -76,7 +77,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDatesSelectionSuccess() {
+    fun givenCalendarView_whenMultipleDatesSelected_thenDatesSelectionSuccess() {
         val testDates = listOf(
             LocalDate.now().withDayOfMonth(2),
             LocalDate.now().withDayOfMonth(8),
@@ -104,7 +105,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDatesSelectionInvalid() {
+    fun givenCalendarView_whenNoDatesSelected_thenDatesSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
                 useCaseState = UseCaseState(visible = true),
@@ -115,7 +116,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewPeriodSelectionSuccess() {
+    fun givenCalendarView_whenDateSelectedWithStyleMonthAndDisabledDates_thenDateSelectionStyleMonthConfigDatesDisabled() {
         val testStartDate = LocalDate.now().withDayOfMonth(2)
         val testEndDate = LocalDate.now().withDayOfMonth(12)
 
@@ -147,7 +148,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDateSelectionStyleMonthConfigDatesDisabled() {
+    fun givenCalendarView_whenMultipleDatesSelectedWithStyleMonthAndDisabledDates_thenDatesSelectionStyleMonthConfigDatesDisabled() {
         val testDate = LocalDate.now().withDayOfMonth(15)
         val newDates = listOf(
             testDate.plusDays(2),
@@ -183,7 +184,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDatesSelectionStyleMonthConfigDatesDisabled() {
+    fun givenCalendarView_whenPeriodSelectedWithStyleMonthAndDisabledDates_thenPeriodSelectionStyleMonthConfigDatesDisabled() {
         val testDate = LocalDate.now().withDayOfMonth(15)
         val defaultDates = listOf(
             testDate.minusDays(10),
@@ -224,7 +225,7 @@ class CalendarViewTests {
 
 
     @Test
-    fun calendarViewPeriodSelectionStyleMonthConfigDatesDisabled() {
+    fun givenCalendarView_whenPeriodSelectedWithStyleMonthAndDisabledDatesAlt_thenPeriodSelectionStyleMonthConfigDatesDisabled() {
         val testDate = LocalDate.now().withDayOfMonth(15)
         val disabledDates = listOf(
             testDate.minusDays(1),
@@ -262,7 +263,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewPeriodSelectionInvalid() {
+    fun givenCalendarView_whenNoPeriodSelected_thenPeriodSelectionInvalid() {
         rule.setContentAndWaitForIdle {
             CalendarView(
                 useCaseState = UseCaseState(visible = true),
@@ -273,7 +274,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewPeriodSelectionInvalidSelectEndDateBeforeStartDate() {
+    fun givenCalendarView_whenEndDateSelectedBeforeStartDate_thenPeriodSelectionInvalidSelectEndDateBeforeStartDate() {
         val testStartDate = LocalDate.now().withDayOfMonth(12)
         val testEndDate = LocalDate.now().withDayOfMonth(2)
         rule.setContentAndWaitForIdle {
@@ -297,7 +298,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDisplaysCalendarStyleWeek() {
+    fun givenCalendarView_whenCalendarStyleWeek_thenCalendarViewDisplaysCalendarStyleWeek() {
         rule.setContentAndWaitForIdle {
             CalendarView(
                 useCaseState = UseCaseState(visible = true),
@@ -309,7 +310,7 @@ class CalendarViewTests {
     }
 
     @Test
-    fun calendarViewDisplaysCalendarStyleMonth() {
+    fun givenCalendarView_whenCalendarStyleMonth_thenCalendarViewDisplaysCalendarStyleMonth() {
         rule.setContentAndWaitForIdle {
             CalendarView(
                 useCaseState = UseCaseState(visible = true),
@@ -318,6 +319,125 @@ class CalendarViewTests {
             )
         }
         rule.onPositiveButton().assertIsNotEnabled()
+    }
+
+
+    @Test
+    fun givenCalendarView_whenDateSelectedWithCameraDate_thenDisplayCorrectTime() {
+        val testDate = LocalDate.now().withDayOfMonth(15)
+        val testCameraDate = LocalDate.now().minusMonths(2)
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(
+                    selectedDate = testDate,
+                    onSelectDate = { date -> }
+                ),
+                config = CalendarConfig(
+                    style = CalendarStyle.MONTH,
+                    cameraDate = testCameraDate
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_DATE_SELECTION,
+            testCameraDate.format(DateTimeFormatter.ISO_DATE)
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun givenCalendarView_whenDateSelectedWithCameraDateOutsideBoundary_thenDisplaySelectedTime() {
+        val testDate = LocalDate.now().withDayOfMonth(15)
+        val testBoundary = testDate.minusYears(2)..testDate.plusYears(2)
+        val testCameraDate = LocalDate.now().minusYears(4)
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(
+                    selectedDate = testDate,
+                    onSelectDate = { date -> }
+                ),
+                config = CalendarConfig(
+                    boundary = testBoundary,
+                    cameraDate = testCameraDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_DATE_SELECTION,
+            testCameraDate.format(DateTimeFormatter.ISO_DATE)
+        ).assertDoesNotExist()
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_DATE_SELECTION,
+            testDate.format(DateTimeFormatter.ISO_DATE)
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+
+    @Test
+    fun givenCalendarView_whenCameraDateOutsideBoundaryCurrentTimeInsideBoundary_thenDisplayCurrentTime() {
+        val testDate = LocalDate.now()
+        val testBoundary = testDate.minusYears(2)..testDate.plusYears(2)
+        val testCameraDate = LocalDate.now().minusYears(4)
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(
+                    onSelectDate = { date -> }
+                ),
+                config = CalendarConfig(
+                    boundary = testBoundary,
+                    cameraDate = testCameraDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_DATE_SELECTION,
+            testDate.format(DateTimeFormatter.ISO_DATE)
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun givenCalendarView_whenCameraDateOutsideBoundaryCurrentTimeOutsideBoundary_thenDisplayCurrentTime() {
+        val testDate = LocalDate.now()
+        val testBoundary = testDate.plusYears(2)..testDate.plusYears(4)
+        val testCameraDate = LocalDate.now().minusYears(4)
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(
+                    onSelectDate = { date -> }
+                ),
+                config = CalendarConfig(
+                    boundary = testBoundary,
+                    cameraDate = testCameraDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_DATE_SELECTION,
+            testBoundary.start.format(DateTimeFormatter.ISO_DATE)
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
     }
 
 }
