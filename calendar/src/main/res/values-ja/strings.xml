@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week">来週</string>
     <string name="scd_calendar_dialog_prev_week">前週</string>
     <string name="scd_calendar_dialog_select_year">年を選択</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

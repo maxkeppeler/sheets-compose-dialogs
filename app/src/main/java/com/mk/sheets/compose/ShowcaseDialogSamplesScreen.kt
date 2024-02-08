@@ -50,6 +50,8 @@ import com.mk.sheets.compose.models.UseCaseType
 import com.mk.sheets.compose.samples.CalendarSample1
 import com.mk.sheets.compose.samples.CalendarSample2
 import com.mk.sheets.compose.samples.CalendarSample3
+import com.mk.sheets.compose.samples.CalendarSample4
+import com.mk.sheets.compose.samples.CalendarSample5
 import com.mk.sheets.compose.samples.ClockSample1
 import com.mk.sheets.compose.samples.ClockSample2
 import com.mk.sheets.compose.samples.ColorSample1
@@ -129,6 +131,8 @@ fun ShowcaseDialogSamples(
         Sample.CALENDAR_SAMPLE_1 -> CalendarSample1(onResetSheet)
         Sample.CALENDAR_SAMPLE_2 -> CalendarSample2(onResetSheet)
         Sample.CALENDAR_SAMPLE_3 -> CalendarSample3(onResetSheet)
+        Sample.CALENDAR_SAMPLE_4 -> CalendarSample4(onResetSheet)
+        Sample.CALENDAR_SAMPLE_5 -> CalendarSample5(onResetSheet)
 
         Sample.CLOCK_SAMPLE_1 -> ClockSample1(onReset)
         Sample.CLOCK_SAMPLE_2 -> ClockSample2(onReset)

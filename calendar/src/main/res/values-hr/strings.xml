@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">Sljedeći tjedan</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Prošli tjedan</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Odaberite godinu</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

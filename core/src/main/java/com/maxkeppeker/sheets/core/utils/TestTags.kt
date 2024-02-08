@@ -50,7 +50,14 @@ object TestTags {
      *  Test tags for CalendarView
      */
 
-    const val CALENDAR_DATE_SELECTION = "calendar_date"
+    const val CALENDAR_NEXT_ACTION = "calendar_next"
+    const val CALENDAR_PREVIOUS_ACTION = "calendar_previous"
+    const val CALENDAR_MONTH_TITLE = "calendar_month_title"
+    const val CALENDAR_YEAR_TITLE = "calendar_year_title"
+    const val CALENDAR_DATE = "calendar_date"
+    const val CALENDAR_CW = "calendar_cw"
+    const val CALENDAR_HEADER_CW = "calendar_header_cw"
+    const val CALENDAR_HEADER_DAY = "calendar_header_day"
 
 
     /*

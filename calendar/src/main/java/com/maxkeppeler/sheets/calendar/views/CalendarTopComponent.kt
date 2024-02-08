@@ -17,15 +17,38 @@
 
 package com.maxkeppeler.sheets.calendar.views
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.expandIn
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.graphics.ExperimentalAnimationGraphicsApi
 import androidx.compose.animation.graphics.res.animatedVectorResource
 import androidx.compose.animation.graphics.res.rememberAnimatedVectorPainter
 import androidx.compose.animation.graphics.vector.AnimatedImageVector
+import androidx.compose.animation.shrinkOut
 import androidx.compose.foundation.clickable
-import androidx.compose.foundation.layout.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilledIconButton
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButtonDefaults
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,6 +57,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.calendar.R
 import com.maxkeppeler.sheets.calendar.models.CalendarConfig
 import com.maxkeppeler.sheets.calendar.models.CalendarDisplayMode
@@ -86,6 +111,7 @@ internal fun CalendarTopComponent(
                 chevronMonthAtEnd = false
                 chevronYearAtEnd = false
             }
+
             CalendarDisplayMode.MONTH -> chevronYearAtEnd = false
             CalendarDisplayMode.YEAR -> chevronMonthAtEnd = false
         }
@@ -109,6 +135,7 @@ internal fun CalendarTopComponent(
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
                     modifier = Modifier
+                        .testTags(TestTags.CALENDAR_PREVIOUS_ACTION)
                         .size(dimensionResource(RC.dimen.scd_size_200)),
                     enabled = !navigationDisabled && !prevDisabled,
                     onClick = onPrev
@@ -145,7 +172,8 @@ internal fun CalendarTopComponent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = selectableItemModifier,
+                    modifier = selectableItemModifier
+                        .testTags(TestTags.CALENDAR_MONTH_TITLE, cameraDate.month.value),
                     text = cameraDate.format(DateTimeFormatter.ofPattern("MMM")),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
@@ -171,7 +199,8 @@ internal fun CalendarTopComponent(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    modifier = selectableItemModifier,
+                    modifier = selectableItemModifier
+                        .testTags(TestTags.CALENDAR_YEAR_TITLE, cameraDate.year),
                     text = cameraDate.format(DateTimeFormatter.ofPattern("yyyy")),
                     style = MaterialTheme.typography.titleLarge.copy(fontWeight = FontWeight.Bold),
                     textAlign = TextAlign.Center
@@ -196,7 +225,9 @@ internal fun CalendarTopComponent(
             Column(Modifier.align(Alignment.CenterEnd)) {
                 FilledIconButton(
                     colors = IconButtonDefaults.filledIconButtonColors(containerColor = MaterialTheme.colorScheme.secondaryContainer),
-                    modifier = Modifier.size(dimensionResource(RC.dimen.scd_size_200)),
+                    modifier = Modifier
+                        .testTags(TestTags.CALENDAR_NEXT_ACTION)
+                        .size(dimensionResource(RC.dimen.scd_size_200)),
                     enabled = !navigationDisabled && !nextDisabled,
                     onClick = onNext
                 ) {
@@ -258,6 +289,7 @@ internal fun CalendarTopLandscapeComponent(
                 chevronMonthAtEnd = false
                 chevronYearAtEnd = false
             }
+
             CalendarDisplayMode.MONTH -> chevronYearAtEnd = false
             CalendarDisplayMode.YEAR -> chevronMonthAtEnd = false
         }

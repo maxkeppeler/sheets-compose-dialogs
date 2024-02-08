@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">שבוע הבא</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">השבוע קודם</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">בחר שנה</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

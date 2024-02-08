@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">An ath sheachdain</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Seachdain a dh\'fhalbh.</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Tagh bliadhna</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

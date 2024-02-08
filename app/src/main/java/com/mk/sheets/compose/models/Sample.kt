@@ -106,6 +106,21 @@ enum class Sample(
         "Disabled future with boundary"
     ),
 
+    CALENDAR_SAMPLE_4(
+        UseCaseType.CALENDAR,
+        "Select date",
+        "Month-style",
+        "Display Calendar Weeks"
+    ),
+
+    CALENDAR_SAMPLE_5(
+        UseCaseType.CALENDAR,
+        "Select date",
+        "Week-style",
+        "Display Calendar Weeks"
+    ),
+
+
     CLOCK_SAMPLE_1(
         UseCaseType.CLOCK,
         "Hours and minutes selection",

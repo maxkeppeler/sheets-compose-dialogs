@@ -27,6 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.text.style.TextAlign
+import com.maxkeppeker.sheets.core.utils.TestTags
+import com.maxkeppeker.sheets.core.utils.testTags
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -38,6 +40,7 @@ import com.maxkeppeler.sheets.core.R as RC
 internal fun CalendarHeaderItemComponent(label: String) {
     Row(
         modifier = Modifier
+            .testTags(TestTags.CALENDAR_HEADER_DAY, label)
             .aspectRatio(1f, true)
             .padding(dimensionResource(RC.dimen.scd_small_50))
             .clip(MaterialTheme.shapes.extraSmall),
@@ -46,7 +49,7 @@ internal fun CalendarHeaderItemComponent(label: String) {
     ) {
         Text(
             text = label,
-            style = MaterialTheme.typography.bodySmall,
+            style = MaterialTheme.typography.labelSmall,
             textAlign = TextAlign.Center,
             color = MaterialTheme.colorScheme.onSurface
         )

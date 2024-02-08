@@ -22,9 +22,11 @@ import com.maxkeppeler.sheets.calendar.models.CalendarDateData
 import com.maxkeppeler.sheets.calendar.models.CalendarMonthData
 import com.maxkeppeler.sheets.calendar.models.CalendarSelection
 import com.maxkeppeler.sheets.calendar.models.CalendarStyle
+import com.maxkeppeler.sheets.calendar.models.CalendarViewType
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.Month
+import java.time.format.DateTimeFormatter
 import java.time.temporal.TemporalAdjusters
 import java.time.temporal.WeekFields
 import java.util.Locale
@@ -161,7 +163,10 @@ fun LocalDate.jumpNext(config: CalendarConfig): LocalDate = when (config.style) 
  * @param boundary The boundary of the calendar.
  * @return The initial date to be displayed on the CalendarView.
  */
-internal fun getInitialCameraDate(selection: CalendarSelection, boundary: ClosedRange<LocalDate>): LocalDate {
+internal fun getInitialCameraDate(
+    selection: CalendarSelection,
+    boundary: ClosedRange<LocalDate>
+): LocalDate {
     val cameraDateBasedOnMode = when (selection) {
         is CalendarSelection.Date -> selection.selectedDate
         is CalendarSelection.Dates -> selection.selectedDates?.firstOrNull()
@@ -260,32 +265,92 @@ internal fun calcMonthData(
 @RestrictTo(RestrictTo.Scope.LIBRARY_GROUP)
 internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): CalendarData {
     var weekCameraDate = cameraDate
+
+    val firstDayOfWeek = WeekFields.of(config.locale).firstDayOfWeek
+    val dayOfWeek = cameraDate.dayOfWeek
+    val diff = (dayOfWeek.value - firstDayOfWeek.value + 7) % 7
+
     val offsetStart = when (config.style) {
-        CalendarStyle.MONTH -> cameraDate.withDayOfMonth(Constants.FIRST_DAY_IN_MONTH).dayOfWeek.ordinal
+        CalendarStyle.MONTH -> diff
         CalendarStyle.WEEK -> {
-            val dayOfWeekInMonth = cameraDate.withDayOfMonth(Constants.FIRST_DAY_IN_MONTH).dayOfWeek
-            val diff = dayOfWeekInMonth.ordinal
-            val value = if (weekCameraDate.dayOfMonth <= Constants.DAYS_IN_WEEK && diff > 0) {
-                val offset = weekCameraDate.dayOfWeek.ordinal
-                if (weekCameraDate.dayOfWeek != DayOfWeek.MONDAY) {
-                    weekCameraDate = cameraDate.minusDays(offset.toLong())
-                    offset
-                } else weekCameraDate.dayOfWeek.ordinal
-            } else weekCameraDate.dayOfWeek.ordinal
-            value
+            // Calculate the difference in days to the first day of the week from the camera date
+            val dayOfWeekInMonth = cameraDate.with(TemporalAdjusters.firstDayOfMonth()).dayOfWeek
+            val dayDiff = (dayOfWeekInMonth.value - firstDayOfWeek.value + 7) % 7
+
+            // Adjust weekCameraDate to the start of the week if necessary
+            val adjustedWeekCameraDate =
+                if (cameraDate.dayOfMonth <= Constants.DAYS_IN_WEEK && dayDiff > 0) {
+                    cameraDate.minusDays((cameraDate.dayOfWeek.value - firstDayOfWeek.value + 7) % 7.toLong())
+                } else {
+                    weekCameraDate
+                }
+
+            // Calculate the offset based on the adjustedWeekCameraDate
+            ((adjustedWeekCameraDate.dayOfWeek.value - firstDayOfWeek.value + 7) % 7).also {
+                // Update weekCameraDate if it was adjusted
+                weekCameraDate = adjustedWeekCameraDate
+            }
         }
     }
 
     val days = when (config.style) {
         CalendarStyle.MONTH -> cameraDate.lengthOfMonth()
-        CalendarStyle.WEEK -> DayOfWeek.values().size - offsetStart
+        CalendarStyle.WEEK -> DayOfWeek.values().size
+    }
+
+    val rangedDays = (1..days.plus(offsetStart)).toMutableList()
+        .map { dayIndex ->
+            val date = when (config.style) {
+                CalendarStyle.MONTH -> cameraDate
+                    .withDayOfMonth(1)
+                    .plusDays(dayIndex.toLong().minus(1))
+                    .minusDays(offsetStart.toLong())
+
+                CalendarStyle.WEEK -> weekCameraDate
+                    .plusDays(dayIndex.toLong().minus(1))
+                    .minusDays(offsetStart.toLong())
+            }
+            Pair(CalendarViewType.DAY, date)
+        }.drop(
+            when (config.style) {
+                CalendarStyle.MONTH -> offsetStart
+                CalendarStyle.WEEK -> 0
+            }
+        ).dropLast(
+            when (config.style) {
+                CalendarStyle.MONTH -> 0
+                CalendarStyle.WEEK -> offsetStart
+            }
+        ).toMutableList()
+
+    val isMonthStartOffset = weekCameraDate.dayOfMonth <= 7
+    if (isMonthStartOffset) {
+        repeat(offsetStart) {
+            rangedDays.add(0, Pair(CalendarViewType.DAY_START_OFFSET, LocalDate.now()))
+        }
+    }
+
+    val chunkedDays: List<List<Pair<CalendarViewType, Any>>> =
+        rangedDays.chunked(Constants.DAYS_IN_WEEK)
+
+    val weekDays: List<List<Pair<CalendarViewType, Any>>> = chunkedDays.map { week ->
+        if (config.displayCalendarWeeks) {
+            val newWeek = week.toMutableList().apply {
+                val firstDateCalendarWeek =
+                    week.first { it.first == CalendarViewType.DAY }.second as LocalDate
+                val formatter = DateTimeFormatter.ofPattern("w").withLocale(config.locale)
+                val calendarWeek = formatter.format(firstDateCalendarWeek)
+                add(0, Pair(CalendarViewType.CW, calendarWeek))
+            }
+            newWeek
+        } else week
     }
 
     return CalendarData(
         offsetStart = offsetStart,
         weekCameraDate = weekCameraDate,
         cameraDate = cameraDate,
-        days = days,
+        days = weekDays,
     )
 }
 
@@ -296,7 +361,6 @@ internal fun calcCalendarData(config: CalendarConfig, cameraDate: LocalDate): Ca
 internal fun calcCalendarDateData(
     date: LocalDate,
     calendarViewData: CalendarData,
-    today: LocalDate,
     selection: CalendarSelection,
     config: CalendarConfig,
     selectedDate: LocalDate?,

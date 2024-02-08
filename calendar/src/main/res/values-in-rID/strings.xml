@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">Minggu depan</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Minggu sebelumnya</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Pilih tahun</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

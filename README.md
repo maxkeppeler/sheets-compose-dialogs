@@ -125,6 +125,26 @@ Module <code>calendar</code> ‎‎ | ‎‎ <a href="https://maxkeppeler.github
 <td width="25%"> </td>
 <td width="25%"> </td>
 </tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample4.kt" title="Code">CalendarSample4</a>
+ </br>
+ <img src="docs/res/sheets/calendar/light/calendar_sample_4.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample4.kt" title="Code">CalendarSample4</a>
+ </br>
+<img src="docs/res/sheets/calendar/dark/calendar_sample_4.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
+<tr>
+<td width="25%"> <a style="text-align: center" href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample5.kt" title="Code">CalendarSample5</a>
+ </br>
+ <img src="docs/res/sheets/calendar/light/calendar_sample_5.png" /></td>
+<td width="25%"> <a href="https://github.com/maxkeppeler/sheets-compose-dialogs/blob/main/app/src/main/java/com/mk/sheets/compose/samples/CalendarSample5.kt" title="Code">CalendarSample5</a>
+ </br>
+<img src="docs/res/sheets/calendar/dark/calendar_sample_5.png" /></td>
+<td width="25%"> </td>
+<td width="25%"> </td>
+</tr>
 </table>
 </br>
 

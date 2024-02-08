@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week">Próxima semana</string>
     <string name="scd_calendar_dialog_prev_week">Semana anterior</string>
     <string name="scd_calendar_dialog_select_year">Selecionar ano</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

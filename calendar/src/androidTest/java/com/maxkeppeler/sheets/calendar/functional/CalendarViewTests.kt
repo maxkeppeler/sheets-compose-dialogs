@@ -33,11 +33,17 @@ import com.maxkeppeler.sheets.calendar.models.CalendarStyle
 import com.maxkeppeler.sheets.test.utils.onNodeWithTags
 import com.maxkeppeler.sheets.test.utils.onPositiveButton
 import com.maxkeppeler.sheets.test.utils.setContentAndWaitForIdle
+import kotlinx.coroutines.test.runTest
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import java.time.LocalDate
+import java.time.Period
 import java.time.format.DateTimeFormatter
+import java.time.temporal.ChronoField
+import java.time.temporal.TemporalAdjusters
+import java.time.temporal.WeekFields
+import java.util.Locale
 
 @RunWith(AndroidJUnit4::class)
 class CalendarViewTests {
@@ -58,7 +64,7 @@ class CalendarViewTests {
             )
         }
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
         rule.onPositiveButton().performClick()
@@ -95,7 +101,7 @@ class CalendarViewTests {
 
         testDates.forEach { testDate ->
             rule.onNodeWithTags(
-                TestTags.CALENDAR_DATE_SELECTION,
+                TestTags.CALENDAR_DATE,
                 testDate.format(DateTimeFormatter.ISO_DATE)
             ).performClick()
         }
@@ -133,12 +139,12 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testStartDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testEndDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
@@ -174,7 +180,7 @@ class CalendarViewTests {
 
         newDates.forEach { date ->
             rule.onNodeWithTags(
-                TestTags.CALENDAR_DATE_SELECTION,
+                TestTags.CALENDAR_DATE,
                 date.format(DateTimeFormatter.ISO_DATE)
             ).performClick()
         }
@@ -214,7 +220,7 @@ class CalendarViewTests {
 
         newDates.forEach { date ->
             rule.onNodeWithTags(
-                TestTags.CALENDAR_DATE_SELECTION,
+                TestTags.CALENDAR_DATE,
                 date.format(DateTimeFormatter.ISO_DATE)
             ).performClick()
         }
@@ -249,12 +255,12 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testStartDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testEndDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
@@ -285,12 +291,12 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testStartDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testEndDate.format(DateTimeFormatter.ISO_DATE)
         ).performClick()
 
@@ -341,7 +347,7 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testCameraDate.format(DateTimeFormatter.ISO_DATE)
         ).apply {
             assertExists()
@@ -370,12 +376,12 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testCameraDate.format(DateTimeFormatter.ISO_DATE)
         ).assertDoesNotExist()
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testDate.format(DateTimeFormatter.ISO_DATE)
         ).apply {
             assertExists()
@@ -404,7 +410,7 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testDate.format(DateTimeFormatter.ISO_DATE)
         ).apply {
             assertExists()
@@ -432,12 +438,270 @@ class CalendarViewTests {
         }
 
         rule.onNodeWithTags(
-            TestTags.CALENDAR_DATE_SELECTION,
+            TestTags.CALENDAR_DATE,
             testBoundary.start.format(DateTimeFormatter.ISO_DATE)
         ).apply {
             assertExists()
             assertIsDisplayed()
         }
+    }
+
+    @Test
+    fun givenCalendarViewWithWeekStyle_whenDisplayCalendarWeeksTrue_thenDisplayCalendarWeek() {
+        val testDate = LocalDate.now()
+        val calendarWeek = testDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR).toString()
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(onSelectDate = { }),
+                config = CalendarConfig(
+                    displayCalendarWeeks = true,
+                    style = CalendarStyle.WEEK
+                )
+            )
+        }
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_CW,
+            calendarWeek
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun givenCalendarViewWithMonthStyleOnLastDayOfMonth_whenDisplayCalendarWeeksTrue_thenCorrectCalendarWeekDisplayed() {
+        val testDate = LocalDate.of(2023, 12, 31)
+        val calendarWeek =
+            DateTimeFormatter.ofPattern("w").withLocale(Locale.GERMANY).format(testDate)
+
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(onSelectDate = { }),
+                config = CalendarConfig(
+                    displayCalendarWeeks = true,
+                    cameraDate = testDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_CW,
+            calendarWeek
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun givenCalendarViewWithMonthStyleOnFirstDayOfMonth_whenDisplayCalendarWeeksTrue_thenCorrectCalendarWeekDisplayed() {
+        // Example: Set to the first day of January
+        val testDate = LocalDate.of(2024, 1, 1)
+        val calendarWeek = testDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR).toString()
+
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(onSelectDate = { }),
+                config = CalendarConfig(
+                    displayCalendarWeeks = true,
+                    cameraDate = testDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_CW,
+            calendarWeek
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test
+    fun givenCalendarViewWithMonthStyleDuringYearTransition_whenDisplayCalendarWeeksTrue_thenCorrectCalendarWeekDisplayed() {
+        // Example: Set to the last day of the year
+        val testDate = LocalDate.of(2023, 12, 31)
+        val nextYearDate = testDate.plusDays(1)
+        val calendarWeek = nextYearDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR).toString()
+
+        rule.setContentAndWaitForIdle {
+            CalendarView(
+                useCaseState = UseCaseState(visible = true),
+                selection = CalendarSelection.Date(onSelectDate = { }),
+                config = CalendarConfig(
+                    displayCalendarWeeks = true,
+                    cameraDate = nextYearDate,
+                    style = CalendarStyle.MONTH
+                )
+            )
+        }
+
+        rule.onNodeWithTags(
+            TestTags.CALENDAR_CW,
+            calendarWeek
+        ).apply {
+            assertExists()
+            assertIsDisplayed()
+        }
+    }
+
+    @Test(timeout = 1000000)
+    fun givenCalendarViewWithMonthStyleAndLocaleGermany_whenIteratingThroughMonths_thenCorrectDataIsDisplayedForEachMonth() =
+        runTest(timeout = kotlin.time.Duration.parse("1m")) {
+            val startDate = LocalDate.of(2023, 1, 1)
+            val endDate = LocalDate.of(2028, 1, 1)
+            val testLocale = Locale.GERMANY
+            val iterations = Period.between(startDate, endDate).toTotalMonths()
+            rule.setContentAndWaitForIdle {
+                CalendarView(
+                    useCaseState = UseCaseState(visible = true),
+                    selection = CalendarSelection.Date(onSelectDate = { }),
+                    config = CalendarConfig(
+                        displayCalendarWeeks = true,
+                        cameraDate = startDate,
+                        locale = testLocale,
+                        style = CalendarStyle.MONTH
+                    )
+                )
+            }
+            repeat(iterations.toInt()) { index ->
+                val currentMonth = startDate.plusMonths(index.toLong())
+
+                // Check if the month is displayed
+                rule.onNodeWithTags(TestTags.CALENDAR_MONTH_TITLE, currentMonth.month.value).apply {
+                    assertExists()
+                    assertIsDisplayed()
+                }
+
+                // Check if the year is displayed
+                rule.onNodeWithTags(TestTags.CALENDAR_YEAR_TITLE, currentMonth.year).apply {
+                    assertExists()
+                    assertIsDisplayed()
+                }
+
+                // Check if the calendar weeks are displayed
+                val calendarWeeks = getCalendarWeeksForMonth(testLocale, currentMonth)
+                calendarWeeks.forEach { cw ->
+                    rule.onNodeWithTags(TestTags.CALENDAR_CW, cw).apply {
+                        assertExists()
+                        assertIsDisplayed()
+                    }
+                }
+
+                // Check if the calendar days are displayed
+                val calendarDays = getCalendarDayForMonth(currentMonth)
+                calendarDays.forEach { day ->
+                    val date = currentMonth.withDayOfMonth(day).format(DateTimeFormatter.ISO_DATE)
+                    rule.onNodeWithTags(TestTags.CALENDAR_DATE, date).apply {
+                        assertExists()
+                        assertIsDisplayed()
+                    }
+                }
+
+                // Navigate to the next month if not the last iteration
+                if (index < iterations - 1) {
+                    rule.onNodeWithTags(TestTags.CALENDAR_NEXT_ACTION).performClick()
+                    rule.awaitIdle()
+                }
+            }
+        }
+
+    @Test(timeout = 1000000)
+    fun givenCalendarViewWithMonthStyleAndLocaleUS_whenIteratingThroughMonths_thenCorrectDataIsDisplayedForEachMonth() =
+        runTest(timeout = kotlin.time.Duration.parse("1m")) {
+            val startDate = LocalDate.of(2023, 1, 1)
+            val endDate = LocalDate.of(2028, 1, 1)
+            val testLocale = Locale.US
+            val iterations = Period.between(startDate, endDate).toTotalMonths()
+            rule.setContentAndWaitForIdle {
+                CalendarView(
+                    useCaseState = UseCaseState(visible = true),
+                    selection = CalendarSelection.Date(onSelectDate = { }),
+                    config = CalendarConfig(
+                        displayCalendarWeeks = true,
+                        cameraDate = startDate,
+                        locale = testLocale,
+                        style = CalendarStyle.MONTH
+                    )
+                )
+            }
+            repeat(iterations.toInt()) { index ->
+                val currentMonth = startDate.plusMonths(index.toLong())
+
+                // Check if the month is displayed
+                rule.onNodeWithTags(TestTags.CALENDAR_MONTH_TITLE, currentMonth.month.value).apply {
+                    assertExists()
+                    assertIsDisplayed()
+                }
+
+                // Check if the year is displayed
+                rule.onNodeWithTags(TestTags.CALENDAR_YEAR_TITLE, currentMonth.year).apply {
+                    assertExists()
+                    assertIsDisplayed()
+                }
+
+                // Check if the calendar weeks are displayed
+                val calendarWeeks = getCalendarWeeksForMonth(testLocale, currentMonth)
+                calendarWeeks.forEach { cw ->
+                    rule.onNodeWithTags(TestTags.CALENDAR_CW, cw).apply {
+                        assertExists()
+                        assertIsDisplayed()
+                    }
+                }
+
+                // Check if the calendar days are displayed
+                val calendarDays = getCalendarDayForMonth(currentMonth)
+                calendarDays.forEach { day ->
+                    val date = currentMonth.withDayOfMonth(day).format(DateTimeFormatter.ISO_DATE)
+                    rule.onNodeWithTags(TestTags.CALENDAR_DATE, date).apply {
+                        assertExists()
+                        assertIsDisplayed()
+                    }
+                }
+
+                // Navigate to the next month if not the last iteration
+                if (index < iterations - 1) {
+                    rule.onNodeWithTags(TestTags.CALENDAR_NEXT_ACTION).performClick()
+                    rule.awaitIdle()
+                }
+            }
+        }
+
+    private fun getCalendarWeeksForMonth(locale: Locale, date: LocalDate): Set<Int> {
+        val firstDayOfMonth = date.with(TemporalAdjusters.firstDayOfMonth())
+        val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth())
+
+        val weekField = WeekFields.of(locale).weekOfWeekBasedYear()
+
+        val weeksInMonth = mutableSetOf<Int>()
+        var currentDate = firstDayOfMonth
+        while (!currentDate.isAfter(lastDayOfMonth)) {
+            val weekOfYear = currentDate.get(weekField)
+            weeksInMonth.add(weekOfYear)
+            currentDate = currentDate.plusDays(1)
+        }
+
+        return weeksInMonth
+    }
+
+    private fun getCalendarDayForMonth(date: LocalDate): Set<Int> {
+        val firstDayOfMonth = date.with(TemporalAdjusters.firstDayOfMonth())
+        val lastDayOfMonth = date.with(TemporalAdjusters.lastDayOfMonth())
+        val weeksInMonth = mutableSetOf<Int>()
+        var currentDate = firstDayOfMonth
+        while (!currentDate.isAfter(lastDayOfMonth)) {
+            val dayOfMonth = currentDate.dayOfMonth
+            weeksInMonth.add(dayOfMonth)
+            currentDate = currentDate.plusDays(1)
+        }
+
+        return weeksInMonth
     }
 
 }

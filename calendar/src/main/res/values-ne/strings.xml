@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">अर्को हप्ता</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">अघिल्लो हप्ता</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">वर्ष छान्नुहोस्</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

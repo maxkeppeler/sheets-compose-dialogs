@@ -174,7 +174,7 @@ internal class CalendarState(
 
     val cells: Int
         get() = when (mode) {
-            CalendarDisplayMode.CALENDAR -> DayOfWeek.values().size
+            CalendarDisplayMode.CALENDAR -> DayOfWeek.values().size + if (config.displayCalendarWeeks) 1 else 0
             CalendarDisplayMode.YEAR -> Constants.YEAR_GRID_COLUMNS
             CalendarDisplayMode.MONTH -> Constants.MONTH_GRID_COLUMNS
         }

@@ -24,8 +24,7 @@ internal object Constants {
 
     // Default values for CalendarConfig class.
 
-    internal const val DEFAULT_MIN_YEAR = 1900
-    internal val DEFAULT_MAX_YEAR = LocalDate.now().year
+    internal const val DEFAULT_DISPLAY_CALENDAR_WEEKS = false
     internal const val DEFAULT_MONTH_SELECTION = false
     internal const val DEFAULT_YEAR_SELECTION = false
 

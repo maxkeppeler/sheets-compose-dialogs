@@ -1,8 +1,9 @@
 <resources>
     <string name="scd_calendar_dialog_select_month" translatable="true">Roghnaigh mí</string>
     <string name="scd_calendar_dialog_next_month" translatable="true">An mhí seo chugainn</string>
-    <string name="scd_calendar_dialog_prev_month" translatable="true"><![CDATA[Next month -> An mhí seo chugainn]]></string>
+    <string name="scd_calendar_dialog_prev_month" translatable="true">An mhí seo chugainn</string>
     <string name="scd_calendar_dialog_next_week" translatable="true">An chéad seachtain eile.</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Seachtain roimhe</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Roghnaigh bliain</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">Επόμενη εβδομάδα</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Προηγούμενη εβδομάδα</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Επιλέξτε έτος</string>
+    <string name="scd_calendar_dialog_cw">CW</string>
 </resources>

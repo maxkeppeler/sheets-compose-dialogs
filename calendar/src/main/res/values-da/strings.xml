@@ -5,4 +5,5 @@
     <string name="scd_calendar_dialog_next_week" translatable="true">Næste uge</string>
     <string name="scd_calendar_dialog_prev_week" translatable="true">Sidste uge</string>
     <string name="scd_calendar_dialog_select_year" translatable="true">Vælg år</string>
+    <string name="scd_calendar_dialog_cw" translatable="true">CW</string>
 </resources>

@@ -23,13 +23,14 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.dimensionResource
 import com.maxkeppeker.sheets.core.models.base.LibOrientation
-import com.maxkeppeker.sheets.core.utils.TestTags
-import com.maxkeppeker.sheets.core.utils.testTags
-import com.maxkeppeler.sheets.calendar.models.*
+import com.maxkeppeler.sheets.calendar.models.CalendarConfig
+import com.maxkeppeler.sheets.calendar.models.CalendarData
+import com.maxkeppeler.sheets.calendar.models.CalendarDateData
+import com.maxkeppeler.sheets.calendar.models.CalendarSelection
+import com.maxkeppeler.sheets.calendar.models.CalendarViewType
 import com.maxkeppeler.sheets.calendar.utils.calcCalendarDateData
 import java.time.DayOfWeek
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 import com.maxkeppeler.sheets.core.R as RC
 
 /**
@@ -52,48 +53,54 @@ internal fun LazyGridScope.setupCalendarSelectionView(
     config: CalendarConfig,
     selection: CalendarSelection,
     data: CalendarData,
-    today: LocalDate,
     onSelect: (LocalDate) -> Unit,
     selectedDate: LocalDate?,
     selectedDates: List<LocalDate>?,
     selectedRange: Pair<LocalDate?, LocalDate?>,
 ) {
-    items(dayOfWeekLabels.values.toList()) { dayOfWeekLabel -> CalendarHeaderItemComponent(dayOfWeekLabel) }
-    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
-    items(data.offsetStart) {
-        CalendarDateItemComponent(
-            data = CalendarDateData(otherMonth = true),
-            selection = selection,
-            orientation = orientation
-        )
+    val offset = if (config.displayCalendarWeeks) 1 else 0
+    items(cells) { cell ->
+        val label = dayOfWeekLabels.values.toList().getOrNull(cell - offset)
+        label?.let { CalendarHeaderItemComponent(label) } ?: CalendarWeekHeaderItemComponent()
     }
-    items(data.days) { dayIndex ->
+    item(span = { GridItemSpan(cells) }) { Spacer(modifier = Modifier.height(dimensionResource(RC.dimen.scd_small_50))) }
 
-        val date = when (config.style) {
-            CalendarStyle.MONTH -> data.cameraDate.withDayOfMonth(dayIndex.plus(1))
-            CalendarStyle.WEEK -> data.weekCameraDate.plusDays(dayIndex.toLong() + data.offsetStart)
+
+    data.days.forEach { weekDays ->
+        items(weekDays) { day ->
+            when (day.first) {
+                CalendarViewType.CW -> CalendarWeekItemComponent(
+                    value = day.second as String,
+                    selection = selection
+                )
+
+                CalendarViewType.DAY_START_OFFSET -> CalendarDateItemComponent(
+                    data = CalendarDateData(otherMonth = true),
+                    selection = selection,
+                    orientation = orientation
+                )
+
+                CalendarViewType.DAY -> {
+                    val dateData = calcCalendarDateData(
+                        date = day.second as LocalDate,
+                        calendarViewData = data,
+                        selection = selection,
+                        config = config,
+                        selectedDate = selectedDate,
+                        selectedDates = selectedDates,
+                        selectedRange = selectedRange
+                    )
+                    dateData?.let {
+                        CalendarDateItemComponent(
+                            orientation = orientation,
+                            data = dateData,
+                            selection = selection,
+                            onDateClick = onSelect
+                        )
+
+                    }
+                }
+            }
         }
-
-        val dateData = calcCalendarDateData(
-            date = date,
-            calendarViewData = data,
-            today = today,
-            selection = selection,
-            config = config,
-            selectedDate = selectedDate,
-            selectedDates = selectedDates,
-            selectedRange = selectedRange
-        ) ?: return@items
-
-        CalendarDateItemComponent(
-            modifier = Modifier.testTags(
-                TestTags.CALENDAR_DATE_SELECTION,
-                date.format(DateTimeFormatter.ISO_DATE)
-            ),
-            orientation = orientation,
-            data = dateData,
-            selection = selection,
-            onDateClick = onSelect
-        )
     }
 }
