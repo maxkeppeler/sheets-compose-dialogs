@@ -61,7 +61,7 @@ internal fun RatingSelectionView(
             space = dimensionResource(RC.dimen.scd_small_50),
             alignment = alignment
         ),
-        verticalAlignment = Alignment.CenterVertically,
+        verticalArrangement = Arrangement.Center,
         maxItemsInEachRow = 6,
     ) {
         (1..config.ratingOptionsCount).forEach { optionIndex ->
