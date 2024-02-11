@@ -32,12 +32,22 @@ enum class Sample(
         "Standard"
     ),
 
+    NUMBER_SAMPLE_1(
+        UseCaseType.NUMBER,
+        "Integer Number",
+    ),
+
+    NUMBER_SAMPLE_2(
+        UseCaseType.NUMBER,
+        "Decimal Number",
+    ),
+
     RATING_SAMPLE_1(
         UseCaseType.RATING,
         "1-5 Stars",
         "Alignment Center"
-
     ),
+
     RATING_SAMPLE_2(
         UseCaseType.RATING,
         "1-5 Stars",

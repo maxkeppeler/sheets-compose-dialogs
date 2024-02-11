@@ -4,6 +4,7 @@ enum class Modules(val moduleName: String) {
 
     CORE("core"),
     RATING("rating"),
+    NUMBER("number"),
     INFO("info"),
     STATE("state"),
     COLOR("color"),

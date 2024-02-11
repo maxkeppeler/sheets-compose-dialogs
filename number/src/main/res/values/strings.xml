@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string name="scd_number_dialog_next_value" translatable="true">Next value</string>
+    <string name="scd_number_dialog_previous_value" translatable="true">Previous value</string>
+    <string name="scd_number_dialog_boundary_hint" translatable="true">Must be between %1$s and %2$s</string>
+
+</resources>

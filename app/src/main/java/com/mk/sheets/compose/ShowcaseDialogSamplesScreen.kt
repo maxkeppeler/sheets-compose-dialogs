@@ -74,6 +74,8 @@ import com.mk.sheets.compose.samples.ListSample1
 import com.mk.sheets.compose.samples.ListSample2
 import com.mk.sheets.compose.samples.ListSample3
 import com.mk.sheets.compose.samples.ListSample4
+import com.mk.sheets.compose.samples.NumberSample1
+import com.mk.sheets.compose.samples.NumberSample2
 import com.mk.sheets.compose.samples.OptionSample1
 import com.mk.sheets.compose.samples.OptionSample2
 import com.mk.sheets.compose.samples.OptionSample3
@@ -123,6 +125,9 @@ fun ShowcaseDialogSamples(
         Sample.RATING_SAMPLE_2 -> RatingSample2(onReset)
         Sample.RATING_SAMPLE_3 -> RatingSample3(onReset)
         Sample.RATING_SAMPLE_4 -> RatingSample4(onReset)
+
+        Sample.NUMBER_SAMPLE_1 -> NumberSample1(onReset)
+        Sample.NUMBER_SAMPLE_2 -> NumberSample2(onReset)
 
         Sample.COLOR_SAMPLE_1 -> ColorSample1(onReset)
         Sample.COLOR_SAMPLE_2 -> ColorSample2(onReset)

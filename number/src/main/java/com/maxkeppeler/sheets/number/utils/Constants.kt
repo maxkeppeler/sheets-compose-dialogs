@@ -13,21 +13,27 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.mk.sheets.compose.models
+package com.maxkeppeler.sheets.number.utils
 
-enum class UseCaseType(val title: String) {
-    CORE("⚒️  Core Dialog"),
-    INFO("ℹ️  Info Dialog"),
-    RATING("✨ Rating Dialog"),
-    NUMBER("🔢  Number Dialog"),
-    COLOR("\uD83C\uDFA8  Color Dialog"),
-    CALENDAR("\uD83D\uDCC5  Calendar Dialog"),
-    CLOCK("\uD83D\uDD67  Clock Dialog"),
-    DATE_TIME("\uD83D\uDCC5\uD83D\uDD67  DateTime Dialog"),
-    DURATION("⌛  Duration Dialog"),
-    OPTION("\uD83E\uDEA7  Option Dialog"),
-    LIST("✅️  List Dialog"),
-    EMOJI("\uD83D\uDE1C  Emoji Dialog"),
-    INPUT("\uD83D\uDD8A️ Input Dialog"),
-    STATE("\uD83D\uDD03  State Dialog")
+/**
+ * Clock dialog specific constants.
+ */
+internal object Constants {
+
+    const val ACTION_NEXT = "action_next"
+    const val ACTION_PREV = "action_prev"
+
+    // Keyboard constants
+    const val KEYBOARD_COLUMNS = 3
+
+    const val KEYBOARD_ANIM_CORNER_RADIUS = 300
+    const val KEYBOARD_ITEM_CORNER_RADIUS_DEFAULT = 50
+    const val KEYBOARD_ITEM_CORNER_RADIUS_PRESSED = 20
+
+    const val KEYBOARD_ALPHA_ITEM_ENABLED = 1f
+    const val KEYBOARD_ALPHA_ITEM_DISABLED = 0.3f
+
+    const val KEYBOARD_ACTION_BACKGROUND_SURFACE_ALPHA = 0.3f
+
+    const val DEBOUNCE_KEY_CLICK_DURATION = 100L
 }

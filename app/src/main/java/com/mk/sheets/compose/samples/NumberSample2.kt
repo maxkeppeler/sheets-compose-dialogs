@@ -13,21 +13,25 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.mk.sheets.compose.models
+@file:OptIn(ExperimentalMaterial3Api::class)
 
-enum class UseCaseType(val title: String) {
-    CORE("⚒️  Core Dialog"),
-    INFO("ℹ️  Info Dialog"),
-    RATING("✨ Rating Dialog"),
-    NUMBER("🔢  Number Dialog"),
-    COLOR("\uD83C\uDFA8  Color Dialog"),
-    CALENDAR("\uD83D\uDCC5  Calendar Dialog"),
-    CLOCK("\uD83D\uDD67  Clock Dialog"),
-    DATE_TIME("\uD83D\uDCC5\uD83D\uDD67  DateTime Dialog"),
-    DURATION("⌛  Duration Dialog"),
-    OPTION("\uD83E\uDEA7  Option Dialog"),
-    LIST("✅️  List Dialog"),
-    EMOJI("\uD83D\uDE1C  Emoji Dialog"),
-    INPUT("\uD83D\uDD8A️ Input Dialog"),
-    STATE("\uD83D\uDD03  State Dialog")
+package com.mk.sheets.compose.samples
+
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.runtime.Composable
+import com.maxkeppeker.sheets.core.models.base.rememberUseCaseState
+import com.maxkeppeler.sheets.number.NumberDialog
+import com.maxkeppeler.sheets.number.models.NumberSelection
+
+@Composable
+internal fun NumberSample2(closeSelection: () -> Unit) {
+
+    NumberDialog(
+        state = rememberUseCaseState(
+            visible = true,
+            onCloseRequest = { closeSelection() }),
+        selection = NumberSelection.Decimal { number ->
+
+        }
+    )
 }
