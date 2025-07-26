@@ -15,8 +15,26 @@
  */
 package com.maxkeppeler.sheets.color.utils
 
+import androidx.compose.ui.graphics.Color
+
 /** Receive the clipboard data. */
 @OptIn(ExperimentalStdlibApi::class)
 internal fun getFormattedColor(color: Int): String {
-    return "#" + (0xFFFFFFFF and color.toLong()).toHexString()
+    val c = Color(color)
+    return toArgbHexManual(c.alpha * 255F, c.red * 255F, c.green * 255F, c.blue * 255F)
 }
+
+private fun toArgbHexManual(a: Float, r: Float, g: Float, b: Float): String {
+    require(a in 0F..255F && r in 0F..255F && g in 0F..255F && b in 0F..255F) {
+        "ARGB values must be between 0 and 255."
+    }
+    return "#${a.toInt().toHex()}${r.toInt().toHex()}${g.toInt().toHex()}${b.toInt().toHex()}"
+}
+
+private fun Int.toHex(): String = toHexString(HexFormat {
+    upperCase = true
+    number {
+        removeLeadingZeros = true
+        minLength = 2
+    }
+})

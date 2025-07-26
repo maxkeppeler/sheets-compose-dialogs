@@ -93,7 +93,7 @@ internal fun ColorCustomControlComponent(
     ) { entry ->
         val index = colorItems.indexOf(entry)
         val onValueChange: (Int) -> Unit = {
-            entry.second.value = it.toFloat()
+            entry.second.value = it / 256F
         }
         val sliderTestTag = testSequenceTagOf(
             TestTags.COLOR_CUSTOM_VALUE_SLIDER,
@@ -103,7 +103,7 @@ internal fun ColorCustomControlComponent(
             LibOrientation.PORTRAIT ->
                 ColorCustomControlListItemComponent(
                     label = entry.first,
-                    value = entry.second.value.toInt(),
+                    value = (entry.second.value * 256F).toInt(),
                     onValueChange = onValueChange,
                     colorItemLabelWidth = colorItemLabelWidth,
                     colorValueLabelWidth = colorValueLabelWidth,
@@ -112,7 +112,7 @@ internal fun ColorCustomControlComponent(
             LibOrientation.LANDSCAPE ->
                 ColorCustomControlGridItemComponent(
                     label = entry.first,
-                    value = entry.second.value.toInt(),
+                    value = (entry.second.value * 256F).toInt(),
                     onValueChange = onValueChange,
                     sliderTestTag = sliderTestTag,
                 )

@@ -79,7 +79,7 @@ internal fun ColorSelectionModeComponent(
                     }
                 )
                 Icon(
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(24.dp),
                     imageVector = if (mode != ColorSelectionMode.TEMPLATE) config.icons.Apps else config.icons.Tune,
                     contentDescription = text,
                     tint = MaterialTheme.colorScheme.primary
@@ -102,7 +102,7 @@ internal fun ColorSelectionModeComponent(
                 shape = RoundedCornerShape(50)
             ) {
                 Icon(
-                    modifier = Modifier.size(48.dp),
+                    modifier = Modifier.size(24.dp),
                     imageVector = config.icons.NotInterested,
                     contentDescription = stringResource(Res.string.scd_color_dialog_no_color),
                     tint = MaterialTheme.colorScheme.primary
